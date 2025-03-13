@@ -2,5 +2,5 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Nois que sabe o programa karai ");
     }
-    
+// os mlk é liso
 }
