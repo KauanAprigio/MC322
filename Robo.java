@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 public class Robo {
     private String nome;
@@ -18,4 +19,8 @@ public class Robo {
     public void exibirPosicao() {
         System.out.printf("Posição atual do robõ %s: (%d, %d)\n", nome, posicaoX, posicaoY);
     }
+=======
+public class Robo {
+    
+>>>>>>> 471108a78dcb3ce52a06a0513bae47791d7b676d
 }
