@@ -1,5 +1,4 @@
-package LAB01;
-
+package LAB01.Code;
 // considerando x, y >= 0 sempre
 // e largura, altura > 0
 

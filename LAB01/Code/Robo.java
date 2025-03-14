@@ -1,4 +1,4 @@
-package LAB01;
+package LAB01.Code;
 public class Robo {
     private String nome;
     private int posicaoX;
