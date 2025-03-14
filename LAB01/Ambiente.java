@@ -1,3 +1,4 @@
+package LAB01;
 public class Ambiente {
 
     private int largura;

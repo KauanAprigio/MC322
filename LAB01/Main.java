@@ -1,3 +1,4 @@
+package LAB01;
 
 // considerando x, y >= 0 sempre
 // e largura, altura > 0

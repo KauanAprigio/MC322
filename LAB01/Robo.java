@@ -1,3 +1,4 @@
+package LAB01;
 public class Robo {
     private String nome;
     private int posicaoX;
