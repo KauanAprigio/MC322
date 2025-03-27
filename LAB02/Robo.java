@@ -39,6 +39,8 @@ public class Robo {
 
 class RoboTerrestre extends Robo {
     private int velocidadeMaxima;
+    private static int altitudeMaxima = 0;
+    private static int altitude = 0;
 
     public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMaxima) {
         super(nome, posicaoX, posicaoY);
@@ -49,10 +51,12 @@ class RoboTerrestre extends Robo {
         if (velocidade <= velocidadeMaxima) {
             super.mover(deltaX, deltaY);
         } else {
-            System.out.println(getNome() + ": Velocidade de " + velocidade + " excede o máximo de " + getVelocidadeMaxima() + " permitido!");
+            System.out.println(getNome() + ": Velocidade de " + velocidade + " excede o máximo de " + getVelocidadeMaxima() + " permitido");
         }
     }
     public int getVelocidadeMaxima() { return velocidadeMaxima; }
+    public int getAltitudeMaxima() { return altitudeMaxima; }
+    public int getAltitude() { return altitude; }
 }
 
 class RoboAereo extends Robo {
@@ -68,18 +72,18 @@ class RoboAereo extends Robo {
     public void subir(int metros) {
         if (altitude + metros <= altitudeMaxima) {
             altitude += metros;
-            System.out.println(getNome() + " subiu para " + altitude + " metros de altitude");
+            System.out.println(getNome() + " subiu para " + getAltitude() + " metros de altitude");
         } else {
-            System.out.println(getNome() + " não pode subir além da altitude máxima de " + altitudeMaxima + " metros!");
+            System.out.println(getNome() + " não pode subir além da altitude máxima de " + getAltitudeMaxima() + " metros");
         }
     }
 
     public void descer(int metros) {
         if (altitude - metros >= 0) {
             altitude -= metros;
-            System.out.println(getNome() + " desceu para " + altitude + " metros de altitude");
+            System.out.println(getNome() + " desceu para " + getAltitude() + " metros de altitude");
         } else {
-            System.out.println(getNome() + " não pode descer abaixo do nível do solo!");
+            System.out.println(getNome() + " não pode descer abaixo do nível do solo");
         }
     }
 
@@ -87,4 +91,5 @@ class RoboAereo extends Robo {
     public int getAltitude() { return altitude; }
     public int getAltitudeMaxima() { return altitudeMaxima; }
     public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
+    public void setAltitude(int altitude) { this.altitude = altitude; }
 }
