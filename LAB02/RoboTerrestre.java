@@ -158,5 +158,5 @@ class RoboGarcom extends RoboTerrestre {
 
     //Getters e Setters
     public int getEstoque() { return estoque; }
-    public int getGarga_maxima() { return carga_maxima; }
+    public int getCarga_maxima() { return carga_maxima; }
 }

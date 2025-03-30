@@ -41,6 +41,9 @@ public class RoboAereo extends Robo {
     public void setAltitude(int altitude) { this.altitude = altitude; }
 }
 
+
+
+// Subclasse de RoboAereo
 class RoboBombeiro extends RoboAereo {
     //Atributos adicionais
     private int peso_max; // peso maximo que o robo suporta;
@@ -82,10 +85,23 @@ class RoboBombeiro extends RoboAereo {
         int auxiliar = reservatorio + peso_tripulantes + peso_tripulacao; // variavel auxiliar que representa o somatorio das cargas
         if (auxiliar > peso_max ){
             int excedente = auxiliar - peso_max;
-            System.out.println("O peso " + peso_tripulacao + " excede " + excedente + " kilos da capacidade máxima de " + getNome() + "!");
+            if (reservatorio >= excedente){
+                reservatorio -= excedente;
+                System.out.println(getNome() + " irá liberar " + excedente + " litros de água do reservatório para poder acomodar os tripulantes");
+            } else {
+                System.out.println(getNome() + " não suporta todos os tripulantes, libere os que estão a bordo primeiro");
+            }
         } else {
             peso_tripulantes += peso_tripulacao;
             System.out.println(getNome() + " conseguiu suportar todos a bordo!");
+        }
+    }
+
+    public void liberar_tripulantes(){
+        if (altitude == 0){ // quer dizer que esta no chao num lugar seguro para deixar os tripulantes em lugar seguro
+            peso_tripulantes = 0;
+        } else {
+            System.out.println(getNome() + " deve estar em um lugar seguro para liberar os tripulantes");
         }
     }
 
@@ -98,5 +114,9 @@ class RoboBombeiro extends RoboAereo {
         }
     }
 
-    
+
+    // Getters e Setters
+    public int getCapacidade() { return peso_max; }
+    public int getReservatorio() { return reservatorio; }
+    public int getTripulacao() { return peso_tripulantes; }
 }
