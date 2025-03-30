@@ -128,7 +128,6 @@ class RoboBombeiro extends RoboAereo {
 class RoboLetreiro extends RoboAereo {
     //Atributos adicionais
     private int max_caracteres;
-    private int max_altura; 
     private String visor; // a mensagem que irá aparecer no letreiro
 
 
@@ -140,7 +139,7 @@ class RoboLetreiro extends RoboAereo {
 
     // Metodos
     public void escrever_visor(String texto, int altura){
-        if ((texto.length() <= max_caracteres) && (altura <= max_altura)){ // ve se pode escrever a mensagem desejada + se nao fica acima da alturaMaxima do robo
+        if ((texto.length() <= max_caracteres) && (altura <= getAltitudeMaxima())){ // ve se pode escrever a mensagem desejada + se nao fica acima da alturaMaxima do robo
             int diff_atura = altura - getAltitude(); // diferença entre a altura do robo e a altura desejada
             if (diff_atura < 0){ // se o robo estiver acima da altura desejada
                 descer(-diff_atura); // desce a altura desejada
@@ -149,9 +148,9 @@ class RoboLetreiro extends RoboAereo {
             }
             visor = texto;
             System.out.println(getNome() + " tem no seu visor a seguinte mensagem: " + visor);
-        } else if (altura > max_altura) {
-            int altura_excendente = altura - max_altura;
-            System.out.println(getNome() + " não pode escrever acima da altura máxima de " + max_altura + " metros, excedendo em " + altura_excendente + " metros");
+        } else if (altura > getAltitude()) {
+            int altura_excendente = altura - getAltitudeMaxima();
+            System.out.println(getNome() + " não pode escrever acima da altura máxima de " + getAltitudeMaxima() + " metros, excedendo em " + altura_excendente + " metros");
         } else {
             int caracteres_excedentes = texto.length() - max_caracteres;
             System.out.println(getNome() + " não pode escrever mais de " + max_caracteres + " caracteres, excedendo em " + caracteres_excedentes + " caracteres");
