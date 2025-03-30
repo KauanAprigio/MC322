@@ -19,6 +19,7 @@ public class Main {
         ambiente.adicionarRobo(roboLimpador);
         ambiente.adicionarRobo(roboGarcom);
         ambiente.adicionarRobo(roboBombeiro);
+        ambiente.adicionarRobo(roboLetreiro);
 
         System.out.println("-------------------------");
         System.out.println("Teste de movimentação e funcionalidades dos robôs:");
