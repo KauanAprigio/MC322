@@ -31,6 +31,10 @@ public class RoboAereo extends Robo {
         }
     }
 
+    public void exibirPosicao() {
+        System.out.println(getNome() + " está na posição (" + getPosicaoX() + ", " + getPosicaoY() + ", " +getAltitude() +")");
+    }
+
     // Getters e Setters
     public int getAltitude() { return altitude; }
     public int getAltitudeMaxima() { return altitudeMaxima; }
