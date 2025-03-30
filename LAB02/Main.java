@@ -10,6 +10,8 @@ public class Main {
         RoboLimpador roboLimpador = new RoboLimpador("RoboLimpador", 0, 0, 10, true, 5);
         RoboGarcom roboGarcom = new RoboGarcom("RoboGarcom", 0, 0, 10, 5000);
         RoboBombeiro roboBombeiro = new RoboBombeiro("RoboBombeiro", 0, 0, 100, 3000);
+        RoboLetreiro roboLetreiro = new RoboLetreiro("RoboLetreiro", 100, 101, 10, 100);
+
         // Adicionando robôs ao ambiente
         System.out.println("Adicionando robôs ao ambiente:");
         ambiente.adicionarRobo(roboTerrestre);
@@ -87,6 +89,18 @@ public class Main {
         roboBombeiro.descer(50);
         roboBombeiro.liberar_tripulantes();
         roboBombeiro.aprimora(1000);
+
+        System.out.println("-------------------------");
+        System.out.println("Teste do letreiro:");
+        // Testes robo letreiro
+        roboLetreiro.mover(-5, 5);
+        roboLetreiro.escrever_visor("Diego Esteve por aqui", 10);
+        System.out.println("Texto no visor: " + roboLetreiro.getTexto());
+        roboLetreiro.escrever_visor("Kauan esteve por aqui", 100);
+        roboLetreiro.limpar_visor();
+        roboLetreiro.aumentarVisor(100);
+        roboLetreiro.descer(10);
+        roboLetreiro.aumentarVisor(100);
 
         System.out.println("-------------------------");
         System.out.println("Teste de exibição do Ambiente:");
