@@ -1,5 +1,6 @@
 package LAB02;
 
+//Subclasse de Robo, mas também é a "SuperClasse" de RoboLimpador e RoboGarcom
 public class RoboTerrestre extends Robo {
     // Atributos adicionais
     private int velocidadeMaxima;

@@ -1,5 +1,6 @@
 package LAB02;
 
+//SubClasse de Robo, mas é "SuperClasse" de RoboLetreiro e RoboBombeiro
 public class RoboAereo extends Robo {
     //Atributos adicionais
     private int altitude;
@@ -169,10 +170,4 @@ class RoboLetreiro extends RoboAereo {
     // Getters e Setters
     public String getVisor() { return visor; }
     public int getMaximoCaracteres() { return max_caracteres; }
-
-
-
-
-
-    
 }
