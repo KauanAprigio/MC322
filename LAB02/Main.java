@@ -9,12 +9,17 @@ public class Main {
         RoboAereo roboAereo = new RoboAereo("RoboAereo", 0, 0, 100);
         RoboLimpador roboLimpador = new RoboLimpador("RoboLimpador", 0, 0, 10, true, 5);
         RoboGarcom roboGarcom = new RoboGarcom("RoboGarcom", 0, 0, 10, 5000);
+        RoboBombeiro roboBombeiro = new RoboBombeiro("RoboBombeiro", 0, 0, 100, 3000);
         // Adicionando robôs ao ambiente
+        System.out.println("Adicionando robôs ao ambiente:");
         ambiente.adicionarRobo(roboTerrestre);
         ambiente.adicionarRobo(roboAereo);
         ambiente.adicionarRobo(roboLimpador);
         ambiente.adicionarRobo(roboGarcom);
+        ambiente.adicionarRobo(roboBombeiro);
 
+        System.out.println("-------------------------");
+        System.out.println("Teste de movimentação e funcionalidades dos robôs:");
         // Movimentação terrestre
         roboTerrestre.mover(5, 5);
         // Movimentação aérea
@@ -24,6 +29,15 @@ public class Main {
         // Altura máxima
         roboAereo.mover(5, 5); // Excede a altura máxima
 
+        System.out.println("-------------------------");
+        System.out.println("Teste de identificação de obstáculos:");
+        // Identificação de obstáculos
+        roboTerrestre.identificarObstaculo();
+        roboAereo.identificarObstaculo();
+
+
+        System.out.println("-------------------------");
+        System.out.println("Teste de altitude robos aéreos:");
         // Testes de altitude
         roboAereo.subir(50); // Sobe 50 metros
         roboAereo.subir(60); // Não pode subir além da altura máxima
@@ -31,7 +45,8 @@ public class Main {
         roboAereo.descer(100); // Não pode descer abaixo do nível do solo
         roboAereo.subir(70); // Sobe 70 metros
        
-
+        System.out.println("-------------------------");
+        System.out.println("Teste do limpador:");
         // Testes robo limpador
         roboLimpador.ligar();
         roboLimpador.mover(5, 5);
@@ -41,6 +56,8 @@ public class Main {
         roboLimpador.definir_tipo_limpeza(0); // Não pode definir tipo de limpeza enquanto desligado
         roboLimpador.mover(5, 5); // Não pode mover enquanto desligado
 
+        System.out.println("-------------------------");
+        System.out.println("Teste do garcom:");
         // Testes robo garcom
         roboGarcom.adicionar_estoque(5001); // Excede o limite de estoque
         roboGarcom.entregar_comida(2000); // Não possui estoque suficiente
@@ -54,6 +71,25 @@ public class Main {
         roboGarcom.mudar_carga(6000); // Aumenta a carga para 6000
         roboGarcom.adicionar_estoque(1000); // Adiciona 1000 ao estoque
 
+        System.out.println("-------------------------");
+        System.out.println("Teste do bombeiro:");
+        // Testes robo bombeiro
+        roboBombeiro.mover(20, 20);
+        roboBombeiro.adicionar_agua(1000); // Adiciona 1000 litros de água
+        roboBombeiro.subir(50);
+        roboBombeiro.apagar_fogo(2000);
+        roboBombeiro.adicionar_agua(2000);
+        roboBombeiro.apagar_fogo(2000);
+        roboBombeiro.adicionar_agua(2000); // Adiciona 500 litros de água
+        roboBombeiro.resgate(500);
+        roboBombeiro.liberar_tripulantes();
+        roboBombeiro.aprimora(1000);
+        roboBombeiro.descer(50);
+        roboBombeiro.liberar_tripulantes();
+        roboBombeiro.aprimora(1000);
+
+        System.out.println("-------------------------");
+        System.out.println("Teste de exibição do Ambiente:");
         // Testes do ambiente
         System.out.println("Ambiente: " + ambiente.getNome());
         System.out.println("Largura: " + ambiente.getLargura());
@@ -63,7 +99,7 @@ public class Main {
         // Teste de limites
         for (Robo robo : ambiente.getRobos()) {
             if (robo instanceof RoboTerrestre){
-                System.out.println(robo.getNome() + " está na posição (" + robo.getPosicaoX() + ", " + robo.getPosicaoY() + ")");
+                robo.exibirPosicao();
                 if (ambiente.dentroDosLimites(robo.getPosicaoX(), robo.getPosicaoY(), 0)) {
                     System.out.println(robo.getNome() + " está dentro dos limites do ambiente.");
                 } else {
@@ -71,7 +107,7 @@ public class Main {
                 }
             }
             if (robo instanceof RoboAereo){
-                System.out.println(robo.getNome() + " está na posição (" + robo.getPosicaoX() + ", " + robo.getPosicaoY() + ", " + ((RoboAereo) robo).getAltitude() + ")");
+                robo.exibirPosicao();
                 if (ambiente.dentroDosLimites(robo.getPosicaoX(), robo.getPosicaoY(), ((RoboAereo) robo).getAltitude())) {
                     System.out.println(robo.getNome() + " está dentro dos limites do ambiente.");
                 } else {
