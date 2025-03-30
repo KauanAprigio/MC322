@@ -115,3 +115,47 @@ class RoboBombeiro extends RoboAereo {
     public int getReservatorio() { return reservatorio; }
     public int getTripulacao() { return peso_tripulantes; }
 }
+
+
+
+// SubClasse de RoboAereo
+
+class RoboLetreiro extends RoboAereo {
+    //Atributos adicionais
+    private int max_caracteres; 
+    private String visor; // a mensagem que irá aparecer no letreiro
+
+
+    // Construtor
+    public RoboLetreiro(String nome, int posicaoX, int posicaoY, int altitudeMaxima, int max_caracteres){
+        super(nome, posicaoX, posicaoY, altitudeMaxima);
+        this.max_caracteres = max_caracteres;
+    }
+
+    // Metodos
+    public void escrever_visor(String texto){
+        if (texto.length() <= max_caracteres){ // ve se pode escrever a mensagem desejada, ou seja, o texto
+            visor = texto;
+            System.out.println(getNome() + " tem no seu visor a seguinte mensagem: " + texto);
+        } else {
+            int caracteres_excedentes = texto.length() - max_caracteres;
+            System.out.println("A mensagem excede " + caracteres_excedentes + " caracteres");
+        }
+    }
+
+    public void limpar_visor() { visor = ""; }; // deixa o visor vazio, ou seja, lenght = 0
+
+    public void aumentar_caracteres(int novo_limite) { max_caracteres = novo_limite; } // caso precise aumentar o tamanho do robo/letreiro
+
+
+    // Getters e Setters
+    
+    public String getVisor() { return visor; }
+    public int getMaximoCaracteres() { return max_caracteres; }
+
+
+
+
+
+    
+}
