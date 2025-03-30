@@ -3,16 +3,15 @@ package LAB02;
 public class RoboTerrestre extends Robo {
     // Atributos adicionais
     private int velocidadeMaxima;
+    // robos terrestres não saem do chão
     private static int altitudeMaxima = 0;
     private static int altitude = 0;
-
 
     // Construtor
     public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMaxima) {
         super(nome, posicaoX, posicaoY);
         this.velocidadeMaxima = velocidadeMaxima;
     }
-
 
     // Metodos
     public void mover(int deltaX, int deltaY) {
@@ -68,6 +67,12 @@ class RoboLimpador extends RoboTerrestre {
     }
 
     void definir_tipo_limpeza(int tipo){
+        if (!power) {
+            System.out.println(getNome() + " está desligado. Não é possível definir o tipo de limpeza.");
+            return;
+        }
+        // Verifica se o tipo de limpeza é válido
+        // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
         if (tipo >= 0 && tipo <= 2) {
             tipo_limpeza = tipo;
             switch (tipo_limpeza) {
@@ -84,7 +89,14 @@ class RoboLimpador extends RoboTerrestre {
         } else {
             System.out.println("Tipo de limpeza inválido. Escolha entre 0 (leve), 1 (pesada) ou 2 (muito pesada).");
         }
+    }
 
+    public void mover(int deltaX, int deltaY) {
+        if (power) {
+            super.mover(deltaX, deltaY);
+        } else {
+            System.out.println(getNome() + " não pode se mover enquanto desligado.");
+        }
     }
 
     //Getters e Setters
@@ -105,19 +117,20 @@ class RoboGarcom extends RoboTerrestre {
     }
 
     // Metodos
-    public void encher_estoque(int peso_adicional_comida){
+    public void adicionar_estoque(int peso_adicional_comida){
         if (estoque + peso_adicional_comida <= carga_maxima){
             estoque += peso_adicional_comida;
-            System.out.println(getNome() + " foram colocadas " + peso_adicional_comida + " gramas de comida!");
+            System.out.println(" foram colocadas " + peso_adicional_comida + " gramas de comida no " + getNome());
+            System.out.println(getNome() + " agora tem " + estoque + " gramas de comida");
         } else {
             int peso_disponivel = carga_maxima - estoque;
-            System.out.println(getNome() + " não pode carregar mais comida, pois o compartimento está cheio!");
-            System.out.println(getNome() + "aguenta apenas mais  " + peso_disponivel + " gramas de comida!");
+            System.out.println(getNome() + " não pode carregar mais " + peso_adicional_comida + ", pois o compartimento não aguenta");
+            System.out.println(getNome() + " aguenta apenas mais  " + peso_disponivel + " gramas de comida!");
         }
     }
 
     public void entregar_comida(int comida){
-        int estoque_atual = estoque;
+        int estoque_anterior = estoque;
         estoque -= comida;
         if (estoque == 0) {
             System.out.println(getNome() + " está entregou " + comida + " gramas de comida");
@@ -127,12 +140,12 @@ class RoboGarcom extends RoboTerrestre {
             System.out.println(getNome() + " ainda tem " + estoque + " gramas de comida");
         } else {
             estoque = 0;
-            System.out.println(getNome() + "entregou apenas " + estoque_atual + " gramas de comida");
+            System.out.println(getNome() + " entregou apenas " + estoque_anterior + " gramas de comida");
             System.out.println(getNome() + " não tem mais comida para entregar");
         }
     }
 
-    public void aumentar_carga(int nova_carga){
+    public void mudar_carga(int nova_carga){
         carga_maxima = nova_carga;
         if (carga_maxima < estoque) {
             carga_maxima = estoque;
