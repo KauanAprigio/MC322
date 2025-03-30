@@ -3,9 +3,6 @@ package LAB02;
 public class RoboTerrestre extends Robo {
     // Atributos adicionais
     private int velocidadeMaxima;
-    // robos terrestres não saem do chão
-    private static int altitudeMaxima = 0;
-    private static int altitude = 0;
 
     // Construtor
     public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMaxima) {
@@ -26,8 +23,6 @@ public class RoboTerrestre extends Robo {
 
     // Getters e Setters
     public int getVelocidadeMaxima() { return velocidadeMaxima; }
-    public int getAltitudeMaxima() { return altitudeMaxima; }
-    public int getAltitude() { return altitude; }
 }
 
 

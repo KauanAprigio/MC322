@@ -7,11 +7,13 @@ public class Ambiente {
     ArrayList<Robo> robos;
     private int largura;
     private int altura;
+    private int altitudeMaxima;
     private String nome;
 
 
     // Construtor
-    public Ambiente(int larguraX, int alturaY, String nome) {
+    public Ambiente(int larguraX, int alturaY, String nome, int altitudeMaxima) {
+        this.altitudeMaxima = altitudeMaxima;
         this.largura = larguraX;
         this.altura = alturaY;
         this.nome = nome;
@@ -24,7 +26,8 @@ public class Ambiente {
         robos.add(r);
         System.out.println(r.getNome() + " foi adicionado ao ambiente " + getNome());
     }
-    public boolean dentroDosLimites(int x, int y, int altitude, int altitudeMaxima) {
+
+    public boolean dentroDosLimites(int x, int y, int altitude) {
         if ((0 <= x && x < largura) && (0 <= y && y < altura) && (0 <= altitude && altitude <= altitudeMaxima)) return true;
         return false;
     }
@@ -34,6 +37,8 @@ public class Ambiente {
     public int getLargura() { return largura; }
     public int getAltura() { return altura; }
     public String getNome() { return nome; }
+    public int getAltitudeMaxima() { return altitudeMaxima; }
+    public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
     public void setLargura(int largura) { this.largura = largura; }
     public void setAltura(int altura) { this.altura = altura; }
     public void setNome(String nome) { this.nome = nome; }
