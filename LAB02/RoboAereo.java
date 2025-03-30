@@ -150,7 +150,7 @@ class RoboLetreiro extends RoboAereo {
             System.out.println(getNome() + " tem no seu visor a seguinte mensagem: " + visor);
         } else if (altura > getAltitude()) {
             int altura_excendente = altura - getAltitudeMaxima();
-            System.out.println(getNome() + " não pode escrever acima da altura máxima de " + getAltitudeMaxima() + " metros, excedendo em " + altura_excendente + " metros");
+            System.out.println(getNome() + " não pode estar acima da altura máxima de " + getAltitudeMaxima() + " metros, excedendo em " + altura_excendente + " metros");
         } else {
             int caracteres_excedentes = texto.length() - max_caracteres;
             System.out.println(getNome() + " não pode escrever mais de " + max_caracteres + " caracteres, excedendo em " + caracteres_excedentes + " caracteres");
