@@ -1,15 +1,20 @@
 package LAB02;
 
 public class RoboAereo extends Robo {
+    //Atributos adicionais
     private int altitude;
     private int altitudeMaxima;
 
+
+    // Construtor
     public RoboAereo(String nome, int posicaoX, int posicaoY, int altitudeMaxima) {
         super(nome, posicaoX, posicaoY);
         this.altitude = 0;
         this.altitudeMaxima = altitudeMaxima;
     }
 
+
+    // Métodos
     public void subir(int metros) {
         if (altitude + metros <= altitudeMaxima) {
             altitude += metros;
@@ -27,6 +32,7 @@ public class RoboAereo extends Robo {
             System.out.println(getNome() + " não pode descer abaixo do nível do solo");
         }
     }
+
 
     // Getters e Setters
     public int getAltitude() { return altitude; }

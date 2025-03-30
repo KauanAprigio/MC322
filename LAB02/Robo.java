@@ -1,11 +1,14 @@
 package LAB02;
 
 public class Robo {
+    // Atributos da SuperClasse
     private String nome;
     private String direcao;
     private int posicaoX;
     private int posicaoY;
 
+
+    // Construtor
     public Robo(String nome, int posicaoX, int posicaoY) {
         this.nome = nome;
         this.direcao = "Norte";
@@ -13,6 +16,8 @@ public class Robo {
         this.posicaoY = posicaoY;
     }
 
+
+    // Metodos
     public void mover(int deltaX, int deltaY) {
         this.posicaoX += deltaX;
         this.posicaoY += deltaY;
@@ -27,6 +32,7 @@ public class Robo {
         System.out.println(getNome() + " está na posição (" + getPosicaoX() + ", " + getPosicaoY() + ")");
     }
 
+    
     // Getters e Setters
     public String getNome() { return nome; }
     public String getDirecao() { return direcao; }
