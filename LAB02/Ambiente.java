@@ -3,17 +3,23 @@ package LAB02;
 import java.util.ArrayList;
 
 public class Ambiente {
+    //Atributos da SuperClasse
     ArrayList<Robo> robos;
     private int largura;
     private int altura;
     private String nome;
 
+
+    // Construtor
     public Ambiente(int larguraX, int alturaY, String nome) {
         this.largura = larguraX;
         this.altura = alturaY;
         this.nome = nome;
         robos = new ArrayList<Robo>();
     }
+
+
+    // Metodos
     public void adicionarRobo(Robo r) {
         robos.add(r);
         System.out.println(r.getNome() + " foi adicionado ao ambiente " + getNome());
@@ -22,7 +28,9 @@ public class Ambiente {
         if ((0 <= x && x < largura) && (0 <= y && y < altura) && (0 <= altitude && altitude <= altitudeMaxima)) return true;
         return false;
     }
-    //getters e setters
+
+
+    //Getters e Setters
     public int getLargura() { return largura; }
     public int getAltura() { return altura; }
     public String getNome() { return nome; }
