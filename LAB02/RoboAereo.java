@@ -5,14 +5,12 @@ public class RoboAereo extends Robo {
     private int altitude;
     private int altitudeMaxima;
 
-
     // Construtor
     public RoboAereo(String nome, int posicaoX, int posicaoY, int altitudeMaxima) {
         super(nome, posicaoX, posicaoY);
         this.altitude = 0;
         this.altitudeMaxima = altitudeMaxima;
     }
-
 
     // Métodos
     public void subir(int metros) {
@@ -33,7 +31,6 @@ public class RoboAereo extends Robo {
         }
     }
 
-
     // Getters e Setters
     public int getAltitude() { return altitude; }
     public int getAltitudeMaxima() { return altitudeMaxima; }
@@ -48,41 +45,41 @@ class RoboBombeiro extends RoboAereo {
     //Atributos adicionais
     private int peso_max; // peso maximo que o robo suporta;
     private int peso_tripulantes = 0; // peso da tripulaçao presente no exato momento 
-    private int reservatorio = 0; // litros de agua no reservatorio, lembre-se que 1l = 1kg de agua
-    private int altitude = 0; // ele começa no solo, logo a altitude ja é inicializada como sendo 0
+    private int reservatorio = 0; // litros de agua no reservatorio
     
 
     // Construtor
     public RoboBombeiro(String nome, int posicaoX, int posicaoY, int altitudeMaxima, int peso_max) {
-        super(nome, posicaoX, posicaoY, altitudeMaxima);   
+        super(nome, posicaoX, posicaoY, altitudeMaxima);  
         this.peso_max = peso_max;
     }
 
     
     // Metodos
-    public void encher_reservatorio(int litros){
-        int auxiliar = reservatorio + peso_tripulantes + litros; // variavel auxiliar para o if, representa somatorio dos pesos
-        if (auxiliar > peso_max){
-            int excedente = auxiliar - peso_max;
-            System.out.println("A quantidade " + litros + " excede " + excedente + " kilos da capacidade máxima de " + getNome() + "!");
+    public void adicionar_agua(int litros){
+        int peso_total = reservatorio + peso_tripulantes + litros; // somatorio dos pesos
+        if (peso_total > peso_max){
+            int excedente = peso_total - peso_max;
+            System.out.println("A quantidade " + litros + " excede " + excedente + " kilos da capacidade máxima de " + peso_max + "do" + getNome());
         } else {
             reservatorio += litros;
-            System.out.println(getNome() + " foi abastecido com sucesso!");
+            System.out.println(getNome() + " foi abastecido com sucesso");
+            System.out.println("Reservatorio possui " + reservatorio + " litros");
         }
     }
 
     public void apagar_fogo(int litros_necessarios){
         if (reservatorio < litros_necessarios){
             int deficit = litros_necessarios - reservatorio; // quanto ira faltar de agua para apagar o fogo
-            System.out.println(getNome() + " precisa de " + deficit + " litros a mais para apagar o incêndio!");
+            System.out.println(getNome() + " precisa de " + deficit + " litros a mais para apagar o incêndio");
         } else {
             reservatorio -= litros_necessarios;
-            System.out.println(getNome() + " apagou o incêndio com sucesso!");
+            System.out.println(getNome() + " apagou o incêndio com sucesso");
         }
     }
 
-    public void resgate(int peso_tripulacao){
-        int auxiliar = reservatorio + peso_tripulantes + peso_tripulacao; // variavel auxiliar que representa o somatorio das cargas
+    public void resgate(int peso_civis){
+        int auxiliar = reservatorio + peso_tripulantes + peso_civis; // variavel auxiliar que representa o somatorio das cargas
         if (auxiliar > peso_max ){
             int excedente = auxiliar - peso_max;
             if (reservatorio >= excedente){
@@ -92,23 +89,24 @@ class RoboBombeiro extends RoboAereo {
                 System.out.println(getNome() + " não suporta todos os tripulantes, libere os que estão a bordo primeiro");
             }
         } else {
-            peso_tripulantes += peso_tripulacao;
-            System.out.println(getNome() + " conseguiu suportar todos a bordo!");
+            peso_tripulantes += peso_civis; // adiciona o peso dos civis ao peso da tripulaçao
+            System.out.println(getNome() + " conseguiu suportar todos a bordo");
         }
     }
 
     public void liberar_tripulantes(){
-        if (altitude == 0){ // quer dizer que esta no chao num lugar seguro para deixar os tripulantes em lugar seguro
+        if (getAltitude() == 0){ // quer dizer que esta no chao num lugar seguro para deixar os tripulantes em lugar seguro
             peso_tripulantes = 0;
+            System.out.println(getNome() + " liberou os tripulantes com sucesso");
         } else {
             System.out.println(getNome() + " deve estar em um lugar seguro para liberar os tripulantes");
         }
     }
 
-    public void aprimora(int novo_peso){
-        if (altitude == 0){ // isso quer dizer que ele ainda nao esta indo socorrer ninguem, por estar na base pode ser aprimorado
-            peso_max = novo_peso;
-            System.out.println(getNome() + " aumentou sua capacidade máxima para " + novo_peso + " kilos!");
+    public void aprimora(int peso_adicional){
+        if (getAltitude() == 0){ // isso quer dizer que ele ainda nao esta indo socorrer ninguem, por estar na base pode ser aprimorado
+            peso_max += peso_adicional;
+            System.out.println(getNome() + " aumentou sua capacidade máxima para " + peso_max + " kilos");
         } else {
             System.out.println(getNome() + " deve estar na base para ser aprimorado");
         }
