@@ -126,7 +126,8 @@ class RoboBombeiro extends RoboAereo {
 
 class RoboLetreiro extends RoboAereo {
     //Atributos adicionais
-    private int max_caracteres; 
+    private int max_caracteres;
+    private int max_altura; 
     private String visor; // a mensagem que irá aparecer no letreiro
 
 
@@ -137,23 +138,35 @@ class RoboLetreiro extends RoboAereo {
     }
 
     // Metodos
-    public void escrever_visor(String texto){
-        if (texto.length() <= max_caracteres){ // ve se pode escrever a mensagem desejada, ou seja, o texto
+    public void escrever_visor(String texto, int altura){
+        if ((texto.length() <= max_caracteres) && (altura <= max_altura)){ // ve se pode escrever a mensagem desejada + se nao fica acima da alturaMaxima do robo
             visor = texto;
             System.out.println(getNome() + " tem no seu visor a seguinte mensagem: " + texto);
+        } else if (altura > max_altura) {
+            int altura_excendente = altura - max_altura;
+            System.out.println(getNome() + " está " + altura_excendente + " metros acima da altura máxima");
         } else {
             int caracteres_excedentes = texto.length() - max_caracteres;
-            System.out.println("A mensagem excede " + caracteres_excedentes + " caracteres");
+            System.out.println("A mensagem excede " + caracteres_excedentes + " caracteres!");
         }
     }
 
-    public void limpar_visor() { visor = ""; }; // deixa o visor vazio, ou seja, lenght = 0
+    public void limpar_visor() {
+        visor = ""; // deixa o visor vazio, ou seja, lenght = 0
+        System.out.println(getNome() + " teve seu visor limpo!");
+    }
 
-    public void aumentar_caracteres(int novo_limite) { max_caracteres = novo_limite; } // caso precise aumentar o tamanho do robo/letreiro
+    public void aumentar_caracteres(int novo_limite) {// caso precise aumentar o tamanho do robo/letreiro
+        if (getAltitude() == 0){ // tem que estar no chao para ser atualizado o tamanho do visor, ou seja, quantos caracteres ele suporta
+            max_caracteres = novo_limite; 
+            System.out.println(getNome() + " teve seu visor aumentado, agora suporta " + novo_limite + " caracteres!");
+        } else {
+            System.out.println(getNome() + " deve estar no chão para ter seu visor aumentado!");
+        }
+    }
 
 
     // Getters e Setters
-    
     public String getVisor() { return visor; }
     public int getMaximoCaracteres() { return max_caracteres; }
 
