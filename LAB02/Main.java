@@ -36,6 +36,10 @@ public class Main {
         // Identificação de obstáculos
         roboTerrestre.identificarObstaculo();
         roboAereo.identificarObstaculo();
+        roboAereo.setDirecao("Leste");
+        roboAereo.identificarObstaculo();
+        roboTerrestre.setDirecao("Sul");
+        roboTerrestre.identificarObstaculo();
 
 
         System.out.println("-------------------------");
