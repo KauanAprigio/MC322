@@ -30,8 +30,8 @@ public class RoboTerrestre extends Robo {
 // Subclasse de RoboTerrestre
 class RoboLimpador extends RoboTerrestre {
     // Atributos adicionais
-    private int n_pas;
-    private boolean power = false;
+    private int n_pas; // numero de pás limpadoras do robo
+    private boolean power = false; // estado que ira dizer se esta ligado = true ou desligado = false
     private int tipo_limpeza = 0; // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
 
     // Construtor
@@ -104,7 +104,7 @@ class RoboLimpador extends RoboTerrestre {
 
 class RoboGarcom extends RoboTerrestre {
     private int estoque = 0; // estoque seria o quanto ele ja esta carregando de comida em peso, por ele começar carregando nada o estoque e 0
-    private int carga_maxima; 
+    private int carga_maxima; //maximo de comida que ele pode carregar
 
     // Construtor
     public RoboGarcom(String nome, int posicaoX, int posicaoY, int velocidadeMaxima, int carga_maxima) {
@@ -116,7 +116,7 @@ class RoboGarcom extends RoboTerrestre {
     public void adicionar_estoque(int peso_adicional_comida){
         if (estoque + peso_adicional_comida <= carga_maxima){
             estoque += peso_adicional_comida;
-            System.out.println(" foram colocadas " + peso_adicional_comida + " gramas de comida no " + getNome());
+            System.out.println("Foram colocadas " + peso_adicional_comida + " gramas de comida no " + getNome());
             System.out.println(getNome() + " agora tem " + estoque + " gramas de comida");
         } else {
             int peso_disponivel = carga_maxima - estoque;
@@ -128,27 +128,27 @@ class RoboGarcom extends RoboTerrestre {
     public void entregar_comida(int comida){
         int estoque_anterior = estoque;
         estoque -= comida;
-        if (estoque == 0) {
-            System.out.println(getNome() + " está entregou " + comida + " gramas de comida");
+        if (estoque == 0) { //condicional caso o robo entregue toda sua comida
+            System.out.println(getNome() + " entregou " + comida + " gramas de comida");
             System.out.println(getNome() + " não tem mais comida para entregar");
-        } else if (estoque > 0) {
+        } else if (estoque > 0) { // caso o robo entregue a comida e ainda tenha comida no estoque
             System.out.println(getNome() + " entregou " + comida + " gramas de comida");
             System.out.println(getNome() + " ainda tem " + estoque + " gramas de comida");
-        } else {
+        } else { // caso "falte" comida para entregar
             estoque = 0;
             System.out.println(getNome() + " entregou apenas " + estoque_anterior + " gramas de comida");
             System.out.println(getNome() + " não tem mais comida para entregar");
         }
     }
 
-    public void mudar_carga(int nova_carga){
+    public void mudar_carga(int nova_carga){ // metodo para aumentar sua capacidade máxima
         carga_maxima = nova_carga;
-        if (carga_maxima < estoque) {
+        if (carga_maxima < estoque) { // caso a nova carga máxima seja do mesmo tamanho que o estoque atual, impede que ele diminua a carga máxima para menos que o estoque atual
             carga_maxima = estoque;
             System.out.println(getNome() + " teve seu compartimento alterado para " + carga_maxima + " gramas");
             System.out.println(getNome() + " não pode reduzir mais o seu compartimento, pois ele já está cheio");
         }
-        else
+        else // aqui só modifica a carga_maxima podendo ser tanto para mais quanto para menos
             System.out.println(getNome() + " teve seu compartimento alterado para " + carga_maxima + " gramas");
     }
 

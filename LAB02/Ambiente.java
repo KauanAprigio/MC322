@@ -2,6 +2,7 @@ package LAB02;
 
 import java.util.ArrayList;
 
+//SuperClasse Ambiente
 public class Ambiente {
     //Atributos da SuperClasse
     ArrayList<Robo> robos;
@@ -22,12 +23,12 @@ public class Ambiente {
 
 
     // Metodos
-    public void adicionarRobo(Robo r) {
+    public void adicionarRobo(Robo r) { //adiciona um robo r no arraylist
         robos.add(r);
         System.out.println(r.getNome() + " foi adicionado ao ambiente " + getNome());
     }
 
-    public boolean dentroDosLimites(int x, int y, int altitude) {
+    public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
         if ((0 <= x && x < largura) && (0 <= y && y < altura) && (0 <= altitude && altitude <= altitudeMaxima)) return true;
         return false;
     }

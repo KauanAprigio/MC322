@@ -85,10 +85,10 @@ class RoboBombeiro extends RoboAereo {
         int peso_total = reservatorio + peso_tripulantes + peso_civis; // variavel auxiliar que representa o somatorio das cargas
         if (peso_total > peso_max ){
             int excedente = peso_total - peso_max;
-            if (reservatorio >= excedente){
+            if (reservatorio >= excedente){ // condicional caso queira tirar agua do reservatorio para dimunuir o peso, assim cabendo os outros tripulantes
                 reservatorio -= excedente;
                 System.out.println(getNome() + " irá liberar " + excedente + " litros de água do reservatório para poder acomodar os tripulantes");
-            } else {
+            } else { // condicional caso nao de para tirar o excedente de peso do reservatorio de agua
                 System.out.println(getNome() + " não suporta todos os tripulantes, libere os que estão a bordo primeiro");
             }
         } else {
@@ -98,17 +98,17 @@ class RoboBombeiro extends RoboAereo {
     }
 
     public void liberar_tripulantes(){
-        if (getAltitude() == 0){ // quer dizer que esta no chao num lugar seguro para deixar os tripulantes em lugar seguro
+        if (getAltitude() == 0){ // quer dizer que esta no chao para deixar os tripulantes em lugar seguro
             peso_tripulantes = 0;
             System.out.println(getNome() + " liberou os tripulantes com sucesso");
-        } else {
+        } else { // condicional caso nao esteja no chao/lugar seguro
             System.out.println(getNome() + " deve estar em um lugar seguro para liberar os tripulantes");
         }
     }
 
     public void aprimora(int peso_adicional){
         if (getAltitude() == 0){ // isso quer dizer que ele ainda nao esta indo socorrer ninguem, por estar na base pode ser aprimorado
-            peso_max += peso_adicional;
+            peso_max += peso_adicional; // aumenta o limite de peso do robo somando o peso_adicional ao limite atual
             System.out.println(getNome() + " aumentou sua capacidade máxima para " + peso_max + " kilos");
         } else {
             System.out.println(getNome() + " deve estar na base para ser aprimorado");
@@ -140,11 +140,11 @@ class RoboLetreiro extends RoboAereo {
     // Metodos
     public void escrever_visor(String texto, int altura){
         if ((texto.length() <= max_caracteres) && (altura <= getAltitudeMaxima())){ // ve se pode escrever a mensagem desejada + se nao fica acima da alturaMaxima do robo
-            int diff_atura = altura - getAltitude(); // diferença entre a altura do robo e a altura desejada
-            if (diff_atura < 0){ // se o robo estiver acima da altura desejada
-                descer(-diff_atura); // desce a altura desejada
-            } else if (diff_atura > 0){ // se o robo estiver abaixo da altura desejada
-                subir(diff_atura); // sobe a altura desejada
+            int diff_altura = altura - getAltitude(); // diferença entre a altura do robo e a altura desejada
+            if (diff_altura < 0){ // se o robo estiver acima da altura desejada
+                descer(-diff_altura); // desce a altura desejada
+            } else if (diff_altura > 0){ // se o robo estiver abaixo da altura desejada
+                subir(diff_altura); // sobe a altura desejada
             }
             visor = texto;
             System.out.println(getNome() + " tem no seu visor a seguinte mensagem: " + visor);
