@@ -47,13 +47,11 @@ class RoboBombeiro extends RoboAereo {
     private int peso_tripulantes = 0; // peso da tripulaçao presente no exato momento 
     private int reservatorio = 0; // litros de agua no reservatorio
     
-
     // Construtor
     public RoboBombeiro(String nome, int posicaoX, int posicaoY, int altitudeMaxima, int peso_max) {
         super(nome, posicaoX, posicaoY, altitudeMaxima);  
         this.peso_max = peso_max;
     }
-
     
     // Metodos
     public void adicionar_agua(int litros){
@@ -79,9 +77,9 @@ class RoboBombeiro extends RoboAereo {
     }
 
     public void resgate(int peso_civis){
-        int auxiliar = reservatorio + peso_tripulantes + peso_civis; // variavel auxiliar que representa o somatorio das cargas
-        if (auxiliar > peso_max ){
-            int excedente = auxiliar - peso_max;
+        int peso_total = reservatorio + peso_tripulantes + peso_civis; // variavel auxiliar que representa o somatorio das cargas
+        if (peso_total > peso_max ){
+            int excedente = peso_total - peso_max;
             if (reservatorio >= excedente){
                 reservatorio -= excedente;
                 System.out.println(getNome() + " irá liberar " + excedente + " litros de água do reservatório para poder acomodar os tripulantes");
@@ -111,7 +109,6 @@ class RoboBombeiro extends RoboAereo {
             System.out.println(getNome() + " deve estar na base para ser aprimorado");
         }
     }
-
 
     // Getters e Setters
     public int getCapacidade() { return peso_max; }
