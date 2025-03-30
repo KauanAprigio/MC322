@@ -141,6 +141,12 @@ class RoboLetreiro extends RoboAereo {
     // Metodos
     public void escrever_visor(String texto, int altura){
         if ((texto.length() <= max_caracteres) && (altura <= max_altura)){ // ve se pode escrever a mensagem desejada + se nao fica acima da alturaMaxima do robo
+            int diff_atura = altura - getAltitude(); // diferença entre a altura do robo e a altura desejada
+            if (diff_atura < 0){ // se o robo estiver acima da altura desejada
+                descer(-diff_atura); // desce a altura desejada
+            } else if (diff_atura > 0){ // se o robo estiver abaixo da altura desejada
+                subir(diff_atura); // sobe a altura desejada
+            }
             visor = texto;
             System.out.println(getNome() + " tem no seu visor a seguinte mensagem: " + visor);
         } else if (altura > max_altura) {
@@ -168,4 +174,5 @@ class RoboLetreiro extends RoboAereo {
     // Getters e Setters
     public String getVisor() { return visor; }
     public int getMaximoCaracteres() { return max_caracteres; }
+    public String getTexto() { return visor; }
 }
