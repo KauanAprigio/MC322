@@ -1,4 +1,4 @@
-package LAB02;
+package LAB02.Code;
 
 //Subclasse de Robo, mas também é a "SuperClasse" de RoboLimpador e RoboGarcom
 public class RoboTerrestre extends Robo {

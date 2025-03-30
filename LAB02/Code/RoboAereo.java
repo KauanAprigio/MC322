@@ -1,4 +1,4 @@
-package LAB02;
+package LAB02.Code;
 
 //SubClasse de Robo, mas é "SuperClasse" de RoboLetreiro e RoboBombeiro
 public class RoboAereo extends Robo {

@@ -1,4 +1,4 @@
-package LAB02;
+package LAB02.Code;
 
 public class Robo {
     // Atributos da SuperClasse
