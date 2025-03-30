@@ -1,11 +1,12 @@
 package LAB02;
 
 public class RoboTerrestre extends Robo {
+    // Atributos adicionais
     private int velocidadeMaxima;
     private static int altitudeMaxima = 0;
     private static int altitude = 0;
 
-    
+
     // Construtor
     public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMaxima) {
         super(nome, posicaoX, posicaoY);
@@ -30,7 +31,10 @@ public class RoboTerrestre extends Robo {
     public int getAltitude() { return altitude; }
 }
 
+
+// Subclasse de RoboTerrestre
 class RoboLimpador extends RoboTerrestre {
+    // Atributos adicionais
     private int n_pas;
     private boolean power = false;
 
@@ -72,9 +76,48 @@ class RoboLimpador extends RoboTerrestre {
     //Getters e Setters
     public boolean getPower() { return power; }
     public int getPas() { return n_pas; }
+}
+
+//SubClasse do RoboTerrestre 
+class RoboGarcom extends RoboTerrestre {
+    // Atributos adicionais
+    private int estoque = 0; // estoque seria o quanto ele ja esta carregando de comida, por ele começar carregando nada o estoque e 0
+    private int compartimento_maximo;
+
+
+    // Construtor
+    public RoboGarcom(String nome, int posicaoX, int posicaoY, int velocidadeMaxima, int compartimento_maximo) {
+        super(nome, posicaoX, posicaoY, velocidadeMaxima);
+        this.compartimento_maximo = compartimento_maximo;
+    }
 
     
-    
+    // Metodos
+    public void encher_estoque(int comida){
+        if (estoque + comida <= compartimento_maximo){
+            estoque += comida;
+            System.out.println(getNome() + " foram colocadas " + comida + " gramas!");
+        } else {
+            System.out.println(getNome() + " já está na sua capacidade máxima!");
+        }
+    }
+
+    public void entregar_comida(int comida){
+        if (estoque > 0) {
+            estoque -= comida;
+            System.out.println(getNome() + " está entregando " + comida + " gramas de comida!");
+        } else {
+            System.out.println(getNome() + " está vazio!");
+        }
+    }
+
+    public void aumentar_compartimento(int novo_compartimento){
+        compartimento_maximo = novo_compartimento;
+        System.out.println(getNome() + " teve seu compartimento expandido para " + compartimento_maximo + " gramas!");
+    }
 
     
+    //Getters e Setters
+    public int getEstoque() { return estoque; }
+    public int getCompartimento() { return compartimento_maximo; }
 }
