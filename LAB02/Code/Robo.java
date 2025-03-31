@@ -1,5 +1,8 @@
 package LAB02.Code;
 
+/*
+ * Classe obrigatória Robo
+ */
 public class Robo {
     // Atributos da SuperClasse
     private String nome;
@@ -10,6 +13,7 @@ public class Robo {
     // Construtor
     public Robo(String nome, int posicaoX, int posicaoY) {
         this.nome = nome;
+        //inicializada com o valor padrão "Norte"
         this.direcao = "Norte";
         this.posicaoX = posicaoX;
         this.posicaoY = posicaoY;

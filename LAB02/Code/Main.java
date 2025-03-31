@@ -1,5 +1,20 @@
+/*
+ *  Grupo: Diego Martins e Kauan Aprigio
+ *  
+ *  Última modificação: 30/03/2025
+ * 
+ *  Laboratório 2 - MC322 - Programação orientada a objetos
+ *  
+ */
 package LAB02.Code;
 
+/*
+ * Essa classe contém o método main que cria um ambiente e robôs,
+ * adiciona os robôs ao ambiente e executa testes de movimentação,
+ * funcionalidades e exibição do ambiente.
+ * Ela printa todos os resultados no console.
+ * 
+ */
 public class Main {
     public static void main(String[] args) {
         // Criação do ambiente

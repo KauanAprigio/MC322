@@ -9,6 +9,7 @@ public class RoboAereo extends Robo {
     // Construtor
     public RoboAereo(String nome, int posicaoX, int posicaoY, int altitudeMaxima) {
         super(nome, posicaoX, posicaoY);
+        // Todos os robos aéreos começam com altitude 0
         this.altitude = 0;
         this.altitudeMaxima = altitudeMaxima;
     }
