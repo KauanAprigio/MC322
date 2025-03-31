@@ -1,7 +1,25 @@
 package LAB02.Code;
 
-
+/* 
+ * Classe criada RoboLimpador
+ * 
+ * Atributos:
+ * - n_pas
+ * - power
+ * - tipo_limpeza
+ * 
+ * Métodos:
+ * - ligar()
+ * - desligar()
+ * - definir_tipo_limpeza(int tipo)
+ * - mover(int deltaX, int deltaY) (sobrescreve o método da superclasse)
+ * 
+ */
 // Subclasse de RoboTerrestre
+// Possui 3 modos de limpeza: leve, pesada e muito pesada
+// O robo limpador pode ser ligado e desligado
+// O robo limpador tem um numero de pás limpadoras
+// O robo limpador pode se mover, mas apenas quando ligado
 class RoboLimpador extends RoboTerrestre {
     // Atributos adicionais
     private int n_pas; // numero de pás limpadoras do robo

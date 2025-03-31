@@ -1,5 +1,15 @@
 package LAB02.Code;
 
+/* 
+ * Classe dada pelo enunciado RoboTerrestre
+ *  
+ * Atributos:
+ * - velocidadeMaxima
+ * 
+ * Métodos:
+ * - mover(int deltaX, int deltaY)
+ * 
+ */
 //Subclasse de Robo, mas também é a "SuperClasse" de RoboLimpador e RoboGarcom
 public class RoboTerrestre extends Robo {
     // Atributos adicionais

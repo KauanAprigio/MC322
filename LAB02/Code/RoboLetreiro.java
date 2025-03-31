@@ -1,4 +1,17 @@
 package LAB02.Code;
+
+/* 
+ * Classe criada RoboLetreiro
+ *  
+ * Atributos:
+ * - max_caracteres
+ * - visor
+ * 
+ * Métodos:
+ * - escrever_visor(String texto, int altura)
+ * - limpar_visor()
+ * - aumentarVisor(int tamanho_adicional)
+ */
 // SubClasse de RoboAereo
 // Robo que mostra uma mensagem em uma dada altura em seu visor para servir como placa ou letreiro
 public class RoboLetreiro extends RoboAereo {

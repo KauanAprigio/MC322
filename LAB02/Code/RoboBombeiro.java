@@ -1,5 +1,23 @@
 package LAB02.Code;
+
+/*
+ * Classe criada RoboBombeiro
+ *  
+ * Atributos:
+ * - peso_max
+ * - peso_tripulantes
+ * - reservatorio
+ * 
+ * Métodos:
+ * - adicionar_agua(int litros)
+ * - apagar_fogo(int litros_necessarios)
+ * - resgate(int peso_civis)
+ * - liberar_tripulantes()
+ * - aprimora(int peso_adicional)
+ */
 // Subclasse de RoboAereo
+// resgata civis, apaga fogo e carrega agua
+// e tem um peso maximo que suporta
 public class RoboBombeiro extends RoboAereo {
     //Atributos adicionais
     private int peso_max; // peso maximo que o robo suporta;

@@ -1,5 +1,17 @@
 package LAB02.Code;
 
+/* 
+ * Classe criada RoboGarcom
+ *  
+ * Atributos:
+ * - estoque
+ * - carga_maxima
+ * 
+ * Métodos:
+ * - adicionar_estoque(int peso_adicional_comida)
+ * - entregar_comida(int comida)
+ * - mudar_carga(int nova_carga)
+ */
 // robo que carrega comida e entrega
 // SubClasse de RoboTerrestre
 class RoboGarcom extends RoboTerrestre {

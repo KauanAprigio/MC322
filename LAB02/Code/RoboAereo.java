@@ -1,5 +1,18 @@
 package LAB02.Code;
 
+/*
+ * Classe dada pelo enunciado RoboAereo
+ *  
+ * Atributos:
+ * - altitude
+ * - altitudeMaxima
+ * 
+ * Métodos:
+ * - subir(int metros)
+ * - descer(int metros)
+ * - exibirPosicao() (sobrescreve o método da superclasse para exibir altitude)
+ * 
+ */
 //SubClasse de Robo, mas é "SuperClasse" de RoboLetreiro e RoboBombeiro
 public class RoboAereo extends Robo {
     //Atributos adicionais
