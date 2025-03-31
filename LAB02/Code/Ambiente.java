@@ -2,7 +2,19 @@ package LAB02.Code;
 
 import java.util.ArrayList;
 
-//SuperClasse Ambiente
+/*
+ * Classe obrigatória Ambiente
+ * 
+ * Atributos:
+ * - largura
+ * - altura
+ * - altitudeMaxima
+ * - nome
+ * 
+ * Métodos:
+ * - adicionarRobo(Robo r)
+ * - dentroDosLimites(int x, int y, int altitude)
+ */
 public class Ambiente {
     //Atributos da SuperClasse
     ArrayList<Robo> robos;

@@ -2,6 +2,18 @@ package LAB02.Code;
 
 /*
  * Classe obrigatória Robo
+ *  
+ * Atributos:
+ * - nome
+ * - direcao
+ * - posicaoX
+ * - posicaoY
+ * 
+ * Métodos:
+ * - mover(int deltaX, int deltaY)
+ * - identificarObstaculo()
+ * - exibirPosicao()
+ * 
  */
 public class Robo {
     // Atributos da SuperClasse
