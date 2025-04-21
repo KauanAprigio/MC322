@@ -30,9 +30,9 @@ public class RoboAereo extends Robo {
     }
 
     // Métodos
-    public void subir(int dz, Ambiente ambiente) {
+    public void subir(int dz) {
         // Verifica se a nova altitude está dentro dos limites do ambiente
-        if (!ambiente.dentroDosLimites(getX(), getY(), altitude + dz)){
+        if (!getAmbiente().dentroDosLimites(getX(), getY(), altitude + dz)){
             System.out.println(getNome() + " não pode subir para essa altitude, pois está fora dos limites do ambiente");
             return;
         }
@@ -58,10 +58,19 @@ public class RoboAereo extends Robo {
         System.out.println(getNome() + " está na posição (" + getX() + ", " + getY() + ", " + getAltitude() +")");
     }
 
+    @Override
+    public void identificarObstaculo() {
+        // Lógica para identificar obstáculos
+        // Aqui é utilizado o sensor para verificar se há obstáculos próximos
+        System.out.println("Identificando obstáculos...");
+        getSensor().monitorar(getX(), getY(), altitude, getAmbiente());
+    }
+
+
     // Getters e Setters
     public int getAltitude() { return altitude; }
     public int getAltitudeMaxima() { return altitudeMaxima; }
+
     public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
-    public void setAltitude(int altitude) { this.altitude = altitude; }
 }
 
