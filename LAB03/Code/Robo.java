@@ -48,7 +48,7 @@ public class Robo {
         // Lógica para identificar obstáculos
         // Aqui é utilizado o sensor para verificar se há obstáculos próximos
         System.out.println("Identificando obstáculos...");
-        sensor.monitorar(posicaoX, posicaoY, 0, ambiente); // Passar o ambiente correto aqui
+        sensor.monitorar(posicaoX, posicaoY, 0, ambiente);
     }
 
     public void exibirPosicao() {
@@ -59,6 +59,10 @@ public class Robo {
     public String getNome() { return nome; }
     public int getX() { return posicaoX; }
     public int getY() { return posicaoY; }
+    public Ambiente getAmbiente() { return ambiente; }
+    public Sensor getSensor() { return sensor; }
+
     public void setNome(String nome) { this.nome = nome; }
-    public String getAmbiente() { return ambiente.toString(); }
+    public void setSensor(Sensor sensor) { this.sensor = sensor; }
+    public void setAmbiente(Ambiente ambiente) { this.ambiente = ambiente; }
 }
