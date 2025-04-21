@@ -19,12 +19,17 @@ import java.util.ArrayList;
 public class Ambiente {
     private int largura;
     private int altura;
+    private String nome;
+    private int altitudeMaxima;
     ArrayList<Obstaculo> obstaculos;
     ArrayList<Robo> robos;
+    
 
 
     // Construtor
-    public Ambiente(int larguraX, int alturaY) {
+    public Ambiente(int larguraX, int alturaY, String nome, int altitudeMaxima) {
+        this.altitudeMaxima = altitudeMaxima;
+        this.nome = nome;
         this.largura = larguraX;
         this.altura = alturaY;
         obstaculos = new ArrayList<Obstaculo>();
@@ -32,8 +37,17 @@ public class Ambiente {
     }
     // Metodos
     public void adicionarRobo(Robo r) { //adiciona um robo r no arraylist
+        // Verifica se o robô está dentro dos limites do ambiente
+        // Se o robô estiver fora dos limites, não adiciona e exibe mensagem
+        // Se o robô estiver dentro dos limites, adiciona e exibe mensagem
+        if (!dentroDosLimites(r.getX(), r.getY(), 0)) {
+            System.out.println("Robô fora dos limites do ambiente.");
+            System.out.println("Não foi possível adicionar o robô.");
+            return;
+        }
         robos.add(r);
         System.out.println(r.getNome() + " foi adicionado ao ambiente.");
+        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")");
     }
     public void removerRobo(Robo r) { //remove um robo r do arraylist
         robos.remove(r);
@@ -49,25 +63,41 @@ public class Ambiente {
         }
     }
     public void adicionarObstaculo(Obstaculo o) { //adiciona um obstaculo o no arraylist
+        // Verifica se o obstáculo está dentro dos limites do ambiente
+        // Se o obstáculo estiver fora dos limites, não adiciona e exibe mensagem
+        // Se o obstáculo estiver dentro dos limites, adiciona e exibe mensagem
+        if (!dentroDosLimites(o.getPosicaoX1(), o.getPosicaoY1(), o.getAltura()) || !dentroDosLimites(o.getPosicaoX2(), o.getPosicaoY2(), o.getAltura())) {
+            System.out.println("Obstáculo fora dos limites do ambiente.");
+            System.out.println("Não foi possível adicionar o obstáculo.");
+            return;
+        }
         obstaculos.add(o);
         System.out.println("Obstáculo " + o.getTipo() + " adicionado ao ambiente.");
+        System.out.println("Posição inferior esquerda: (" + o.getPosicaoX1() + ", " + o.getPosicaoY1() + ", " + 0 + ")");
+        System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getAltura() + ")");
     }
     public void removerObstaculo(Obstaculo o) { //remove um obstaculo o do arraylist
         obstaculos.remove(o);
         System.out.println("Obstáculo " + o.getTipo() + " removido do ambiente.");
     }
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
-        if ((0 <= x && x < largura) && (0 <= y && y < altura) && (0 <= altitude)) return true;
+        if ((0 <= x && x <= largura) && (0 <= y && y <= altura) && (0 <= altitude && altitude <= altitudeMaxima)) return true;
         return false;
     }
     //Getters e Setters
     public int getLargura() { return largura; }
     public int getAltura() { return altura; }
+    public String getNome() { return nome; }
+    public int getAltitudeMaxima() { return altitudeMaxima; }
     public ArrayList<Obstaculo> getObstaculos() { return obstaculos; }
-    public void setObstaculos(ArrayList<Obstaculo> obstaculos) { this.obstaculos = obstaculos; }
     public ArrayList<Robo> getRobos() { return robos; }
-    public void setRobos(ArrayList<Robo> robos) { this.robos = robos; }
+
     public void setLargura(int largura) { this.largura = largura; }
     public void setAltura(int altura) { this.altura = altura; }
+    public void setNome(String nome) { this.nome = nome; }
+    public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
+    public void setObstaculos(ArrayList<Obstaculo> obstaculos) { this.obstaculos = obstaculos; }
+    public void setRobos(ArrayList<Robo> robos) { this.robos = robos; }
+    
     
 }
