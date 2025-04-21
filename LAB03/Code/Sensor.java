@@ -23,19 +23,26 @@ public class Sensor {
     }
     // Métodos
     public void monitorar(int x, int y, int altura, Ambiente ambiente) {
+        int N_obstaculos = 0;
         // Lógica para monitorar o ambiente
-        // Verifica se há algum obstáculo na área de monitoramento
-        // Se houver, verifica se está dentro do raio do sensor
-        // Se estiver, detecta o obstáculo
+        // Conta os obstáculos na área de monitoramento
         for (Obstaculo obstaculo: ambiente.getObstaculos()) {
             int Xmaisproximo = Math.max(obstaculo.getPosicaoX1(), Math.min(x, obstaculo.getPosicaoX2()));
             int Ymaisproximo = Math.max(obstaculo.getPosicaoY1(), Math.min(y, obstaculo.getPosicaoY2()));
             int Zmaisproximo = Math.max(0, Math.min(altura, obstaculo.getAltura()));
             double distancia = Math.sqrt(Math.pow(Xmaisproximo - x, 2) + Math.pow(Ymaisproximo - y, 2) + Math.pow(Zmaisproximo - altura, 2));
             if (distancia <= raio) {
-                System.out.println("Obstáculo detectado dentro do raio do sensor!");
+                N_obstaculos++;
             }
-
+        }
+        if (N_obstaculos > 0) {
+            System.out.println("Sensor detectou " + N_obstaculos + " obstáculos próximos.");
+        } else {
+            System.out.println("Sensor não detectou obstáculos próximos.");
         }
     }
+
+    // Getters e Setters
+    public double getRaio() { return raio; }
+    public void setRaio(double raio) { this.raio = raio; }
 }
