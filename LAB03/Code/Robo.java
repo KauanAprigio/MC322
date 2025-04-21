@@ -18,26 +18,37 @@ package LAB03.Code;
  */
 public class Robo {
     private String nome;
-    private String direcao;
     private int posicaoX;
     private int posicaoY;
+    private Sensor sensor;
+    private Ambiente ambiente;
 
     // Construtor
-    public Robo(String nome, String direcao, int posicaoX, int posicaoY) {
+    public Robo(String nome, int posicaoX, int posicaoY, Sensor sensor, Ambiente ambiente) {
         this.nome = nome;
-        this.direcao = direcao;
         this.posicaoX = posicaoX;
         this.posicaoY = posicaoY;
+        this.sensor = sensor;
+        this.ambiente = ambiente;
     }
 
     // Métodos
     public void mover(int deltaX, int deltaY) {
-        this.posicaoX += deltaX;
-        this.posicaoY += deltaY;
+        // Verifica se a nova posição está dentro dos limites do ambiente
+        if (ambiente.dentroDosLimites(posicaoX + deltaX, posicaoY + deltaY, 0)) {
+            this.posicaoX += deltaX;
+            this.posicaoY += deltaY;
+            System.out.println("Robo " + nome + " moveu para (" + posicaoX + ", " + posicaoY + ")");
+        } else {
+            System.out.println("Movimento inválido! Posição nova fora dos limites do ambiente atual.");
+        }
     }
 
     public void identificarObstaculo() {
-        // Implementar lógica para identificar obstáculos
+        // Lógica para identificar obstáculos
+        // Aqui é utilizado o sensor para verificar se há obstáculos próximos
+        System.out.println("Identificando obstáculos...");
+        sensor.monitorar(posicaoX, posicaoY, 0, ambiente); // Passar o ambiente correto aqui
     }
 
     public void exibirPosicao() {
@@ -46,10 +57,8 @@ public class Robo {
 
     // Getters e Setters
     public String getNome() { return nome; }
-    public String getDirecao() { return direcao; }
     public int getX() { return posicaoX; }
     public int getY() { return posicaoY; }
     public void setNome(String nome) { this.nome = nome; }
-    public void setDirecao(String direcao) { this.direcao = direcao; }
-
+    public String getAmbiente() { return ambiente.toString(); }
 }
