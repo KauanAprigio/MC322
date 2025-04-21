@@ -20,6 +20,7 @@ IDE utilizado para codar foi o [Visual Studio Code](https://code.visualstudio.co
 
 
 # LAB 3
+ESSE DIAGRAMA ESTA INCOMPLETO TERMINAR DPS
 ```mermaid
 ---
 title: Diagrama de classes
