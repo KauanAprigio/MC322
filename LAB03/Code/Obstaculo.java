@@ -79,26 +79,9 @@ public class Obstaculo {
             this.altura = altura;
             this.prendeRobo = prendeRobo;
         }
-
-        public int getLarguraX() {
-            return larguraX;
-        }
-
-        public int getLarguraY() {
-            return larguraY;
-        }
-
-        public int getAltura() {
-            return altura;
-        }
-        public boolean isPrendeRobo() {
-            return prendeRobo;
-        }
+        public int getLarguraX() { return larguraX; }
+        public int getLarguraY() { return larguraY; }
+        public int getAltura() { return altura; }
+        public boolean isPrendeRobo() { return prendeRobo; }
     }
-
-
-        
-
-
-
 }
