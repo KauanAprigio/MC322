@@ -23,6 +23,8 @@ public class Ambiente {
     private int altitudeMaxima;
     ArrayList<Obstaculo> obstaculos;
     ArrayList<Robo> robos;
+    // Incluir alguma variavel final (requisito obligatório)
+    // Atributos adicionais
     
 
 
