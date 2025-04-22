@@ -33,36 +33,36 @@ public class RoboAereo extends Robo {
     public void subir(int dz) {
         // Verifica se a nova altitude está dentro dos limites do ambiente
         if (!getAmbiente().dentroDosLimites(getX(), getY(), altitude + dz)){
-            System.out.println(getNome() + " não pode subir para essa altitude, pois está fora dos limites do ambiente");
+            System.out.println(getNome() + " não pode subir para essa altitude, pois está fora dos limites do ambiente\n");
             return;
         }
         else if (altitude + dz <= altitudeMaxima) {
             altitude += dz;
-            System.out.println(getNome() + " subiu para " + getAltitude() + " metros de altitude");
+            System.out.println(getNome() + " subiu para " + getAltitude() + " metros de altitude\n");
         } 
         else if (altitude + dz > altitudeMaxima) {
-            System.out.println(getNome() + " não pode subir acima da altitude máxima  permitida de " + altitudeMaxima + " metros");
+            System.out.println(getNome() + " não pode subir acima da altitude máxima  permitida de " + altitudeMaxima + " metros\n");
         }
     }
 
     public void descer(int dz) {
         if (altitude - dz >= 0) {
             altitude -= dz;
-            System.out.println(getNome() + " desceu para " + getAltitude() + " metros de altitude");
+            System.out.println(getNome() + " desceu para " + getAltitude() + " metros de altitude\n");
         } else {
-            System.out.println(getNome() + " não pode descer abaixo do nível do solo");
+            System.out.println(getNome() + " não pode descer abaixo do nível do solo\n");
         }
     }
 
     public void exibirPosicao() {
-        System.out.println(getNome() + " está na posição (" + getX() + ", " + getY() + ", " + getAltitude() +")");
+        System.out.println(getNome() + " está na posição (" + getX() + ", " + getY() + ", " + getAltitude() +")\n");
     }
 
     @Override
     public void identificarObstaculo() {
         // Lógica para identificar obstáculos
         // Aqui é utilizado o sensor para verificar se há obstáculos próximos
-        System.out.println("Identificando obstáculos...");
+        System.out.println("Identificando obstáculos...\n");
         getSensor().monitorar(getX(), getY(), altitude, getAmbiente());
     }
 
