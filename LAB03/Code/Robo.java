@@ -61,6 +61,7 @@ public class Robo {
     public int getY() { return posicaoY; }
     public Ambiente getAmbiente() { return ambiente; }
     public Sensor getSensor() { return sensor; }
+    public Sensor getSensorSeguro() { return sensor; }
 
     public void setNome(String nome) { this.nome = nome; }
     public void setSensor(Sensor sensor) { this.sensor = sensor; }

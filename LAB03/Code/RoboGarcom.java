@@ -20,8 +20,8 @@ class RoboGarcom extends RoboTerrestre {
 
     // Construtor
     public RoboGarcom(String nome, int posicaoX, int posicaoY, int velocidadeMaxima,
-                                    Sensor sensor, Ambiente ambiente, int carga_maxima) {
-        super(nome, posicaoX, posicaoY, velocidadeMaxima, sensor, ambiente);
+                                    Double raio, Ambiente ambiente, int carga_maxima) {
+        super(nome, posicaoX, posicaoY, velocidadeMaxima, raio, ambiente);
         this.carga_maxima = carga_maxima;
     }
 

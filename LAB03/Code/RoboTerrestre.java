@@ -16,22 +16,26 @@ public class RoboTerrestre extends Robo {
     private int velocidadeMaxima;
 
     // Construtor
-
-    // aqui estou usando somente sensor, mas acho que nas subclasses utilizarei de outro tipo de sensor
-    public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMaxima, Sensor sensor, Ambiente ambiente) { 
-        super(nome, posicaoX, posicaoY, sensor, ambiente);
+    public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMaxima, Double raio, Ambiente ambiente) {
+        super(nome, posicaoX, posicaoY, new SensorPosicaoSegura(raio,ambiente), ambiente);
         this.velocidadeMaxima = velocidadeMaxima;
     }
 
     // Metodos
 
     // aqui não é necessário fazer mais avaliações de caso, pois ele utiliza os "ifs" da SuperClasse
-    public void mover(int deltaX, int deltaY) { 
-        int velocidade = (int) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        if (velocidade <= velocidadeMaxima) {
-            super.mover(deltaX, deltaY);
+    public void mover(int deltaX, int deltaY) {
+        int pos_x = getX() + deltaX;
+        int pos_y = getY() + deltaY;
+        if (!getSensor().posicao_segura(pos_x, pos_y)){
+            System.out.println("A posição desejada não é segura, pois há um obstáculo nela");
         } else {
-            System.out.println(getNome() + ": Velocidade de " + velocidade + " excede o máximo de " + getVelocidadeMaxima() + " permitido");
+            int velocidade = (int) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            if (velocidade <= velocidadeMaxima) {
+                super.mover(deltaX, deltaY);
+            } else {
+                System.out.println(getNome() + ": Velocidade de " + velocidade + " excede o máximo de " + getVelocidadeMaxima() + " permitido");
+            }
         }
     }
 

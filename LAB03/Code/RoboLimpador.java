@@ -28,8 +28,8 @@ class RoboLimpador extends RoboTerrestre {
 
     // Construtor
     public RoboLimpador(String nome, int posicaoX, int posicaoY, int velocidadeMaxima,
-                            Sensor sensor, Ambiente ambiente, boolean power, int n_pas) {
-        super(nome, posicaoX, posicaoY, velocidadeMaxima, sensor, ambiente);
+                            Double raio, Ambiente ambiente, boolean power, int n_pas) {
+        super(nome, posicaoX, posicaoY, velocidadeMaxima, raio, ambiente);
         this.power = power;
         this.n_pas = n_pas;
     }
