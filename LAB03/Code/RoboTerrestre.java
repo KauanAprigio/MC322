@@ -27,7 +27,8 @@ public class RoboTerrestre extends Robo {
     public void mover(int deltaX, int deltaY) {
         int pos_x = getX() + deltaX;
         int pos_y = getY() + deltaY;
-        if (!getSensor().posicao_segura(pos_x, pos_y)){
+        SensorPosicaoSegura sensor = (SensorPosicaoSegura) getSensor();
+        if (!sensor.posicao_segura(pos_x, pos_y)){
             System.out.println("A posição desejada não é segura, pois há um obstáculo nela");
         } else {
             int velocidade = (int) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
