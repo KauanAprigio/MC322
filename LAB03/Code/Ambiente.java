@@ -43,23 +43,23 @@ public class Ambiente {
         // Se o robô estiver fora dos limites, não adiciona e exibe mensagem
         // Se o robô estiver dentro dos limites, adiciona e exibe mensagem
         if (!dentroDosLimites(r.getX(), r.getY(), 0)) {
-            System.out.println("Robô fora dos limites do ambiente.");
-            System.out.println("Não foi possível adicionar o robô.");
+            System.out.println("Robô fora dos limites do ambiente.\n");
+            System.out.println("Não foi possível adicionar o robô.\n");
             return;
         }
         robos.add(r);
-        System.out.println(r.getNome() + " foi adicionado ao ambiente.");
-        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")");
+        System.out.println(r.getNome() + " foi adicionado ao ambiente.\n");
+        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
     }
     public void removerRobo(Robo r) { //remove um robo r do arraylist
         robos.remove(r);
-        System.out.println(r.getNome() + " foi removido do ambiente.");
+        System.out.println(r.getNome() + " foi removido do ambiente.\n");
     }
     public void detectarColisoes() { //verifica se o robo colidiu com algum obstaculo
         for (Robo r : robos) {
             for (Obstaculo o : obstaculos) {
                 if (r.getX() >= o.getPosicaoX1() && r.getX() <= o.getPosicaoX2() && r.getY() >= o.getPosicaoY1() && r.getY() <= o.getPosicaoY2()) {
-                    System.out.println("Colisão detectada entre " + r.getNome() + " e " + o.getTipo());
+                    System.out.println("Colisão detectada entre " + r.getNome() + " e " + o.getTipo() + "\n");
                 }
             }
         }
@@ -69,18 +69,18 @@ public class Ambiente {
         // Se o obstáculo estiver fora dos limites, não adiciona e exibe mensagem
         // Se o obstáculo estiver dentro dos limites, adiciona e exibe mensagem
         if (!dentroDosLimites(o.getPosicaoX1(), o.getPosicaoY1(), o.getAltura()) || !dentroDosLimites(o.getPosicaoX2(), o.getPosicaoY2(), o.getAltura())) {
-            System.out.println("Obstáculo fora dos limites do ambiente.");
-            System.out.println("Não foi possível adicionar o obstáculo.");
+            System.out.println("Obstáculo fora dos limites do ambiente.\n");
+            System.out.println("Não foi possível adicionar o obstáculo.\n");
             return;
         }
         obstaculos.add(o);
-        System.out.println("Obstáculo " + o.getTipo() + " adicionado ao ambiente.");
-        System.out.println("Posição inferior esquerda: (" + o.getPosicaoX1() + ", " + o.getPosicaoY1() + ", " + 0 + ")");
-        System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getAltura() + ")");
+        System.out.println("Obstáculo " + o.getTipo() + " adicionado ao ambiente.\n");
+        System.out.println("Posição inferior esquerda: (" + o.getPosicaoX1() + ", " + o.getPosicaoY1() + ", " + 0 + ")\n");
+        System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getAltura() + ")\n");
     }
     public void removerObstaculo(Obstaculo o) { //remove um obstaculo o do arraylist
         obstaculos.remove(o);
-        System.out.println("Obstáculo " + o.getTipo() + " removido do ambiente.");
+        System.out.println("Obstáculo " + o.getTipo() + " removido do ambiente.\n");
     }
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
         if ((0 <= x && x <= largura) && (0 <= y && y <= altura) && (0 <= altitude && altitude <= altitudeMaxima)) return true;
