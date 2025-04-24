@@ -26,6 +26,7 @@ ESSE DIAGRAMA ESTA INCOMPLETO TERMINAR DPS
 title: Diagrama de classes
 ---
 classDiagram
+    note "notação: public -> +, private -> -"
     Robo <|-- RoboAereo : Herança
     Robo <|-- RoboTerrestre : Herança
     Ambiente *-- Robo : Composição
@@ -34,6 +35,28 @@ classDiagram
     Robo <.. Sensor : Dependênncia
     Sensor <|-- SensorDeProximidae : Herança
     Sensor <|-- SensorDeAinda_a_definir : Herança
+    class Robo {
+        -String nome
+        -int posicaoX
+        -int posicaoY
+        -Sensor sensor
+        -Ambiente ambiente
+
+        +move(deltaS) void
+        +identificarObstaculo() void
+        +exibirPosicao() void
+    }
+    class Ambiente {
+        -int largura
+        -int altura
+        -String nome
+        -int altitudeMaxima
+        -ArrayList<Obstaculo> obstaculos
+        -ArrayList<Robo> robos
+        -final int altitudeMinima = 0
+        -final int origemX = 0
+        -final int origemY = 0
+    }
     
 ```
 
