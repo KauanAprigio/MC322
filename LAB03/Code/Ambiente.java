@@ -21,10 +21,12 @@ public class Ambiente {
     private int altura;
     private String nome;
     private int altitudeMaxima;
-    ArrayList<Obstaculo> obstaculos;
-    ArrayList<Robo> robos;
-    // Incluir alguma variavel final (requisito obligatório)
-    // Atributos adicionais
+    private ArrayList<Obstaculo> obstaculos;
+    private ArrayList<Robo> robos;
+    // variaveis finais (requisito obligatório)
+    private final int altitudeMinima = 0;
+    private final int origemX = 0;
+    private final int origemY = 0;
     
 
 
@@ -83,7 +85,7 @@ public class Ambiente {
         System.out.println("Obstáculo " + o.getTipo() + " removido do ambiente.\n");
     }
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
-        if ((0 <= x && x <= largura) && (0 <= y && y <= altura) && (0 <= altitude && altitude <= altitudeMaxima)) return true;
+        if ((origemX <= x && x <= largura) && (origemY <= y && y <= altura) && (altitudeMinima <= altitude && altitude <= altitudeMaxima)) return true;
         return false;
     }
     //Getters e Setters
