@@ -20,7 +20,6 @@ IDE utilizado para codar foi o [Visual Studio Code](https://code.visualstudio.co
 
 
 # LAB 3
-ESSE DIAGRAMA ESTA INCOMPLETO TERMINAR DPS
 ```mermaid
 ---
 title: Diagrama de classes - LAB03
@@ -54,40 +53,23 @@ classDiagram
     }
 
     class RoboLimpador {
-        - n_pas : int
-        - power : boolean
         - tipo_limpeza : int
-        + ligar() : boolean
-        + desligar() : boolean
+        - sensorDeLixo : SensorDeLixo
+        - raioDeLimpeza : int
         + definir_tipo_limpeza(tipo : int)
-        + mover(deltaX : int, deltaY : int)
-    }
-
-    class RoboGarcom {
-        - estoque : int
-        - carga_maxima : int
-        + adicionar_estoque(peso_adicional_comida : int)
-        + entregar_comida(comida : int)
-        + mudar_carga(nova_carga : int)
-    }
-
-    class RoboLetreiro {
-        - max_caracteres : int
-        - visor : String
-        + escrever_visor(texto : String, altura : int)
-        + limpar_visor()
-        + aumentarVisor(tamanho_adicional : int)
+        + limpar()
+        + indentificar_lixo()
+        + aprimorar(aumento_raio_limpeza : int)
     }
 
     class RoboBombeiro {
         - peso_max : int
-        - peso_tripulantes : int
         - reservatorio : int
+        - sensorDeFogo : SensorDeFogo
         + adicionar_agua(litros : int)
         + apagar_fogo(litros_necessarios : int)
-        + resgate(peso_civis : int)
-        + liberar_tripulantes()
-        + aprimora(peso_adicional : int)
+        + indentificar_fogo()
+        + aprimorar(peso_adicional : int)
     }
 
     class Sensor {
@@ -95,7 +77,11 @@ classDiagram
         + monitorar(x : int, y : int, altura : int, ambiente : Ambiente)
     }
 
-    class SensorDeProximidade {
+    class SensorDeFogo {
+        + monitorar(x : int, y : int, altura : int, ambiente : Ambiente)
+    }
+
+    class SensorDeLixo {
         + monitorar(x : int, y : int, altura : int, ambiente : Ambiente)
     }
 
@@ -133,27 +119,26 @@ classDiagram
 
     class TipoObstaculo {
         <<enumeration>>
-        + ARVORE
-        + PREDIO
-        + BURACO
-        + PAREDE
-        + ROCHA
-        + CERCAELETRICA
-        + AREIAMOVEDICA
         + LAGO
+        + FOGO
+        + PREDIOEMCHAMAS
+        + PREDIO
+        + SUJEIRAENCARDIDA
+        + COMIDANOCHAO
+        + SACOLAPLASTICA
+        + OFICINA
     }
 
     Robo <|-- RoboAereo : Herança
     Robo <|-- RoboTerrestre : Herança
     RoboTerrestre <|-- RoboLimpador : Herança
-    RoboTerrestre <|-- RoboGarcom : Herança
-    RoboAereo <|-- RoboLetreiro : Herança
     RoboAereo <|-- RoboBombeiro : Herança
     Ambiente *-- Robo : Composição
     Ambiente *-- Obstaculo : Composição
     Robo o-- Sensor : Agregação
     Robo <.. Sensor : Dependência
-    Sensor <|-- SensorDeProximidade : Herança
+    Sensor <|-- SensorDeFogo : Herança
+    Sensor <|-- SensorDeLixo : Herança
     Sensor <|-- SensorPosicaoSegura : Herança
 ```
 
