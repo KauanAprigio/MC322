@@ -23,7 +23,7 @@ public class RoboAereo extends Robo {
     public RoboAereo(String nome, int posicaoX, int posicaoY, int altitudeMaxima,
                                             double raiosensor, Ambiente ambiente) {
         // Robos aéreos possuem um sensor de proximidade.
-        super(nome, posicaoX, posicaoY, new SensorDeProximidade(raiosensor), ambiente);
+        super(nome, posicaoX, posicaoY, new SensorPosicaoSegura(raiosensor, ambiente), ambiente);
         // Todos os robos aéreos começam com altitude 0
         this.altitude = 0;
         this.altitudeMaxima = altitudeMaxima;
@@ -49,6 +49,9 @@ public class RoboAereo extends Robo {
         if (altitude - deltaZ >= 0) {
             altitude -= deltaZ;
             System.out.println(getNome() + " desceu para " + getAltitude() + " metros de altitude\n");
+            if (altitude == 0) {
+                System.out.println(getNome() + "pousou");
+            }
         } else {
             System.out.println(getNome() + " não pode descer abaixo do nível do solo\n");
         }

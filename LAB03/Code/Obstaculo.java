@@ -42,46 +42,66 @@ public class Obstaculo {
     public int getAltura() { return altura; }
 
 
-    // Enum
-    /*
-    * Enum TipoObstaculo
-    * Objetivo é criar um enum que represente os tipos de obstáculos que podem ser encontrados no ambiente.
-    * Os tipos de obstáculos são:
-    * - ARVORE
-    * - PREDIO
-    * - BURACO
-    * - PAREDE
-    * - OUTRO
-    *  Atributos:
-    * - larguray (int)
-    * - largurax (int)
-    * - altura (int)
-    * - PrendeORobo (boolean)
+    /* 
+     * Enumeração dos tipos de obstáculos
+     * - LAGO: Local:reabastecimento de água do robô bombeiro: não removível
+     * - FOGO: removível pelo robô bombeiro destroi robos que não são bombeiros
+     * - PREDIOEMCHAMAS: Fogo: removível pelo robô bombeiro vira prédio destroi robos que não são bombeiros
+     * - PREDIO: Local: não removível
+     * - SUJEIRAENCARDIDA: Lixo: removível pelo robô limpador no modo de limpeza pesada
+     * - COMIDANOCHAO: Lixo: removível pelo robô limpador no modo de limpeza média
+     * - SACOLAPLASTICA: Lixo: removível pelo robô limpador no modo de limpeza leve
+     * - ARMAZEMDECOMIDA: Local de reabastecimento do robô garçom
+     * - OFICINA: Local: melhoria de robôs: não removível
+     * 
+     * Atributos:
+     * - larguraX: largurax do obstáculo
+     * - larguraY: larguray do obstáculo
+     * - altura: altura do obstáculo
+     * - nome: nome do obstáculo
+     * - destroiRobo: se o obstáculo destrói o robô que colide com ele
+     * - local: se o obstáculo é um local de reabastecimento ou melhoria
+     * - fogo: se o obstáculo é ou tem fogo
+     * - lixo: se o obstáculo é lixo
     */
     public static enum TipoObstaculo {
-        ARVORE(1, 1, 10, false),
-        PREDIO(10, 10, 100, false),
-        BURACO(1, 1, 0, true),
-        PAREDE(10, 1, 10, true), 
-        ROCHA(5, 5, 5, false),
-        CERCAELETRICA(0, 15, 5, true),
-        AREIAMOVEDICA(3, 3, 0, true),
-        LAGO(10, 10, 0, true);
+        LAGO(30, 30, 0, false, "Lago", false, false, false), 
+        FOGO(5, 5, 5, false, "Fogo", true, true, false),
+        PREDIOEMCHAMAS(30, 30, 100, true, "Prédio em chamas", true, true, false), 
+        PREDIO(30, 30, 100, true, "Prédio", false, false, false),
+        SUJEIRAENCARDIDA(0, 0, 0, false, "Sujeira encardida", false, false, true), 
+        COMIDANOCHAO(0, 0, 0, false, "Comida no chão", false, false, true), 
+        SACOLAPLASTICA(0, 0, 0, false, "Sacola plástica", false, false, true), 
+        OFICINA(20, 20, 20, true, "Oficina", false, false, false); 
+
 
         private final int larguraX;
         private final int larguraY;
         private final int altura;
-        private final boolean prendeRobo;
+        private String nome;
+        private final boolean destroiRobo;
+        private final boolean local;
+        private final boolean fogo;
+        private final boolean lixo;
 
-        TipoObstaculo(int larguraX, int larguraY, int altura, boolean prendeRobo) {
+        TipoObstaculo(int larguraX, int larguraY, int altura, boolean Local,
+                            String nome, boolean destroiRobo, boolean fogo, boolean lixo) {
             this.larguraX = larguraX;
             this.larguraY = larguraY;
             this.altura = altura;
-            this.prendeRobo = prendeRobo;
+            this.nome = nome;
+            this.destroiRobo = destroiRobo;
+            this.local = Local;
+            this.fogo = fogo;
+            this.lixo = lixo;
         }
         public int getLarguraX() { return larguraX; }
         public int getLarguraY() { return larguraY; }
         public int getAltura() { return altura; }
-        public boolean isPrendeRobo() { return prendeRobo; }
+        public String getNome() { return nome; }
+        public boolean isDestroiRobo() { return destroiRobo; }  
+        public boolean isLocal() { return local; }
+        public boolean isFogo() { return fogo; }
+        public boolean isLixo() { return lixo; }
     }
 }

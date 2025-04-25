@@ -1,65 +1,35 @@
 package LAB03.Code;
 
+import LAB03.Code.Obstaculo.TipoObstaculo;
+
 /* 
  * Classe criada RoboLimpador
  * 
  * Atributos:
- * - n_pas
- * - power
  * - tipo_limpeza
- * 
+ * - raio de limpeza
  * Métodos:
- * - ligar()
- * - desligar()
  * - definir_tipo_limpeza(int tipo)
- * - mover(int deltaX, int deltaY) (sobrescreve o método da superclasse)
+ * - limpar()
  * 
  */
-// Subclasse de RoboTerrestre
-// Possui 3 modos de limpeza: leve, pesada e muito pesada
-// O robo limpador pode ser ligado e desligado
-// O robo limpador tem um numero de pás limpadoras
-// O robo limpador pode se mover, mas apenas quando ligado
 class RoboLimpador extends RoboTerrestre {
     // Atributos adicionais
-    private int n_pas; // numero de pás limpadoras do robo
-    private boolean power = false; // estado que ira dizer se esta ligado = true ou desligado = false
     private int tipo_limpeza = 0; // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
+    private SensorDeLixo sensorDeLixo;// sensor de lixo com raio 10
+    private int raioDeLimpeza; // raio de limpeza do robô
 
     // Construtor
     public RoboLimpador(String nome, int posicaoX, int posicaoY, int velocidadeMaxima,
-                            Double raio, Ambiente ambiente, boolean power, int n_pas) {
+                            Double raio, Ambiente ambiente, int raioDeLimpeza) {
         super(nome, posicaoX, posicaoY, velocidadeMaxima, raio, ambiente);
-        this.power = power;
-        this.n_pas = n_pas;
+        this.sensorDeLixo = new SensorDeLixo(raio); // sensor de lixo com raio 10
+        this.raioDeLimpeza = raioDeLimpeza;
     }
 
     // Metodos
-    public boolean ligar() {
-        if (!power) {
-            power = true;
-            System.out.println(getNome() + " foi ligado com sucesso!");
-        } else {
-            System.out.println(getNome() + " já está ligado.");
-        }
-        return power;
-    }
-
-    public boolean desligar() {
-        if (power) {
-            power = false;
-            System.out.println(getNome() + " foi desligado.");
-        } else {
-            System.out.println(getNome() + " já está desligado.");
-        }
-        return power;
-    }
 
     void definir_tipo_limpeza(int tipo){
-        if (!power) {
-            System.out.println(getNome() + " está desligado. Não é possível definir o tipo de limpeza.");
-            return;
-        }
         // Verifica se o tipo de limpeza é válido
         // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
         if (tipo >= 0 && tipo <= 2) {
@@ -80,18 +50,50 @@ class RoboLimpador extends RoboTerrestre {
         }
     }
 
-    public void mover(int deltaX, int deltaY) {
-        if (power) {
-            super.mover(deltaX, deltaY);
-        } else {
-            System.out.println(getNome() + " não pode se mover enquanto desligado.");
+    public void limpar() {
+        for (Obstaculo o : getAmbiente().getObstaculos()) {
+            if (o.getTipo().isLixo()){
+                int distancia = (int) Math.sqrt(Math.pow(o.getPosicaoX1() - getX(), 2) + Math.pow(o.getPosicaoY1() - getY(), 2));
+                if (distancia < raioDeLimpeza){ // verifica se o robô esta perto do lixo
+                    if (o.getTipo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza >= 2) {
+                        System.out.println(getNome() + " limpou " + o.getTipo().getNome());
+                        getAmbiente().removerObstaculo(o);
+                    } else if (o.getTipo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza >= 1) {
+                        System.out.println(getNome() + " limpou " + o.getTipo().getNome());
+                        getAmbiente().removerObstaculo(o);
+                    } else if (o.getTipo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza >= 0) {
+                        System.out.println(getNome() + " limpou " + o.getTipo().getNome());
+                        getAmbiente().removerObstaculo(o);
+                    } else {
+                        System.out.println(getNome() + " não pode limpar " + o.getTipo().getNome());
+                        System.out.println("tente aumentar a intensidade de limpeza");
+                        System.out.println("Tipo de limpeza atual: " + tipo_limpeza);   
+                    }
+                }
+            }
         }
+    }
+    public void indentificar_lixo() {
+        sensorDeLixo.monitorar(getX(), getY(), 0, getAmbiente());
+    }
+    public void aprimorar(int aumento_raio_limpeza){
+        //verifica se o robô esta dentro de uma oficina
+        for (Obstaculo o : getAmbiente().getObstaculos()) {
+            if (o.getTipo() == TipoObstaculo.OFICINA) {
+                if (getX() <= o.getPosicaoX2() && getX() >= o.getPosicaoX1() && getY() <= o.getPosicaoY2() && getY() >= o.getPosicaoY1()) {
+                    System.out.println(getNome() + " está dentro da oficina e pode ser aprimorado.");
+                    raioDeLimpeza += aumento_raio_limpeza;
+                    System.out.println(getNome() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza);
+                    return;
+                } 
+            }
+        }
+        System.out.println(getNome() + " não está dentro da oficina e não pode ser aprimorado.");
+
     }
 
     //Getters e Setters
-    public boolean getPower() { return power; }
-    public int getPas() { return n_pas; }
     public int getTipoLimpeza() { return tipo_limpeza; }
-    public void setPas(int n_pas) { this.n_pas = n_pas; }
+    public int getRaioDeLimpeza() { return raioDeLimpeza; }
 }
 
