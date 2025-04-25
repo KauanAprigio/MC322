@@ -140,6 +140,10 @@ classDiagram
     Sensor <|-- SensorDeFogo : Herança
     Sensor <|-- SensorDeLixo : Herança
     Sensor <|-- SensorPosicaoSegura : Herança
+    RoboLimpador o-- SensorDeLixo : Agregação
+    RoboBombeiro o-- SensorDeFogo : Agregação
+    RoboLimpador <.. SensorDeLixo : Agregação
+    RoboBombeiro <.. SensorDeFogo : Agregação
 ```
 
 
