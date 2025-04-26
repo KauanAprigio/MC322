@@ -16,7 +16,8 @@ public class RoboTerrestre extends Robo {
     private int velocidadeMaxima;
 
     // Construtor
-    public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMaxima, Double raio, Ambiente ambiente) {
+    public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMaxima, 
+                                                    double raio, Ambiente ambiente) {
         super(nome, posicaoX, posicaoY, new SensorPosicaoSegura(raio,ambiente), ambiente);
         this.velocidadeMaxima = velocidadeMaxima;
     }
@@ -29,13 +30,13 @@ public class RoboTerrestre extends Robo {
         int pos_y = getY() + deltaY;
         SensorPosicaoSegura sensor = (SensorPosicaoSegura) getSensor();
         if (!sensor.posicao_segura(pos_x, pos_y, getX(), getY())) {
-            System.out.println("O robô " + getNome() + " não pode se mover para a posição (" + pos_x + ", " + pos_y + ")");
+            System.out.println("O robô " + getNome() + " não pode se mover para a posição (" + pos_x + ", " + pos_y + ")\n");
         } else {
             int velocidade = (int) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             if (velocidade <= velocidadeMaxima) {
                 super.mover(deltaX, deltaY);
             } else {
-                System.out.println(getNome() + ": Velocidade de " + velocidade + " excede o máximo de " + getVelocidadeMaxima() + " permitido");
+                System.out.println(getNome() + ": Velocidade de " + velocidade + " excede o máximo de " + getVelocidadeMaxima() + " permitido\n");
             }
         }
     }

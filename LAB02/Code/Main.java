@@ -148,7 +148,7 @@ public class Main {
                     System.out.println(robo.getNome() + " está fora dos limites do ambiente.");
                 }
             }
-    }
+        }
 
 
 

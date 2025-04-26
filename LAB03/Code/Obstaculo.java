@@ -51,16 +51,15 @@ public class Obstaculo {
      * - SUJEIRAENCARDIDA: Lixo: removível pelo robô limpador no modo de limpeza pesada
      * - COMIDANOCHAO: Lixo: removível pelo robô limpador no modo de limpeza média
      * - SACOLAPLASTICA: Lixo: removível pelo robô limpador no modo de limpeza leve
-     * - ARMAZEMDECOMIDA: Local de reabastecimento do robô garçom
      * - OFICINA: Local: melhoria de robôs: não removível
      * 
      * Atributos:
      * - larguraX: largurax do obstáculo
      * - larguraY: larguray do obstáculo
      * - altura: altura do obstáculo
+     * - local: se o obstáculo é um local de reabastecimento ou melhoria
      * - nome: nome do obstáculo
      * - destroiRobo: se o obstáculo destrói o robô que colide com ele
-     * - local: se o obstáculo é um local de reabastecimento ou melhoria
      * - fogo: se o obstáculo é ou tem fogo
      * - lixo: se o obstáculo é lixo
     */
@@ -71,7 +70,7 @@ public class Obstaculo {
         PREDIO(30, 30, 100, true, "Prédio", false, false, false),
         SUJEIRAENCARDIDA(0, 0, 0, false, "Sujeira encardida", false, false, true), 
         COMIDANOCHAO(0, 0, 0, false, "Comida no chão", false, false, true), 
-        SACOLAPLASTICA(0, 0, 0, false, "Sacola plástica", false, false, true), 
+        SACOLAPLASTICA(0, 0, 0, false, "Sacola plástica", false, false, true),
         OFICINA(20, 20, 20, true, "Oficina", false, false, false); 
 
 

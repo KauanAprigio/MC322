@@ -21,7 +21,7 @@ class RoboLimpador extends RoboTerrestre {
 
     // Construtor
     public RoboLimpador(String nome, int posicaoX, int posicaoY, int velocidadeMaxima,
-                            Double raio, Ambiente ambiente, int raioDeLimpeza) {
+                            double raio, Ambiente ambiente, int raioDeLimpeza) {
         super(nome, posicaoX, posicaoY, velocidadeMaxima, raio, ambiente);
         this.sensorDeLixo = new SensorDeLixo(raio); // sensor de lixo com raio 10
         this.raioDeLimpeza = raioDeLimpeza;
