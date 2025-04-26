@@ -31,8 +31,8 @@ public class SensorPosicaoSegura extends Sensor {
         // aqui vejo todos os obstáculos e caso tenha algum que esteja na posição, a posicao já não é segura
         for(Obstaculo o : ambiente.getObstaculos()){ 
             if (pos_x >= o.getPosicaoX1() && pos_x <= o.getPosicaoX2()
-            && pos_y >= o.getPosicaoY1() && pos_y <= o.getPosicaoY2()){
-                System.out.println("Posição não segura");
+            && pos_y >= o.getPosicaoY1() && pos_y <= o.getPosicaoY2() && o.getTipo().isFogo()){
+                System.out.println("Posição não segura, Fogo detectado! Chame um Robô bombeiro");
                 return false; // se não é segura retorna false
             } 
         }
