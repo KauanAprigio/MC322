@@ -36,9 +36,9 @@ public class Sensor {
             }
         }
         if (N_obstaculos > 0) {
-            System.out.println("Sensor detectou " + N_obstaculos + " obstáculos próximos.\n");
+            System.out.println("Sensor detectou " + N_obstaculos + " obstáculos próximos!\n");
         } else {
-            System.out.println("Sensor não detectou obstáculos próximos.\n");
+            System.out.println("Sensor não detectou obstáculos próximos!\n");
         }
     }
 

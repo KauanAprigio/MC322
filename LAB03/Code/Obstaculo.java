@@ -64,14 +64,14 @@ public class Obstaculo {
      * - lixo: se o obstáculo é lixo
     */
     public static enum TipoObstaculo {
-        LAGO(30, 30, 0, false, "Lago", false, false, false), 
-        FOGO(5, 5, 5, false, "Fogo", true, true, false),
-        PREDIOEMCHAMAS(30, 30, 100, true, "Prédio em chamas", true, true, false), 
-        PREDIO(30, 30, 100, true, "Prédio", false, false, false),
-        SUJEIRAENCARDIDA(0, 0, 0, false, "Sujeira encardida", false, false, true), 
-        COMIDANOCHAO(0, 0, 0, false, "Comida no chão", false, false, true), 
-        SACOLAPLASTICA(0, 0, 0, false, "Sacola plástica", false, false, true),
-        OFICINA(20, 20, 20, true, "Oficina", false, false, false); 
+        LAGO(30, 30, 0, false, "Lago", false, false, false, false), 
+        FOGO(5, 5, 5, false, "Fogo", true, true, false, false),
+        PREDIOEMCHAMAS(30, 30, 100, true, "Prédio em chamas", true, true, false,false), 
+        PREDIO(30, 30, 100, true, "Prédio", false, false, false,false),
+        SUJEIRAENCARDIDA(0, 0, 0, false, "Sujeira encardida", false, false, true,false), 
+        COMIDANOCHAO(0, 0, 0, false, "Comida no chão", false, false, true,false), 
+        SACOLAPLASTICA(0, 0, 0, false, "Sacola plástica", false, false, true,false),
+        OFICINA(20, 20, 20, true, "Oficina", false, false, false,true); 
 
 
         private final int larguraX;
@@ -82,9 +82,10 @@ public class Obstaculo {
         private final boolean local;
         private final boolean fogo;
         private final boolean lixo;
+        private final boolean aprimora;
 
-        TipoObstaculo(int larguraX, int larguraY, int altura, boolean Local,
-                            String nome, boolean destroiRobo, boolean fogo, boolean lixo) {
+        TipoObstaculo(int larguraX, int larguraY, int altura, boolean Local, String nome,
+                            boolean destroiRobo, boolean fogo, boolean lixo, boolean aprimora) {
             this.larguraX = larguraX;
             this.larguraY = larguraY;
             this.altura = altura;
@@ -93,6 +94,7 @@ public class Obstaculo {
             this.local = Local;
             this.fogo = fogo;
             this.lixo = lixo;
+            this.aprimora = aprimora;
         }
         public int getLarguraX() { return larguraX; }
         public int getLarguraY() { return larguraY; }
@@ -102,5 +104,6 @@ public class Obstaculo {
         public boolean isLocal() { return local; }
         public boolean isFogo() { return fogo; }
         public boolean isLixo() { return lixo; }
+        public boolean isAprimora() { return aprimora; }
     }
 }

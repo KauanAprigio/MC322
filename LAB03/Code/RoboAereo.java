@@ -33,15 +33,15 @@ public class RoboAereo extends Robo {
     public void subir(int deltaZ) {
         // Verifica se a nova altitude está dentro dos limites do ambiente
         if (!getAmbiente().dentroDosLimites(getX(), getY(), altitude + deltaZ)){
-            System.out.println(getNome() + " não pode subir para essa altitude, pois está fora dos limites do ambiente\n");
+            System.out.println(getNome() + " não pode subir para essa altitude, pois está fora dos limites do ambiente!\n");
             return;
         }
         else if (altitude + deltaZ <= altitudeMaxima) {
             altitude += deltaZ;
-            System.out.println(getNome() + " subiu para " + getAltitude() + " metros de altitude\n");
+            System.out.println(getNome() + " subiu para " + getAltitude() + " metros de altitude!\n");
         } 
         else if (altitude + deltaZ > altitudeMaxima) {
-            System.out.println(getNome() + " não pode subir acima da altitude máxima  permitida de " + altitudeMaxima + " metros\n");
+            System.out.println(getNome() + " não pode subir acima da altitude máxima de " + altitudeMaxima + " metros!\n");
         }
     }
 
@@ -50,7 +50,7 @@ public class RoboAereo extends Robo {
             altitude -= deltaZ;
             System.out.println(getNome() + " desceu para " + getAltitude() + " metros de altitude\n");
             if (altitude == 0) {
-                System.out.println(getNome() + "pousou");
+                System.out.println(getNome() + " pousou");
             }
         } else {
             System.out.println(getNome() + " não pode descer abaixo do nível do solo\n");

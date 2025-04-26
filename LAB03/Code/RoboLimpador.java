@@ -36,38 +36,37 @@ class RoboLimpador extends RoboTerrestre {
             tipo_limpeza = tipo;
             switch (tipo_limpeza) {
                 case 0:
-                    System.out.println(getNome() + " está configurado para limpeza leve.");
+                    System.out.println(getNome() + " está configurado para limpeza leve.\n");
                     break;
                 case 1:
-                    System.out.println(getNome() + " está configurado para limpeza pesada.");
+                    System.out.println(getNome() + " está configurado para limpeza pesada.\n");
                     break;
                 case 2:
-                    System.out.println(getNome() + " está configurado para limpeza muito pesada.");
+                    System.out.println(getNome() + " está configurado para limpeza muito pesada.\n");
                     break;
             }
         } else {
-            System.out.println("Tipo de limpeza inválido. Escolha entre 0 (leve), 1 (pesada) ou 2 (muito pesada).");
+            System.out.println("Tipo de limpeza inválido. Escolha entre 0 (leve), 1 (pesada) ou 2 (muito pesada).\n");
         }
     }
 
     public void limpar() {
+        System.out.println("Tipo de limpeza atual: " + tipo_limpeza ); // Fala qual o tipo de limpeza
         for (Obstaculo o : getAmbiente().getObstaculos()) {
             if (o.getTipo().isLixo()){
                 int distancia = (int) Math.sqrt(Math.pow(o.getPosicaoX1() - getX(), 2) + Math.pow(o.getPosicaoY1() - getY(), 2));
                 if (distancia < raioDeLimpeza){ // verifica se o robô esta perto do lixo
                     if (o.getTipo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza >= 2) {
-                        System.out.println(getNome() + " limpou " + o.getTipo().getNome());
+                        System.out.println(getNome() + " limpou " + o.getTipo().getNome() );
                         getAmbiente().removerObstaculo(o);
                     } else if (o.getTipo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza >= 1) {
-                        System.out.println(getNome() + " limpou " + o.getTipo().getNome());
+                        System.out.println(getNome() + " limpou " + o.getTipo().getNome() );
                         getAmbiente().removerObstaculo(o);
                     } else if (o.getTipo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza >= 0) {
-                        System.out.println(getNome() + " limpou " + o.getTipo().getNome());
+                        System.out.println(getNome() + " limpou " + o.getTipo().getNome() );
                         getAmbiente().removerObstaculo(o);
                     } else {
-                        System.out.println(getNome() + " não pode limpar " + o.getTipo().getNome());
-                        System.out.println("tente aumentar a intensidade de limpeza");
-                        System.out.println("Tipo de limpeza atual: " + tipo_limpeza);   
+                        System.out.println(getNome() + " não pode limpar " + o.getTipo().getNome() + ", tente aumentar a intensidade da limpeza!");
                     }
                 }
             }
@@ -83,12 +82,12 @@ class RoboLimpador extends RoboTerrestre {
                 if (getX() <= o.getPosicaoX2() && getX() >= o.getPosicaoX1() && getY() <= o.getPosicaoY2() && getY() >= o.getPosicaoY1()) {
                     System.out.println(getNome() + " está dentro da oficina e pode ser aprimorado.");
                     raioDeLimpeza += aumento_raio_limpeza;
-                    System.out.println(getNome() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza);
+                    System.out.println(getNome() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza + " ! \n");
                     return;
                 } 
             }
         }
-        System.out.println(getNome() + " não está dentro da oficina e não pode ser aprimorado.");
+        System.out.println(getNome() + " não está dentro da oficina e não pode ser aprimorado!\n");
 
     }
 
