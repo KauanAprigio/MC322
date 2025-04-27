@@ -79,6 +79,7 @@ public class Main {
         roboTerrestre.mover(-10, 10); // Movimentação excede o raio do sensor, logo não consegue saber se é seguro e não se move
         roboTerrestre.mover(55, 55); // Movimentação excede o tamanho do ambiente
         roboTerrestre.mover(1, 0); // Há fogo no local, logo o rôbo não pode mover para lá
+        roboTerrestre.identificarObstaculo(); // Testando o sensor, detectará apenas 1 obstáculo, no caso o fogo
         
         ////////////////////////////////////////////
         //TALVEZ É BOM USAR O MONITORAR PARA OS TESTES DESSA ABA DE TESTE DE SENSOR E MOVIMENTAÇAO ROBO TERRESTRE
@@ -94,6 +95,7 @@ public class Main {
         roboAereo.descer(5); // Desce normal
         roboAereo.descer(15); // Não pode descer abaixo do solo
         roboAereo.descer(5); // Voltou a altitude = 0, logo pousou!
+        roboAereo.identificarObstaculo(); // Detectará a oficina e o prédio, logo 2 obstáculos
 
         // Testes robo limpador + testes do sensor de lixo
         System.out.println("-------------------------");
@@ -112,7 +114,7 @@ public class Main {
         // ALTEREI O SENSOR DE POSICAO PARA CONSIDERAR A OFICINA LOCAL QUE PODE MOVER + COLOQUEI UM ATRIBUTO A MAIS NO TIPOOBSTACULO, CHAMADO APRIMORA, PARA FACILITAR PARA O ROBO LIMPADOR
         ////////////////////////////////////////////
 
-
+        
 
     }
 }

@@ -80,9 +80,9 @@ class RoboLimpador extends RoboTerrestre {
         for (Obstaculo o : getAmbiente().getObstaculos()) {
             if (o.getTipo() == TipoObstaculo.OFICINA) {
                 if (getX() <= o.getPosicaoX2() && getX() >= o.getPosicaoX1() && getY() <= o.getPosicaoY2() && getY() >= o.getPosicaoY1()) {
-                    System.out.println(getNome() + " está dentro da oficina e pode ser aprimorado.");
+                    System.out.println(getNome() + " está dentro da oficina e pode ser aprimorado!");
                     raioDeLimpeza += aumento_raio_limpeza;
-                    System.out.println(getNome() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza + " ! \n");
+                    System.out.println(getNome() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza + " . \n");
                     return;
                 } 
             }
