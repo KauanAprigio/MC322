@@ -50,12 +50,12 @@ public class Ambiente {
             return;
         }
         robos.add(r);
-        System.out.println(r.getNome() + " foi adicionado ao ambiente!");
-        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
+        System.out.println(r.getNome() + " foi adicionado ao ambiente.");
+        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ".)\n");
     }
     public void removerRobo(Robo r) { //remove um robo r do arraylist
         robos.remove(r);
-        System.out.println(r.getNome() + " foi removido do ambiente!\n");
+        System.out.println(r.getNome() + " foi removido do ambiente.\n");
     }
     public void detectarColisoes() { // verifica se houve colisão entre os robos e os obstaculos
         // Se o obstaculo for do tipo FOGO, o robo é destruido a não ser que seja um robo bombeiro
@@ -65,13 +65,13 @@ public class Ambiente {
                     System.out.println("Colisão detectada entre " + r.getNome() + " e " + o.getTipo() + "\n");
                     if  (o.getTipo() == Obstaculo.TipoObstaculo.FOGO) {
                         if (r instanceof RoboBombeiro) {
-                            System.out.println("o robô: "+ r.getNome() + " esta dentro do " + o.getTipo().getNome() + "\n");
+                            System.out.println("O robô: "+ r.getNome() + " esta dentro do " + o.getTipo().getNome() + "\n");
                         } else {
-                            System.out.println(r.getNome() + " foi destruído pelo fogo\n");
+                            System.out.println(r.getNome() + " foi destruído pelo fogo!\n");
                             removerRobo(r);
                         }
                     } else if (o.getTipo().isLixo()) {
-                        System.out.println(r.getNome() + " colidiu com lixo\n");
+                        System.out.println(r.getNome() + " colidiu com lixo!\n");
                     } else {
                         System.out.println(r.getNome() + " esta dentro de " + o.getTipo().getNome() + "\n");
                     }
@@ -89,13 +89,13 @@ public class Ambiente {
             return;
         }
         obstaculos.add(o);
-        System.out.println("Obstáculo " + o.getTipo() + " adicionado ao ambiente!");
-        System.out.println("Posição inferior esquerda: (" + o.getPosicaoX1() + ", " + o.getPosicaoY1() + ", " + 0 + ")");
-        System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getAltura() + ")\n");
+        System.out.println("Obstáculo " + o.getTipo() + " adicionado ao ambiente.");
+        System.out.println("Posição inferior esquerda: (" + o.getPosicaoX1() + ", " + o.getPosicaoY1() + ", " + 0 + ".)");
+        System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getAltura() + ".)\n");
     }
     public void removerObstaculo(Obstaculo o) { //remove um obstaculo o do arraylist
         obstaculos.remove(o);
-        System.out.println("Obstáculo " + o.getTipo() + " removido do ambiente!\n");
+        System.out.println("Obstáculo " + o.getTipo() + " removido do ambiente.\n");
     }
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
         if ((origemX <= x && x <= largura) && (origemY <= y && y <= altura) && (altitudeMinima <= altitude && altitude <= altitudeMaxima)) return true;

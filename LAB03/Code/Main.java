@@ -132,7 +132,5 @@ public class Main {
         roboBombeiro.mover(23, 5); // Foi para a Oficina
         roboBombeiro.aprimorar(1000); // Será aprimorado sem problemas
  
-
-
     }
 }

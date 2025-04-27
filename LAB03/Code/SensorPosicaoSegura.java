@@ -35,7 +35,7 @@ public class SensorPosicaoSegura extends Sensor {
                 if (o.getTipo().isFogo()) {
                     System.out.println("Posição não segura, Fogo detectado! Chame um Robô bombeiro!");
                 } else if (o.getTipo().isAprimora()){
-                    System.out.println("Posição é segura, pois foi detectado um local de aprimoramento!");
+                    System.out.println("Posição é segura, pois foi detectado um local de aprimoramento.");
                     return true;
                 } else {
                     System.out.println("Posição não é segura, pois foi detectado um obstáculo!");

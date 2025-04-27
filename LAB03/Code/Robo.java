@@ -38,21 +38,21 @@ public class Robo {
         if (ambiente.dentroDosLimites(posicaoX + deltaX, posicaoY + deltaY, 0)) {
             this.posicaoX += deltaX;
             this.posicaoY += deltaY;
-            System.out.println("Robo " + nome + " moveu para (" + posicaoX + ", " + posicaoY + ")\n");
+            System.out.println("Robo " + nome + " moveu para (" + posicaoX + ", " + posicaoY + ").\n");
         } else {
-            System.out.println("Movimento inválido! Posição nova fora dos limites do ambiente atual.\n");
+            System.out.println("Movimento inválido! Posição nova fora dos limites do ambiente atual!\n");
         }
     }
 
     public void identificarObstaculo() {
         // Lógica para identificar obstáculos
         // Aqui é utilizado o sensor para verificar se há obstáculos próximos
-        System.out.println("Identificando obstáculos...\n");
+        System.out.println("Identificando obstáculos...");
         sensor.monitorar(posicaoX, posicaoY, 0, ambiente);
     }
 
     public void exibirPosicao() {
-        System.out.println("Posição do robô " + nome + ": (" + posicaoX + ", " + posicaoY + ")\n");
+        System.out.println("Posição do robô " + nome + ": (" + posicaoX + ", " + posicaoY + ").\n");
     }
 
     // Getters e Setters

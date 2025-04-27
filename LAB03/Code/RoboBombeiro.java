@@ -40,7 +40,7 @@ public class RoboBombeiro extends RoboAereo {
         for (Obstaculo o : getAmbiente().getObstaculos()) {
             if (o.getTipo().getNome() == "Lago" && o.getPosicaoX1() <= getX() && o.getPosicaoY1() <= getY() &&
                 o.getPosicaoX2() >= getX() && o.getPosicaoY2() >= getY()) {
-                System.out.println(getNome() + " está em um lago e pode abastecer água!");
+                System.out.println(getNome() + " está em um lago e pode abastecer água.");
                 dentro_lago = true;
                 break;
             }
@@ -55,7 +55,7 @@ public class RoboBombeiro extends RoboAereo {
                 System.out.println("A quantidade " + litros + " litros excede " + excedente + " litros da capacidade máxima de " + peso_max + " litros do " + getNome() + "!\n");
             } else {
                 reservatorio += litros;
-                System.out.println(getNome() + " foi abastecido com sucesso!");
+                System.out.println(getNome() + " foi abastecido com sucesso.");
                 System.out.println("Reservatorio possui " + reservatorio + " litros.\n");
             }
     }
@@ -71,18 +71,18 @@ public class RoboBombeiro extends RoboAereo {
 
             if (o.getTipo().isFogo() && distancia <= raio_de_cessar_fogo) { // Condional caso o obstaculo detectado seja um fogo
                 if (o.getAltura() <= getAltitude()){ // condicional para ver se está na altura do fogo
-                    System.out.println(getNome() + " está próximo de um incêndio!");
+                    System.out.println(getNome() + " está próximo de um incêndio.");
                     if (reservatorio < litros_necessarios){ // condicional caso nao tenha agua o suficiente
                         int deficit = litros_necessarios - reservatorio; // quanto ira faltar de agua para apagar o fogo
                         System.out.println(getNome() + " precisa de " + deficit + " litros a mais para apagar o incêndio!\n");
                     } else {
                         reservatorio -= litros_necessarios;
                         if (o.getTipo() == TipoObstaculo.FOGO) {
-                            System.out.println("Incêndio apagado com sucesso!");
+                            System.out.println("Incêndio apagado com sucesso.");
                             System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); // esse print está duplicado, pois quero que apareça tudo do robo primeiro depois da remoção do objeto, por isso nao botei depois, a fim de englobar os dois casos
                             getAmbiente().removerObstaculo(o); // remove o fogo do ambiente
                         } else if (o.getTipo() == TipoObstaculo.PREDIOEMCHAMAS) {
-                            System.out.println("Prédio não mais está em chamas!");
+                            System.out.println("Prédio não mais está em chamas.");
                             System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
                             getAmbiente().adicionarObstaculo(new Obstaculo(o.getPosicaoX1(), o.getPosicaoY1(), TipoObstaculo.PREDIO)); // agora o predio nao esta mais em chamas
                             getAmbiente().removerObstaculo(o); // muda para somente um predio, nao um predio em chamas
@@ -106,7 +106,7 @@ public class RoboBombeiro extends RoboAereo {
         for (Obstaculo o : getAmbiente().getObstaculos()) {
             if (o.getTipo() == TipoObstaculo.OFICINA) {
                 if (getX() <= o.getPosicaoX2() && getX() >= o.getPosicaoX1() && getY() <= o.getPosicaoY2() && getY() >= o.getPosicaoY1()) {
-                    System.out.println(getNome() + " está dentro da oficina e pode ser aprimorado!");
+                    System.out.println(getNome() + " está dentro da oficina e pode ser aprimorado.");
                     peso_max += peso_adicional;
                     System.out.println("Reservatório máximo do " + getNome() + " agora é de " + peso_max + " litros.\n");
                 } else {

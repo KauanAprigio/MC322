@@ -38,7 +38,7 @@ public class RoboAereo extends Robo {
         }
         else if (altitude + deltaZ <= altitudeMaxima) {
             altitude += deltaZ;
-            System.out.println(getNome() + " subiu para " + getAltitude() + " metros de altitude!\n");
+            System.out.println(getNome() + " subiu para " + getAltitude() + " metros de altitude.\n");
         } 
         else if (altitude + deltaZ > altitudeMaxima) {
             System.out.println(getNome() + " não pode subir acima da altitude máxima de " + altitudeMaxima + " metros!\n");
@@ -54,19 +54,19 @@ public class RoboAereo extends Robo {
                 System.out.println(getNome() + " desceu para " + getAltitude() + " metros de altitude.\n");
             }
         } else { // condicional caso tente "entrar" na terra
-            System.out.println(getNome() + " não pode descer abaixo do nível do solo\n");
+            System.out.println(getNome() + " não pode descer abaixo do nível do solo!\n");
         }
     }
 
     public void exibirPosicao() {
-        System.out.println(getNome() + " está na posição (" + getX() + ", " + getY() + ", " + getAltitude() +")\n");
+        System.out.println(getNome() + " está na posição (" + getX() + ", " + getY() + ", " + getAltitude() +").\n");
     }
 
     @Override
     public void identificarObstaculo() {
         // Lógica para identificar obstáculos
         // Aqui é utilizado o sensor para verificar se há obstáculos próximos
-        System.out.println("Identificando obstáculos...\n");
+        System.out.println("Identificando obstáculos...");
         getSensor().monitorar(getX(), getY(), altitude, getAmbiente());
     }
 

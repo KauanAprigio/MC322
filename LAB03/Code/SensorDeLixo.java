@@ -20,7 +20,7 @@ public class SensorDeLixo extends Sensor {
                 
                 if (distancia <= getRaio()) {
                     System.out.println("Lixo detectado na posição: " + obstaculo.getPosicaoX1() + ", " + obstaculo.getPosicaoY1() + " a uma distância de " + distancia + " metros.");
-                    System.out.println("Tipo de lixo: " + obstaculo.getTipo() );
+                    System.out.println("Tipo de lixo: " + obstaculo.getTipo() + ".");
                     N_lixos++;
                 }
             }
