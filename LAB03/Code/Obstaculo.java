@@ -62,6 +62,7 @@ public class Obstaculo {
      * - destroiRobo: se o obstáculo destrói o robô que colide com ele
      * - fogo: se o obstáculo é ou tem fogo
      * - lixo: se o obstáculo é lixo
+     * - aprimora: se é um local para aprimoramento
     */
     public static enum TipoObstaculo {
         LAGO(30, 30, 0, false, "Lago", false, false, false, false), 

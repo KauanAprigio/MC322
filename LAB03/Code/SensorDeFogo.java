@@ -18,16 +18,16 @@ public class SensorDeFogo extends Sensor {
                 double distancia = Math.sqrt(Math.pow(Xmaisproximo - x, 2) + Math.pow(Ymaisproximo - y, 2) + Math.pow(Zmaisproximo - altura, 2));
 
                 if (distancia <= getRaio()) {
-                    System.out.println("Fogo detectado na posição: " + obstaculo.getPosicaoX1() + ", " + obstaculo.getPosicaoY1() + " a uma distância de " + distancia + "\n");
-                    System.out.println("Tipo de fogo: " + obstaculo.getTipo() + "\n");
+                    System.out.println("Fogo detectado na posição: (" + obstaculo.getPosicaoX1() + ", " + obstaculo.getPosicaoY1() + ") a uma distância de " + distancia + " metros.");
+                    System.out.println("Tipo de fogo: " + obstaculo.getTipo() );
                     N_fogos++;
                 }
             }
         }
         if (N_fogos > 0) {
-            System.out.println("Sensor de fogo detectou " + N_fogos + " fogos próximos.\n");
+            System.out.println("Sensor de fogo detectou " + N_fogos + " fogos próximos!\n");
         } else {
-            System.out.println("Sensor de fogo não detectou fogos próximos.\n");
+            System.out.println("Sensor de fogo não detectou fogos próximos!\n");
         }
     }
     

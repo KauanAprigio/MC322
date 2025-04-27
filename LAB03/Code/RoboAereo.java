@@ -48,11 +48,12 @@ public class RoboAereo extends Robo {
     public void descer(int deltaZ) {
         if (altitude - deltaZ >= 0) {
             altitude -= deltaZ;
-            System.out.println(getNome() + " desceu para " + getAltitude() + " metros de altitude\n");
-            if (altitude == 0) {
-                System.out.println(getNome() + " pousou");
+            if (altitude == 0) { // mensagem caso volte para o chão
+                System.out.println(getNome() + " retornou ao solo.\n");
+            } else { // se descer para qualquer outra altitude
+                System.out.println(getNome() + " desceu para " + getAltitude() + " metros de altitude.\n");
             }
-        } else {
+        } else { // condicional caso tente "entrar" na terra
             System.out.println(getNome() + " não pode descer abaixo do nível do solo\n");
         }
     }

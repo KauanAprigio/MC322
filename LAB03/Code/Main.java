@@ -30,7 +30,7 @@ import LAB03.Code.Obstaculo.TipoObstaculo;
 public class Main {
     public static void main(String[] args) {
         // Criação do ambiente
-        Ambiente ambiente = new Ambiente(100, 100, "Ambiente", 100);
+        Ambiente ambiente = new Ambiente(100, 100, "Ambiente", 110);
 
         //Criação dos obstáculos
         Obstaculo lago = new Obstaculo(2, 2, TipoObstaculo.LAGO); //Coordenadas X(2,32), Y(2,32), no caso eu digo o começo e o fim do X, depois do Y, já a altura sempre começa do 0, logo dou o valor dela, se nao tiver é porque o objeto nao tem altura
@@ -60,7 +60,7 @@ public class Main {
         
         ////SuperClasse e Subclasse: Aereo e Bombeiro
         RoboAereo roboAereo = new RoboAereo("RoboAereo", 60, 35, 90, 10, ambiente);
-        RoboBombeiro roboBombeiro = new RoboBombeiro("RoboBombeiro", 0, 0, 90, 15, ambiente, 3000);
+        RoboBombeiro roboBombeiro = new RoboBombeiro("RoboBombeiro", 30, 30, 105, 10, ambiente, 3000, 10);
     
         //Adicionando os robôs ao ambiente
         System.out.println("-------------------------");
@@ -90,8 +90,8 @@ public class Main {
         System.out.println("Teste de movimentação do Rôbo Aéreo:\n");
         roboAereo.mover(5, 5); // Movimentação normal utilizando método da SuperClasse, ou seja, altitude = 0
         roboAereo.subir(10); // Sobe normal
-        roboAereo.subir(100); // Não pode sair da altitude máxima do ambiente
-        roboAereo.subir(81); // Não pode ir além da Altitude_máxima pré-definida.
+        roboAereo.subir(110); // Não pode sair da altitude máxima do ambiente
+        roboAereo.subir(96); // Não pode ir além da Altitude_máxima pré-definida.
         roboAereo.descer(5); // Desce normal
         roboAereo.descer(15); // Não pode descer abaixo do solo
         roboAereo.descer(5); // Voltou a altitude = 0, logo pousou!
@@ -110,11 +110,29 @@ public class Main {
         roboLimpador.aprimorar(10); // Robo limpador está fora da oficina
         roboLimpador.mover(5, 0); // Movi o robo para a oficina
         roboLimpador.aprimorar(10); // Robo será aprimorado com sucesso
+        roboLimpador.indentificar_lixo(); // Sensor não irá identificar nenhum lixo, pois já limpou tudo
         ////////////////////////////////////////////
         // ALTEREI O SENSOR DE POSICAO PARA CONSIDERAR A OFICINA LOCAL QUE PODE MOVER + COLOQUEI UM ATRIBUTO A MAIS NO TIPOOBSTACULO, CHAMADO APRIMORA, PARA FACILITAR PARA O ROBO LIMPADOR
         ////////////////////////////////////////////
 
-        
+        // Testes robo bombeiro + testes do sensor de fogo
+        System.out.println("-------------------------");
+        System.out.println("Teste do sensor de fogo e do rôbo bombeiro:\n");
+        roboBombeiro.adicionar_agua(2500); // Adiciona água sem problemas.
+        roboBombeiro.adicionar_agua(1000); // Excede a quantidade máxima, logo não abastecerá.
+        roboBombeiro.mover(2, 10); // Movi o robo para perto do prédio em chamas e fora do lago
+        roboBombeiro.adicionar_agua(5000); // Não está no lago, logo não pode adicionar
+        roboBombeiro.indentificar_fogo(); // Irá identificar o prédio em fogo
+        roboBombeiro.apagar_fogo(1500); // Não irá apagar o fogo, pois não está na altura dele
+        roboBombeiro.subir(100); // Subirá até a altura do fogo.
+        roboBombeiro.apagar_fogo(4000); // Aqui ele não consegue apagar o fogo porque falta água
+        roboBombeiro.apagar_fogo(1500); // Conseguirá apagar o fogo.
+        roboBombeiro.descer(100); // Voltou para o solo
+        roboBombeiro.aprimorar(1000); // Não está na oficina, logo não aprimorará
+        roboBombeiro.mover(23, 5); // Foi para a Oficina
+        roboBombeiro.aprimorar(1000); // Será aprimorado sem problemas
+ 
+
 
     }
 }
