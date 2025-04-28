@@ -144,6 +144,8 @@ classDiagram
     RoboBombeiro o-- SensorDeFogo : Agregação
     RoboLimpador <.. SensorDeLixo : Dependência
     RoboBombeiro <.. SensorDeFogo : Dependência
+    RoboTerrestre o-- SensorPosicaoSegura : Agregação
+    RoboAereo o-- SensorPosicaoSegura : Agregação
 ```
 
 
