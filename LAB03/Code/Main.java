@@ -125,10 +125,9 @@ public class Main {
         roboBombeiro.mover(2, 10); // Movi o robo para perto do prédio em chamas e fora do lago
         roboBombeiro.adicionar_agua(5000); // Não está no lago, logo não pode adicionar
         roboBombeiro.indentificar_fogo(); // Irá identificar o prédio em fogo
-        roboBombeiro.apagar_fogo(1500); // Não irá apagar o fogo, pois não está na altura dele
+        roboBombeiro.apagar_fogo(); // Não irá apagar o fogo, pois não está na altura dele
         roboBombeiro.subir(100); // Subirá até a altura do fogo.
-        roboBombeiro.apagar_fogo(4000); // Aqui ele não consegue apagar o fogo porque falta água
-        roboBombeiro.apagar_fogo(1500); // Conseguirá apagar o fogo.
+        roboBombeiro.apagar_fogo(); // Conseguirá apagar o fogo.
         roboBombeiro.descer(100); // Voltou para o solo
         roboBombeiro.aprimorar(1000); // Não está na oficina, logo não aprimorará
         roboBombeiro.mover(23, 5); // Foi para a Oficina
@@ -143,6 +142,7 @@ public class Main {
         Obstaculo Fogo2 = new Obstaculo(55, 55, TipoObstaculo.FOGO); //Coordenadas X(55,60), Y(55,60) e Z = 5m
         Obstaculo Fogo3 = new Obstaculo(80, 25, TipoObstaculo.FOGO); //Coordenadas X(80,85), Y(25,30) e Z = 5m
         Obstaculo Predio_em_chamas1 = new Obstaculo(0, 40, TipoObstaculo.PREDIOEMCHAMAS); //Coordenadas X(0,30), Y(40,70) e Z = 30m
+        Obstaculo Predio_em_chamas2 = new Obstaculo(70, 45, TipoObstaculo.PREDIOEMCHAMAS); //Coordenadas X(0,30), Y(70,100) e Z = 30m
         Obstaculo Predio1 = new Obstaculo(20, 0, TipoObstaculo.PREDIO); //Coordenadas X(20,50), Y(0,30) e Z = 30m
         Obstaculo Comida1 = new Obstaculo(15, 25, TipoObstaculo.COMIDANOCHAO); //Coordenadas (15,25)
         Obstaculo Comida2 = new Obstaculo(65, 65, TipoObstaculo.COMIDANOCHAO); //Coordenadas (65,65)
@@ -158,6 +158,7 @@ public class Main {
         ambiente2.adicionarObstaculo(Fogo2);
         ambiente2.adicionarObstaculo(Fogo3);
         ambiente2.adicionarObstaculo(Predio_em_chamas1);
+        ambiente2.adicionarObstaculo(Predio_em_chamas2);
         ambiente2.adicionarObstaculo(Predio1);
         ambiente2.adicionarObstaculo(Comida1);
         ambiente2.adicionarObstaculo(Comida2);
@@ -268,6 +269,79 @@ public class Main {
         } else if (comando == 2){
             System.out.println("Você escolheu o RoboBombeiro.");
             System.out.println("O seu objetivo é apagar o fogo no ambiente.");
+            System.out.println("Mova, evitando os obstáculos, e apague os incêndios.");
+            System.out.println("Utilize o seus sensores para detectar fogo no ambiente e encontrar oficinas.");
+            System.out.println("Lembre-se que seus sensores possuem um raio limitado então mova-se para explorar o ambiente.");
+            RoboBombeiro Player = new RoboBombeiro("Player", 0, 0, 200, 20, ambiente, 1000, 20);
+            ambiente.adicionarRobo(Player);
+            int quantidade_fogos = 0;
+            while (comando != 8) {
+                // Exibir quantidade de fogos no ambiente
+                for (Obstaculo o : ambiente.getObstaculos()) {
+                    if (o.getTipo().isFogo()) {
+                        quantidade_fogos++;
+                    }
+                }
+                System.out.println("Quantidade de fogos no ambiente: " + quantidade_fogos);
+                // Menu de opções
+                System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
+                System.out.println("1 - Mover");
+                System.out.println("2 - Scannear por fogo");
+                System.out.println("3 - Apagar fogo");
+                System.out.println("4 - Aprimorar");
+                System.out.println("5 - Adicionar água");
+                System.out.println("6 - Subir");
+                System.out.println("7 - Descer");
+                System.out.println("8 - Sair");
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Você digitou algo inválido, tente novamente.");
+                    scanner.next(); // Limpa o buffer
+                }
+                comando = scanner.nextInt();
+                while ((comando < 1 && comando > 8)) {
+                    System.out.println("Você digitou algo inválido, tente novamente.");
+                    System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
+                    System.out.println("1 - Mover");
+                    System.out.println("2 - Scannear por fogo");
+                    System.out.println("3 - Apagar fogo");
+                    System.out.println("4 - Aprimorar");
+                    System.out.println("5 - Adicionar água");
+                    System.out.println("6 - Sair");
+                }
+                switch (comando) {
+                    case 1:
+                        MoverPlayer(Player);
+                        break;
+                    case 2:
+                        Player.indentificar_fogo();
+                        break;
+                    case 3:
+                        Player.apagar_fogo();
+                        break;
+                    case 4:
+                        Player.aprimorar(10);
+                        break;
+                    case 5:
+                        Player.adicionar_agua(1000);
+                        break;
+                    case 6:
+                        System.out.println("Digite a quantidade de metros que você quer subir:");
+                        int metros = scanner.nextInt();
+                        Player.subir(metros);
+                        break;
+                    case 7:
+                        System.out.println("Digite a quantidade de metros que você quer descer:");
+                        int metros2 = scanner.nextInt();
+                        Player.descer(metros2);
+                        break;
+                    case 8:
+                        System.out.println("Você saiu do menu interativo.");
+                        break;
+                    default:
+                        break;
+                }
+            }
+
 
         } 
  
