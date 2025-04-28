@@ -51,7 +51,7 @@ public class Ambiente {
         }
         robos.add(r);
         System.out.println(r.getNome() + " foi adicionado ao ambiente.");
-        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ".)\n");
+        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
     }
     public void removerRobo(Robo r) { //remove um robo r do arraylist
         robos.remove(r);
