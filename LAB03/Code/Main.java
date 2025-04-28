@@ -10,6 +10,7 @@
 package LAB03.Code;
 
 import LAB03.Code.Obstaculo.TipoObstaculo;
+import java.util.Scanner;
 
 /*
  * Essa classe contém o método main que cria um ambiente e robôs,
@@ -28,6 +29,7 @@ import LAB03.Code.Obstaculo.TipoObstaculo;
  * 
  */
 public class Main {
+    private static final Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         // Criação do ambiente
         Ambiente ambiente = new Ambiente(100, 100, "Ambiente", 110);
@@ -52,6 +54,9 @@ public class Main {
         ambiente.adicionarObstaculo(comida);
         ambiente.adicionarObstaculo(sacola);
         ambiente.adicionarObstaculo(oficina);
+        System.out.println("Colocando um obstáculo inválido:\n");
+        Obstaculo obstaculo_invalido = new Obstaculo(100, 0, TipoObstaculo.LAGO); //Coordenadas X(100,130), Y(0,30) e Z = 0m
+        ambiente.adicionarObstaculo(obstaculo_invalido); // Esse obstáculo não será adicionado, pois está fora do ambiente
 
         // Criação dos robôs
         //SuperClasse e Subclasse: Terrestre e Limpador
@@ -111,9 +116,6 @@ public class Main {
         roboLimpador.mover(5, 0); // Movi o robo para a oficina
         roboLimpador.aprimorar(10); // Robo será aprimorado com sucesso
         roboLimpador.indentificar_lixo(); // Sensor não irá identificar nenhum lixo, pois já limpou tudo
-        ////////////////////////////////////////////
-        // ALTEREI O SENSOR DE POSICAO PARA CONSIDERAR A OFICINA LOCAL QUE PODE MOVER + COLOQUEI UM ATRIBUTO A MAIS NO TIPOOBSTACULO, CHAMADO APRIMORA, PARA FACILITAR PARA O ROBO LIMPADOR
-        ////////////////////////////////////////////
 
         // Testes robo bombeiro + testes do sensor de fogo
         System.out.println("-------------------------");
@@ -131,6 +133,153 @@ public class Main {
         roboBombeiro.aprimorar(1000); // Não está na oficina, logo não aprimorará
         roboBombeiro.mover(23, 5); // Foi para a Oficina
         roboBombeiro.aprimorar(1000); // Será aprimorado sem problemas
+
+
+        // Menu interativo
+        System.out.println("-------------------------");
+        System.out.println("Criando um ambiente novo:\n");
+        Ambiente ambiente2 = new Ambiente(100, 100, "Ambiente Novo", 110);
+        Obstaculo Fogo1 = new Obstaculo(50, 85, TipoObstaculo.FOGO); //Coordenadas X(50,55), Y(85,90) e Z = 5m
+        Obstaculo Fogo2 = new Obstaculo(55, 55, TipoObstaculo.FOGO); //Coordenadas X(55,60), Y(55,60) e Z = 5m
+        Obstaculo Fogo3 = new Obstaculo(80, 25, TipoObstaculo.FOGO); //Coordenadas X(80,85), Y(25,30) e Z = 5m
+        Obstaculo Predio_em_chamas1 = new Obstaculo(0, 40, TipoObstaculo.PREDIOEMCHAMAS); //Coordenadas X(0,30), Y(40,70) e Z = 30m
+        Obstaculo Predio1 = new Obstaculo(20, 0, TipoObstaculo.PREDIO); //Coordenadas X(20,50), Y(0,30) e Z = 30m
+        Obstaculo Comida1 = new Obstaculo(15, 25, TipoObstaculo.COMIDANOCHAO); //Coordenadas (15,25)
+        Obstaculo Comida2 = new Obstaculo(65, 65, TipoObstaculo.COMIDANOCHAO); //Coordenadas (65,65)
+        Obstaculo Sujeira1 = new Obstaculo(90, 20, TipoObstaculo.SUJEIRAENCARDIDA); //Coordenadas (90,20)
+        Obstaculo Sujeira2 = new Obstaculo(70, 85, TipoObstaculo.SUJEIRAENCARDIDA); //Coordenadas (70,85)
+        Obstaculo Sacola1 = new Obstaculo(52, 68, TipoObstaculo.SACOLAPLASTICA); //Coordenadas (52,68)
+        Obstaculo Sacola2 = new Obstaculo(55, 32, TipoObstaculo.SACOLAPLASTICA); //Coordenadas (55,32)
+        Obstaculo Lago1 = new Obstaculo(0, 70, TipoObstaculo.LAGO); //Coordenadas X(0,30), Y(70,100) e Z = 0m
+        Obstaculo Oficina1 = new Obstaculo(80, 80, TipoObstaculo.OFICINA); //Coordenadas X(80,100), Y(80,100) e Z = 20m
+        //Adicionando os obstáculos ao ambiente
+        System.out.println("Adicionando obstáculos ao ambiente:\n");
+        ambiente2.adicionarObstaculo(Fogo1);
+        ambiente2.adicionarObstaculo(Fogo2);
+        ambiente2.adicionarObstaculo(Fogo3);
+        ambiente2.adicionarObstaculo(Predio_em_chamas1);
+        ambiente2.adicionarObstaculo(Predio1);
+        ambiente2.adicionarObstaculo(Comida1);
+        ambiente2.adicionarObstaculo(Comida2);
+        ambiente2.adicionarObstaculo(Sujeira1);
+        ambiente2.adicionarObstaculo(Sujeira2);
+        ambiente2.adicionarObstaculo(Sacola1);
+        ambiente2.adicionarObstaculo(Sacola2);
+        ambiente2.adicionarObstaculo(Lago1);
+        ambiente2.adicionarObstaculo(Oficina1);
+        
+        MenuInterativo(ambiente2); // Chama o menu interativo para o novo ambiente
+        scanner.close(); // Fecha o scanner
+    }
+    
+
+        
+    public static void MenuInterativo(Ambiente ambiente) {
+        System.out.println("-------------------------");
+        System.out.println("Menu interativo:\n");
+        System.out.println("Você pode usar o menu interativo para testar as funcionalidades do ambiente e dos robôs.");
+        System.out.println("Você controla um robô, e pode usar os métodos de movimentação, sensor e aprimoramento.");
+        System.out.println("Escolha o robô que você quer controlar, digitando o número correspondente:");
+        System.out.println("1 - RoboLimpador");
+        System.out.println("2 - RoboBombeiro");
+        // Using the global scanner instance
+        while (!scanner.hasNextInt()) {
+            System.out.println("Você digitou algo inválido, tente novamente.");
+            scanner.next(); // Limpa o buffer
+        }
+        int comando = scanner.nextInt();
+        while ((comando != 1 && comando != 2)) {
+            System.out.println("Você digitou algo inválido, tente novamente.");
+            comando = scanner.nextInt();
+        }
+        if (comando == 1){
+            int quantidade_lixo = 0;
+            RoboLimpador Player = new RoboLimpador("Player", 0, 0, 20, 20, ambiente, 20);
+            System.out.println("Você escolheu o RoboLimpador. Raio de limpeza: 20m");
+            System.out.println("O seu objetivo é limpar o ambiente.");
+            System.out.println("Mova, evitando os incêndios, e limpe o ambiente");
+            System.out.println("Utilize o seus sensores para detectar lixo no ambiente e encontrar oficinas.");
+            System.out.println("Lembre-se que seus sensores possuem um raio limitado então mova-se para explorar o ambiente.");
+            ambiente.adicionarRobo(Player);
+            while (comando != 6) {
+                // Exibir quantidade de lixo no ambiente
+                for (Obstaculo o : ambiente.getObstaculos()) {
+                    if (o.getTipo().isLixo()) {
+                        quantidade_lixo++;
+                    }
+                }
+                System.out.println("Quantidade de lixo no ambiente: " + quantidade_lixo);
+                // Menu de opções
+                System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
+                System.out.println("1 - Mover");
+                System.out.println("2 - Scannear por lixo");
+                System.out.println("3 - Limpar");
+                System.out.println("4 - Aprimorar");
+                System.out.println("5 - Definir intensidade de limpeza:");
+                System.out.println("6 - Sair");
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Você digitou algo inválido, tente novamente.");
+                    scanner.next(); // Limpa o buffer
+                }
+                comando = scanner.nextInt();
+                while ((comando < 1 && comando > 6)) {
+                    System.out.println("Você digitou algo inválido, tente novamente.");
+                    System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
+                    System.out.println("1 - Mover");
+                    System.out.println("2 - Scannear por lixo");
+                    System.out.println("3 - Limpar");
+                    System.out.println("4 - Aprimorar");
+                    System.out.println("5 - Definir intensidade de limpeza:");
+                    System.out.println("6 - Sair");
+                }
+                switch (comando) {
+                    case 1:
+                        MoverPlayer(Player);
+                        break;
+                    case 2:
+                        Player.indentificar_lixo();
+                        break;
+                    case 3:
+                        Player.limpar();
+                        break;
+                    case 4:
+                        System.out.println("Digite o valor do raio que você quer adicionar: ");
+                        int DeltaRaio = scanner.nextInt();
+                        Player.aprimorar(DeltaRaio);
+                        break;
+                    case 5:
+                        System.out.println("Digite o tipo de limpeza que você quer fazer:");
+                        System.out.println("0 - Limpeza leve");
+                        System.out.println("1 - Limpeza pesada");
+                        System.out.println("2 - Limpeza muito pesada");
+                        int tipo = scanner.nextInt();
+                        Player.definir_tipo_limpeza(tipo);
+                        break;
+                    case 6:
+                        System.out.println("Você saiu do menu interativo.");
+                        break;
+                    default:
+                        break;
+                }
+                quantidade_lixo = 0; // Reseta a quantidade de lixo
+            }
+
+            
+        } else if (comando == 2){
+            System.out.println("Você escolheu o RoboBombeiro.");
+            System.out.println("O seu objetivo é apagar o fogo no ambiente.");
+
+        } 
  
     }
+    private static void MoverPlayer(Robo Player) {
+        System.out.println("Você escolheu mover.");
+        System.out.println("Digite o valor de X e Y em metros que você quer mover:");
+        System.out.println("DeltaX: ");
+        int deltaX = scanner.nextInt();
+        System.out.println("DeltaY: ");
+        int deltaY = scanner.nextInt();
+        Player.mover(deltaX, deltaY);
+    }
+
 }
