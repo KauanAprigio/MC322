@@ -84,8 +84,8 @@ public class RoboBombeiro extends RoboAereo {
                         } else if (o.getTipo() == TipoObstaculo.PREDIOEMCHAMAS) {
                             System.out.println("Prédio não mais está em chamas.");
                             System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
-                            getAmbiente().adicionarObstaculo(new Obstaculo(o.getPosicaoX1(), o.getPosicaoY1(), TipoObstaculo.PREDIO)); // agora o predio nao esta mais em chamas
                             getAmbiente().removerObstaculo(o); // muda para somente um predio, nao um predio em chamas
+                            getAmbiente().adicionarObstaculo(new Obstaculo(o.getPosicaoX1(), o.getPosicaoY1(), TipoObstaculo.PREDIO)); // agora o predio nao esta mais em chamas
                         }
                     }
                     break;
