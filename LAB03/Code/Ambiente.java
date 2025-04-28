@@ -62,7 +62,7 @@ public class Ambiente {
         for (Robo r : robos) {
             for (Obstaculo o : obstaculos) {
                 if (r.getX() >= o.getPosicaoX1() && r.getX() <= o.getPosicaoX2() && r.getY() >= o.getPosicaoY1() && r.getY() <= o.getPosicaoY2()) {
-                    System.out.println("Colisão detectada entre " + r.getNome() + " e " + o.getTipo() + "\n");
+                    System.out.println("Colisão detectada entre " + r.getNome() + " e " + o.getTipo());
                     if  (o.getTipo() == Obstaculo.TipoObstaculo.FOGO) {
                         if (r instanceof RoboBombeiro) {
                             System.out.println("O robô: "+ r.getNome() + " esta dentro do " + o.getTipo().getNome() + "\n");
@@ -90,8 +90,8 @@ public class Ambiente {
         }
         obstaculos.add(o);
         System.out.println("Obstáculo " + o.getTipo() + " adicionado ao ambiente.");
-        System.out.println("Posição inferior esquerda: (" + o.getPosicaoX1() + ", " + o.getPosicaoY1() + ", " + 0 + ".)");
-        System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getAltura() + ".)\n");
+        System.out.println("Posição inferior esquerda: (" + o.getPosicaoX1() + ", " + o.getPosicaoY1() + ", " + 0 + ")");
+        System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getAltura() + ")\n");
     }
     public void removerObstaculo(Obstaculo o) { //remove um obstaculo o do arraylist
         obstaculos.remove(o);
