@@ -147,7 +147,7 @@ classDiagram
     RoboTerrestre o-- SensorPosicaoSegura : Agregação
     RoboAereo o-- SensorPosicaoSegura : Agregação
 ```
-
+![Diagrama_Ambiente](https://github.com/user-attachments/assets/8d6971a5-8f38-4cc8-ac1c-308c832979f3)
 
 ### COMPILAÇÃO:
 
