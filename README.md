@@ -67,7 +67,7 @@ classDiagram
         - reservatorio : int
         - sensorDeFogo : SensorDeFogo
         + adicionar_agua(litros : int)
-        + apagar_fogo(litros_necessarios : int)
+        + apagar_fogo()
         + indentificar_fogo()
         + aprimorar(peso_adicional : int)
     }
