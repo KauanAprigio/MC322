@@ -1,5 +1,7 @@
 package LAB03.Code;
 
+import java.util.Iterator;
+
 import LAB03.Code.Obstaculo.TipoObstaculo;
 
 /* 
@@ -52,19 +54,21 @@ class RoboLimpador extends RoboTerrestre {
 
     public void limpar() {
         System.out.println("Tipo de limpeza atual: " + tipo_limpeza + "."); // Fala qual o tipo de limpeza
-        for (Obstaculo o : getAmbiente().getObstaculos()) {
-            if (o.getTipo().isLixo()){
+        Iterator<Obstaculo> iterator = getAmbiente().getObstaculos().iterator();
+        while (iterator.hasNext()) {
+            Obstaculo o = iterator.next();
+            if (o.getTipo().isLixo()) {
                 int distancia = (int) Math.sqrt(Math.pow(o.getPosicaoX1() - getX(), 2) + Math.pow(o.getPosicaoY1() - getY(), 2));
-                if (distancia < raioDeLimpeza){ // verifica se o robô esta perto do lixo
+                if (distancia < raioDeLimpeza) { // verifica se o robô esta perto do lixo
                     if (o.getTipo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza >= 2) {
                         System.out.println(getNome() + " limpou " + o.getTipo().getNome() + ".");
-                        getAmbiente().removerObstaculo(o);
+                        iterator.remove();
                     } else if (o.getTipo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza >= 1) {
                         System.out.println(getNome() + " limpou " + o.getTipo().getNome() + ".");
-                        getAmbiente().removerObstaculo(o);
+                        iterator.remove();
                     } else if (o.getTipo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza >= 0) {
                         System.out.println(getNome() + " limpou " + o.getTipo().getNome() + ".");
-                        getAmbiente().removerObstaculo(o);
+                        iterator.remove();
                     } else {
                         System.out.println(getNome() + " não pode limpar " + o.getTipo().getNome() + ", tente aumentar a intensidade da limpeza!");
                     }
