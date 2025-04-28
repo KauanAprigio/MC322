@@ -20,7 +20,7 @@ import LAB03.Code.Obstaculo.TipoObstaculo;
 public class RoboBombeiro extends RoboAereo {
     //Atributos adicionais
     private int peso_max; // peso maximo que o robo suporta;
-    private int reservatorio = 0; // litros de agua no reservatorio
+    private int reservatorio; // litros de agua no reservatorio
     private SensorDeFogo sensorDeFogo; // sensor de fogo com raio 10
     private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
     
@@ -31,6 +31,7 @@ public class RoboBombeiro extends RoboAereo {
         this.sensorDeFogo = new SensorDeFogo(raiosensor); // sensor de fogo com raio 10
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
+        this.reservatorio = peso_max; // litros de agua no reservatorio (começa cheio)
     }
     
     // Metodos
@@ -49,18 +50,19 @@ public class RoboBombeiro extends RoboAereo {
             System.out.println(getNome() + " não está em um lago e não pode abastecer água!\n");
             return;
         }
-            int peso_total = reservatorio + litros; // somatorio dos pesos
-            if (peso_total > peso_max){
-                int excedente = peso_total - peso_max;
-                System.out.println("A quantidade " + litros + " litros excede " + excedente + " litros da capacidade máxima de " + peso_max + " litros do " + getNome() + "!\n");
-            } else {
-                reservatorio += litros;
-                System.out.println(getNome() + " foi abastecido com sucesso.");
-                System.out.println("Reservatorio possui " + reservatorio + " litros.\n");
-            }
+        int peso_total = reservatorio + litros; // somatorio dos pesos
+        if (peso_total > peso_max){
+            int excedente = peso_total - peso_max;
+            System.out.println("A quantidade " + litros + " litros excede " + excedente + " litros da capacidade máxima de " + peso_max + " litros do " + getNome() + "!\n");
+        } else {
+            reservatorio += litros;
+            System.out.println(getNome() + " foi abastecido com sucesso.");
+            System.out.println("Reservatorio possui " + reservatorio + " litros.\n");
+        }
     }
 
-    public void apagar_fogo(int litros_necessarios){
+    public void apagar_fogo(){
+        int litros_necessarios = 0; // quantidade de agua para apagar o fogo
         // Verifica se o robô está dentro de um incêndio
         for (Obstaculo o : getAmbiente().getObstaculos()) {
 
@@ -72,6 +74,8 @@ public class RoboBombeiro extends RoboAereo {
             if (o.getTipo().isFogo() && distancia <= raio_de_cessar_fogo) { // Condional caso o obstaculo detectado seja um fogo
                 if (o.getAltura() <= getAltitude()){ // condicional para ver se está na altura do fogo
                     System.out.println(getNome() + " está próximo de um incêndio.");
+                    if (o.getTipo() == TipoObstaculo.FOGO) litros_necessarios = 100; // quantidade de agua para apagar o fogo
+                    else if (o.getTipo() == TipoObstaculo.PREDIOEMCHAMAS) litros_necessarios = 1000; // quantidade de agua para apagar o predio em chamas
                     if (reservatorio < litros_necessarios){ // condicional caso nao tenha agua o suficiente
                         int deficit = litros_necessarios - reservatorio; // quanto ira faltar de agua para apagar o fogo
                         System.out.println(getNome() + " precisa de " + deficit + " litros a mais para apagar o incêndio!\n");
