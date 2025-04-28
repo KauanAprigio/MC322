@@ -180,17 +180,23 @@ public class Main {
         System.out.println("Menu interativo:\n");
         System.out.println("Você pode usar o menu interativo para testar as funcionalidades do ambiente e dos robôs.");
         System.out.println("Você controla um robô, e pode usar os métodos de movimentação, sensor e aprimoramento.");
-        System.out.println("Escolha o robô que você quer controlar, digitando o número correspondente:");
-        System.out.println("1 - RoboLimpador");
-        System.out.println("2 - RoboBombeiro");
+        System.out.println("ATENÇÃO:");
+        System.out.println("Para ter uma melhor experiência no simulador, LEIAM O README, pois ele possui todas as instruções e localidades dos obstáculos.");
+        System.out.println("ENJOY PLAYERS!!!!!");
+        System.out.println("-------------------------");
+        
+        ImprimeMenuInicial(); // mostra as opções para o player escolher qual robo ele irá controlar
+        
         // Using the global scanner instance
-        while (!scanner.hasNextInt()) {
-            System.out.println("Você digitou algo inválido, tente novamente.");
+        while (!scanner.hasNextInt()) { // caso o jogador escreva uma palavra ao invés de um número
+            System.out.println("Você digitou algo inválido, tente novamente!");
+            ImprimeMenuInicial(); // mostra as opções para o player de novo
             scanner.next(); // Limpa o buffer
         }
         int comando = scanner.nextInt();
-        while ((comando != 1 && comando != 2)) {
-            System.out.println("Você digitou algo inválido, tente novamente.");
+        while ((comando != 1 && comando != 2)) { // caso o player escreva um número, mas que seja diferente de 1 ou 2
+            System.out.println("Você digitou algo inválido, tente novamente!");
+            ImprimeMenuInicial(); // mostra as opções para o player de novo
             comando = scanner.nextInt();
         }
         if (comando == 1){
@@ -210,31 +216,19 @@ public class Main {
                     }
                 }
                 System.out.println("Quantidade de lixo no ambiente: " + quantidade_lixo);
-                // Menu de opções
-                System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
-                System.out.println("1 - Mover");
-                System.out.println("2 - Scannear por lixo");
-                System.out.println("3 - Limpar");
-                System.out.println("4 - Aprimorar");
-                System.out.println("5 - Definir intensidade de limpeza:");
-                System.out.println("6 - Sair");
-                while (!scanner.hasNextInt()) {
-                    System.out.println("Você digitou algo inválido, tente novamente.");
+                
+                //imprime o menu de opções para o robo limpador
+                ImprimeMenuLimpador();
+                
+                while (!scanner.hasNextInt()) { // Caso a opção escolhida seja uma palavra ao invés de uma número
+                    System.out.println("Você digitou algo inválido, tente novamente!");
+                    ImprimeMenuLimpador(); // mostra o menu de novo, para facilitar o player a ver as opções válidas.
                     scanner.next(); // Limpa o buffer
                 }
                 comando = scanner.nextInt();
-                while ((comando < 1 && comando > 6)) {
-                    System.out.println("Você digitou algo inválido, tente novamente.");
-                    System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
-                    System.out.println("1 - Mover");
-                    System.out.println("2 - Scannear por lixo");
-                    System.out.println("3 - Limpar");
-                    System.out.println("4 - Aprimorar");
-                    System.out.println("5 - Definir intensidade de limpeza:");
-                    System.out.println("6 - Sair");
-                }
                 switch (comando) {
                     case 1:
+                        System.out.println("A posição atual de " + Player.getNome() + " é: " + "(" + Player.getX() + "," + Player.getY() + ")\n"); // Sendo mais Friendly caso queira movimentar
                         MoverPlayer(Player);
                         break;
                     case 2:
@@ -283,33 +277,19 @@ public class Main {
                     }
                 }
                 System.out.println("Quantidade de fogos no ambiente: " + quantidade_fogos);
-                // Menu de opções
-                System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
-                System.out.println("1 - Mover");
-                System.out.println("2 - Scannear por fogo");
-                System.out.println("3 - Apagar fogo");
-                System.out.println("4 - Aprimorar");
-                System.out.println("5 - Adicionar água");
-                System.out.println("6 - Subir");
-                System.out.println("7 - Descer");
-                System.out.println("8 - Sair");
-                while (!scanner.hasNextInt()) {
-                    System.out.println("Você digitou algo inválido, tente novamente.");
+                
+                //imprime o menu de opções para o robo bombeiro
+                ImprimeMenuBombeiro();
+                
+                while (!scanner.hasNextInt()) { // caso o player coloque uma palavra ao invés de um número
+                    System.out.println("Você digitou algo inválido, tente novamente!");
+                    ImprimeMenuBombeiro(); // Mostra o menu do robo bombeiro de novo
                     scanner.next(); // Limpa o buffer
                 }
                 comando = scanner.nextInt();
-                while ((comando < 1 && comando > 8)) {
-                    System.out.println("Você digitou algo inválido, tente novamente.");
-                    System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
-                    System.out.println("1 - Mover");
-                    System.out.println("2 - Scannear por fogo");
-                    System.out.println("3 - Apagar fogo");
-                    System.out.println("4 - Aprimorar");
-                    System.out.println("5 - Adicionar água");
-                    System.out.println("6 - Sair");
-                }
                 switch (comando) {
                     case 1:
+                    System.out.println("A posição atual de " + Player.getNome() + " é: " + "(" + Player.getX() + "," + Player.getY() + "," + Player.getAltitude() + ")\n"); // Sendo mais Friendly caso queira movimentar
                         MoverPlayer(Player);
                         break;
                     case 2:
@@ -339,8 +319,9 @@ public class Main {
                         break;
                     default:
                         break;
+                    }
+                quantidade_fogos = 0; // reseta a quantidade de fogos.
                 }
-            }
 
 
         } 
@@ -356,4 +337,31 @@ public class Main {
         Player.mover(deltaX, deltaY);
     }
 
+    private static void ImprimeMenuBombeiro(){
+        System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
+        System.out.println("1 - Mover");
+        System.out.println("2 - Scannear por fogo");
+        System.out.println("3 - Apagar fogo");
+        System.out.println("4 - Aprimorar");
+        System.out.println("5 - Adicionar água");
+        System.out.println("6 - Subir");
+        System.out.println("7 - Descer");
+        System.out.println("8 - Sair");
+    }
+
+    private static void ImprimeMenuLimpador(){
+        System.out.println("Digite o número correspondente ao movimento que você quer fazer:");
+        System.out.println("1 - Mover");
+        System.out.println("2 - Scannear por lixo");
+        System.out.println("3 - Limpar");
+        System.out.println("4 - Aprimorar");
+        System.out.println("5 - Definir intensidade de limpeza:");
+        System.out.println("6 - Sair");
+    }
+
+    private static void ImprimeMenuInicial(){
+        System.out.println("Escolha o robô que você quer controlar, digitando o número correspondente:");
+        System.out.println("1 - RoboLimpador");
+        System.out.println("2 - RoboBombeiro");
+    }
 }
