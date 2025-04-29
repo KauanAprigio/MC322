@@ -358,8 +358,18 @@ public class Main {
         System.out.println("Você escolheu mover.");
         System.out.println("Digite o valor de X e Y em metros que você quer mover:");
         System.out.println("DeltaX: ");
+        while (!scanner.hasNextInt()) { // caso o player coloque uma palavra ao invés de um número
+            System.out.println("Você digitou algo inválido, tente novamente!");
+            System.out.println("DeltaX: ");
+            scanner.next(); // Limpa o buffer
+        }
         int deltaX = scanner.nextInt();
         System.out.println("DeltaY: ");
+        while (!scanner.hasNextInt()) { // caso o player coloque uma palavra ao invés de um número
+            System.out.println("Você digitou algo inválido, tente novamente!");
+            System.out.println("DeltaY: ");
+            scanner.next(); // Limpa o buffer
+        }
         int deltaY = scanner.nextInt();
         Player.mover(deltaX, deltaY);
     }
