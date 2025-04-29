@@ -20,6 +20,10 @@ IDE utilizado para codar foi o [Visual Studio Code](https://code.visualstudio.co
 
 
 # LAB 3
+Diagrama de classes:
+As classes são representadas de maneira simplificada, com algumas relações e métodos ocultados para evitar confusão visual.\
+Métodos Getters e Setters foram ocultados e a enumeração do tipoObstáculo foi separada da classe Obstáculo.\
+Além disso, as setas de agregação e dependência entre subclasses de robôs e subclasses de sensores não foram desenhadas.\
 ```mermaid
 ---
 title: Diagrama de classes - LAB03
@@ -140,12 +144,6 @@ classDiagram
     Sensor <|-- SensorDeFogo : Herança
     Sensor <|-- SensorDeLixo : Herança
     Sensor <|-- SensorPosicaoSegura : Herança
-    RoboLimpador o-- SensorDeLixo : Agregação
-    RoboBombeiro o-- SensorDeFogo : Agregação
-    RoboLimpador <.. SensorDeLixo : Dependência
-    RoboBombeiro <.. SensorDeFogo : Dependência
-    RoboTerrestre o-- SensorPosicaoSegura : Agregação
-    RoboAereo o-- SensorPosicaoSegura : Agregação
 ```
 ![Diagrama_Ambiente](https://github.com/user-attachments/assets/ce31c75d-47a6-4824-86eb-2c68f99437bd)
 
