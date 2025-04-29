@@ -20,10 +20,10 @@ IDE utilizado para codar foi o [Visual Studio Code](https://code.visualstudio.co
 
 
 # LAB 3
-Diagrama de classes:
+Diagrama de classes:\
 As classes são representadas de maneira simplificada, com algumas relações e métodos ocultados para evitar confusão visual.\
 Métodos Getters e Setters foram ocultados e a enumeração do tipoObstáculo foi separada da classe Obstáculo.\
-Além disso, as setas de agregação e dependência entre subclasses de robôs e subclasses de sensores não foram desenhadas.\
+Além disso, as setas de agregação e dependência entre subclasses de robôs e subclasses de sensores não foram desenhadas.
 ```mermaid
 ---
 title: Diagrama de classes - LAB03
