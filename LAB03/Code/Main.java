@@ -201,7 +201,7 @@ public class Main {
             System.out.println("Utilize o seus sensores para detectar lixo no ambiente e encontrar oficinas.");
             System.out.println("Lembre-se que seus sensores possuem um raio limitado então mova-se para explorar o ambiente.");
             ambiente.adicionarRobo(Player);
-            while (comando != 6) {
+            while (comando != 7) {
                 // Exibir quantidade de lixo no ambiente
                 for (Obstaculo o : ambiente.getObstaculos()) {
                     if (o.getTipo().isLixo()) {
@@ -262,6 +262,9 @@ public class Main {
                         }
                         break;
                     case 6:
+                        Player.exibirPosicao();
+                        break;
+                    case 7:
                         System.out.println("Você saiu do menu interativo.");
                         break;
                     default:
@@ -280,7 +283,7 @@ public class Main {
             RoboBombeiro Player = new RoboBombeiro("Player", 0, 0, 200, 20, ambiente, 1000, 20);
             ambiente.adicionarRobo(Player);
             int quantidade_fogos = 0;
-            while (comando != 8) {
+            while (comando != 9) {
                 // Exibir quantidade de fogos no ambiente
                 for (Obstaculo o : ambiente.getObstaculos()) {
                     if (o.getTipo().isFogo()) {
@@ -336,6 +339,9 @@ public class Main {
                         }
                         break;
                     case 8:
+                        Player.exibirPosicao();
+                        break;
+                    case 9:
                         System.out.println("Você saiu do menu interativo.");
                         break;
                     default:
@@ -367,7 +373,8 @@ public class Main {
         System.out.println("5 - Adicionar água");
         System.out.println("6 - Subir");
         System.out.println("7 - Descer");
-        System.out.println("8 - Sair");
+        System.out.println("8 - Exibir posição");
+        System.out.println("9 - Sair");
     }
 
     private static void ImprimeMenuLimpador(){
@@ -377,7 +384,8 @@ public class Main {
         System.out.println("3 - Limpar");
         System.out.println("4 - Aprimorar");
         System.out.println("5 - Definir tipo de limpeza:");
-        System.out.println("6 - Sair");
+        System.out.println("6 - Exibir posição");
+        System.out.println("7 - Sair");
     }
 
     private static void ImprimeMenuInicial(){
