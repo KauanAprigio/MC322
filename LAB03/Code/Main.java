@@ -376,7 +376,7 @@ public class Main {
         System.out.println("2 - Scannear por lixo");
         System.out.println("3 - Limpar");
         System.out.println("4 - Aprimorar");
-        System.out.println("5 - Definir intensidade de limpeza:");
+        System.out.println("5 - Definir tipo de limpeza:");
         System.out.println("6 - Sair");
     }
 
