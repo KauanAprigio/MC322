@@ -311,7 +311,7 @@ public class Main {
                         Player.apagar_fogo();
                         break;
                     case 4:
-                        System.out.println("Digite o valor do raio que você quer adicionar: ");
+                        System.out.println("Digite o volume adicional de reservatório que você quer adicionar: ");
                         if (scanner.hasNextInt()){ // condicional para confirmar que a entrada é um int
                             int DeltaRaio = scanner.nextInt();
                             if (DeltaRaio < 0){
