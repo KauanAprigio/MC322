@@ -232,16 +232,34 @@ public class Main {
                         break;
                     case 4:
                         System.out.println("Digite o valor do raio que você quer adicionar: ");
-                        int DeltaRaio = scanner.nextInt();
-                        Player.aprimorar(DeltaRaio);
+                        if (scanner.hasNextInt()){ // condicional para confirmar que a entrada é um int
+                            int DeltaRaio = scanner.nextInt();
+                            if (DeltaRaio < 0){
+                                System.out.println("Valor inválido! Tente outra vez utilizando um valor positivo!");
+                            } else {
+                                Player.aprimorar(DeltaRaio);
+                            }
+                        } else { // caso não for, voltará para o menu
+                            System.out.println("Entrada inválida! Tente usar um algarismo positivo da proxima vez!");
+                            scanner.next(); // limpa o scanner
+                        }
                         break;
                     case 5:
                         System.out.println("Digite o tipo de limpeza que você quer fazer:");
                         System.out.println("0 - Limpeza de sacola plástica");
                         System.out.println("1 - Limpeza de comida no chão");
                         System.out.println("2 - Limpeza de sujeira encardida");
-                        int tipo = scanner.nextInt();
-                        Player.definir_tipo_limpeza(tipo);
+                        if (scanner.hasNextInt()){ // condicional para confirmar que a entrada é um int
+                            int tipo = scanner.nextInt();
+                            if (tipo < 0 || tipo > 2){
+                                System.out.println("Valor inválido! Tente outra vez utilizando 0, 1 ou 2!");
+                            } else {
+                                Player.aprimorar(tipo);
+                            }
+                        } else { //caso não for, voltará para o menu
+                            System.out.println("Entrada inválida! Tente outra vez utilizando 0,1 ou 2!");
+                            scanner.next(); // limpa o scanner
+                        }
                         break;
                     case 6:
                         System.out.println("Você saiu do menu interativo.");
@@ -299,13 +317,23 @@ public class Main {
                         break;
                     case 6:
                         System.out.println("Digite a quantidade de metros que você quer subir:");
-                        int metros = scanner.nextInt();
-                        Player.subir(metros);
+                        if (scanner.hasNextInt()){ // condicional para confirmar que a entrada é um int
+                            int metros = scanner.nextInt();
+                            Player.subir(metros);
+                        } else { //caso não for, voltará para o menu
+                            System.out.println("Entrada inválida! Tente outra vez utilizando um algarismo!");
+                            scanner.next(); // limpa o scanner
+                        }
                         break;
                     case 7:
                         System.out.println("Digite a quantidade de metros que você quer descer:");
-                        int metros2 = scanner.nextInt();
-                        Player.descer(metros2);
+                        if (scanner.hasNextInt()){ // condicional para confirmar que a entrada é um int
+                            int metros2 = scanner.nextInt();
+                            Player.descer(metros2);
+                        } else { //caso não for, voltará para o menu
+                            System.out.println("Entrada inválida! Tente outra vez utilizando um algarismo!");
+                            scanner.next(); // limpa o scanner
+                        }
                         break;
                     case 8:
                         System.out.println("Você saiu do menu interativo.");
