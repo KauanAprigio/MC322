@@ -57,28 +57,9 @@ public class Ambiente {
         robos.remove(r);
         System.out.println(r.getNome() + " foi removido do ambiente.\n");
     }
-    public void detectarColisoes() { // verifica se houve colisão entre os robos e os obstaculos
-        // Se o obstaculo for do tipo FOGO, o robo é destruido a não ser que seja um robo bombeiro
-        for (Robo r : robos) {
-            for (Obstaculo o : obstaculos) {
-                if (r.getX() >= o.getPosicaoX1() && r.getX() <= o.getPosicaoX2() && r.getY() >= o.getPosicaoY1() && r.getY() <= o.getPosicaoY2()) {
-                    System.out.println("Colisão detectada entre " + r.getNome() + " e " + o.getTipo());
-                    if  (o.getTipo() == Obstaculo.TipoObstaculo.FOGO) {
-                        if (r instanceof RoboBombeiro) {
-                            System.out.println("O robô: "+ r.getNome() + " esta dentro do " + o.getTipo().getNome() + "\n");
-                        } else {
-                            System.out.println(r.getNome() + " foi destruído pelo fogo!\n");
-                            removerRobo(r);
-                        }
-                    } else if (o.getTipo().isLixo()) {
-                        System.out.println(r.getNome() + " colidiu com lixo!\n");
-                    } else {
-                        System.out.println(r.getNome() + " esta dentro de " + o.getTipo().getNome() + "\n");
-                    }
-                }
-            }
-        }
-    }
+
+    // A função obrigatória "detectarColisoes()" foi substituída pelo SensorPosicaoSegura, pois ele já prevê e evita a colisão.
+
     public void adicionarObstaculo(Obstaculo o) { //adiciona um obstaculo o no arraylist
         // Verifica se o obstáculo está dentro dos limites do ambiente
         // Se o obstáculo estiver fora dos limites, não adiciona e exibe mensagem

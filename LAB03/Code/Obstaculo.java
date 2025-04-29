@@ -59,39 +59,36 @@ public class Obstaculo {
      * - altura: altura do obstáculo
      * - local: se o obstáculo é um local de reabastecimento ou melhoria
      * - nome: nome do obstáculo
-     * - destroiRobo: se o obstáculo destrói o robô que colide com ele
      * - fogo: se o obstáculo é ou tem fogo
      * - lixo: se o obstáculo é lixo
      * - aprimora: se é um local para aprimoramento
     */
     public static enum TipoObstaculo {
-        LAGO(30, 30, 0, false, "Lago", false, false, false, false), 
-        FOGO(5, 5, 5, false, "Fogo", true, true, false, false),
-        PREDIOEMCHAMAS(30, 30, 100, true, "Prédio em chamas", true, true, false,false), 
-        PREDIO(30, 30, 100, true, "Prédio", false, false, false,false),
-        SUJEIRAENCARDIDA(0, 0, 0, false, "Sujeira encardida", false, false, true,false), 
-        COMIDANOCHAO(0, 0, 0, false, "Comida no chão", false, false, true,false), 
-        SACOLAPLASTICA(0, 0, 0, false, "Sacola plástica", false, false, true,false),
-        OFICINA(20, 20, 20, true, "Oficina", false, false, false,true); 
+        LAGO(30, 30, 0, false, "Lago", false, false, false), 
+        FOGO(5, 5, 5, false, "Fogo", true, false, false),
+        PREDIOEMCHAMAS(30, 30, 100, true, "Prédio em chamas", true, false,false), 
+        PREDIO(30, 30, 100, true, "Prédio", false, false,false),
+        SUJEIRAENCARDIDA(0, 0, 0, false, "Sujeira encardida", false, true,false), 
+        COMIDANOCHAO(0, 0, 0, false, "Comida no chão", false, true,false), 
+        SACOLAPLASTICA(0, 0, 0, false, "Sacola plástica", false, true,false),
+        OFICINA(20, 20, 20, true, "Oficina", false, false,true); 
 
 
         private final int larguraX;
         private final int larguraY;
         private final int altura;
         private String nome;
-        private final boolean destroiRobo;
         private final boolean local;
         private final boolean fogo;
         private final boolean lixo;
         private final boolean aprimora;
 
         TipoObstaculo(int larguraX, int larguraY, int altura, boolean Local, String nome,
-                            boolean destroiRobo, boolean fogo, boolean lixo, boolean aprimora) {
+                            boolean fogo, boolean lixo, boolean aprimora) {
             this.larguraX = larguraX;
             this.larguraY = larguraY;
             this.altura = altura;
             this.nome = nome;
-            this.destroiRobo = destroiRobo;
             this.local = Local;
             this.fogo = fogo;
             this.lixo = lixo;
@@ -101,7 +98,6 @@ public class Obstaculo {
         public int getLarguraY() { return larguraY; }
         public int getAltura() { return altura; }
         public String getNome() { return nome; }
-        public boolean isDestroiRobo() { return destroiRobo; }  
         public boolean isLocal() { return local; }
         public boolean isFogo() { return fogo; }
         public boolean isLixo() { return lixo; }
