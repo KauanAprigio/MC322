@@ -13,19 +13,11 @@ import LAB03.Code.Obstaculo.TipoObstaculo;
 import java.util.Scanner;
 
 /*
+ *      Classe Main:
  * Essa classe contém o método main que cria um ambiente e robôs,
  * adiciona os robôs ao ambiente e executa testes de movimentação,
  * funcionalidades e exibição do ambiente.
  * Ela printa todos os resultados no console;
- * o menu interativo para utilização das classes e metódos.
- */
-
-
-/*
- * Classe Main:
- * 
- * 
- * 
  * 
  */
 public class Main {
@@ -86,10 +78,6 @@ public class Main {
         roboTerrestre.mover(1, 0); // Há fogo no local, logo o rôbo não pode mover para lá
         roboTerrestre.identificarObstaculo(); // Testando o sensor, detectará apenas 1 obstáculo, no caso o fogo
         
-        ////////////////////////////////////////////
-        //TALVEZ É BOM USAR O MONITORAR PARA OS TESTES DESSA ABA DE TESTE DE SENSOR E MOVIMENTAÇAO ROBO TERRESTRE
-        ////////////////////////////////////////////
-        
         // Movimentação do Robo Aéreo
         System.out.println("-------------------------");
         System.out.println("Teste de movimentação do Rôbo Aéreo:\n");
@@ -99,6 +87,7 @@ public class Main {
         roboAereo.subir(96); // Não pode ir além da Altitude_máxima pré-definida.
         roboAereo.descer(5); // Desce normal
         roboAereo.descer(15); // Não pode descer abaixo do solo
+        roboAereo.exibirPosicao(); // Exibe a posição atual do robô
         roboAereo.descer(5); // Voltou a altitude = 0, logo pousou!
         roboAereo.identificarObstaculo(); // Detectará a oficina e o prédio, logo 2 obstáculos
 
@@ -120,8 +109,7 @@ public class Main {
         // Testes robo bombeiro + testes do sensor de fogo
         System.out.println("-------------------------");
         System.out.println("Teste do sensor de fogo e do rôbo bombeiro:\n");
-        roboBombeiro.adicionar_agua(2500); // Adiciona água sem problemas.
-        roboBombeiro.adicionar_agua(1000); // Excede a quantidade máxima, logo não abastecerá.
+        roboBombeiro.adicionar_agua(2500); // Excede a quantidade máxima, logo não abastecerá.
         roboBombeiro.mover(2, 10); // Movi o robo para perto do prédio em chamas e fora do lago
         roboBombeiro.adicionar_agua(5000); // Não está no lago, logo não pode adicionar
         roboBombeiro.indentificar_fogo(); // Irá identificar o prédio em fogo
@@ -173,7 +161,12 @@ public class Main {
         scanner.close(); // Fecha o scanner
     }
     
-
+    /*
+     * Método MenuInterativo:
+     * Esse método é responsável por criar um menu interativo para o usuário,
+     * onde ele pode escolher qual robô controlar e quais ações realizar.
+     * Ele também exibe informações sobre o ambiente e os robôs.
+     */
         
     public static void MenuInterativo(Ambiente ambiente) {
         System.out.println("-------------------------");

@@ -83,10 +83,14 @@ public class RoboBombeiro extends RoboAereo {
                         reservatorio -= litros_necessarios;
                         if (o.getTipo() == TipoObstaculo.FOGO) {
                             System.out.println("Incêndio apagado com sucesso.");
-                            System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); // esse print está duplicado, pois quero que apareça tudo do robo primeiro depois da remoção do objeto, por isso nao botei depois, a fim de englobar os dois casos
+                            // esse print está duplicado, pois quero que apareça tudo do robo primeiro depois da remoção do objeto,
+                            // por isso nao botei depois, a fim de englobar os dois casos
+                            System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
+                            System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); 
                             getAmbiente().removerObstaculo(o); // remove o fogo do ambiente
                         } else if (o.getTipo() == TipoObstaculo.PREDIOEMCHAMAS) {
                             System.out.println("Prédio não mais está em chamas.");
+                            System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
                             System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
                             getAmbiente().removerObstaculo(o); // muda para somente um predio, nao um predio em chamas
                             getAmbiente().adicionarObstaculo(new Obstaculo(o.getPosicaoX1(), o.getPosicaoY1(), TipoObstaculo.PREDIO)); // agora o predio nao esta mais em chamas
