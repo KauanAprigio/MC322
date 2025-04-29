@@ -311,10 +311,32 @@ public class Main {
                         Player.apagar_fogo();
                         break;
                     case 4:
-                        Player.aprimorar(10);
+                        System.out.println("Digite o valor do raio que você quer adicionar: ");
+                        if (scanner.hasNextInt()){ // condicional para confirmar que a entrada é um int
+                            int DeltaRaio = scanner.nextInt();
+                            if (DeltaRaio < 0){
+                                System.out.println("Valor inválido! Tente outra vez utilizando um valor positivo!");
+                            } else {
+                                Player.aprimorar(DeltaRaio);
+                            }
+                        } else { // caso não for, voltará para o menu
+                            System.out.println("Entrada inválida! Tente usar um algarismo positivo da proxima vez!");
+                            scanner.next(); // limpa o scanner
+                        }
                         break;
                     case 5:
-                        Player.adicionar_agua(1000);
+                        System.out.println("Digite o valor de volume de água que você quer adicionar ao reservatório: ");
+                        if (scanner.hasNextInt()){ // condicional para confirmar que a entrada é um int
+                            int VolumeAdicional = scanner.nextInt();
+                            if (VolumeAdicional < 0){
+                                System.out.println("Valor inválido! Tente outra vez utilizando um valor positivo!");
+                            } else {
+                                Player.adicionar_agua(VolumeAdicional);
+                            }
+                        } else { // caso não for, voltará para o menu
+                            System.out.println("Entrada inválida! Tente usar um algarismo positivo da proxima vez!");
+                            scanner.next(); // limpa o scanner
+                        }
                         break;
                     case 6:
                         System.out.println("Digite a quantidade de metros que você quer subir:");
