@@ -11,8 +11,6 @@ package LAB03.Code;
  *  Se o ponto mais próximo estiver dentro do raio do sensor detecta ele
  * - Monitorar(int X, int Y, int altura, Ambiente ambiente) // detecta se há algum obstáculo na área de monitoramento
  * 
- * Relação com a classe Robo: 
- * - Um robô tem 1 ou vários sensores (Composição)
  */
 public class Sensor {
     private double raio;

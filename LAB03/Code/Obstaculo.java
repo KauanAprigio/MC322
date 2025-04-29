@@ -11,8 +11,6 @@ package LAB03.Code;
  * - TipoObstaculo tipo
  * - int altura
  * 
- * Relação com a classe Ambiente: 
- * - Um ambiente pode ter vários obstáculos (Composição)
  */
 // Obstaculos São aproximados a paralelepipedos para facilitar os calculos de colisão
 // e detecção de proximidade

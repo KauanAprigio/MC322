@@ -11,10 +11,6 @@ package LAB03.Code;
  * - Sensor sensor
  * - Ambiente ambiente
  * 
- * Relações:
- * - Ambiente: pode ter mais de um rôbo, mas um rôbo tem apenas um ambiente
- * - Sensor: depende do robô para existir, logo compõe o robô, o robô deve ter 1 ou mais sensores
- * 
  * Métodos:
  * - mover(int deltaX, int deltaY)
  * - identificarObstaculo()
