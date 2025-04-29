@@ -78,7 +78,8 @@ public class Obstaculo {
         private final int larguraY;
         private final int altura;
         private String nome;
-        // Atributos finais (requisito obligatório)
+        
+        // Atributos finais (requisito obrigatório)
         private final boolean local;
         private final boolean fogo;
         private final boolean lixo;

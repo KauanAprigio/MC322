@@ -4,7 +4,7 @@ package LAB03.Code;
  * Classe obrigatória Sensor
  * 
  * Atributos:
- * - raio (double)
+ * - double raio 
  * 
  * Métodos:
  *  Encontra o ponto mais próximo do sensor que pertence a um obstáculo
