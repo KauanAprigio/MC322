@@ -3,16 +3,19 @@ package LAB03.Code;
 import LAB03.Code.Obstaculo.TipoObstaculo;
 
 /*
- * Classe criada RoboBombeiro
+ * SubClasse de RoboAereo
  *  
  * Atributos:
- * - peso_max
- * - reservatorio
+ * - int peso_max
+ * - int reservatorio
+ * - SensorDeFogo sensorDeFogo
+ * - int raio_de_cessar_fogo
  * 
  * Métodos:
  * - adicionar_agua(int litros)
- * - apagar_fogo(int litros_necessarios)
+ * - apagar_fogo()
  * - aprimora(int peso_adicional)
+ * - identificar_fogo()
  */
 // Subclasse de RoboAereo
 // resgata civis, apaga fogo e carrega agua

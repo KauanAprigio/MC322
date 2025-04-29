@@ -5,10 +5,10 @@ import java.util.ArrayList;
  * Classe obrigatória Ambiente
  * 
  * Atributos:
- * - largura
- * - altura
- * - obstaculos
- * - robos
+ * - int largura
+ * - int altura
+ * - ArrayList<Obstaculo> obstaculos
+ * - ArrayList<Robo> robos
  * 
  * Métodos:
  * - adicionarRobo(Robo r)
@@ -23,7 +23,7 @@ public class Ambiente {
     private int altitudeMaxima;
     private ArrayList<Obstaculo> obstaculos;
     private ArrayList<Robo> robos;
-    // variaveis finais (requisito obligatório)
+    // variaveis finais (requisito obrigatório)
     private final int altitudeMinima = 0;
     private final int origemX = 0;
     private final int origemY = 0;
@@ -44,7 +44,7 @@ public class Ambiente {
         // Verifica se o robô está dentro dos limites do ambiente
         // Se o robô estiver fora dos limites, não adiciona e exibe mensagem
         // Se o robô estiver dentro dos limites, adiciona e exibe mensagem
-        if (!dentroDosLimites(r.getX(), r.getY(), 0)) {
+        if (!dentroDosLimites(r.getX(), r.getY(), 0)) { 
             System.out.println("Robô fora dos limites do ambiente!");
             System.out.println("Não foi possível adicionar o robô!\n");
             return;

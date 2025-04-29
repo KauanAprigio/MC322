@@ -4,8 +4,10 @@ package LAB03.Code;
  * Subclasse de Sensor
  * 
  * Atributos:
- *  - ambiente (Ambiente)
+ *  - Ambiente ambiente
  * 
+ * Métodos:
+ * posicao_segura(int pos_x, int pos_y, int x_atual, int y_atual)
  */
 
 public class SensorPosicaoSegura extends Sensor {

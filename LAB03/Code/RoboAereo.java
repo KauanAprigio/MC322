@@ -11,7 +11,7 @@ package LAB03.Code;
  * - subir(int metros)
  * - descer(int metros)
  * - exibirPosicao() (sobrescreve o método da superclasse para exibir altitude)
- * 
+ * - identificarObstaculo()
  */
 //SubClasse de Robo, mas é "SuperClasse" de RoboLetreiro e RoboBombeiro
 public class RoboAereo extends Robo {

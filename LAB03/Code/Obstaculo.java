@@ -5,11 +5,11 @@ package LAB03.Code;
  * Enum:
  *  - Enum TipoObstaculo {ARVORE, PREDIO, BURACO, PAREDE, OUTRO}
  * Atributos:
- * - PosicaoX1, PosicaoY1 (coordenadas do canto inferior esquerdo)
- * - PosicaoX2 = PosicaoX1 + tipo.getLarguraX (coordenadas do canto superior direito)
- * - PosicaoY2 = PosizaoY1 + tipo.getLarguraY (coordenadas do canto superior direito)
- * - tipo
- * - altura
+ * - int PosicaoX1, int PosicaoY1 (coordenadas do canto inferior esquerdo)
+ * - int PosicaoX2 = PosicaoX1 + tipo.getLarguraX (coordenadas do canto superior direito)
+ * - int PosicaoY2 = PosizaoY1 + tipo.getLarguraY (coordenadas do canto superior direito)
+ * - TipoObstaculo tipo
+ * - int altura
  * 
  * Relação com a classe Ambiente: 
  * - Um ambiente pode ter vários obstáculos (Composição)
@@ -54,14 +54,14 @@ public class Obstaculo {
      * - OFICINA: Local: melhoria de robôs: não removível
      * 
      * Atributos:
-     * - larguraX: largurax do obstáculo
-     * - larguraY: larguray do obstáculo
-     * - altura: altura do obstáculo
-     * - local: se o obstáculo é um local de reabastecimento ou melhoria
-     * - nome: nome do obstáculo
-     * - fogo: se o obstáculo é ou tem fogo
-     * - lixo: se o obstáculo é lixo
-     * - aprimora: se é um local para aprimoramento
+     * - int larguraX: largurax do obstáculo
+     * - int larguraY: larguray do obstáculo
+     * - int altura: altura do obstáculo
+     * - boolean local: se o obstáculo é um local de reabastecimento ou melhoria
+     * - String nome: nome do obstáculo
+     * - boolean fogo: se o obstáculo é ou tem fogo
+     * - boolean lixo: se o obstáculo é lixo
+     * - boolean aprimora: se é um local para aprimoramento
     */
     public static enum TipoObstaculo {
         LAGO(30, 30, 0, false, "Lago", false, false, false), 

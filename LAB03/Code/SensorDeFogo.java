@@ -1,12 +1,19 @@
 package LAB03.Code;
 
+/*
+ * Subclasse de Sensor
+ * 
+ * Métodos:
+ * monitorar(int x, int y, int altura, Ambiente ambiente)
+ */
+
 public class SensorDeFogo extends Sensor {
     // Construtor
     public SensorDeFogo(double raio) {
         super(raio);
     }
 
-    // Método para monitorar fogo
+    // Método para monitorar fogo, mesma lógica do outro.
     @Override
     public void monitorar(int x, int y, int altura, Ambiente ambiente) {
         int N_fogos = 0;
