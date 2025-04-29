@@ -221,7 +221,6 @@ public class Main {
                 comando = scanner.nextInt();
                 switch (comando) {
                     case 1:
-                        System.out.println("A posição atual de " + Player.getNome() + " é: " + "(" + Player.getX() + "," + Player.getY() + ")\n"); // Sendo mais Friendly caso queira movimentar
                         MoverPlayer(Player);
                         break;
                     case 2:
@@ -303,7 +302,6 @@ public class Main {
                 comando = scanner.nextInt();
                 switch (comando) {
                     case 1:
-                    System.out.println("A posição atual de " + Player.getNome() + " é: " + "(" + Player.getX() + "," + Player.getY() + "," + Player.getAltitude() + ")\n"); // Sendo mais Friendly caso queira movimentar
                         MoverPlayer(Player);
                         break;
                     case 2:
