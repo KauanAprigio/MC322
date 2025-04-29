@@ -10,12 +10,14 @@ import LAB03.Code.Obstaculo.TipoObstaculo;
  * Atributos:
  * - int tipo_limpeza
  * - int raio de limpeza
+ * - SensorDeLixo sensorDeLixo
  * Métodos:
  * - definir_tipo_limpeza(int tipo)
  * - limpar()
  * - identificar_lixo()
  * - aprimorar (int aumentar_raio_limpeza)
  */
+
 class RoboLimpador extends RoboTerrestre {
     // Atributos adicionais
     private int tipo_limpeza = 0; // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada

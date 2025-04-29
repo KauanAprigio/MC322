@@ -14,12 +14,10 @@ import LAB03.Code.Obstaculo.TipoObstaculo;
  * Métodos:
  * - adicionar_agua(int litros)
  * - apagar_fogo()
- * - aprimora(int peso_adicional)
  * - identificar_fogo()
+ * - aprimora(int peso_adicional)
  */
-// Subclasse de RoboAereo
-// resgata civis, apaga fogo e carrega agua
-// e tem um peso maximo que suporta
+
 public class RoboBombeiro extends RoboAereo {
     //Atributos adicionais
     private int peso_max; // peso maximo que o robo suporta;

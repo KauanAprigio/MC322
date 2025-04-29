@@ -1,7 +1,7 @@
 package LAB03.Code;
 
 /* 
- * Classe dada pelo enunciado RoboTerrestre
+ * SubClasse de Robo, SuperClasse de RoboLimpador
  *  
  * Atributos:
  * - velocidadeMaxima
@@ -10,7 +10,7 @@ package LAB03.Code;
  * - mover(int deltaX, int deltaY)
  * 
  */
-//Subclasse de Robo, mas também é a "SuperClasse" de RoboLimpador e RoboGarcom
+
 public class RoboTerrestre extends Robo {
     // Atributos adicionais
     private int velocidadeMaxima;
@@ -23,7 +23,6 @@ public class RoboTerrestre extends Robo {
     }
 
     // Metodos
-
     // aqui não é necessário fazer mais avaliações de caso, pois ele utiliza os "ifs" da SuperClasse
     public void mover(int deltaX, int deltaY) {
         int pos_x = getX() + deltaX;

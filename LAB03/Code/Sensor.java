@@ -1,7 +1,7 @@
 package LAB03.Code;
 
 /*
- * Classe obrigatória Sensor
+ * SuperClasse obrigatória Sensor
  * 
  * Atributos:
  * - double raio 
