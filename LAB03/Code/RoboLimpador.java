@@ -38,13 +38,13 @@ class RoboLimpador extends RoboTerrestre {
             tipo_limpeza = tipo;
             switch (tipo_limpeza) {
                 case 0:
-                    System.out.println(getNome() + " está configurado para limpeza leve.\n");
+                    System.out.println(getNome() + " está configurado para remover objetos do chão.\n");
                     break;
                 case 1:
-                    System.out.println(getNome() + " está configurado para limpeza pesada.\n");
+                    System.out.println(getNome() + " está configurado para limpar comida do chão.\n");
                     break;
                 case 2:
-                    System.out.println(getNome() + " está configurado para limpeza muito pesada.\n");
+                    System.out.println(getNome() + " está configurado para remover sujeiras encardidas.\n");
                     break;
             }
         } else {
@@ -60,17 +60,17 @@ class RoboLimpador extends RoboTerrestre {
             if (o.getTipo().isLixo()) {
                 int distancia = (int) Math.sqrt(Math.pow(o.getPosicaoX1() - getX(), 2) + Math.pow(o.getPosicaoY1() - getY(), 2));
                 if (distancia < raioDeLimpeza) { // verifica se o robô esta perto do lixo
-                    if (o.getTipo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza >= 2) {
+                    if (o.getTipo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza == 2) {
                         System.out.println(getNome() + " limpou " + o.getTipo().getNome() + ".\n");
                         iterator.remove();
-                    } else if (o.getTipo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza >= 1) {
+                    } else if (o.getTipo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza == 1) {
                         System.out.println(getNome() + " limpou " + o.getTipo().getNome() + ".\n");
                         iterator.remove();
-                    } else if (o.getTipo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza >= 0) {
+                    } else if (o.getTipo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza == 0) {
                         System.out.println(getNome() + " limpou " + o.getTipo().getNome() + ".\n");
                         iterator.remove();
                     } else {
-                        System.out.println(getNome() + " não pode limpar " + o.getTipo().getNome() + ", tente aumentar a intensidade da limpeza!\n");
+                        System.out.println(getNome() + " não pode limpar " + o.getTipo().getNome() + ", tente mudar o tipo de limpeza\n");
                     }
                 }
             }

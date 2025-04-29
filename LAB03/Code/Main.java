@@ -215,7 +215,7 @@ public class Main {
                         quantidade_lixo++;
                     }
                 }
-                System.out.println("Quantidade de lixo no ambiente: " + quantidade_lixo);
+                System.out.println("Quantidade de lixo no ambiente: " + quantidade_lixo + "\n");
                 
                 //imprime o menu de opções para o robo limpador
                 ImprimeMenuLimpador();
@@ -244,9 +244,9 @@ public class Main {
                         break;
                     case 5:
                         System.out.println("Digite o tipo de limpeza que você quer fazer:");
-                        System.out.println("0 - Limpeza leve");
-                        System.out.println("1 - Limpeza pesada");
-                        System.out.println("2 - Limpeza muito pesada");
+                        System.out.println("0 - Limpeza de sacola plástica");
+                        System.out.println("1 - Limpeza de comida no chão");
+                        System.out.println("2 - Limpeza de sujeira encardida");
                         int tipo = scanner.nextInt();
                         Player.definir_tipo_limpeza(tipo);
                         break;
@@ -276,7 +276,7 @@ public class Main {
                         quantidade_fogos++;
                     }
                 }
-                System.out.println("Quantidade de fogos no ambiente: " + quantidade_fogos);
+                System.out.println("Quantidade de fogos no ambiente: " + quantidade_fogos + "\n");
                 
                 //imprime o menu de opções para o robo bombeiro
                 ImprimeMenuBombeiro();
