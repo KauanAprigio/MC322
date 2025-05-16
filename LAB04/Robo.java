@@ -1,6 +1,6 @@
 package LAB04;
 
-//ta com erro pq deixei comentado alguns metodos da interface Entidade
+
 public class Robo implements Entidade {
     // Atributos
     String id;
@@ -10,41 +10,54 @@ public class Robo implements Entidade {
     int pos_y;
     int pos_z;
 
+    // Atributo adicional para deixar o moverPara ficar mais fácil
+    Ambiente ambiente;
+
 
     //Construtor
-    Robo(String id, EstadoRobo estado, TipoEntidade tipo,  int pos_x, int pos_y, int pos_z){
+    Robo(String id, EstadoRobo estado, TipoEntidade tipo,  int pos_x, int pos_y, int pos_z, Ambiente ambiente){
         this.id = id;
         this.estado = estado;
         this.tipo = tipo;
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.pos_z = pos_z;
+        this.ambiente = ambiente;
     }
 
 
     //Metodos
-    void moverPara(int x, int y, int z){
-        //só desenvolver
+    public void moverPara(int deltaX, int deltaY) {
+        // Verifica se a nova posição está dentro dos limites do ambiente
+        if (ambiente.dentroDosLimites(pos_x + deltaX, pos_y + deltaY, 0)) {
+            this.pos_x += deltaX;
+            this.pos_y += deltaY;
+            System.out.println("Robo de id:" + id + " moveu para (" + pos_x + ", " + pos_y + ").\n");
+        } else {
+            System.out.println("Movimento inválido! Posição nova fora dos limites do ambiente atual!\n");
+        }
     }
 
-    void ligar(){
+    public void ligar(){
         this.estado = EstadoRobo.ON;
-        System.out.println("O robô de id:" + this.getNome() + " está ligado.");
+        System.out.println("O robô de id:" + this.getId() + " está ligado.");
     }
 
-    void desligar(){
+    public void desligar(){
         this.estado = EstadoRobo.OFF;
-        System.out.println("O robô de id:" + this.getNome() + " está desligado.");
+        System.out.println("O robô de id:" + this.getId() + " está desligado.");
     }
 
-    void executar(){
+    public void executar(){
         //posso deixar enxuto e desenvolver por meio de sobrecarga de método nas subclasses do robo
     }
 
 
-    // Geters e Setters adicionais
-    public String getNome(){ return id; }
+    // Getters e Setters
+    public String getId(){ return id; }
     public EstadoRobo getEstado() { return estado; }
+    public Ambiente getAmbiente() { return ambiente; }
+
     public void setEstado(EstadoRobo novoEstado){ this.estado = novoEstado; }
     
 

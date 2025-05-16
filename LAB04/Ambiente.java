@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import LAB04.Entidade.TipoEntidade;
 
 public class Ambiente {
-    //Atributos
+    //Atributos final
+    private final int altitudeMinima = 0;
+    private final int origemX = 0;
+    private final int origemY = 0;
+
+    //Atributos normais / para o construtor
     int largura; // eixo X
     int profundidade; // eixo Y
     int altura; // eixo Z
@@ -36,8 +41,9 @@ public class Ambiente {
         // desenvolver... aqui pode ter exception
     }
 
-    void dentroDosLimites(int x, int y, int z){
-        //pode pegar do outro lab, fala que pode ter um colisaoexception
+    public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
+        if ((origemX <= x && x <= largura) && (origemY <= y && y <= altura) && (altitudeMinima <= altitude && altitude <= altura)) return true;
+        return false;
     }
 
     void estaOcupado(int x, int y, int z){

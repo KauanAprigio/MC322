@@ -1,7 +1,6 @@
 package LAB04;
 
 
-//so para lembrar que aqui primeiro fazer a entidade depois fazer o enum TipoEntidade
 public interface Entidade {
     int getX();
     int getY();
@@ -10,9 +9,12 @@ public interface Entidade {
     String getDescricao();
     char getRepresentacao();
 
-
-    public enum TipoEntidade{
-    // o enum não será static, por isso nao passei o parametro, só deixei assim para não dar erro, depois irei implementar
+    //se precisar criar metodos cria depois, pois a principio nao vejo a necessidade
+    public static enum TipoEntidade{
+        VAZIO,
+        ROBO,
+        OBSTACULO,
+        DESCONHECIDO;
 
     }
 }
