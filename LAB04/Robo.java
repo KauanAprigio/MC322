@@ -4,7 +4,7 @@ package LAB04;
 public class Robo implements Entidade {
     // Atributos
     String id;
-    // boolean estado; no caso acho que vale deixar aqui que pode ser um boolean o estado, no caso true ligado e false desligado
+    EstadoRobo estado;
     TipoEntidade tipo;
     int pos_x;
     int pos_y;
@@ -12,9 +12,9 @@ public class Robo implements Entidade {
 
 
     //Construtor
-    Robo(String id, TipoEntidade tipo,  int pos_x, int pos_y, int pos_z){ // falta o estado
+    Robo(String id, EstadoRobo estado, TipoEntidade tipo,  int pos_x, int pos_y, int pos_z){
         this.id = id;
-        //this.estado = estado;
+        this.estado = estado;
         this.tipo = tipo;
         this.pos_x = pos_x;
         this.pos_y = pos_y;
@@ -28,15 +28,36 @@ public class Robo implements Entidade {
     }
 
     void ligar(){
-        // posso botar só para mudar o estado e printar algo 
+        this.estado = EstadoRobo.ON;
+        System.out.println("O robô de id:" + this.getNome() + " está ligado.");
     }
 
     void desligar(){
-        //mema fita do ligar
+        this.estado = EstadoRobo.OFF;
+        System.out.println("O robô de id:" + this.getNome() + " está desligado.");
     }
 
     void executar(){
         //posso deixar enxuto e desenvolver por meio de sobrecarga de método nas subclasses do robo
+    }
+
+
+    // Geters e Setters adicionais
+    public String getNome(){ return id; }
+    public EstadoRobo getEstado() { return estado; }
+    public void setEstado(EstadoRobo novoEstado){ this.estado = novoEstado; }
+    
+
+    // usarei o enum para me referir ao estado do robo
+    public enum EstadoRobo {
+        ON, // ligado
+        OFF; // desligado
+        
+        //aqui irei ver se ele está ligado, caso ele esteja ligado ira retornar true, caso o contrario irá falar que é false, logo OFF
+        public boolean estaLigado() {
+            return this == ON;
+        }
+
     }
 
 
