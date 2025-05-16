@@ -1,7 +1,6 @@
 package LAB04;
 
 import java.util.ArrayList;
-
 import LAB04.Entidade.TipoEntidade;
 
 public class Ambiente {
@@ -15,11 +14,11 @@ public class Ambiente {
     int profundidade; // eixo Y
     int altura; // eixo Z
     ArrayList<Entidade> entidades;
-    TipoEntidade mapa;
+    TipoEntidade[][][] mapa;
 
     
     //Construtor
-    Ambiente(int largura, int profundidade, int altura, TipoEntidade mapa){
+    Ambiente(int largura, int profundidade, int altura, TipoEntidade[][][] mapa){
         this.largura = largura;
         this.profundidade = profundidade;
         this.altura = altura;
@@ -29,15 +28,21 @@ public class Ambiente {
 
 
     //Metodos
-    void inicializarMapa(){
-        //desenvolver
+    public void inicializarMapa(){
+        for (int x = 0; x < largura; x++){
+            for (int y = 0; y < profundidade; y++){
+                for (int z = 0; z < altura; z++){
+                    mapa[x][y][z] = TipoEntidade.VAZIO;
+                }
+            }
+        }
     }
 
-    void adicionarEntidade(Entidade e){
+    public void adicionarEntidade(Entidade e){
         //desenvolver tmb, aqui tmb pode ter exception
     }
 
-    void removerEntidade(Entidade e){
+    public void removerEntidade(Entidade e){
         // desenvolver... aqui pode ter exception
     }
 
