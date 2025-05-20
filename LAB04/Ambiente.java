@@ -33,7 +33,7 @@ public class Ambiente {
     public void inicializarMapa(){
         for (int x = 0; x < largura; x++){
             for (int y = 0; y < profundidade; y++){
-                planoXY[x][y] = 'v'; // aqui irei fazer a representação do plano xy no z = 0
+                planoXY[x][y] = 'v'; // aqui irei fazer a representação do plano xy no z = 0. O 'v' é a representação para o vazio
                 for (int z = 0; z < altura; z++){
                     mapa[x][y][z] = TipoEntidade.VAZIO;
                 }
@@ -81,7 +81,6 @@ public class Ambiente {
                 }
             }
 
-
             entidades.add(e);
             System.out.println("A entidade OBSTACULO, de tipo" + o.getTipoObstaculo() + ", foi adicionado ao ambiente.");
             System.out.println("Posição inferior esquerda: (" + o.getX() + ", " + o.getY() + ", " + 0 + ")");
@@ -90,6 +89,27 @@ public class Ambiente {
     }
 
     public void removerEntidade(Entidade e){ //pode desenvolver uma exception se quiser, no caso se eu for remover algo que nao existe
+        if (e.getTipo() == TipoEntidade.ROBO){
+            Robo r = (Robo) e; // casting para facilitar as coisas
+            mapa[r.getX()][r.getY()][r.getZ()] = TipoEntidade.VAZIO; // deixa como vazio o espaço da entidade
+            planoXY[r.getX()][r.getY()] = 'v'; // deixa o 'v' de vazio na reprentacao do planoXY, ou seja, representaçaõ 2d do ambiente
+        
+        } else if (e.getTipo() == TipoEntidade.OBSTACULO){
+            Obstaculo o = (Obstaculo) e; // casting para facilitar tambem 
+            for (int x = o.getX(); x < o.getPosicaoX2(); x++) {
+                for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
+                    planoXY[x][y] = 'v'; // Deixa como vazio na representação no plano XY (z=0) ambiente 2d
+                    
+                    if (o.getZ() > 0) { // Preencherá com o vazio as camadas no eixo z se o objeto tiver altura
+                        for (int z = 0; z < o.getZ(); z++) {
+                            mapa[x][y][z] = TipoEntidade.VAZIO;
+                        }
+                    } else { //Se nao tiver altura preenche com vazio somente o z = 0 para deixar o código mais eficiente
+                        mapa[x][y][0] = TipoEntidade.VAZIO;
+                    }
+                }
+            }
+        }
         entidades.remove(e);
         System.out.println("A Entidade " + e.getTipo() + " foi removida com sucesso.");
     }
