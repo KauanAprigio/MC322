@@ -15,13 +15,13 @@ public class Robo implements Entidade {
 
 
     //Construtor
-    Robo(String id, EstadoRobo estado, TipoEntidade tipo,  int pos_x, int pos_y, int pos_z, Ambiente ambiente){
+    Robo(String id, EstadoRobo estado, TipoEntidade tipo, int pos_x, int pos_y, int pos_z, Ambiente ambiente){
         this.id = id;
         this.estado = estado;
         this.tipo = tipo;
         this.pos_x = pos_x;
         this.pos_y = pos_y;
-        this.pos_z = pos_z;
+        this.pos_z = pos_z; // duvida se eu coloco no construtor, porque para robos em geral sera 0, menos para o robo aereo, mas ate ele começa no chao, entao rever se nao coloco pos_Z = 0
         this.ambiente = ambiente;
     }
 

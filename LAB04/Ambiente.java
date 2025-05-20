@@ -1,7 +1,8 @@
 package LAB04;
-
 import java.util.ArrayList;
 import LAB04.Entidade.TipoEntidade;
+
+// VALE RESSALTAR QUE SE EU FOR USAR O VERIFICAR COLISOES PARA BOTAR UM OBSTACULO EM UM LUGAR QUE NÃO TENHA OUTRO DEVO REVER O CODIGO
 
 public class Ambiente {
     //Atributos final
@@ -119,19 +120,34 @@ public class Ambiente {
         return false;
     }
 
-    public void estaOcupado(int x, int y, int z){
-        // a principio acho que seria uma função para ver se tem algo na posicao, da pra fazer como se fosse a ideia do sensor de posicao segura 
+    public boolean estaOcupado(int x, int y, int z){ 
+        if (mapa[x][y][z] == TipoEntidade.VAZIO){ // se na representacao 3d do ambiente estiver vazia naquelas coordenadas quer dizer que não está ocupado, logo false
+            return false;
+        }
+        return true; // se não for vazio, logo é alguma coisa, então está ocupado
     }
 
-    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ){
-        // acho que seria algo para mover obstaculos...
+    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ){ // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
+        //AQUI BASICAMENTE IREI MOVER A ENTIDADE DA SEGUINTE MANEIRA IREI ADICIONAR ELA EM UM LUGAR E REMOVER A ENTIDADE DE AGORA
+        if (e.getTipo() == TipoEntidade.OBSTACULO){
+            Obstaculo obstaculo = (Obstaculo) e; // casting para refazer as coordenadas do obstaculo
+            removerEntidade(e); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
+
+            // atualizando as coordenadas do obstaculo
+            obstaculo.setPosX(novoX);
+            obstaculo.setPosY(novoY);
+            obstaculo.setPosX2();
+            obstaculo.setPosY2();
+
+            adicionarEntidade(obstaculo); // reutilizarei o adicionar para mover a entidade com as novas coordenadas
+        }
     }
 
-    public void executarSensores(){
+    public void executarSensores(){ // AQUI NAO VEJO MUITO USO PARA ISSO 
         
     }
 
-    public void verificarColisoes(){
+    public void verificarColisoes(){ // PODE SER USADO PARA VERIFICAR SE ONDE VOCÊ ESTÁ COLOCANDO UM OBJETO SE TEM UMA COISA QUE IMPEDE ISSO
         //pode ser o sensor de proximidade? ou tem q implementar isso?
     }
 

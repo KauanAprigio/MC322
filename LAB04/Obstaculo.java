@@ -15,12 +15,13 @@ package LAB04;
  */
 // Obstaculos São aproximados a paralelepipedos para facilitar os calculos de colisão
 // e detecção de proximidade
-public class Obstaculo implements Entidade {
+public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu nao sei se deve dar a altura ou o final, pois sempre começa em z = 0
     private int pos_x;
     private int pos_y;
+    private final int pos_z = 0;
     private int pos_x2;
     private int pos_y2;
-    private int pos_z;
+    private int pos_z2;
     private TipoObstaculo tipoObstaculo;
     private TipoEntidade tipo;
 
@@ -31,7 +32,7 @@ public class Obstaculo implements Entidade {
         this.pos_y = pos_y;
         this.pos_x2 = pos_x + tipoObstaculo.getLarguraX();
         this.pos_y2 = pos_y + tipoObstaculo.getLarguraY();
-        this.pos_z = tipoObstaculo.getAltura();
+        this.pos_z2 = tipoObstaculo.getAltura();
         this.tipoObstaculo = tipoObstaculo;
         this.tipo = tipo;
     }
@@ -61,9 +62,15 @@ public class Obstaculo implements Entidade {
 
 
     // Getters e Setters
+    public int getAlturinha() { return pos_z2; } // só para tirar a linha amarela, mas nem sei se vou usar kkkkkkk
     public int getPosicaoX2() { return pos_x2; }
     public int getPosicaoY2() { return pos_y2; }
     public TipoObstaculo getTipoObstaculo() { return tipoObstaculo; }
+
+    public void setPosX(int novo_x) { this.pos_x = novo_x; }
+    public void setPosY(int novo_y) { this.pos_y = novo_y; }
+    public void setPosX2() { pos_x2 = pos_x + tipoObstaculo.getLarguraX(); }
+    public void setPosY2() { pos_y2 = pos_y + tipoObstaculo.getLarguraY(); }
 
 
     /* 
