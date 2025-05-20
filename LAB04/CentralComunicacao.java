@@ -1,5 +1,4 @@
 package LAB04;
-
 import java.util.ArrayList;
 
 public class CentralComunicacao {
@@ -14,7 +13,7 @@ public class CentralComunicacao {
 
 
     //Metodos
-    void registrarMensagem(String remetente, String msg){
+    void registrarMensagem(String remetente, String msg){ // tem que mudar isso uma forma para armazenar o remetente ou destinatario
         //podemos usar aquelas exceções personalizadas se passar:
         mensagens.add(msg);
     }

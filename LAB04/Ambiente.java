@@ -38,12 +38,33 @@ public class Ambiente {
         }
     }
 
-    public void adicionarEntidade(Entidade e){
-        //desenvolver tmb, aqui tmb pode ter exception
+    public void adicionarEntidade(Entidade e){//pode desenvolver uma exception se quiser ou ate mais se a entidade nao for nenhuma dessas
+        if (e.getTipo() == TipoEntidade.ROBO){
+            Robo r = (Robo) e; // aqui usarei o casting para ter acesso ao ID do robo
+            if (!dentroDosLimites(r.getX(), r.getY(), 0)) { 
+                System.out.println("Não foi possível adicionar a entidade do tipo ROBO, pois ela está fora dos limites do ambiente!\n");
+                return; // aqui acaba o método caso seja fora dos limites
+            }
+        // aqui significa que está nos limites, logo ira adicionar
+        entidades.add(e);
+        System.out.println("A entidade ROBO, de ID" + r.getId() + ", foi adicionado ao ambiente.");
+        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
+        } else if (e.getTipo() == TipoEntidade.OBSTACULO){
+            Obstaculo o = (Obstaculo) e; // aqui usarei o casting para ter acesso aos metodos getPosx2 e y2
+            if (!dentroDosLimites(o.getX(), o.getY(), o.getZ()) || !dentroDosLimites(o.getPosicaoX2(), o.getPosicaoY2(), o.getZ())) {
+                System.out.println("Não foi possível adicionar a entidade do tipo OBSTACULO, pois ela está fora dos limites do ambiente!\n");
+                //PODEMOS USAR RECURSAO PARA CHAMAR A FUNÇÃO ATÉ DAR UMA ENTIDADE QUE ESTEJA NOS LIMITES
+                return; // aqui acaba o método caso seja fora dos limites
+            }
+            entidades.add(e);
+            System.out.println("A entidade OBSTACULO, de tipo" + o.getTipoObstaculo() + ", foi adicionado ao ambiente.");
+            System.out.println("Posição inferior esquerda: (" + o.getX() + ", " + o.getY() + ", " + 0 + ")");
+            System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getZ() + ")\n");
+        }
     }
 
-    public void removerEntidade(Entidade e){
-        // desenvolver... aqui pode ter exception
+    public void removerEntidade(Entidade e){ //pode desenvolver uma exception se quiser
+        
     }
 
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false

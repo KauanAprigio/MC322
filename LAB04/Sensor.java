@@ -1,4 +1,3 @@
-// mesmo esquema do obstaculos irei mudar bastante, mas ja copiei e colei do lab 03
 package LAB04;
 import LAB04.Entidade.TipoEntidade;
 
