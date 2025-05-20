@@ -1,5 +1,6 @@
 // mesmo esquema do obstaculos irei mudar bastante, mas ja copiei e colei do lab 03
-package LAB04.Code;
+package LAB04;
+import LAB04.Entidade.TipoEntidade;
 
 /*
  * SuperClasse obrigatória Sensor
@@ -27,13 +28,16 @@ public class Sensor {
         // Conta os obstáculos na área de monitoramento
         
         //terei de mudar basntate por conta da mudança do ambiente, mas depois vejo isso 
-        for (Obstaculo obstaculo: ambiente.getObstaculos()) {
-            int Xmaisproximo = Math.max(obstaculo.getPosicaoX1(), Math.min(x, obstaculo.getPosicaoX2()));
-            int Ymaisproximo = Math.max(obstaculo.getPosicaoY1(), Math.min(y, obstaculo.getPosicaoY2()));
-            int Zmaisproximo = Math.max(0, Math.min(altura, obstaculo.getAltura()));
-            double distancia = Math.sqrt(Math.pow(Xmaisproximo - x, 2) + Math.pow(Ymaisproximo - y, 2) + Math.pow(Zmaisproximo - altura, 2));
-            if (distancia <= raio) {
-                N_obstaculos++;
+        for (Entidade e: ambiente.getEntidades()) {
+            if (e.getTipo() == TipoEntidade.OBSTACULO){
+                Obstaculo o = (Obstaculo) e; // casting para que eu possa usar getPosicaox2 e y2 para calcular as distancias
+                int Xmaisproximo = Math.max(o.getX(), Math.min(x, o.getPosicaoX2()));
+                int Ymaisproximo = Math.max(o.getY(), Math.min(y, o.getPosicaoY2()));
+                int Zmaisproximo = Math.max(0, Math.min(altura, o.getZ()));
+                double distancia = Math.sqrt(Math.pow(Xmaisproximo - x, 2) + Math.pow(Ymaisproximo - y, 2) + Math.pow(Zmaisproximo - altura, 2));
+                if (distancia <= raio) {
+                    N_obstaculos++;
+                }
             }
         }
         if (N_obstaculos > 0) {

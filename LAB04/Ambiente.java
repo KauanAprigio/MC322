@@ -71,4 +71,7 @@ public class Ambiente {
         // imprime o ambiente em 2d, somente eixo (X,Y)
     }
 
+
+    //Geters e Setters
+    public ArrayList<Entidade> getEntidades() { return entidades; }
 }
