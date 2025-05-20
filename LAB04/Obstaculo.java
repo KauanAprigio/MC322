@@ -1,4 +1,3 @@
-// coloquei aqui porque acho que irei usar, apenas copiei do lab 03, mas capaz que terá de ter mudanças bruscas
 package LAB04;
 
 /*
@@ -7,39 +6,64 @@ package LAB04;
  * Enum:
  *  - Enum TipoObstaculo {ARVORE, PREDIO, BURACO, PAREDE, OUTRO}
  * Atributos:
- * - int PosicaoX1, int PosicaoY1 (coordenadas do canto inferior esquerdo)
- * - int PosicaoX2 = PosicaoX1 + tipo.getLarguraX (coordenadas do canto superior direito)
- * - int PosicaoY2 = PosizaoY1 + tipo.getLarguraY (coordenadas do canto superior direito)
- * - TipoObstaculo tipo
- * - int altura
+ * - int pos_x, int PosicaoY1 (coordenadas do canto inferior esquerdo)
+ * - int PosicaoX2 = pos_x + tipoObstaculo.getLarguraX (coordenadas do canto superior direito)
+ * - int PosicaoY2 = PosizaoY1 + tipoObstaculo.getLarguraY (coordenadas do canto superior direito)
+ * - TipoObstaculo tipoObstaculo
+ * - int pos_z
  * 
  */
 // Obstaculos São aproximados a paralelepipedos para facilitar os calculos de colisão
 // e detecção de proximidade
-public class Obstaculo {
-    private int posicaoX1;
-    private int posicaoY1;
-    private int posicaoX2;
-    private int posicaoY2;
-    private TipoObstaculo tipo;
-    private int altura;
+public class Obstaculo implements Entidade {
+    private int pos_x;
+    private int pos_y;
+    private int pos_x2;
+    private int pos_y2;
+    private int pos_z;
+    private TipoObstaculo tipoObstaculo;
+    private TipoEntidade tipo;
+
 
     // Construtor
-    public Obstaculo(int posicaoX1, int posicaoY1, TipoObstaculo tipo) {
-        this.posicaoX1 = posicaoX1;
-        this.posicaoY1 = posicaoY1;
+    public Obstaculo(int pos_x, int pos_y, TipoObstaculo tipoObstaculo, TipoEntidade tipo) {
+        this.pos_x = pos_x;
+        this.pos_y = pos_y;
+        this.pos_x2 = pos_x + tipoObstaculo.getLarguraX();
+        this.pos_y2 = pos_y + tipoObstaculo.getLarguraY();
+        this.pos_z = tipoObstaculo.getAltura();
+        this.tipoObstaculo = tipoObstaculo;
         this.tipo = tipo;
-        this.posicaoX2 = posicaoX1 + tipo.getLarguraX();
-        this.posicaoY2 = posicaoY1 + tipo.getLarguraY();
-        this.altura = tipo.getAltura();
     }
+
+
+    // Metodos sobrescritos da interface
+    @Override
+    public int getX() { return pos_x; }
+
+    @Override
+    public int getY() { return pos_y; }
+
+    @Override
+    public int getZ() { return pos_z; }
+
+    @Override
+    public TipoEntidade getTipo() { return tipo; }
+
+    @Override
+    public String getDescricao() { 
+        String descricao = "QUALQUER COISA, SÓ PARA TER ALGO";
+        return descricao;
+    }
+
+    @Override
+    public char getRepresentacao() { char representacao = 'o'; return representacao; }
+
+
     // Getters e Setters
-    public int getPosicaoX1() { return posicaoX1; }
-    public int getPosicaoY1() { return posicaoY1; }
-    public int getPosicaoX2() { return posicaoX2; }
-    public int getPosicaoY2() { return posicaoY2; }
-    public TipoObstaculo getTipo() { return tipo; }
-    public int getAltura() { return altura; }
+    public int getPosicaoX2() { return pos_x2; }
+    public int getPosicaoY2() { return pos_y2; }
+    public TipoObstaculo getTipoObstaculo() { return tipoObstaculo; }
 
 
     /* 
