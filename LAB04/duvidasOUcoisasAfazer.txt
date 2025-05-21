@@ -1,27 +1,21 @@
 Falta o seguinte:
 
+- ver como ira funcionar os sensores, pois agora o ambiente está bem mais completo
+
 - excecoes, talvez eu tenha de criar uma interface que ai gera varias excecoes personalizadas
-
-- desenvolver as coisas
-
-- entender como sera feito o mapa 3d do ambiente
 
 - o menu interativo + main + readme sera desenvolvido somente depois 
 
 - criar 3 novas interfaces funcionais
 
-- fazer o enum de tipoEntidade
-
 - fazer herança de robo 
-
-- ver se tem que implementar os sensores + obstaculos
 
 - fazer herança multipla(ver se é por exemplo extends + implements ou se é mais de um implements)
 
-- criar 3 excecoes personalizadas*
+- criar 3 excecoes personalizadas
 
 - definir tarefas especificas de cada robo, talvez tenhamos de voltar com mais subclasses:
-    Veja se é melhor implementar roboterrestre ou as subclasses dele direto, por exemplo 
+    Veja se é melhor implementar roboterrestre ou as subclasses dele direto, por exemplo ja colocar que roboGarcom é subclasse direta de ROBO
 
 ////////////////////////////////////////////////////////////////
 

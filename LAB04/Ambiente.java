@@ -144,10 +144,11 @@ public class Ambiente {
     }
 
     public void executarSensores(){ // AQUI NAO VEJO MUITO USO PARA ISSO 
-        
+       
     }
 
     public void verificarColisoes(){ // PODE SER USADO PARA VERIFICAR SE ONDE VOCÊ ESTÁ COLOCANDO UM OBJETO SE TEM UMA COISA QUE IMPEDE ISSO
+        //agora com o estaOcupado isso aqui poderia ser substituido suave nao sei para o que vou usar isso
         //pode ser o sensor de proximidade? ou tem q implementar isso?
     }
 
