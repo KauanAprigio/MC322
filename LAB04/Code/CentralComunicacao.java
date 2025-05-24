@@ -1,4 +1,4 @@
-package LAB04;
+package LAB04.Code;
 import java.util.ArrayList;
 
 public class CentralComunicacao {

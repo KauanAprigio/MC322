@@ -1,6 +1,7 @@
-package LAB04;
+package LAB04.Code;
 import java.util.ArrayList;
-import LAB04.Entidade.TipoEntidade;
+
+import LAB04.Code.Entidade.TipoEntidade;
 
 // VALE RESSALTAR QUE SE EU FOR USAR O VERIFICAR COLISOES PARA BOTAR UM OBSTACULO EM UM LUGAR QUE NÃO TENHA OUTRO DEVO REVER O CODIGO
 
@@ -41,7 +42,7 @@ public class Ambiente {
             }
         }
     }
-
+    // Porque separar robos dos obstaculos nessa função?
     public void adicionarEntidade(Entidade e){//pode desenvolver uma exception se quiser ou ate mais se a entidade nao for nenhuma dessas
         if (e.getTipo() == TipoEntidade.ROBO){
             Robo r = (Robo) e; // aqui usarei o casting para ter acesso ao ID do robo
@@ -49,21 +50,20 @@ public class Ambiente {
                 System.out.println("Não foi possível adicionar a entidade do tipo ROBO, pois ela está fora dos limites do ambiente!\n");
                 return; // aqui acaba o método caso seja fora dos limites
             }
-        // aqui significa que está nos limites, logo ira adicionar
+            // aqui significa que está nos limites, logo ira adicionar
 
-        //vou deixar separado do resto para melhor visualização 
-        mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.ROBO; // adiciona na representação do ambiente
-        planoXY[e.getX()][e.getY()] = r.getRepresentacao(); // adiciona no planoXY, ou seja, representaçaõ 2d do ambiente
-        entidades.add(e);
-        
-        System.out.println("A entidade ROBO, de ID" + r.getId() + ", foi adicionado ao ambiente.");
-        System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
+            //vou deixar separado do resto para melhor visualização 
+            mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.ROBO; // adiciona na representação do ambiente
+            planoXY[e.getX()][e.getY()] = r.getRepresentacao(); // adiciona no planoXY, ou seja, representaçaõ 2d do ambiente
+            entidades.add(e);
+            
+            System.out.println("A entidade ROBO, de ID" + r.getId() + ", foi adicionado ao ambiente.");
+            System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
         
         } else if (e.getTipo() == TipoEntidade.OBSTACULO){
             Obstaculo o = (Obstaculo) e; // aqui usarei o casting para ter acesso aos metodos getPosx2 e y2
             if (!dentroDosLimites(o.getX(), o.getY(), o.getZ()) || !dentroDosLimites(o.getPosicaoX2(), o.getPosicaoY2(), o.getZ())) {
                 System.out.println("Não foi possível adicionar a entidade do tipo OBSTACULO, pois ela está fora dos limites do ambiente!\n");
-                //PODEMOS USAR RECURSAO PARA CHAMAR A FUNÇÃO ATÉ DAR UMA ENTIDADE QUE ESTEJA NOS LIMITES
                 return; // aqui acaba o método caso seja fora dos limites
             }
             
@@ -72,12 +72,12 @@ public class Ambiente {
                 for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
                     planoXY[x][y] = o.getRepresentacao(); // Representação no plano XY (z=0)
                     
-                    if (o.getZ() > 0) { // Preencherá as camadas no eixo z se o objeto tiver altura
+                    if (o.getZ() > altitudeMinima) { // Preencherá as camadas no eixo z se o objeto tiver altura
                         for (int z = 0; z < o.getZ(); z++) {
                             mapa[x][y][z] = TipoEntidade.OBSTACULO;
                         }
                     } else { //Se nao tiver altura preenche somente o z = 0 para deixar o código mais eficiente
-                        mapa[x][y][0] = TipoEntidade.OBSTACULO;
+                        mapa[x][y][altitudeMinima] = TipoEntidade.OBSTACULO;
                     }
                 }
             }
@@ -101,12 +101,12 @@ public class Ambiente {
                 for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
                     planoXY[x][y] = 'v'; // Deixa como vazio na representação no plano XY (z=0) ambiente 2d
                     
-                    if (o.getZ() > 0) { // Preencherá com o vazio as camadas no eixo z se o objeto tiver altura
+                    if (o.getZ() > altitudeMinima) { // Preencherá com o vazio as camadas no eixo z se o objeto tiver altura
                         for (int z = 0; z < o.getZ(); z++) {
                             mapa[x][y][z] = TipoEntidade.VAZIO;
                         }
                     } else { //Se nao tiver altura preenche com vazio somente o z = 0 para deixar o código mais eficiente
-                        mapa[x][y][0] = TipoEntidade.VAZIO;
+                        mapa[x][y][altitudeMinima] = TipoEntidade.VAZIO;
                     }
                 }
             }

@@ -1,5 +1,5 @@
-package LAB04;
-import LAB04.Entidade.TipoEntidade;
+package LAB04.Code;
+import LAB04.Code.Entidade.TipoEntidade;
 
 /*
  * SuperClasse obrigatória Sensor
