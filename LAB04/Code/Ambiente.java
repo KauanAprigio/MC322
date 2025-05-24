@@ -45,7 +45,6 @@ public class Ambiente {
             }
         }
     }
-    public void adicionarEntidade(Entidade e){//pode desenvolver uma exception se quiser ou ate mais se a entidade nao for nenhuma dessas
     public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
         if (e.getTipo() == TipoEntidade.ROBO){
             Robo r = (Robo) e; // aqui usarei o casting para ter acesso ao ID do robo
