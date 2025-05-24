@@ -15,7 +15,6 @@ public interface Entidade {
         ROBO,
         OBSTACULO,
         DESCONHECIDO;
-
     }
 }
 

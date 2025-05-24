@@ -27,6 +27,7 @@ public class Robo implements Entidade {
 
 
     //Metodos
+    // Atualizar o mapa 2D quando mover ROBO!!
     public void moverPara(int deltaX, int deltaY) {
         // Verifica se a nova posição está dentro dos limites do ambiente
         if (ambiente.dentroDosLimites(pos_x + deltaX, pos_y + deltaY, 0)) {
