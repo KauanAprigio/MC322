@@ -45,7 +45,7 @@ public class Ambiente {
             }
         }
     }
-    public void adicionarEntidade(Entidade e) throws ForaDosLimitesException, LocalOcupadoException{
+    public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
         if (e.getTipo() == TipoEntidade.ROBO){
             Robo r = (Robo) e; // aqui usarei o casting para ter acesso ao ID do robo
             if (!dentroDosLimites(r.getX(), r.getY(), 0)) throw new ForaDosLimitesException("Não foi possível adicionar o ROBO "+ r.getId() +", pois ela está fora dos limites do ambiente!\n");
@@ -56,9 +56,10 @@ public class Ambiente {
             mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.ROBO; // adiciona na representação do ambiente
             planoXY[e.getX()][e.getY()] = r.getRepresentacao(); // adiciona no planoXY, ou seja, representaçaõ 2d do ambiente
             entidades.add(e);
-            
-            System.out.println("A entidade ROBO, de ID" + r.getId() + ", foi adicionado ao ambiente.");
-            System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
+            if (printar) {
+                System.out.println("A entidade ROBO, de ID" + r.getId() + ", foi adicionado ao ambiente.");
+                System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
+            }
         
         } else if (e.getTipo() == TipoEntidade.OBSTACULO){
             Obstaculo o = (Obstaculo) e; // aqui usarei o casting para ter acesso aos metodos getPosx2 e y2
@@ -90,13 +91,15 @@ public class Ambiente {
             }
 
             entidades.add(e);
-            System.out.println("A entidade OBSTACULO, de tipo" + o.getTipoObstaculo() + ", foi adicionado ao ambiente.");
-            System.out.println("Posição inferior esquerda: (" + o.getX() + ", " + o.getY() + ", " + 0 + ")");
-            System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getZ() + ")\n");
+            if (printar) {
+                System.out.println("A entidade OBSTACULO, de tipo" + o.getTipoObstaculo() + ", foi adicionado ao ambiente.");
+                System.out.println("Posição inferior esquerda: (" + o.getX() + ", " + o.getY() + ", " + 0 + ")");
+                System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getZ() + ")\n");
+            }
         }
     }
 
-    public void removerEntidade(Entidade e) throws EntidadeNaoEncontradaException{ //pode desenvolver uma exception se quiser, no caso se eu for remover algo que nao existe
+    public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException{ //pode desenvolver uma exception se quiser, no caso se eu for remover algo que nao existe
         if (e.getTipo() == TipoEntidade.ROBO){
             Robo r = (Robo) e; // casting para facilitar as coisas
             if (mapa[r.getX()][r.getY()][r.getZ()] == TipoEntidade.VAZIO) 
@@ -121,7 +124,8 @@ public class Ambiente {
             }
         }
         entidades.remove(e);
-        System.out.println("A Entidade " + e.getTipo() + " foi removida com sucesso.");
+        if (printar)
+            System.out.println("A Entidade " + e.getTipo() + " foi removida com sucesso.");
     }
 
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
@@ -138,7 +142,7 @@ public class Ambiente {
 
     public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ){ // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
         try{
-            removerEntidade(e); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
+            removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
         } catch (EntidadeNaoEncontradaException exc) {
             System.out.println("Entidade não está no ambiente e não pode ser movida!\n");
         }
@@ -152,7 +156,9 @@ public class Ambiente {
             obstaculo.setPosX2();
             obstaculo.setPosY2();
             try {
-                adicionarEntidade(obstaculo); // reutilizarei o adicionar para mover a entidade com as novas coordenadas
+                adicionarEntidade(obstaculo, false); // reutilizarei o adicionar para mover a entidade com as novas coordenadas
+                System.out.println("A entidade OBSTACULO, de tipo" + obstaculo.getTipoObstaculo() + ", foi movida para a posição: " + "(" + obstaculo.getPosicaoX2() + ", " + obstaculo.getPosicaoY2() + ", " + 0 + ")");
+                System.out.println("Posição superior direita: (" + obstaculo.getPosicaoX2() + ", " + obstaculo.getPosicaoY2() + ", " + obstaculo.getZ() + ")\n");
             } catch (ForaDosLimitesException | LocalOcupadoException exc){
                 System.out.println("erro: " + exc);
                 System.out.println("Obstáculo não foi movido!");
