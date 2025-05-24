@@ -48,8 +48,8 @@ public class Ambiente {
     public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
         if (e.getTipo() == TipoEntidade.ROBO){
             Robo r = (Robo) e; // aqui usarei o casting para ter acesso ao ID do robo
-            if (!dentroDosLimites(r.getX(), r.getY(), 0)) throw new ForaDosLimitesException("Não foi possível adicionar o ROBO "+ r.getId() +", pois ela está fora dos limites do ambiente!\n");
-            if (estaOcupado(r.getX(), r.getY(), r.getZ())) throw new LocalOcupadoException("Não foi possível adicionar o ROBO " + r.getId() +", pois o local escolhido está ocupado!\n");
+            if (!dentroDosLimites(r.getX(), r.getY(), 0)) throw new ForaDosLimitesException("O local do ROBO "+ r.getId() +" está fora dos limites do ambiente!\n");
+            if (estaOcupado(r.getX(), r.getY(), r.getZ())) throw new LocalOcupadoException("O local do ROBO " + r.getId() +" está ocupado!\n");
             // aqui significa que está nos limites e o local esta desocupado, logo ira adicionar e o local esta desocupado.
         
             //vou deixar separado do resto para melhor visualização 
@@ -64,17 +64,9 @@ public class Ambiente {
         } else if (e.getTipo() == TipoEntidade.OBSTACULO){
             Obstaculo o = (Obstaculo) e; // aqui usarei o casting para ter acesso aos metodos getPosx2 e y2
             if (!dentroDosLimites(o.getX(), o.getY(), o.getZ()) || !dentroDosLimites(o.getPosicaoX2(), o.getPosicaoY2(), o.getZ())) 
-                throw new ForaDosLimitesException("Não foi possível adicionar a entidade do tipo OBSTACULO, pois ela está fora dos limites do ambiente!\n");
+                throw new ForaDosLimitesException("A regiao ocupada pelo OBSTACULO do tipo "+ o.getTipoObstaculo() +" está fora dos limites do ambiente!\n");
             
-            for (int x = o.getX(); x < o.getPosicaoX2(); x++) {
-                for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
-                    for (int z = altitudeMinima; z < o.getZ(); z++) {
-                        if (estaOcupado(x, y, z)){
-                            throw new LocalOcupadoException("Não foi possível adicionar o obstáculo do tipo" + o.getTipo() + "ao ambiente pois o local selecionado está ocupado!\n");
-                        }
-                    }
-                }
-            }
+            verificarColisoes(o);
             //Aqui irei colocar a entidade OBJETO na representação 2d e 3d do ambiente
             for (int x = o.getX(); x < o.getPosicaoX2(); x++) {
                 for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
@@ -109,6 +101,8 @@ public class Ambiente {
         
         } else if (e.getTipo() == TipoEntidade.OBSTACULO){
             Obstaculo o = (Obstaculo) e; // casting para facilitar tambem 
+            if (mapa[o.getX()][o.getY()][o.getZ()] == TipoEntidade.VAZIO) 
+                throw new EntidadeNaoEncontradaException("Entidade não está no ambiente e não pode ser removida!\n");
             for (int x = o.getX(); x < o.getPosicaoX2(); x++) {
                 for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
                     planoXY[x][y] = 'v'; // Deixa como vazio na representação no plano XY (z=0) ambiente 2d
@@ -125,7 +119,7 @@ public class Ambiente {
         }
         entidades.remove(e);
         if (printar)
-            System.out.println("A Entidade " + e.getTipo() + " foi removida com sucesso.");
+            System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.");
     }
 
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
@@ -134,10 +128,7 @@ public class Ambiente {
     }
 
     public boolean estaOcupado(int x, int y, int z){ 
-        if (mapa[x][y][z] == TipoEntidade.VAZIO){ // se na representacao 3d do ambiente estiver vazia naquelas coordenadas quer dizer que não está ocupado, logo false
-            return false;
-        }
-        return true; // se não for vazio, logo é alguma coisa, então está ocupado
+        return mapa[x][y][z] != TipoEntidade.VAZIO;
     }
 
     public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ){ // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
@@ -161,7 +152,7 @@ public class Ambiente {
                 System.out.println("Posição superior direita: (" + obstaculo.getPosicaoX2() + ", " + obstaculo.getPosicaoY2() + ", " + obstaculo.getZ() + ")\n");
             } catch (ForaDosLimitesException | LocalOcupadoException exc){
                 System.out.println("erro: " + exc);
-                System.out.println("Obstáculo não foi movido!");
+                System.out.println("Obstáculo não foi movido!\n");
                 return;
             }
         }
@@ -171,9 +162,16 @@ public class Ambiente {
        
     }
 
-    public void verificarColisoes(){ // PODE SER USADO PARA VERIFICAR SE ONDE VOCÊ ESTÁ COLOCANDO UM OBJETO SE TEM UMA COISA QUE IMPEDE ISSO
-        //agora com o estaOcupado isso aqui poderia ser substituido suave nao sei para o que vou usar isso
-        //pode ser o sensor de proximidade? ou tem q implementar isso?
+    public void verificarColisoes(Obstaculo o) throws LocalOcupadoException{ // PODE SER USADO PARA VERIFICAR SE ONDE VOCÊ ESTÁ COLOCANDO UM OBJETO SE TEM UMA COISA QUE IMPEDE ISSO
+        for (int x = o.getX(); x < o.getPosicaoX2(); x++) {
+            for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
+                for (int z = altitudeMinima; z < o.getZ(); z++) {
+                    if (estaOcupado(x, y, z)){
+                        throw new LocalOcupadoException("A região ocupada pelo obstáculo " + o.getTipoObstaculo() + " está ocupada\n");
+                    }
+                }
+            }
+        }
     }
 
     public void visualizarAmbiente(){
