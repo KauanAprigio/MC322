@@ -155,3 +155,8 @@ classDiagram
 
     java -cp LAB03/Classes LAB03.Code.Main 
 
+# LAB 4
+
+### COMPILAÇÃO:
+
+    javac LAB04/Code/**/*.java LAB04/Code/Exceptions/*.java -d LAB04/Classes
