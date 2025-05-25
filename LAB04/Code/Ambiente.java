@@ -134,7 +134,7 @@ public class Ambiente {
     public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ){ // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
         try{
             removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
-        } catch (EntidadeNaoEncontradaException exc) {
+        } catch (EntidadeNaoEncontradaException exception) {
             System.out.println("Entidade não está no ambiente e não pode ser movida!\n");
         }
         //AQUI BASICAMENTE IREI MOVER A ENTIDADE DA SEGUINTE MANEIRA IREI ADICIONAR ELA EM UM LUGAR E REMOVER A ENTIDADE DE AGORA
@@ -150,8 +150,8 @@ public class Ambiente {
                 adicionarEntidade(obstaculo, false); // reutilizarei o adicionar para mover a entidade com as novas coordenadas
                 System.out.println("A entidade OBSTACULO, de tipo" + obstaculo.getTipoObstaculo() + ", foi movida para a posição: " + "(" + obstaculo.getPosicaoX2() + ", " + obstaculo.getPosicaoY2() + ", " + 0 + ")");
                 System.out.println("Posição superior direita: (" + obstaculo.getPosicaoX2() + ", " + obstaculo.getPosicaoY2() + ", " + obstaculo.getZ() + ")\n");
-            } catch (ForaDosLimitesException | LocalOcupadoException exc){
-                System.out.println("erro: " + exc);
+            } catch (ForaDosLimitesException | LocalOcupadoException exception){
+                System.out.println("erro: " + exception);
                 System.out.println("Obstáculo não foi movido!\n");
                 return;
             }
