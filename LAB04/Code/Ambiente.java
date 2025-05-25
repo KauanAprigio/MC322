@@ -65,9 +65,9 @@ public class Ambiente {
         System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")");
     }
 
-    public void removerEntidade(Entidade e) throws EntidadeNaoEncontradaException {
+    public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
          if (mapa[e.getX()][e.getY()][e.getZ()] == TipoEntidade.VAZIO) 
-            throw new EntidadeNaoEncontradaException("Entidade não está no ambiente e não pode ser removida!\n");
+            throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pode ser encontrada!\n");
         int x = e.getX();
         int y = e.getY();
         int z = e.getZ();
@@ -80,7 +80,8 @@ public class Ambiente {
             }
         }
         entidades.remove(e);
-        System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.");
+        if (printar)
+            System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.");
     }
 
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
@@ -95,7 +96,7 @@ public class Ambiente {
     public void moverEntidade(Entidade e, int novoX, int novoY,
         int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
         try{
-            removerEntidade(e); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
+            removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
         } catch (EntidadeNaoEncontradaException exception) {
             System.out.println("Entidade não está no ambiente e não pode ser movida!\n");
             return;
