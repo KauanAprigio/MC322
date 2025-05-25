@@ -65,35 +65,22 @@ public class Ambiente {
         System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")");
     }
 
-    public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException{ //pode desenvolver uma exception se quiser, no caso se eu for remover algo que nao existe
-        if (e.getTipo() == TipoEntidade.ROBO){
-            Robo r = (Robo) e; // casting para facilitar as coisas
-            if (mapa[r.getX()][r.getY()][r.getZ()] == TipoEntidade.VAZIO) 
-                throw new EntidadeNaoEncontradaException("Entidade não está no ambiente e não pode ser removida!\n");
-            mapa[r.getX()][r.getY()][r.getZ()] = TipoEntidade.VAZIO; // deixa como vazio o espaço da entidade
-            planoXY[r.getX()][r.getY()] = 'v'; // deixa o 'v' de vazio na reprentacao do planoXY, ou seja, representaçaõ 2d do ambiente
-        
-        } else if (e.getTipo() == TipoEntidade.OBSTACULO){
-            Obstaculo o = (Obstaculo) e; // casting para facilitar tambem 
-            if (mapa[o.getX()][o.getY()][o.getZ()] == TipoEntidade.VAZIO) 
-                throw new EntidadeNaoEncontradaException("Entidade não está no ambiente e não pode ser removida!\n");
-            for (int x = o.getX(); x < o.getPosicaoX2(); x++) {
-                for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
-                    planoXY[x][y] = 'v'; // Deixa como vazio na representação no plano XY (z=0) ambiente 2d
-                    
-                    if (o.getZ() > altitudeMinima) { // Preencherá com o vazio as camadas no eixo z se o objeto tiver altura
-                        for (int z = 0; z < o.getZ(); z++) {
-                            mapa[x][y][z] = TipoEntidade.VAZIO;
-                        }
-                    } else { //Se nao tiver altura preenche com vazio somente o z = 0 para deixar o código mais eficiente
-                        mapa[x][y][altitudeMinima] = TipoEntidade.VAZIO;
-                    }
+    public void removerEntidade(Entidade e) throws EntidadeNaoEncontradaException {
+         if (mapa[e.getX()][e.getY()][e.getZ()] == TipoEntidade.VAZIO) 
+            throw new EntidadeNaoEncontradaException("Entidade não está no ambiente e não pode ser removida!\n");
+        int x = e.getX();
+        int y = e.getY();
+        int z = e.getZ();
+        for (; x <= e.getLarguraX() + e.getX(); x++) {
+            for (; y <= e.getLarguraY() + e.getY(); y++) {
+                planoXY[x][y] = 'v'; 
+                for (; z <= e.getAltura() + e.getZ(); z++) {
+                    mapa[x][y][z] = TipoEntidade.VAZIO;
                 }
             }
         }
         entidades.remove(e);
-        if (printar)
-            System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.");
+        System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.");
     }
 
     public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
@@ -108,7 +95,7 @@ public class Ambiente {
     public void moverEntidade(Entidade e, int novoX, int novoY,
         int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
         try{
-            removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
+            removerEntidade(e); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
         } catch (EntidadeNaoEncontradaException exception) {
             System.out.println("Entidade não está no ambiente e não pode ser movida!\n");
             return;
