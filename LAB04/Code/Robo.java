@@ -35,7 +35,7 @@ public class Robo implements Entidade {
 
     //Metodos
     // Atualizar o mapa 2D quando mover ROBO!!
-    public void mover(int deltaX, int deltaY, int deltaZ, ArrayList<Entidade> entidades,
+    public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa,
         char[][] planoXY) throws LocalOcupadoException, ForaDosLimitesException {
         
         

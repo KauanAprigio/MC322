@@ -116,7 +116,7 @@ public class Ambiente {
         int deltaY = novoY - e.getY();
         int deltaZ = novoZ - e.getZ() ;
         verificarColisoes(e, novoX, novoY, novoZ);
-        e.mover(deltaX, deltaY, deltaZ, entidades, planoXY);
+        e.mover(deltaX, deltaY, deltaZ, mapa, planoXY);
     }
 
     public void executarSensores(){ // AQUI NAO VEJO MUITO USO PARA ISSO 

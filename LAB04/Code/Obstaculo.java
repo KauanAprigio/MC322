@@ -67,7 +67,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
 
 
     @Override
-    public void mover(int deltaX, int deltaY, int deltaZ, ArrayList<Entidade> entidades, 
+    public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa, 
         char[][] planoXY) throws LocalOcupadoException, ForaDosLimitesException{
         
         // Verificar se o local novo está não vazio ou fora dos limites.

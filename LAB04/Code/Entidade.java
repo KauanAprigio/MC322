@@ -12,7 +12,7 @@ public interface Entidade {
     public TipoEntidade getTipo();
     public String getDescricao();
     public char getRepresentacao();
-    public void mover(int deltaX, int deltaY, int deltaZ, ArrayList<Entidade> entidades,
+    public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa,
         char[][] planoXY) throws LocalOcupadoException, ForaDosLimitesException;
     public int getLarguraX ();
     public int getLarguraY ();
