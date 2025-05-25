@@ -1,5 +1,10 @@
 package LAB04.Code;
 
+import java.util.ArrayList;
+
+import LAB04.Code.Exceptions.ForaDosLimitesException;
+import LAB04.Code.Exceptions.LocalOcupadoException;
+
 /*
  * Classe obrigatória Obstaculo
  * 
@@ -61,16 +66,28 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public char getRepresentacao() { char representacao = 'o'; return representacao; }
 
 
+    @Override
+    public void mover(int deltaX, int deltaY, int deltaZ, ArrayList<Entidade> entidades, 
+        char[][] planoXY) throws LocalOcupadoException, ForaDosLimitesException{
+        
+        // Verificar se o local novo está não vazio ou fora dos limites.
+
+        // Verificar se algum ponto do local novo 
+    }
+
+
     // Getters e Setters
     public int getAlturinha() { return pos_z2; } // só para tirar a linha amarela, mas nem sei se vou usar kkkkkkk
     public int getPosicaoX2() { return pos_x2; }
     public int getPosicaoY2() { return pos_y2; }
     public TipoObstaculo getTipoObstaculo() { return tipoObstaculo; }
+    public int getLarguraX() { return tipoObstaculo.getLarguraX(); }
+    public int getLarguraY() { return tipoObstaculo.getLarguraY(); }
+    public int getAltura() { return tipoObstaculo.getAltura(); }
 
     public void setPosX(int novo_x) { this.pos_x = novo_x; }
     public void setPosY(int novo_y) { this.pos_y = novo_y; }
-    public void setPosX2() { pos_x2 = pos_x + tipoObstaculo.getLarguraX(); }
-    public void setPosY2() { pos_y2 = pos_y + tipoObstaculo.getLarguraY(); }
+    
 
 
     /* 

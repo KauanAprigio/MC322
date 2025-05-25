@@ -46,49 +46,15 @@ public class Ambiente {
         }
     }
     public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
-        if (e.getTipo() == TipoEntidade.ROBO){
-            Robo r = (Robo) e; // aqui usarei o casting para ter acesso ao ID do robo
-            if (!dentroDosLimites(r.getX(), r.getY(), 0)) throw new ForaDosLimitesException("O local do ROBO "+ r.getId() +" está fora dos limites do ambiente!\n");
-            if (estaOcupado(r.getX(), r.getY(), r.getZ())) throw new LocalOcupadoException("O local do ROBO " + r.getId() +" está ocupado!\n");
-            // aqui significa que está nos limites e o local esta desocupado, logo ira adicionar e o local esta desocupado.
-        
-            //vou deixar separado do resto para melhor visualização 
-            mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.ROBO; // adiciona na representação do ambiente
-            planoXY[e.getX()][e.getY()] = r.getRepresentacao(); // adiciona no planoXY, ou seja, representaçaõ 2d do ambiente
-            entidades.add(e);
             if (printar) {
-                System.out.println("A entidade ROBO, de ID" + r.getId() + ", foi adicionado ao ambiente.");
-                System.out.println("Posição: (" + r.getX() + ", " + r.getY() + ", " + 0 + ")\n");
             }
         
-        } else if (e.getTipo() == TipoEntidade.OBSTACULO){
-            Obstaculo o = (Obstaculo) e; // aqui usarei o casting para ter acesso aos metodos getPosx2 e y2
-            if (!dentroDosLimites(o.getX(), o.getY(), o.getZ()) || !dentroDosLimites(o.getPosicaoX2(), o.getPosicaoY2(), o.getZ())) 
-                throw new ForaDosLimitesException("A regiao ocupada pelo OBSTACULO do tipo "+ o.getTipoObstaculo() +" está fora dos limites do ambiente!\n");
-            
-            verificarColisoes(o);
-            //Aqui irei colocar a entidade OBJETO na representação 2d e 3d do ambiente
-            for (int x = o.getX(); x < o.getPosicaoX2(); x++) {
-                for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
-                    planoXY[x][y] = o.getRepresentacao(); // Representação no plano XY (z=0)
-                    
-                    if (o.getZ() > altitudeMinima) { // Preencherá as camadas no eixo z se o objeto tiver altura
-                        for (int z = 0; z < o.getZ(); z++) {
-                            mapa[x][y][z] = TipoEntidade.OBSTACULO;
-                        }
-                    } else { //Se nao tiver altura preenche somente o z = 0 para deixar o código mais eficiente
-                        mapa[x][y][altitudeMinima] = TipoEntidade.OBSTACULO;
-                    }
-                }
-            }
+      
 
             entidades.add(e);
             if (printar) {
-                System.out.println("A entidade OBSTACULO, de tipo" + o.getTipoObstaculo() + ", foi adicionado ao ambiente.");
-                System.out.println("Posição inferior esquerda: (" + o.getX() + ", " + o.getY() + ", " + 0 + ")");
-                System.out.println("Posição superior direita: (" + o.getPosicaoX2() + ", " + o.getPosicaoY2() + ", " + o.getZ() + ")\n");
             }
-        }
+        
     }
 
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException{ //pode desenvolver uma exception se quiser, no caso se eu for remover algo que nao existe
@@ -131,43 +97,33 @@ public class Ambiente {
         return mapa[x][y][z] != TipoEntidade.VAZIO;
     }
 
-    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ){ // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
+    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ) throws LocalOcupadoException, ForaDosLimitesException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
         try{
             removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
         } catch (EntidadeNaoEncontradaException exception) {
             System.out.println("Entidade não está no ambiente e não pode ser movida!\n");
+            return;
         }
-        //AQUI BASICAMENTE IREI MOVER A ENTIDADE DA SEGUINTE MANEIRA IREI ADICIONAR ELA EM UM LUGAR E REMOVER A ENTIDADE DE AGORA
-        if (e.getTipo() == TipoEntidade.OBSTACULO){
-            Obstaculo obstaculo = (Obstaculo) e; // casting para refazer as coordenadas do obstaculo
-
-            // atualizando as coordenadas do obstaculo
-            obstaculo.setPosX(novoX);
-            obstaculo.setPosY(novoY);
-            obstaculo.setPosX2();
-            obstaculo.setPosY2();
-            try {
-                adicionarEntidade(obstaculo, false); // reutilizarei o adicionar para mover a entidade com as novas coordenadas
-                System.out.println("A entidade OBSTACULO, de tipo" + obstaculo.getTipoObstaculo() + ", foi movida para a posição: " + "(" + obstaculo.getPosicaoX2() + ", " + obstaculo.getPosicaoY2() + ", " + 0 + ")");
-                System.out.println("Posição superior direita: (" + obstaculo.getPosicaoX2() + ", " + obstaculo.getPosicaoY2() + ", " + obstaculo.getZ() + ")\n");
-            } catch (ForaDosLimitesException | LocalOcupadoException exception){
-                System.out.println("erro: " + exception);
-                System.out.println("Obstáculo não foi movido!\n");
-                return;
-            }
-        }
+        if (e.getTipo() == TipoEntidade.OBSTACULO) novoZ = 0; 
+        int deltaX = e.getX() - novoX;
+        int deltaY = e.getY() - novoY;
+        int deltaZ = e.getZ() - novoZ;
+        verificarColisoes(e, novoX, novoY, novoZ);
+        e.mover(deltaX, deltaY, deltaZ, entidades, planoXY);
     }
 
     public void executarSensores(){ // AQUI NAO VEJO MUITO USO PARA ISSO 
        
     }
 
-    public void verificarColisoes(Obstaculo o) throws LocalOcupadoException{ // PODE SER USADO PARA VERIFICAR SE ONDE VOCÊ ESTÁ COLOCANDO UM OBJETO SE TEM UMA COISA QUE IMPEDE ISSO
-        for (int x = o.getX(); x < o.getPosicaoX2(); x++) {
-            for (int y = o.getY(); y < o.getPosicaoY2(); y++) {
-                for (int z = altitudeMinima; z < o.getZ(); z++) {
+    public void verificarColisoes(Entidade e, int novoX, int novoY, int novoZ) throws LocalOcupadoException, ForaDosLimitesException{ 
+        for (int x = novoX; x < e.getLarguraX() + novoX; x++) {
+            for (int y = novoY; y < e.getLarguraY() + novoY; y++) {
+                for (int z = novoZ; z < e.getAltura() + novoZ; z++) {
                     if (estaOcupado(x, y, z)){
-                        throw new LocalOcupadoException("A região ocupada pelo obstáculo " + o.getTipoObstaculo() + " está ocupada\n");
+                        throw new LocalOcupadoException("A região ocupada pelo(a) " + e.getTipo() + " está ocupada!\n");
+                    } else if (!dentroDosLimites(x, y, z)) {
+                        throw new ForaDosLimitesException("A região ocupada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }
                 }
             }
@@ -186,4 +142,5 @@ public class Ambiente {
 
     //Geters e Setters
     public ArrayList<Entidade> getEntidades() { return entidades; }
+    public char[][] getplanoXY() { return planoXY; }
 }

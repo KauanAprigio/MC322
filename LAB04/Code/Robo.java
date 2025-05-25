@@ -1,14 +1,21 @@
 package LAB04.Code;
 
+import java.util.ArrayList;
+
+import LAB04.Code.Exceptions.ForaDosLimitesException;
+import LAB04.Code.Exceptions.LocalOcupadoException;
 
 public class Robo implements Entidade {
     // Atributos
-    String id;
-    EstadoRobo estado;
-    TipoEntidade tipo;
-    int pos_x;
-    int pos_y;
-    int pos_z;
+    private String id;
+    private EstadoRobo estado;
+    private TipoEntidade tipo;
+    private int pos_x;
+    private int pos_y;
+    private int pos_z;
+    private final int larguraX = 0;
+    private final int larguraY = 0;
+    private final int altura = 0;
 
     // Atributo adicional para deixar o moverPara ficar mais fácil
     Ambiente ambiente;
@@ -28,17 +35,12 @@ public class Robo implements Entidade {
 
     //Metodos
     // Atualizar o mapa 2D quando mover ROBO!!
-    public void moverPara(int deltaX, int deltaY) {
-        // Verifica se a nova posição está dentro dos limites do ambiente
-        if (ambiente.dentroDosLimites(pos_x + deltaX, pos_y + deltaY, 0)) {
-            this.pos_x += deltaX;
-            this.pos_y += deltaY;
-            System.out.println("Robo de id:" + id + " moveu para (" + pos_x + ", " + pos_y + ").\n");
-        } else {
-            System.out.println("Movimento inválido! Posição nova fora dos limites do ambiente atual!\n");
-        }
+    public void mover(int deltaX, int deltaY, int deltaZ, ArrayList<Entidade> entidades,
+        char[][] planoXY) throws LocalOcupadoException, ForaDosLimitesException {
+        
+        
     }
-
+    
     public void ligar(){
         this.estado = EstadoRobo.ON;
         System.out.println("O robô de id:" + this.getId() + " está ligado.");
@@ -58,6 +60,9 @@ public class Robo implements Entidade {
     public String getId(){ return id; }
     public EstadoRobo getEstado() { return estado; }
     public Ambiente getAmbiente() { return ambiente; }
+    public int getLarguraX() { return larguraX; }
+    public int getLarguraY() { return larguraY; }
+    public int getAltura() { return altura; }
 
     public void setEstado(EstadoRobo novoEstado){ this.estado = novoEstado; }
     
