@@ -45,16 +45,23 @@ public class Ambiente {
             }
         }
     }
-    public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
-            if (printar) {
+    public void adicionarEntidade(Entidade e) throws ForaDosLimitesException, LocalOcupadoException{
+        int X_max = e.getX() + e.getLarguraX();
+        int Y_max = e.getY() + e.getLarguraY();
+        int Z_max = e.getZ() + e.getAltura();
+        verificarColisoes(e, e.getX(), e.getY(), e.getZ());
+        entidades.add(e);
+        for (int x = e.getX(); x <= X_max; x++) {
+            for (int y = e.getY(); y <= Y_max; y++) {
+                planoXY[x][y] = e.getRepresentacao();
+                for (int z = e.getZ(); z <= Z_max; z++) {
+                    mapa[x][y][z] = e.getTipo();
+                }
             }
-        
-      
-
-            entidades.add(e);
-            if (printar) {
-            }
-        
+        } 
+        System.out.println("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente");
+        System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
+        System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")");
     }
 
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException{ //pode desenvolver uma exception se quiser, no caso se eu for remover algo que nao existe
@@ -105,9 +112,9 @@ public class Ambiente {
             return;
         }
         if (e.getTipo() == TipoEntidade.OBSTACULO) novoZ = 0; 
-        int deltaX = e.getX() - novoX;
-        int deltaY = e.getY() - novoY;
-        int deltaZ = e.getZ() - novoZ;
+        int deltaX = novoX - e.getX();
+        int deltaY = novoY - e.getY();
+        int deltaZ = novoZ - e.getZ() ;
         verificarColisoes(e, novoX, novoY, novoZ);
         e.mover(deltaX, deltaY, deltaZ, entidades, planoXY);
     }
@@ -117,9 +124,12 @@ public class Ambiente {
     }
 
     public void verificarColisoes(Entidade e, int novoX, int novoY, int novoZ) throws LocalOcupadoException, ForaDosLimitesException{ 
-        for (int x = novoX; x < e.getLarguraX() + novoX; x++) {
-            for (int y = novoY; y < e.getLarguraY() + novoY; y++) {
-                for (int z = novoZ; z < e.getAltura() + novoZ; z++) {
+        int x = novoX;
+        int y = novoY;
+        int z = novoZ;
+        for (; x <= e.getLarguraX() + novoX; x++) {
+            for (; y <= e.getLarguraY() + novoY; y++) {
+                for (; z <= e.getAltura() + novoZ; z++) {
                     if (estaOcupado(x, y, z)){
                         throw new LocalOcupadoException("A região ocupada pelo(a) " + e.getTipo() + " está ocupada!\n");
                     } else if (!dentroDosLimites(x, y, z)) {
