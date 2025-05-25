@@ -35,8 +35,14 @@ public class Robo implements Entidade {
     // Isso é feito para manter o código padronizado com os Obstáculos.
     public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa,
         char[][] planoXY) throws RoboDesligadoException {
-        
-        
+        if (getEstado() == EstadoRobo.OFF) 
+            throw new RoboDesligadoException("Não foi possível mover o robô: " + getId() + " pois ele está desligado!\n");
+        pos_x += deltaX;
+        pos_y += deltaY;
+        pos_z += deltaZ;
+        // O Robô ja deve ser removido da posição anterior antes da chamada dessa função
+        planoXY[pos_x][pos_y] = 'r';
+        mapa[pos_x][pos_y][pos_z] = TipoEntidade.ROBO;
     }
     
     public void ligar(){
@@ -99,10 +105,5 @@ public class Robo implements Entidade {
 
     @Override
     public char getRepresentacao() { char representacao = 'r'; return representacao; }
-
-
-    
-
-
 
 }

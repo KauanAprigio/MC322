@@ -64,10 +64,16 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     @Override
     public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa, 
         char[][] planoXY) {
-        
-        // Verificar se o local novo está não vazio ou fora dos limites.
-
-        // Verificar se algum ponto do local novo 
+        setPosX(pos_x + deltaX);
+        setPosY(pos_y + deltaY);
+        for (int x = pos_x; x <= pos_x2; x++) {
+            for (int y = pos_y; y <= pos_y2; y++) {
+                planoXY[x][y] = 'o';
+                for (int z = pos_z; z <= pos_z2; z++) {
+                    mapa[x][y][z] = TipoEntidade.OBSTACULO;
+                }
+            }
+        } 
     }
 
 
@@ -80,8 +86,14 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public int getLarguraY() { return tipoObstaculo.getLarguraY(); }
     public int getAltura() { return tipoObstaculo.getAltura(); }
 
-    public void setPosX(int novo_x) { this.pos_x = novo_x; }
-    public void setPosY(int novo_y) { this.pos_y = novo_y; }
+    public void setPosX(int novo_x) { 
+        this.pos_x = novo_x;
+        this.pos_x2 = novo_x + getLarguraX(); 
+    }
+    public void setPosY(int novo_y) { 
+        this.pos_y = novo_y;
+        this.pos_y2 = novo_y + getLarguraY();
+    }
     
 
 
