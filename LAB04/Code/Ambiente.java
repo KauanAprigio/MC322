@@ -5,6 +5,7 @@ import LAB04.Code.Entidade.TipoEntidade;
 import LAB04.Code.Exceptions.EntidadeNaoEncontradaException;
 import LAB04.Code.Exceptions.ForaDosLimitesException;
 import LAB04.Code.Exceptions.LocalOcupadoException;
+import LAB04.Code.Exceptions.RoboDesligadoException;
 
 // VALE RESSALTAR QUE SE EU FOR USAR O VERIFICAR COLISOES PARA BOTAR UM OBSTACULO EM UM LUGAR QUE NÃO TENHA OUTRO DEVO REVER O CODIGO
 
@@ -104,7 +105,8 @@ public class Ambiente {
         return mapa[x][y][z] != TipoEntidade.VAZIO;
     }
 
-    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ) throws LocalOcupadoException, ForaDosLimitesException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
+    public void moverEntidade(Entidade e, int novoX, int novoY,
+        int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
         try{
             removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
         } catch (EntidadeNaoEncontradaException exception) {
@@ -114,8 +116,10 @@ public class Ambiente {
         if (e.getTipo() == TipoEntidade.OBSTACULO) novoZ = 0; 
         int deltaX = novoX - e.getX();
         int deltaY = novoY - e.getY();
-        int deltaZ = novoZ - e.getZ() ;
+        int deltaZ = novoZ - e.getZ();
+        // Verifica se o novo local está ocupado ou se está fora dos limites
         verificarColisoes(e, novoX, novoY, novoZ);
+        
         e.mover(deltaX, deltaY, deltaZ, mapa, planoXY);
     }
 

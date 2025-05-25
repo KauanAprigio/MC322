@@ -1,9 +1,6 @@
 package LAB04.Code;
 
-import java.util.ArrayList;
-
-import LAB04.Code.Exceptions.ForaDosLimitesException;
-import LAB04.Code.Exceptions.LocalOcupadoException;
+import LAB04.Code.Exceptions.RoboDesligadoException;
 
 public class Robo implements Entidade {
     // Atributos
@@ -34,9 +31,10 @@ public class Robo implements Entidade {
 
 
     //Metodos
-    // Atualizar o mapa 2D quando mover ROBO!!
+    // Quando mover o robo, é necessário utilizar a função moverEntidade do Ambiente!
+    // Isso é feito para manter o código padronizado com os Obstáculos.
     public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa,
-        char[][] planoXY) throws LocalOcupadoException, ForaDosLimitesException {
+        char[][] planoXY) throws RoboDesligadoException {
         
         
     }

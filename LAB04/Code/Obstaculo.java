@@ -1,10 +1,5 @@
 package LAB04.Code;
 
-import java.util.ArrayList;
-
-import LAB04.Code.Exceptions.ForaDosLimitesException;
-import LAB04.Code.Exceptions.LocalOcupadoException;
-
 /*
  * Classe obrigatória Obstaculo
  * 
@@ -68,7 +63,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
 
     @Override
     public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa, 
-        char[][] planoXY) throws LocalOcupadoException, ForaDosLimitesException{
+        char[][] planoXY) {
         
         // Verificar se o local novo está não vazio ou fora dos limites.
 
