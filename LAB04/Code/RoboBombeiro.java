@@ -38,7 +38,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     
     // Construtor
     public RoboBombeiro(String id, EstadoRobo estado, int pos_x, int pos_y, int altitude, 
-                        Ambiente ambiente, int altitudeMaxima, double raiosensor, int peso_max, int raio_de_cessar_fogo) {
+                        Ambiente ambiente, int altitudeMaxima, int peso_max, int raio_de_cessar_fogo) {
         super("Bombeiro_"+id, estado, pos_x, pos_y, altitude, ambiente);
         this.altitudeMaxima = altitudeMaxima;
         this.peso_max = peso_max;
