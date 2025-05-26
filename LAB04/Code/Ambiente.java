@@ -119,7 +119,9 @@ public class Ambiente {
         e.mover(deltaX, deltaY, deltaZ, mapa, planoXY);
     }
 
-    public void executarSensores(){ // AQUI NAO VEJO MUITO USO PARA ISSO 
+    public void executarSensores(){ 
+        // pode ser usado para ativar os sensores de todos os robôs no ambiente. 
+        // Tipo só chamar a função ativar sensores deles...
        
     }
 
