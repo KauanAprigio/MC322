@@ -7,7 +7,7 @@ import LAB04.Code.Interfaces.Entidade;
 public abstract class Robo implements Entidade {
     // Atributos
     private String id;
-    private EstadoRobo estado;
+    private EstadoRobo estado = EstadoRobo.OFF; // Estado do robô, por padrão OFF
     private final TipoEntidade tipo = TipoEntidade.ROBO; // Definindo o tipo como ROBO por padrão
     private int pos_x;
     private int pos_y;

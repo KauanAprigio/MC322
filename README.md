@@ -160,3 +160,7 @@ classDiagram
 ### COMPILAÇÃO:
 
     javac LAB04/Code/**/*.java LAB04/Code/Exceptions/*.java  LAB04/Code/Interfaces/*.java  LAB04/Code/AbstractClasses/*.java -d LAB04/Classes
+
+### PARA RODAR:
+
+    java -cp LAB04/Classes LAB04.Code.Main
