@@ -17,7 +17,7 @@ import LAB04.Code.Obstaculo.TipoObstaculo;
  * - aprimorar (int aumentar_raio_limpeza)
  */
 
-class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero {
+class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel {
     // Atributos adicionais
     private int tipo_limpeza = 0; // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
     private SensorDeLixo sensorDeLixo;// sensor de lixo com raio 10
@@ -33,8 +33,8 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero {
     }
 
     // Metodos 
-
-    public void aprimorar(int aumento_raio_limpeza){
+    @Override
+    public void aprimorar(int upgrade){
         //Procura a oficina e vê se o robô está dentro dos limites dela
         for (Entidade e : getAmbiente().getEntidades()) {
             if (e.getTipo() == TipoEntidade.OBSTACULO){
@@ -43,7 +43,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero {
                     if (getX() <= o.getPosicaoX2() && getX() >= o.getX() && getY() <= o.getPosicaoY2() && getY() >= o.getY()) {
                         // se o robo está na oficina, será aprimorado.
                         System.out.println(getId() + " está dentro da oficina e pode ser aprimorado.");
-                        raioDeLimpeza += aumento_raio_limpeza;
+                        raioDeLimpeza += upgrade;
                         System.out.println(getId() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza + ".\n");
                         return;
                     } 

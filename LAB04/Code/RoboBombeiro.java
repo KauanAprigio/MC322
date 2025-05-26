@@ -21,12 +21,11 @@ import LAB04.Code.Exceptions.LocalOcupadoException;
  * - aprimora(int peso_adicional)
  */
 
-public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
+public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimoravel {
     private int altitudeMaxima;
     private int altitude = 0; // altitude do robô, começa no chão
     private int peso_max; // peso maximo que o robo suporta;
     private int reservatorio; // litros de agua no reservatorio
-    private SensorDeFogo sensorDeFogo; // sensor de fogo com raio 10
     private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
     
     // Construtor
@@ -34,7 +33,6 @@ public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
                         Ambiente ambiente, int altitudeMaxima, double raiosensor, int peso_max, int raio_de_cessar_fogo) {
         super(id, estado, pos_x, pos_y, altitude, ambiente);
         this.altitudeMaxima = altitudeMaxima;
-        this.sensorDeFogo = new SensorDeFogo(raiosensor); // sensor de fogo com raio 10
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
         this.reservatorio = peso_max; // litros de agua no reservatorio (começa cheio)
@@ -122,7 +120,8 @@ public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
         }
     }
 
-    public void aprimorar(int peso_adicional){
+    @Override
+    public void aprimorar(int upgrade){
         //verifica se o robô esta dentro de uma oficina
         for (Entidade e : getAmbiente().getEntidades()) {
             if(e.getTipo() == TipoEntidade.OBSTACULO){
@@ -130,7 +129,7 @@ public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
                 if (o.getTipoObstaculo() == TipoObstaculo.OFICINA) {
                     if (getX() <= o.getPosicaoX2() && getX() >= o.getX() && getY() <= o.getPosicaoY2() && getY() >= o.getY()) {
                         System.out.println(getId() + " está dentro da oficina e pode ser aprimorado.");
-                        peso_max += peso_adicional;
+                        peso_max += upgrade;
                         System.out.println("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.\n");
                     } else {
                         System.out.println(getId() + " não está dentro da oficina e não pode ser aprimorado!\n");
@@ -146,12 +145,19 @@ public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
          " máxima de peso de água que ele pode armazenar, aprimore sua capacidade na oficina e reabasteça nos lagos para apagar todos os fogos do ambiente e salvar a todos!";
         return descricao;
     }
-    
-    //Métodos do sensoreavel
+
     @Override
-    public void acionarSensores(){ // basicamente irá utilizar o sensor de fogo para ver se tem fogo próximo
-        sensorDeFogo.monitorar(getX(), getY(), getZ(), getAmbiente());
+    public void enviarMensagem(Comunicavel destinatario, String mensagem){
+        destinatario.receberMensagem(mensagem);
     }
+
+    @Override
+    public void receberMensagem(String mensagem){
+        System.out.println(mensagem);
+    }
+
+    @Override
+    public boolean isComunicavel() { return true; } // O robô bombeiro é comunicável
 
 
     // Getters e Setters
