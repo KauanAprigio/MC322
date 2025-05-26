@@ -111,6 +111,12 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero {
         }
     }
 
+    @Override
+    public String getDescricao() {
+        String descricao = "Robô limpador: Capaz de limpar diversos tipos sujeira (contanto que o tipo de limpeza ativo seja apropriado!)," + 
+         " aprimore seu alcance limpeza na oficina e ande pelo ambiente, evitando fogos e limpado tudo de lixo que houver por sua frente! Você está salvando o planeta!";
+        return descricao;
+    }
 
     //Métodos do sensoreavel
     @Override

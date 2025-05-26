@@ -84,7 +84,7 @@ public class Robo implements Entidade {
 
     @Override
     public int getLarguraY() { return larguraY; }
-    
+
     @Override
     public int getAltura() { return altura; }
 
@@ -104,7 +104,7 @@ public class Robo implements Entidade {
 
     @Override
     public String getDescricao() { 
-        String descricao = "QUALQUER COISA, SÓ PARA TER ALGO";
+        String descricao = "Robô básico, sem nenhuma ação especial além de poder se mover pelo ambiente, porém é Base para os robôs limpadores e bombeiros.";
         return descricao;
     }
 

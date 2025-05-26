@@ -169,6 +169,13 @@ public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
             }
         }
     }
+
+    @Override
+    public String getDescricao() {
+        String descricao = "Robô bombeiro: Capaz de voar e apagar fogos, o único porém é que existe uma capacidade" +
+         " máxima de peso de água que ele pode armazenar, aprimore sua capacidade na oficina e reabasteça nos lagos para apagar todos os fogos do ambiente e salvar a todos!";
+        return descricao;
+    }
     
     //Métodos do sensoreavel
     @Override
