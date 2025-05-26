@@ -322,20 +322,6 @@ classDiagram
     Obstaculo -- TipoObstaculo
     I_Entidade -- TipoEntidade
 
-
-    package "Exceptions" {
-        class ErrorAbastecimentoException 
-        class ErrorApagarFogoException 
-        class ErrorAprimoramentoException 
-        class ErroComunicacaoException 
-        class ErrorLimpezaException 
-        class EntidadeNaoEncontradaException 
-        class ForaDosLimitesException 
-        class LocalOcupadoException 
-        class NaoPodeVoarException 
-        class RoboDesligadoException 
-    }
-
     %% Relações de Exceção
     RoboBombeiro ..> ErrorAbastecimentoException : throws
     RoboBombeiro ..> ErrorApagarFogoException : throws
