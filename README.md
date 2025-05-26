@@ -271,7 +271,6 @@ classDiagram
     RoboBombeiro ..|> I_Comunicavel
     RoboBombeiro ..|> I_Aprimoravel
 
-    class SensorDeLixo {}
     SensorDeLixo --|> A_Sensor
 
     class Obstaculo {
