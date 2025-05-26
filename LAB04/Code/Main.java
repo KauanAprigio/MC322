@@ -77,7 +77,7 @@ public class Main {
             // Construtor RoboLimpador: String id, EstadoRobo estado, int pos_x, int pos_y, int pos_z,Ambiente ambiente, double raio, int raioDeLimpeza
             roboLimpador = new RoboLimpador("Faxinildo_01", EstadoRobo.OFF, 0, 0, 0, ambiente, 15.0, 10);
             // Construtor RoboBombeiro: String id, EstadoRobo estado, int pos_x, int pos_y, int altitude, Ambiente ambiente, int altitudeMaxima, double raiosensor, int peso_max, int raio_de_cessar_fogo
-            roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 2, 2, 0, ambiente, 105, 3000, 15);
+            roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 45, 45, 0, ambiente, 105, 3000, 15);
             ambiente.adicionarEntidade(roboLimpador);
             ambiente.adicionarEntidade(roboBombeiro);
         } catch (ForaDosLimitesException | LocalOcupadoException e) {
@@ -157,7 +157,7 @@ public class Main {
             ambiente.removerEntidade(roboLimpador, false);
             ambiente.removerEntidade(roboBombeiro, false);
             roboLimpador = new RoboLimpador("Faxinildo_01", EstadoRobo.OFF, 0, 0, 0, ambiente, 15.0, 10);
-            roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 10, 10, 0, ambiente, 105, 3000, 15);
+            roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 45, 45, 0, ambiente, 105, 3000, 15);
             ambiente.adicionarEntidade(roboLimpador);
             ambiente.adicionarEntidade(roboBombeiro);
         } catch (Exception e) { System.err.println("Erro ao reiniciar robôs: " + e.getMessage());}
