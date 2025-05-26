@@ -1,8 +1,10 @@
-package LAB04.Code;
+package LAB04.Code.AbstractClasses;
 
+import LAB04.Code.Ambiente;
 import LAB04.Code.Exceptions.RoboDesligadoException;
+import LAB04.Code.Interfaces.Entidade;
 
-public class Robo implements Entidade {
+public abstract class Robo implements Entidade {
     // Atributos
     private String id;
     private EstadoRobo estado;
@@ -17,7 +19,7 @@ public class Robo implements Entidade {
 
 
     //Construtor
-    Robo(String id, EstadoRobo estado, int pos_x, int pos_y, int pos_z, Ambiente ambiente) {
+    public Robo(String id, EstadoRobo estado, int pos_x, int pos_y, int pos_z, Ambiente ambiente) {
         this.ambiente = ambiente;
         this.id = id;
         this.estado = estado;
@@ -37,8 +39,8 @@ public class Robo implements Entidade {
         pos_y += deltaY;
         pos_z += deltaZ;
         // O Robô ja deve ser removido da posição anterior antes da chamada dessa função
-        getAmbiente().planoXY[pos_x][pos_y] = 'r';
-        getAmbiente().mapa[pos_x][pos_y][pos_z] = TipoEntidade.ROBO;
+        getAmbiente().getplanoXY()[pos_x][pos_y] = 'r';
+        getAmbiente().getMapa()[pos_x][pos_y][pos_z] = TipoEntidade.ROBO;
     }
     
     public void ligar(){
@@ -51,11 +53,6 @@ public class Robo implements Entidade {
         System.out.println("O robô de id:" + this.getId() + " está desligado.");
     }
 
-    public void executar(){
-        //posso deixar enxuto e desenvolver por meio de sobrecarga de método nas subclasses do robo
-    }
-
-
     // Getters e Setters
     public EstadoRobo getEstado() { return estado; }
 
@@ -66,12 +63,6 @@ public class Robo implements Entidade {
     public enum EstadoRobo {
         ON, // ligado
         OFF; // desligado
-        
-        //aqui irei ver se ele está ligado, caso ele esteja ligado ira retornar true, caso o contrario irá falar que é false, logo OFF
-        public boolean estaLigado() {
-            return this == ON;
-        }
-
     }
 
     public Ambiente getAmbiente() { return ambiente; }

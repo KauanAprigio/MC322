@@ -1,14 +1,14 @@
-package LAB04.Code;
+package LAB04.Code.AbstractClasses;
 import java.util.ArrayList;
 
-public class CentralComunicacao {
+public abstract class CentralComunicacao {
     //Atributos
     private ArrayList<String> mensagens;
     private int TotalMensagens = 0;
 
 
     //Construtor
-    CentralComunicacao(){
+    public CentralComunicacao(){
         this.mensagens = new ArrayList<String>();
     }
 

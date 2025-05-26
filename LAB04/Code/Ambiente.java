@@ -1,15 +1,20 @@
 package LAB04.Code;
 import java.util.ArrayList;
 
-import LAB04.Code.Entidade.TipoEntidade;
+import LAB04.Code.AbstractClasses.Robo;
 import LAB04.Code.Exceptions.EntidadeNaoEncontradaException;
 import LAB04.Code.Exceptions.ForaDosLimitesException;
 import LAB04.Code.Exceptions.LocalOcupadoException;
 import LAB04.Code.Exceptions.NaoPodeVoarException;
 import LAB04.Code.Exceptions.RoboDesligadoException;
+import LAB04.Code.Interfaces.Entidade;
+import LAB04.Code.Interfaces.Entidade.TipoEntidade;
 
-// VALE RESSALTAR QUE SE EU FOR USAR O VERIFICAR COLISOES PARA BOTAR UM OBSTACULO EM UM LUGAR QUE NÃO TENHA OUTRO DEVO REVER O CODIGO
-
+/**
+ * Classe Ambiente representa um ambiente tridimensional onde entidades podem ser adicionadas, removidas e movidas.
+ * Possui métodos para inicializar o mapa, adicionar e remover entidades, verificar colisões, mover entidades,
+ * e visualizar o ambiente.
+ */
 public class Ambiente {
     //Atributos final
     private final int altitudeMinima = 0;
@@ -26,7 +31,7 @@ public class Ambiente {
 
     
     //Construtor
-    Ambiente(int largura, int profundidade, int altura, TipoEntidade[][][] mapa, char[][] planoXY){
+    public Ambiente(int largura, int profundidade, int altura, TipoEntidade[][][] mapa, char[][] planoXY){
         this.largura = largura;
         this.profundidade = profundidade;
         this.altura = altura;
@@ -155,4 +160,5 @@ public class Ambiente {
     //Geters e Setters
     public ArrayList<Entidade> getEntidades() { return entidades; }
     public char[][] getplanoXY() { return planoXY; }
+    public TipoEntidade[][][] getMapa() { return mapa; }
 }

@@ -1,6 +1,8 @@
 package LAB04.Code;
 
-import LAB04.Code.Entidade.TipoEntidade;
+import LAB04.Code.AbstractClasses.Sensor;
+import LAB04.Code.Interfaces.Entidade;
+import LAB04.Code.Interfaces.Entidade.TipoEntidade;
 
 /*
  * Subclasse de Sensor

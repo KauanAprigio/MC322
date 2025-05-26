@@ -2,9 +2,14 @@ package LAB04.Code;
 
 import java.util.Iterator;
 import LAB04.Code.Obstaculo.TipoObstaculo;
+import LAB04.Code.AbstractClasses.Robo;
 import LAB04.Code.Exceptions.ErrorAbastecimentoException;
 import LAB04.Code.Exceptions.ForaDosLimitesException;
 import LAB04.Code.Exceptions.LocalOcupadoException;
+import LAB04.Code.Interfaces.Aprimoravel;
+import LAB04.Code.Interfaces.Comunicavel;
+import LAB04.Code.Interfaces.Entidade;
+import LAB04.Code.Interfaces.FogoZero;
 import LAB04.Code.Exceptions.ErrorApagarFogoException;
 import LAB04.Code.Exceptions.ErrorAprimoramentoException;
 
@@ -185,7 +190,6 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     public int getAltitudeMaxima() { return altitudeMaxima; }
     public int getCapacidade() { return peso_max; }
     public int getReservatorio() { return reservatorio; }
-    public Ambiente getAmbiente() { return ambiente; }
     public int getRaioDeCessarFogo() { return raio_de_cessar_fogo; }
     public int getAltitude() { return altitude; }
 

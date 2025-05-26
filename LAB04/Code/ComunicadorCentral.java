@@ -2,7 +2,10 @@ package LAB04.Code;
 
 import java.util.ArrayList;
 
+import LAB04.Code.AbstractClasses.CentralComunicacao;
 import LAB04.Code.Exceptions.ErroComunicacaoException;
+import LAB04.Code.Interfaces.Comunicavel;
+import LAB04.Code.Interfaces.Entidade;
 
 public class ComunicadorCentral extends CentralComunicacao implements Entidade, Comunicavel{
     private final TipoEntidade tipo = TipoEntidade.COMUNICADOR; // Definindo o tipo como COMUNICADOR por padrão
@@ -19,7 +22,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     //ArrayList<Obstaculo> lixos;
 
     //Construtor
-    ComunicadorCentral(int pos_x, int pos_y, int pos_z, Ambiente ambiente){
+    public ComunicadorCentral(int pos_x, int pos_y, int pos_z, Ambiente ambiente){
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.pos_z = pos_z;

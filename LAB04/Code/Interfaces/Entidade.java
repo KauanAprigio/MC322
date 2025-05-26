@@ -1,6 +1,7 @@
-package LAB04.Code;
+package LAB04.Code.Interfaces;
 
 
+import LAB04.Code.Ambiente;
 import LAB04.Code.Exceptions.RoboDesligadoException;
 
 public interface Entidade {

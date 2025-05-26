@@ -1,4 +1,4 @@
-package LAB04.Code;
+package LAB04.Code.Interfaces;
 import LAB04.Code.Exceptions.ErrorAbastecimentoException;
 import LAB04.Code.Exceptions.ErrorApagarFogoException;
 

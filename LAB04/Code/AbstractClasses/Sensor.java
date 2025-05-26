@@ -1,4 +1,6 @@
-package LAB04.Code;
+package LAB04.Code.AbstractClasses;
+
+import LAB04.Code.Ambiente;
 
 public abstract class Sensor {
     private double raio;

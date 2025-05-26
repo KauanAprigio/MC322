@@ -4,6 +4,11 @@ import java.util.Iterator;
 import LAB04.Code.Obstaculo.TipoObstaculo;
 import LAB04.Code.Exceptions.ErrorLimpezaException;
 import LAB04.Code.Exceptions.RoboDesligadoException;
+import LAB04.Code.Interfaces.Aprimoravel;
+import LAB04.Code.Interfaces.Entidade;
+import LAB04.Code.Interfaces.Sensoreavel;
+import LAB04.Code.Interfaces.SujeiraZero;
+import LAB04.Code.AbstractClasses.Robo;
 import LAB04.Code.Exceptions.ErrorAprimoramentoException;
 
 /* 

@@ -1,5 +1,7 @@
 package LAB04.Code;
 
+import LAB04.Code.Interfaces.Entidade;
+
 /*
  * Classe obrigatória Obstaculo
  * 
@@ -76,9 +78,9 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
         setPosY(pos_y + deltaY);
         for (int x = pos_x; x <= pos_x2; x++) {
             for (int y = pos_y; y <= pos_y2; y++) {
-                getAmbiente().planoXY[x][y] = 'o';
+                getAmbiente().getplanoXY()[x][y] = 'o';
                 for (int z = pos_z; z <= pos_z2; z++) {
-                    getAmbiente().mapa[x][y][z] = TipoEntidade.OBSTACULO;
+                    getAmbiente().getMapa()[x][y][z] = TipoEntidade.OBSTACULO;
                 }
             }
         } 

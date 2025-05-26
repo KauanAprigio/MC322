@@ -1,4 +1,4 @@
-package LAB04.Code;
+package LAB04.Code.Interfaces;
 
 public interface Comunicavel {
     public void enviarMensagem(Comunicavel destinatario, String mensagem);
