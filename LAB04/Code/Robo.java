@@ -64,9 +64,6 @@ public class Robo implements Entidade {
     public String getId(){ return id; }
     public EstadoRobo getEstado() { return estado; }
     public Ambiente getAmbiente() { return ambiente; }
-    public int getLarguraX() { return larguraX; }
-    public int getLarguraY() { return larguraY; }
-    public int getAltura() { return altura; }
 
     public void setEstado(EstadoRobo novoEstado){ this.estado = novoEstado; }
     
@@ -82,6 +79,14 @@ public class Robo implements Entidade {
         }
 
     }
+    @Override
+    public int getLarguraX() { return larguraX; }
+
+    @Override
+    public int getLarguraY() { return larguraY; }
+    
+    @Override
+    public int getAltura() { return altura; }
 
 
     // Metodos sobrescritos da interface
