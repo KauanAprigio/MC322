@@ -297,10 +297,6 @@ classDiagram
         +visualizarAmbiente() void
     }
 
-    class Main {
-        +main(String[]) void
-    }
-
     %% Relações
     RoboLimpador "1" o-- "1" SensorDeLixo : possui
     RoboBombeiro "1" o-- "1" ComunicadorCentral : comunicaCom
@@ -308,10 +304,6 @@ classDiagram
     A_Robo "*" o-- "1" Ambiente : operaEm
     Obstaculo "*" o-- "1" Ambiente : contidoEm
     ComunicadorCentral "1" o-- "1" Ambiente : localizadoEm
-    Main ..> Ambiente : usa
-    Main ..> RoboLimpador : instancia
-    Main ..> RoboBombeiro : instancia
-    Main ..> ComunicadorCentral : instancia
 
     %% Enums
     class EstadoRobo { <<enumeration>> ON; OFF }
@@ -321,20 +313,6 @@ classDiagram
     A_Robo -- EstadoRobo
     Obstaculo -- TipoObstaculo
     I_Entidade -- TipoEntidade
-
-    %% Relações de Exceção
-    RoboBombeiro ..> ErrorAbastecimentoException : throws
-    RoboBombeiro ..> ErrorApagarFogoException : throws
-    RoboLimpador ..> ErrorAprimoramentoException : throws
-    RoboBombeiro ..> ErrorAprimoramentoException : throws
-    ComunicadorCentral ..> ErroComunicacaoException : throws
-    RoboLimpador ..> ErrorLimpezaException : throws
-    Ambiente ..> EntidadeNaoEncontradaException : throws
-    Ambiente ..> ForaDosLimitesException : throws
-    Ambiente ..> LocalOcupadoException : throws
-    Ambiente ..> NaoPodeVoarException : throws
-    A_Robo ..> RoboDesligadoException : throws
-    RoboLimpador ..> RoboDesligadoException : throws
 ```
 
 ## Interfaces Criadas
