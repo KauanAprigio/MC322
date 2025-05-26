@@ -2,6 +2,9 @@ package LAB04.Code;
 
 import java.util.Iterator;
 import LAB04.Code.Obstaculo.TipoObstaculo;
+import LAB04.Code.Exceptions.ErrorLimpezaException;
+import LAB04.Code.Exceptions.RoboDesligadoException;
+import LAB04.Code.Exceptions.ErrorAprimoramentoException;
 
 /* 
  * SubClasse de RoboTerrestre
@@ -34,7 +37,11 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
 
     // Metodos 
     @Override
-    public void aprimorar(int upgrade){
+    public void aprimorar(int upgrade) throws ErrorAprimoramentoException {
+        // Verifica se o upgrade é válido
+        if (upgrade <= 0) {
+            throw new ErrorAprimoramentoException("Upgrade inválido! O valor deve ser maior que zero.");
+        }
         //Procura a oficina e vê se o robô está dentro dos limites dela
         for (Entidade e : getAmbiente().getEntidades()) {
             if (e.getTipo() == TipoEntidade.OBSTACULO){
@@ -51,13 +58,13 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
             }
         }
         // caso o robo não esteja na oficina
-        System.out.println(getId() + " não está dentro da oficina e não pode ser aprimorado!\n");
-
+        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!";
+        throw new ErrorAprimoramentoException(msg);
     }
 
     //Métodos da interface SujeiraZero
     @Override
-    public void definir_tipo_limpeza(int tipo){
+    public void definir_tipo_limpeza(int tipo) throws ErrorLimpezaException {
         // Verifica se o tipo de limpeza é válido
         // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
         if (tipo >= 0 && tipo <= 2) {
@@ -74,12 +81,13 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                     break;
             }
         } else {
-            System.out.println("Tipo de limpeza inválido! Escolha entre 0 (leve), 1 (pesada) ou 2 (muito pesada).\n");
+            String msg = "Tipo de limpeza inválido! Escolha entre 0 (leve), 1 (pesada) ou 2 (muito pesada).";
+            throw new ErrorLimpezaException(msg);
         }
     }
 
     @Override
-    public void limpar() {
+    public void limpar() throws ErrorLimpezaException {
         System.out.println("Tipo de limpeza atual: " + tipo_limpeza + "."); // Fala qual o tipo de limpeza
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
         //mesma lógica do laço for para achar os lixos e caso ainda tenha um obstaculo ele continua vendo se é lixo
@@ -104,7 +112,8 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                             
                             // se não pode limpar
                         } else {
-                            System.out.println(getId() + " não pode limpar " + o.getTipoObstaculo().getNome() + ", tente mudar o tipo de limpeza\n");
+                            String msg = getId() + " não pode limpar " + o.getTipoObstaculo().getNome() + ", tente mudar o tipo de limpeza";
+                            throw new ErrorLimpezaException(msg);
                         }
                     }
                 }
@@ -121,7 +130,10 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
 
     //Métodos do sensoreavel
     @Override
-    public void acionarSensores(){ // basicamente irá utilizar o sensor de fogo para ver se tem fogo próximo
+    public void acionarSensores() throws RoboDesligadoException{ // basicamente irá utilizar o sensor de fogo para ver se tem fogo próximo
+        if (getEstado() == EstadoRobo.OFF) {
+            throw new RoboDesligadoException("O robô está desligado e não pode acionar os sensores.");
+        }
         sensorDeLixo.monitorar(getX(), getY(), getZ(), getAmbiente());
     }
 

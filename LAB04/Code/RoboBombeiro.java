@@ -2,8 +2,11 @@ package LAB04.Code;
 
 import java.util.Iterator;
 import LAB04.Code.Obstaculo.TipoObstaculo;
+import LAB04.Code.Exceptions.ErrorAbastecimentoException;
 import LAB04.Code.Exceptions.ForaDosLimitesException;
 import LAB04.Code.Exceptions.LocalOcupadoException;
+import LAB04.Code.Exceptions.ErrorApagarFogoException;
+import LAB04.Code.Exceptions.ErrorAprimoramentoException;
 
 /*
  * SubClasse de RoboAereo
@@ -39,7 +42,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     }
     
     @Override
-    public void adicionar_agua(int litros){
+    public void adicionar_agua(int litros) throws ErrorAbastecimentoException {
         // Verifica se o robô está dentro de um lago
         boolean dentro_lago = false;
         for (Entidade e : getAmbiente().getEntidades()) {
@@ -54,8 +57,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
             }
         }
         if (!dentro_lago) {
-            System.out.println(getId() + " não está em um lago e não pode abastecer água!\n");
-            return;
+            throw new ErrorAbastecimentoException(getId() + " não está em um lago e não pode abastecer água!"); 
         }
         int peso_total = reservatorio + litros; // somatorio dos pesos
         if (peso_total > peso_max){
@@ -68,7 +70,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
         }
     }
 
-    public void apagar_fogo() throws ForaDosLimitesException, LocalOcupadoException{
+    public void apagar_fogo() throws ErrorApagarFogoException {
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
         // Verifica se o robô está dentro de um incêndio
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
@@ -91,7 +93,8 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                         
                         if (reservatorio < litros_necessarios){ // condicional caso nao tenha agua o suficiente
                             int deficit = litros_necessarios - reservatorio; // quanto ira faltar de agua para apagar o fogo
-                            System.out.println(getId() + " precisa de " + deficit + " litros a mais para apagar o incêndio!\n");
+                            String msg = getId() + " precisa de " + deficit + " litros a mais para apagar o incêndio!";
+                            throw new ErrorApagarFogoException(msg);
                         } else {
                             reservatorio -= litros_necessarios;
                             if (o.getTipoObstaculo() == TipoObstaculo.FOGO) {
@@ -107,13 +110,21 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                                 System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
                                 iterator.remove();
                                 Obstaculo novo_Predinho = new Obstaculo(o.getX(), o.getY(), TipoObstaculo.PREDIO, getAmbiente());
-                                getAmbiente().adicionarEntidade(novo_Predinho);
+                                try {
+                                    getAmbiente().adicionarEntidade(novo_Predinho);
+                                } catch (LocalOcupadoException | ForaDosLimitesException e1) {
+                                    // Nunca deveria acontecer, pois o predio é um obstaculo que ja existe
+                                    // e o ambiente ja foi verificado para nao ter obstaculos
+                                    // nesse local, mas vou deixar aqui para evitar erros futuros
+                                    System.out.println("Erro Inesperado: " + e1.getMessage());
+                                }
                             }
-                        }
-                        break;
-                    } else {
+                        }                         
+                    }
+                    else {
                         int falta_altura = o.getAltura() - getZ();
-                        System.out.println(getId() + " não está na altura do fogo, suba " + falta_altura + " metros para apagar o fogo!\n");
+                        String msg = getId() + " não está na altura do fogo, suba " + falta_altura + " metros para apagar o fogo!";
+                        throw new ErrorApagarFogoException(msg);
                     }
                 }
             }
@@ -121,7 +132,11 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     }
 
     @Override
-    public void aprimorar(int upgrade){
+    public void aprimorar(int upgrade) throws ErrorAprimoramentoException {
+        // Verifica se o upgrade é válido
+        if (upgrade <= 0) {
+            throw new ErrorAprimoramentoException("Upgrade inválido! O valor deve ser maior que zero.");
+        }
         //verifica se o robô esta dentro de uma oficina
         for (Entidade e : getAmbiente().getEntidades()) {
             if(e.getTipo() == TipoEntidade.OBSTACULO){
@@ -132,7 +147,8 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                         peso_max += upgrade;
                         System.out.println("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.\n");
                     } else {
-                        System.out.println(getId() + " não está dentro da oficina e não pode ser aprimorado!\n");
+                        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!";
+                        throw new ErrorAprimoramentoException(msg);
                     }
                 }
             }
