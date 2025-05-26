@@ -2,35 +2,28 @@ package LAB04.Code;
 
 import java.util.ArrayList;
 
-import LAB04.Code.Exceptions.RoboDesligadoException;
-import LAB04.Code.Obstaculo.TipoObstaculo;
-
 public class ComunicadorCentral extends CentralComunicacao implements Entidade, Comunicavel{
-    private TipoEntidade tipo;
+    private final TipoEntidade tipo = TipoEntidade.COMUNICADOR; // Definindo o tipo como COMUNICADOR por padrão
     private int pos_x;
     private int pos_y;
     private int pos_z;
     private Ambiente ambiente;
-    private final int larguraX = 0;
-    private final int larguraY = 0;
-    private final int altura = 0;
+    private final int larguraX = 5;
+    private final int larguraY = 5;
+    private final int altura = 100;
 
     //Listas de Obstaculos
     ArrayList<Obstaculo> fogos;
     //ArrayList<Obstaculo> lixos;
 
     //Construtor
-    ComunicadorCentral(TipoEntidade tipo, int pos_x, int pos_y, int pos_z, Ambiente ambiente){
-        this.tipo = tipo;
+    ComunicadorCentral(int pos_x, int pos_y, int pos_z, Ambiente ambiente){
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.pos_z = pos_z;
         this.ambiente = ambiente;
         fogos = new ArrayList<Obstaculo>();
         //lixos = new ArrayList<Obstaculo>();
-    }
-    
-    public void listarFogos(){
         for(Entidade e : getAmbiente().getEntidades()){
             if (e.getTipo() == TipoEntidade.OBSTACULO){
                 Obstaculo o = (Obstaculo) e;
@@ -40,33 +33,43 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             }
         }
     }
+    
+    public void listarFogos(){
+        if (fogos.isEmpty()) {
+            System.out.println("Não há fogos no ambiente.");
+        } else {
+            System.out.println("Lista de fogos no ambiente:");
+            for (Obstaculo fogo : fogos) {
+                System.out.println("Fogo do tipo: " + fogo.getTipoObstaculo() + " localizado em (" + fogo.getX() + ", " + fogo.getY() + ")");
+            }
+        }
+        System.out.println("Total de fogos: " + fogos.size() + ".\n");
+    }
 
     //basicamente ele vai ver em relacao ao robo/entidade onde ele está e com isso onde está o fogo mais próximo
     public void avisoFogoProximo(Entidade e){
-        if (e.getTipo() == TipoEntidade.ROBO){ // vê se é um robo, talvez tenha que ver se é RoboBombeiro
-            Obstaculo fogoProximo = null;
-            double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível para double
-            for (Obstaculo o : fogos) {
-                // Calcula a distância euclidiana entre o robô e o obstáculo
-                int Xmaisproximo = Math.max(o.getX(), Math.min(e.getX(), o.getPosicaoX2()));
-                int Ymaisproximo = Math.max(o.getY(), Math.min(e.getY(), o.getPosicaoY2()));
-                int Zmaisproximo = Math.max(0, Math.min(e.getZ(), o.getAlturinha()));
-                double distancia = Math.sqrt(Math.pow(Xmaisproximo - e.getX(), 2) + Math.pow(Ymaisproximo - e.getY(), 2) + Math.pow(Zmaisproximo - e.getZ(), 2));
-                    
-                if (distancia < menorDistancia) {
-                    menorDistancia = distancia;
-                    fogoProximo = o;
-                }
+        double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível
+        Obstaculo fogoMaisProximo = null; // Inicializa como null para verificar se encontrou algum fogo
+        for (Obstaculo fogo : fogos) {
+            int DistanciaX = Math.max(e.getX(), fogo.getX()) - Math.min (e.getX() + e.getLarguraX(), fogo.getX() + fogo.getLarguraX());
+            if (DistanciaX <= 0) { DistanciaX = 0; } // se a distancia for negativa, significa que o fogo está tocando a entidade
+            int DistanciaY = Math.max(e.getY(), fogo.getY()) - Math.min (e.getY() + e.getLarguraY(), fogo.getY() + fogo.getLarguraY());
+            if (DistanciaY <= 0) { DistanciaY = 0; } // se a distancia for negativa, significa que o fogo está tocando a entidade
+            int DistanciaZ = Math.max(e.getZ(), fogo.getZ()) - Math.min (e.getZ() + e.getAltura(), fogo.getZ() + fogo.getAltura());
+            if (DistanciaZ <= 0) { DistanciaZ = 0; } // se a distancia for negativa, significa que o fogo está tocando a entidade
+            double distancia = Math.sqrt(Math.pow(DistanciaX, 2) + Math.pow(DistanciaY, 2) + Math.pow(DistanciaZ, 2));
+            if (distancia < menorDistancia) {
+            menorDistancia = distancia;
+            fogoMaisProximo = fogo; // Atualiza o fogo mais próximo
             }
-            RoboBombeiro robozin = (RoboBombeiro) e;
-            String mensagemFogo = "O fogo mais próximo do robo de ID " + robozin.getId() + " é o obstaculo "
-                                   + fogoProximo.getTipoObstaculo() + " com coordenadas em (" + fogoProximo.getX() 
-                                   + "," + fogoProximo.getY() + ").\n" ;
-            Comunicavel robozao = (Comunicavel) robozin;
-            enviarMensagem(robozao, mensagemFogo);
         }
-
-        
+        if (fogoMaisProximo != null) {
+            System.out.println("Comunicador Central: O fogo mais próximo de " + e.getId() + " está a uma distância de "
+            + menorDistancia + " unidades e está localizado na posição (" 
+            + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getZ() + ").\n");
+        } else {
+            System.out.println("Comunicador Central: Não há fogos próximos de " + e.getId() + ".\n");
+        }
     }
 
     // Metodos sobrescritos da Comunicavel
@@ -95,7 +98,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
 
     @Override
     public String getDescricao() { 
-        String descricao = "QUALQUER COISA, SÓ PARA TER ALGO";
+        String descricao = "Comunicador Central: responsável por gerenciar a comunicação entre robôs, localiza e indica os fogos mais próximos a uma dada entidade quando ativado.";
         return descricao;
     }
 
@@ -103,8 +106,9 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     public char getRepresentacao() { char representacao = 'c'; return representacao; }
 
     @Override
-    public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa,
-        char[][] planoXY) throws RoboDesligadoException {
+    public void mover(int deltaX, int deltaY, int deltaZ) {
+        // Não é possível mover o Comunicador Central, pois ele é fixo no ambiente.
+        System.out.println("Comunicador Central não pode ser movido.");
     }
 
     @Override
@@ -115,6 +119,9 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
 
     @Override
     public int getAltura(){ return larguraX; }
+
+    @Override
+    public String getId() { return "ComunicadorCentral"; }
 
 
     //Getters e Setters
