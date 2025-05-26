@@ -64,7 +64,7 @@ public class Ambiente {
      * @throws ForaDosLimitesException Se a entidade está fora dos limites do ambiente.
      * @throws LocalOcupadoException Se a região onde a entidade será adicionada já está ocupada por outra entidade.
      */
-    public void adicionarEntidade(Entidade e) throws ForaDosLimitesException, LocalOcupadoException{
+    public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
         int X_max = e.getX() + e.getLarguraX();
         int Y_max = e.getY() + e.getLarguraY();
         int Z_max = e.getZ() + e.getAltura();
@@ -78,9 +78,11 @@ public class Ambiente {
                 }
             }
         } 
-        System.out.println("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente");
-        System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
-        System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")");
+        if (printar){
+            System.out.println("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente");
+            System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
+            System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")");
+        }
     }
 
     /**
@@ -96,9 +98,6 @@ public class Ambiente {
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
          if (mapa[e.getX()][e.getY()][e.getZ()] == TipoEntidade.VAZIO) 
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pode ser encontrada!\n");
-        
-        
-        
         for (int x = e.getX(); x <= e.getLarguraX() + e.getX(); x++) {
             for (int y = e.getY(); y <= e.getLarguraY() + e.getY(); y++) {
                 planoXY[x][y] = 'v'; 
@@ -164,6 +163,10 @@ public class Ambiente {
         verificarColisoes(e, novoX, novoY, novoZ);
         
         e.mover(deltaX, deltaY, deltaZ);
+        adicionarEntidade(e, false); // adiciona a entidade na nova posição
+        System.out.println("Entidade: " + e.getId() + " movida com sucesso para a nova posição.");
+        System.out.println("Nova posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
+        System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + (e.getZ() + e.getAltura()) + ")");
     }
 
     public void executarSensores(){ 
@@ -192,11 +195,12 @@ public class Ambiente {
         for (int x = novoX; x <= e.getLarguraX() + novoX; x++) {
             for (int y = novoY; y <= e.getLarguraY() + novoY; y++) {
                 for (int z = novoZ; z <= e.getAltura() + novoZ; z++) {
-                    if (estaOcupado(x, y, z, e.getTipo())){
-                        throw new LocalOcupadoException("A região ocupada pelo(a) " + e.getTipo() + " está ocupada!\n");
-                    } else if (!dentroDosLimites(x, y, z)) {
+                    if (!dentroDosLimites(x, y, z)) {
                         throw new ForaDosLimitesException("A região ocupada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }
+                    else if (estaOcupado(x, y, z, e.getTipo())){
+                        throw new LocalOcupadoException("A região ocupada pelo(a) " + e.getTipo() + " está ocupada!\n");
+                    } 
                 }
             }
         }

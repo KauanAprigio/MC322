@@ -51,21 +51,21 @@ public class Main {
         // Ajustando tamanho para evitar OutOfBounds (índices vão de 0 a 100, logo precisa de 101)
         TipoEntidade[][][] mapa = new TipoEntidade[101][101][111];
         char[][] planoXY = new char[101][101];
-        ambiente = new Ambiente(100, 100, 110, mapa, planoXY);
+        ambiente = new Ambiente(101, 101, 111, mapa, planoXY);
         ambiente.inicializarMapa();
 
         System.out.println("Adicionando obstáculos...");
         try {
-            ambiente.adicionarEntidade(new Obstaculo(2, 2, TipoObstaculo.LAGO, ambiente, TipoEntidade.OBSTACULO));
-            ambiente.adicionarEntidade(new Obstaculo(95, 0, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO)); // Fogo para apagar
-            ambiente.adicionarEntidade(new Obstaculo(0, 40, TipoObstaculo.PREDIOEMCHAMAS, ambiente, TipoEntidade.OBSTACULO)); // Prédio para apagar
-            ambiente.adicionarEntidade(new Obstaculo(40, 0, TipoObstaculo.PREDIO, ambiente, TipoEntidade.OBSTACULO));
-            ambiente.adicionarEntidade(new Obstaculo(50, 40, TipoObstaculo.SUJEIRAENCARDIDA, ambiente, TipoEntidade.OBSTACULO)); // Lixo 1
-            ambiente.adicionarEntidade(new Obstaculo(52, 41, TipoObstaculo.COMIDANOCHAO, ambiente, TipoEntidade.OBSTACULO)); // Lixo 2
-            ambiente.adicionarEntidade(new Obstaculo(54, 42, TipoObstaculo.SACOLAPLASTICA, ambiente, TipoEntidade.OBSTACULO)); // Lixo 3
-            ambiente.adicionarEntidade(new Obstaculo(55, 45, TipoObstaculo.OFICINA, ambiente, TipoEntidade.OBSTACULO)); // Oficina
-            comunicador = new ComunicadorCentral(50, 50, 0, ambiente);
-            ambiente.adicionarEntidade(comunicador);
+            ambiente.adicionarEntidade(new Obstaculo(2, 2, TipoObstaculo.LAGO, ambiente, TipoEntidade.OBSTACULO), true);
+            ambiente.adicionarEntidade(new Obstaculo(95, 0, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO),true); // Fogo para apagar
+            ambiente.adicionarEntidade(new Obstaculo(0, 40, TipoObstaculo.PREDIOEMCHAMAS, ambiente, TipoEntidade.OBSTACULO), true); // Prédio para apagar
+            ambiente.adicionarEntidade(new Obstaculo(40, 0, TipoObstaculo.PREDIO, ambiente, TipoEntidade.OBSTACULO), true);
+            ambiente.adicionarEntidade(new Obstaculo(50, 40, TipoObstaculo.SUJEIRAENCARDIDA, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 1
+            ambiente.adicionarEntidade(new Obstaculo(52, 41, TipoObstaculo.COMIDANOCHAO, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 2
+            ambiente.adicionarEntidade(new Obstaculo(54, 42, TipoObstaculo.SACOLAPLASTICA, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 3
+            ambiente.adicionarEntidade(new Obstaculo(55, 45, TipoObstaculo.OFICINA, ambiente, TipoEntidade.OBSTACULO), true); // Oficina
+            comunicador = new ComunicadorCentral(49, 50, 0, ambiente);
+            ambiente.adicionarEntidade(comunicador, true);
 
         } catch (ForaDosLimitesException | LocalOcupadoException e) {
             System.err.println("🚨 Erro Crítico ao adicionar entidade inicial: " + e.getMessage());
@@ -78,8 +78,8 @@ public class Main {
             roboLimpador = new RoboLimpador("Faxinildo_01", EstadoRobo.OFF, 0, 0, 0, ambiente, 15.0, 10);
             // Construtor RoboBombeiro: String id, EstadoRobo estado, int pos_x, int pos_y, int altitude, Ambiente ambiente, int altitudeMaxima, double raiosensor, int peso_max, int raio_de_cessar_fogo
             roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 45, 45, 0, ambiente, 105, 3000, 15);
-            ambiente.adicionarEntidade(roboLimpador);
-            ambiente.adicionarEntidade(roboBombeiro);
+            ambiente.adicionarEntidade(roboLimpador, true);
+            ambiente.adicionarEntidade(roboBombeiro, true);
         } catch (ForaDosLimitesException | LocalOcupadoException e) {
             System.err.println("🚨 Erro Crítico ao adicionar robô inicial: " + e.getMessage());
              System.exit(1);
@@ -158,8 +158,8 @@ public class Main {
             ambiente.removerEntidade(roboBombeiro, false);
             roboLimpador = new RoboLimpador("Faxinildo_01", EstadoRobo.OFF, 0, 0, 0, ambiente, 15.0, 10);
             roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 45, 45, 0, ambiente, 105, 3000, 15);
-            ambiente.adicionarEntidade(roboLimpador);
-            ambiente.adicionarEntidade(roboBombeiro);
+            ambiente.adicionarEntidade(roboLimpador, true);
+            ambiente.adicionarEntidade(roboBombeiro, true);
         } catch (Exception e) { System.err.println("Erro ao reiniciar robôs: " + e.getMessage());}
     }
 

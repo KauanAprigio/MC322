@@ -38,9 +38,6 @@ public abstract class Robo implements Entidade {
         pos_x += deltaX;
         pos_y += deltaY;
         pos_z += deltaZ;
-        // O Robô ja deve ser removido da posição anterior antes da chamada dessa função
-        getAmbiente().getplanoXY()[pos_x][pos_y] = 'r';
-        getAmbiente().getMapa()[pos_x][pos_y][pos_z] = TipoEntidade.ROBO;
     }
     
     public void ligar(){

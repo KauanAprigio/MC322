@@ -123,7 +123,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                                 iterator.remove();
                                 Obstaculo novo_Predinho = new Obstaculo(o.getX(), o.getY(), TipoObstaculo.PREDIO, getAmbiente(), TipoEntidade.OBSTACULO);
                                 try {
-                                    getAmbiente().adicionarEntidade(novo_Predinho);
+                                    getAmbiente().adicionarEntidade(novo_Predinho, false);
                                 } catch (LocalOcupadoException | ForaDosLimitesException e1) {
                                     // Nunca deveria acontecer, pois o predio é um obstaculo que ja existe
                                     // e o ambiente ja foi verificado para nao ter obstaculos
