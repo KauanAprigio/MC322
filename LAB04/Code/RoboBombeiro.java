@@ -31,7 +31,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     // Construtor
     public RoboBombeiro(String id, EstadoRobo estado, int pos_x, int pos_y, int altitude, 
                         Ambiente ambiente, int altitudeMaxima, double raiosensor, int peso_max, int raio_de_cessar_fogo) {
-        super(id, estado, pos_x, pos_y, altitude, ambiente);
+        super("Bombeiro_"+id, estado, pos_x, pos_y, altitude, ambiente);
         this.altitudeMaxima = altitudeMaxima;
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
@@ -157,7 +157,12 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     }
 
     @Override
-    public boolean isComunicavel() { return true; } // O robô bombeiro é comunicável
+    public boolean isComunicavel() { 
+        if (getEstado() == EstadoRobo.OFF) {
+            return false; // O robô bombeiro não é comunicável se estiver desligado
+        }
+        return true; 
+    } // O robô bombeiro é comunicável
 
 
     // Getters e Setters
