@@ -33,7 +33,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
     Ambiente ambiente; // ambiente onde o robô está operando
 
     // Construtor
-    public RoboLimpador(String id, EstadoRobo estado, TipoEntidade tipo, int pos_x,
+    public RoboLimpador(String id, EstadoRobo estado, int pos_x,
                         int pos_y, int pos_z,Ambiente ambiente, double raio, int raioDeLimpeza) {
         super("Limpador_"+id, estado, pos_x, pos_y, pos_z, ambiente);
         this.sensorDeLixo = new SensorDeLixo(raio); // sensor de lixo com raio 10
