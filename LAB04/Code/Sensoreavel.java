@@ -1,5 +1,7 @@
 package LAB04.Code;
 
+import LAB04.Code.Exceptions.RoboDesligadoException;
+
 public interface Sensoreavel {
-    public void acionarSensores(); // nao sei como sera implementado, mas vai depender de robo para robo
+    public void acionarSensores() throws RoboDesligadoException; // nao sei como sera implementado, mas vai depender de robo para robo
 }
