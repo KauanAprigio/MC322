@@ -143,13 +143,13 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     }
 
     @Override
-    public int getLarguraX () { return altura; }
+    public int getLarguraX () { return larguraX; }
 
     @Override
     public int getLarguraY () { return larguraY; }
 
     @Override
-    public int getAltura(){ return larguraX; }
+    public int getAltura(){ return altura; }
 
     @Override
     public String getId() { return "ComunicadorCentral"; }
