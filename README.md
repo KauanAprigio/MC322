@@ -23,9 +23,9 @@ Cada laboratório foi dividido em seu próprio conjunto de pastas e os comandos 
 ---
 
 # LAB 3
-Diagrama de classes:\
-As classes são representadas de maneira simplificada, com algumas relações e métodos ocultados para evitar confusão visual.\
-Métodos Getters e Setters foram ocultados e a enumeração do tipoObstáculo foi separada da classe Obstáculo.\
+Diagrama de classes:
+As classes são representadas de maneira simplificada, com algumas relações e métodos ocultados para evitar confusão visual.
+Métodos Getters e Setters foram ocultados e a enumeração do tipoObstáculo foi separada da classe Obstáculo.
 Além disso, as setas de agregação e dependência entre subclasses de robôs e subclasses de sensores não foram desenhadas.
 ```mermaid
 ---
@@ -165,8 +165,8 @@ classDiagram
 O Laboratório 4 introduziu conceitos mais avançados de Orientação a Objetos, focando em **Interfaces**, **Classes Abstratas** e **Tratamento de Exceções**. As principais evoluções foram:
 
 1.  **Interfaces**: Foram criadas diversas interfaces (`Entidade`, `Aprimoravel`, `Comunicavel`, `FogoZero`, `Sensoreavel`, `SujeiraZero`) para definir contratos de comportamento. Isso permitiu "simular" herança múltipla e desacoplar as classes, tornando o sistema mais flexível e extensível.
-2.  **Classes Abstratas**: `Robo` e `Sensor` foram (ou poderiam ser, no caso de `Robo`) transformadas em classes abstratas, definindo comportamentos e atributos comuns, mas forçando subclasses a implementar métodos específicos. `CentralComunicacao` também foi introduzida como abstrata.
-3.  **Tratamento de Exceções**: Um conjunto robusto de exceções personalizadas (`ForaDosLimitesException`, `LocalOcupadoException`, `ErrorLimpezaException`, etc.) foi implementado para lidar com erros de forma mais específica e clara, substituindo simples `System.out.println` de erros.
+2.  **Classes Abstratas**: `Robo` e `Sensor` foram transformadas em classes abstratas, definindo comportamentos e atributos comuns, mas forçando subclasses a implementar métodos específicos. `CentralComunicacao` também foi introduzida como abstrata.
+3.  **Tratamento de Exceções**: Um conjunto robusto de exceções personalizadas (`ForaDosLimitesException`, `LocalOcupadoException`, `ErrorLimpezaException`, etc.) foi implementado para lidar com erros de forma mais específica e clara.
 4.  **`Ambiente` 3D**: A classe `Ambiente` foi aprimorada para gerenciar um mapa 3D (`TipoEntidade[][][]`) e um plano 2D (`char[][]`), permitindo um controle de posição e colisão mais preciso e complexo. A gestão de entidades foi unificada através da interface `Entidade`.
 5.  **`ComunicadorCentral`**: Uma nova classe foi adicionada para gerenciar a comunicação entre entidades, especialmente para alertar sobre perigos como fogo.
 6.  **Refatoração**: As classes de Robôs e Obstáculos foram refatoradas para implementar as novas interfaces e utilizar o novo `Ambiente` e o sistema de exceções.
@@ -176,26 +176,26 @@ O Laboratório 4 introduziu conceitos mais avançados de Orientação a Objetos,
 
 ```mermaid
 ---
-title: Diagrama de classes - LAB04
+title: Diagrama de classes - LAB04 (Estereótipo para Interface)
 ---
 classDiagram
     direction TB
-    note "Interfaces são prefixadas com 'I_' e Classes Abstratas com 'A_'"
 
-    interface I_Entidade {
-        + getX() int
-        + getY() int
-        + getZ() int
-        + getTipo() TipoEntidade
-        + getDescricao() String
-        + getRepresentacao() char
-        + getId() String
-        + mover(int, int, int)
-        + getLarguraX() int
-        + getLarguraY() int
-        + getAltura() int
-        + getAmbiente() Ambiente
-        + isComunicavel() boolean
+    class I_Entidade {
+        <<Interface>>
+        +getX() int
+        +getY() int
+        +getZ() int
+        +getTipo() TipoEntidade
+        +getDescricao() String
+        +getRepresentacao() char
+        +getId() String
+        +mover(int, int, int) void
+        +getLarguraX() int
+        +getLarguraY() int
+        +getAltura() int
+        +getAmbiente() Ambiente
+        +isComunicavel() boolean
     }
 
     class A_Robo {
@@ -206,9 +206,9 @@ classDiagram
         -pos_y : int
         -pos_z : int
         #ambiente : Ambiente
-        +mover(int, int, int)
-        +ligar()
-        +desligar()
+        +mover(int, int, int) void
+        +ligar() void
+        +desligar() void
         +getEstado() EstadoRobo
     }
     A_Robo ..|> I_Entidade
@@ -216,21 +216,39 @@ classDiagram
     class A_Sensor {
         <<Abstract>>
         -raio : double
-        +monitorar(int, int, int, Ambiente)
+        +monitorar(int, int, int, Ambiente) void
     }
 
     class A_CentralComunicacao {
         <<Abstract>>
-        -mensagens : ArrayList<String>
-        +registrarMensagem(String, String)
-        +exibirMensagens()
+        -mensagens : List~String~
+        +registrarMensagem(String, String) void
+        +exibirMensagens() void
     }
 
-    interface I_Aprimoravel { +aprimorar(int) }
-    interface I_Comunicavel { +enviarMensagem(Comunicavel, String); +receberMensagem(String) }
-    interface I_FogoZero { +adicionar_agua(int); +apagar_fogo() }
-    interface I_Sensoreavel { +acionarSensores() }
-    interface I_SujeiraZero { +limpar(); +definir_tipo_limpeza(int) }
+    class I_Aprimoravel {
+        <<Interface>>
+        +aprimorar(int) void
+    }
+    class I_Comunicavel {
+        <<Interface>>
+        +enviarMensagem(Comunicavel, String) void
+        +receberMensagem(String) void
+    }
+    class I_FogoZero {
+        <<Interface>>
+        +adicionar_agua(int) void
+        +apagar_fogo() void
+    }
+    class I_Sensoreavel {
+        <<Interface>>
+        +acionarSensores() void
+    }
+    class I_SujeiraZero {
+        <<Interface>>
+        +limpar() void
+        +definir_tipo_limpeza(int) void
+    }
 
     class RoboLimpador {
         -tipo_limpeza : int
@@ -253,7 +271,7 @@ classDiagram
     RoboBombeiro ..|> I_Comunicavel
     RoboBombeiro ..|> I_Aprimoravel
 
-    class SensorDeLixo { }
+    class SensorDeLixo {}
     SensorDeLixo --|> A_Sensor
 
     class Obstaculo {
@@ -263,7 +281,7 @@ classDiagram
     }
     Obstaculo ..|> I_Entidade
 
-    class ComunicadorCentral { }
+    class ComunicadorCentral {}
     ComunicadorCentral --|> A_CentralComunicacao
     ComunicadorCentral ..|> I_Entidade
     ComunicadorCentral ..|> I_Comunicavel
@@ -272,35 +290,42 @@ classDiagram
         -largura : int
         -profundidade : int
         -altura : int
-        -entidades : ArrayList<I_Entidade>
-        -mapa : TipoEntidade[][][]
-        -planoXY : char[][]
-        +adicionarEntidade(I_Entidade)
-        +removerEntidade(I_Entidade)
-        +moverEntidade(I_Entidade, int, int, int)
-        +visualizarAmbiente()
+        -entidades : List~I_Entidade~
+        -mapa : object
+        -planoXY : object
+        +adicionarEntidade(I_Entidade) void
+        +removerEntidade(I_Entidade, boolean) void
+        +moverEntidade(I_Entidade, int, int, int) void
+        +visualizarAmbiente() void
     }
 
     class Main {
-        +main(String[])
+        +main(String[]) void
     }
 
-    RoboLimpador o-- SensorDeLixo
-    RoboBombeiro o-- ComunicadorCentral : envia msg
-    ComunicadorCentral o-- RoboBombeiro : envia msg
-    A_Robo o-- Ambiente
-    Obstaculo o-- Ambiente
-    ComunicadorCentral o-- Ambiente
-    Main ..> Ambiente
-    Main ..> RoboLimpador
-    Main ..> RoboBombeiro
-    Main ..> ComunicadorCentral
+    %% Relações
+    RoboLimpador "1" o-- "1" SensorDeLixo : possui
+    RoboBombeiro "1" o-- "1" ComunicadorCentral : comunicaCom
+    ComunicadorCentral "1" o-- "*" RoboBombeiro : podeAvisar
+    A_Robo "*" o-- "1" Ambiente : operaEm
+    Obstaculo "*" o-- "1" Ambiente : contidoEm
+    ComunicadorCentral "1" o-- "1" Ambiente : localizadoEm
+    Main ..> Ambiente : usa
+    Main ..> RoboLimpador : instancia
+    Main ..> RoboBombeiro : instancia
+    Main ..> ComunicadorCentral : instancia
 
-    note for A_Robo "EstadoRobo (Enum)"
-    note for Obstaculo "TipoObstaculo (Enum)"
-    note for I_Entidade "TipoEntidade (Enum)"
+    %% Enums
+    class EstadoRobo { <<enumeration>> ON; OFF }
+    class TipoObstaculo { <<enumeration>> LAGO; FOGO /*...*/ }
+    class TipoEntidade { <<enumeration>> VAZIO; ROBO /*...*/ }
 
-    package Exceptions {
+    A_Robo -- EstadoRobo
+    Obstaculo -- TipoObstaculo
+    I_Entidade -- TipoEntidade
+
+
+    package "Exceptions" {
         class ErrorAbastecimentoException {}
         class ErrorApagarFogoException {}
         class ErrorAprimoramentoException {}
@@ -313,6 +338,7 @@ classDiagram
         class RoboDesligadoException {}
     }
 
+    %% Relações de Exceção
     RoboBombeiro ..> ErrorAbastecimentoException : throws
     RoboBombeiro ..> ErrorApagarFogoException : throws
     RoboLimpador ..> ErrorAprimoramentoException : throws
@@ -325,36 +351,35 @@ classDiagram
     Ambiente ..> NaoPodeVoarException : throws
     A_Robo ..> RoboDesligadoException : throws
     RoboLimpador ..> RoboDesligadoException : throws
-
 ```
 
 ## Interfaces Criadas
 
 * **`I_Entidade`**: Contrato base para qualquer objeto que possa existir no `Ambiente` (Robôs, Obstáculos, Comunicador). Define métodos para posição, tipo, descrição, movimento e dimensões.
     * Implementada por: `A_Robo`, `Obstaculo`, `ComunicadorCentral`.
-* **`I_Aprimoravel`**: Define o comportamento de entidades que podem ser melhoradas (geralmente em oficinas).
+* **`I_Aprimoravel`**: Define o comportamento de entidades que podem ser melhoradas.
     * Implementada por: `RoboLimpador`, `RoboBombeiro`.
 * **`I_Comunicavel`**: Define a capacidade de enviar e receber mensagens.
     * Implementada por: `RoboBombeiro`, `ComunicadorCentral`.
 * **`I_FogoZero`**: Define as ações de um robô bombeiro para lidar com fogo.
     * Implementada por: `RoboBombeiro`.
-* **`I_Sensoreavel`**: Define a capacidade de usar sensores (específico para o limpador neste lab).
+* **`I_Sensoreavel`**: Define a capacidade de usar sensores.
     * Implementada por: `RoboLimpador`.
 * **`I_SujeiraZero`**: Define as ações de um robô limpador.
     * Implementada por: `RoboLimpador`.
 
 ## Exceções Personalizadas
 
-* **`ErrorAbastecimentoException`**: Lançada por `RoboBombeiro` ao tentar adicionar água fora de um lago, com valor inválido ou excedendo a capacidade.
-* **`ErrorApagarFogoException`**: Lançada por `RoboBombeiro` ao tentar apagar fogo sem água suficiente, fora de alcance ou na altitude errada.
-* **`ErrorAprimoramentoException`**: Lançada por `RoboLimpador` e `RoboBombeiro` ao tentar aprimorar fora de uma oficina ou com valor inválido.
-* **`ErroComunicacaoException`**: Lançada por `ComunicadorCentral` ao tentar enviar mensagem para uma entidade não comunicável.
-* **`ErrorLimpezaException`**: Lançada por `RoboLimpador` ao tentar limpar com tipo errado ou definir tipo inválido.
-* **`EntidadeNaoEncontradaException`**: Lançada por `Ambiente` ao tentar remover uma entidade que não existe.
-* **`ForaDosLimitesException`**: Lançada por `Ambiente` ao tentar adicionar ou mover uma entidade para fora do mapa.
-* **`LocalOcupadoException`**: Lançada por `Ambiente` ao tentar adicionar ou mover uma entidade para um local já ocupado.
-* **`NaoPodeVoarException`**: Lançada por `Ambiente` quando um robô não aéreo tenta se mover para uma altitude > 0.
-* **`RoboDesligadoException`**: Lançada por `A_Robo` ou subclasses ao tentar executar ações (mover, usar sensores) enquanto desligado.
+* **`ErrorAbastecimentoException`**: Lançada por `RoboBombeiro` ao tentar adicionar água de forma inadequada.
+* **`ErrorApagarFogoException`**: Lançada por `RoboBombeiro` ao falhar em apagar fogo.
+* **`ErrorAprimoramentoException`**: Lançada por `RoboLimpador` e `RoboBombeiro` ao falhar no aprimoramento.
+* **`ErroComunicacaoException`**: Lançada por `ComunicadorCentral` em falhas de comunicação.
+* **`ErrorLimpezaException`**: Lançada por `RoboLimpador` em falhas de limpeza.
+* **`EntidadeNaoEncontradaException`**: Lançada por `Ambiente` ao não encontrar uma entidade.
+* **`ForaDosLimitesException`**: Lançada por `Ambiente` para ações fora do mapa.
+* **`LocalOcupadoException`**: Lançada por `Ambiente` para ações em locais já ocupados.
+* **`NaoPodeVoarException`**: Lançada por `Ambiente` quando um robô não aéreo tenta voar.
+* **`RoboDesligadoException`**: Lançada por `Robo` ou subclasses ao tentar ações enquanto desligado.
 
 ## Compilação e Execução
 
