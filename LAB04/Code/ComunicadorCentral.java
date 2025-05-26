@@ -48,7 +48,6 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível para double
             for (Obstaculo o : fogos) {
                 // Calcula a distância euclidiana entre o robô e o obstáculo
-                // Assumindo que getX() e getY() do obstáculo retornam um ponto representativo (ex: centro ou canto)
                 int Xmaisproximo = Math.max(o.getX(), Math.min(e.getX(), o.getPosicaoX2()));
                 int Ymaisproximo = Math.max(o.getY(), Math.min(e.getY(), o.getPosicaoY2()));
                 int Zmaisproximo = Math.max(0, Math.min(e.getZ(), o.getAlturinha()));
