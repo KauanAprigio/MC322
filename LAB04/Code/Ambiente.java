@@ -96,13 +96,13 @@ public class Ambiente {
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
          if (mapa[e.getX()][e.getY()][e.getZ()] == TipoEntidade.VAZIO) 
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pode ser encontrada!\n");
-        int x = e.getX();
-        int y = e.getY();
-        int z = e.getZ();
-        for (; x <= e.getLarguraX() + e.getX(); x++) {
-            for (; y <= e.getLarguraY() + e.getY(); y++) {
+        
+        
+        
+        for (int x = e.getX(); x <= e.getLarguraX() + e.getX(); x++) {
+            for (int y = e.getY(); y <= e.getLarguraY() + e.getY(); y++) {
                 planoXY[x][y] = 'v'; 
-                for (; z <= e.getAltura() + e.getZ(); z++) {
+                for (int z = e.getZ(); z <= e.getAltura() + e.getZ(); z++) {
                     mapa[x][y][z] = TipoEntidade.VAZIO;
                 }
             }
@@ -120,15 +120,9 @@ public class Ambiente {
 
     // Verifica se a posição (x, y, z) está Vazia ou ocupada por outra entidade.
     public boolean estaOcupado(int x, int y, int z, TipoEntidade tipo) { 
-        if (tipo == TipoEntidade.ROBO){
-            if (mapa[x][y][z] == TipoEntidade.VAZIO || mapa[x][y][z] == TipoEntidade.LOCAL) {
-                return false; // A posição está vazia ou ocupada por um Local seguro para robos
-            }
-        } else {
-            if (mapa[x][y][z] == TipoEntidade.VAZIO) {
-                return false; // A posição está vazia
-            }
-        }
+        TipoEntidade posicao = mapa[x][y][z];
+        if (posicao == TipoEntidade.VAZIO) return false; // A posição está vazia
+        if (posicao == TipoEntidade.LOCAL && tipo == TipoEntidade.ROBO) return false; // A posição é um local e a entidade é um robô, então pode ser ocupada
         return true; // A posição está ocupada
     }
 
@@ -192,12 +186,12 @@ public class Ambiente {
      * @throws ForaDosLimitesException Se a região ocupada estiver fora dos limites do ambiente.
      */
     public void verificarColisoes(Entidade e, int novoX, int novoY, int novoZ) throws LocalOcupadoException, ForaDosLimitesException{ 
-        int x = novoX;
-        int y = novoY;
-        int z = novoZ;
-        for (; x <= e.getLarguraX() + novoX; x++) {
-            for (; y <= e.getLarguraY() + novoY; y++) {
-                for (; z <= e.getAltura() + novoZ; z++) {
+        
+        
+        
+        for (int x = novoX; x <= e.getLarguraX() + novoX; x++) {
+            for (int y = novoY; y <= e.getLarguraY() + novoY; y++) {
+                for (int z = novoZ; z <= e.getAltura() + novoZ; z++) {
                     if (estaOcupado(x, y, z, e.getTipo())){
                         throw new LocalOcupadoException("A região ocupada pelo(a) " + e.getTipo() + " está ocupada!\n");
                     } else if (!dentroDosLimites(x, y, z)) {
