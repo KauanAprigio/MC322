@@ -145,10 +145,10 @@ public class Ambiente {
     public void visualizarAmbiente(){
         for (int x = 0; x < largura; x++){
             for (int y = 0; y < profundidade; y++){
-                System.out.println(planoXY[x][y] + " ");// aqui irei printar os caracteres dando um espaço entre eles
+                System.out.print(planoXY[x][y] + " ");// printa os caracteres dando um espaço entre eles
             }
+            System.out.println("");
         }
-        System.err.println(); // uma quebra de linha para deixar dividido a matriz do resto na main
     }
 
 
