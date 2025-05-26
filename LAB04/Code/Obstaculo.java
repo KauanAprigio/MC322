@@ -25,12 +25,12 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     private int pos_y2;
     private int pos_z2;
     private TipoObstaculo tipoObstaculo;
-    private final TipoEntidade tipo = TipoEntidade.OBSTACULO; // Definindo o tipo como OBSTACULO por padrão
+    private TipoEntidade tipo; // Definindo o tipo como OBSTACULO por padrão
     private Ambiente ambiente; // Ambiente onde o obstáculo está localizado
 
 
     // Construtor
-    public Obstaculo(int pos_x, int pos_y, TipoObstaculo tipoObstaculo, Ambiente ambiente) {
+    public Obstaculo(int pos_x, int pos_y, TipoObstaculo tipoObstaculo, Ambiente ambiente, TipoEntidade tipo) {
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.pos_x2 = pos_x + tipoObstaculo.getLarguraX();
@@ -38,6 +38,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
         this.pos_z2 = tipoObstaculo.getAltura();
         this.tipoObstaculo = tipoObstaculo;
         this.ambiente = ambiente;
+        this.tipo = tipo;
     }
 
 
@@ -107,14 +108,14 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
 
     /* 
      * Enumeração dos tipos de obstáculos
-     * - LAGO: Local:reabastecimento de água do robô bombeiro: não removível
-     * - FOGO: removível pelo robô bombeiro destroi robos que não são bombeiros
-     * - PREDIOEMCHAMAS: Fogo: removível pelo robô bombeiro vira prédio destroi robos que não são bombeiros
-     * - PREDIO: Local: não removível
-     * - SUJEIRAENCARDIDA: Lixo: removível pelo robô limpador no modo de limpeza pesada
-     * - COMIDANOCHAO: Lixo: removível pelo robô limpador no modo de limpeza média
-     * - SACOLAPLASTICA: Lixo: removível pelo robô limpador no modo de limpeza leve
-     * - OFICINA: Local: melhoria de robôs: não removível
+     * - LAGO: Local - reabastecimento de água do robô bombeiro: não removível
+     * - FOGO: removível pelo robô bombeiro.
+     * - PREDIOEMCHAMAS: Fogo - removível pelo robô bombeiro e vira um prédio.
+     * - PREDIO: Local - não removível
+     * - SUJEIRAENCARDIDA: Lixo - removível pelo robô limpador no modo de limpeza pesada
+     * - COMIDANOCHAO: Lixo - removível pelo robô limpador no modo de limpeza média
+     * - SACOLAPLASTICA: Lixo - removível pelo robô limpador no modo de limpeza leve
+     * - OFICINA: Local - melhoria de robôs: não removível
      * 
      * Atributos:
      * - int larguraX: largurax do obstáculo

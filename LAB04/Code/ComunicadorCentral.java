@@ -28,7 +28,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         this.pos_z = pos_z;
         this.ambiente = ambiente;
         fogos = new ArrayList<Obstaculo>();
-        //lixos = new ArrayList<Obstaculo>();
+        // Adicionar os fogos do ambiente à lista de fogos
         for(Entidade e : getAmbiente().getEntidades()){
             if (e.getTipo() == TipoEntidade.OBSTACULO){
                 Obstaculo o = (Obstaculo) e;
@@ -38,7 +38,13 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             }
         }
     }
-    
+
+    // Métodos
+    /**
+     * Método listarFogos:
+     *  Método para listar todos os fogos no ambiente.
+     *  Se não houver fogos, informa que não há fogos no ambiente.
+     */
     public void listarFogos(){
         if (fogos.isEmpty()) {
             System.out.println("Não há fogos no ambiente.");
@@ -51,12 +57,21 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         System.out.println("Total de fogos: " + fogos.size() + ".\n");
     }
 
-    //basicamente ele vai ver em relacao ao robo/entidade onde ele está e com isso onde está o fogo mais próximo
+    /**
+     * Método avisoFogoProximo:
+     *  Método para avisar uma entidade sobre o fogo mais próximo.
+     *  Apenas avisa se a entidade for comunicável e estiver disponível.
+     * 
+     * 
+     * @param e Entidade que receberá a mensagem.
+     * @throws ErroComunicacaoException Se a entidade não for comunicável ou estiver indisponível.
+     */
     public void avisoFogoProximo(Entidade e) throws ErroComunicacaoException {
         if (!e.isComunicavel()) throw new ErroComunicacaoException("Erro de comunicação: Entidade " + e.getId() + " não tem a capacidade de receber mensagens ou está indisponível no momento.\n");
         double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível
         Obstaculo fogoMaisProximo = null; // Inicializa como null para verificar se encontrou algum fogo
         for (Obstaculo fogo : fogos) {
+            // Calcula a distância entre a entidade e o fogo
             int DistanciaX = Math.max(e.getX(), fogo.getX()) - Math.min (e.getX() + e.getLarguraX(), fogo.getX() + fogo.getLarguraX());
             if (DistanciaX <= 0) { DistanciaX = 0; } // se a distancia for negativa, significa que o fogo está tocando a entidade
             int DistanciaY = Math.max(e.getY(), fogo.getY()) - Math.min (e.getY() + e.getLarguraY(), fogo.getY() + fogo.getLarguraY());
@@ -64,9 +79,10 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             int DistanciaZ = Math.max(e.getZ(), fogo.getZ()) - Math.min (e.getZ() + e.getAltura(), fogo.getZ() + fogo.getAltura());
             if (DistanciaZ <= 0) { DistanciaZ = 0; } // se a distancia for negativa, significa que o fogo está tocando a entidade
             double distancia = Math.sqrt(Math.pow(DistanciaX, 2) + Math.pow(DistanciaY, 2) + Math.pow(DistanciaZ, 2));
+
             if (distancia < menorDistancia) {
-            menorDistancia = distancia;
-            fogoMaisProximo = fogo; // Atualiza o fogo mais próximo
+                menorDistancia = distancia;
+                fogoMaisProximo = fogo; // Atualiza o fogo mais próximo
             }
         }
         if (fogoMaisProximo != null) {
@@ -75,13 +91,19 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             + menorDistancia + " unidades e está localizado na posição (" 
             + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getZ() + ").\n";
             enviarMensagem(d, mensagem);
+            // Salva a mensagem no histórico de mensagens do comunicador central
             registrarMensagem(getId(), mensagem);
         } else {
             System.out.println("Comunicador Central: Não há fogos próximos de " + e.getId() + ".\n");
         }
     }
 
-    // Metodos sobrescritos da Comunicavel
+    public void adicionarFogo(Obstaculo fogo) {
+        fogos.add(fogo);
+        System.out.println("Comunicador Central: Fogo da posição (" + fogo.getX() + ", " + fogo.getY() + "). Registraado pelo comunicador central\n");
+    }
+
+    // Metodos sobrescritos da interface Comunicavel
     @Override
     public void enviarMensagem(Comunicavel destinatario, String mensagem){
         destinatario.receberMensagem(mensagem);
@@ -92,7 +114,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         System.out.println(mensagem);
     }
 
-    // Metodos sobrescritos da Entidade
+    // Metodos sobrescritos da interface Entidade
     @Override
     public int getX() { return pos_x; }
 
@@ -135,7 +157,6 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     @Override
     public boolean isComunicavel() { return true; } // O Comunicador Central é comunicável
 
-
-    //Getters e Setters
+    @Override
     public Ambiente getAmbiente() { return ambiente; }
 }

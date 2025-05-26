@@ -64,17 +64,24 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
         if (!dentro_lago) {
             throw new ErrorAbastecimentoException(getId() + " não está em um lago e não pode abastecer água!"); 
         }
+        if (getEstado() == EstadoRobo.OFF) {
+            throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!");
+        }
+        if (litros <= 0) {
+            throw new ErrorAbastecimentoException("Quantidade de litros inválida! Deve ser maior que zero.");
+        }
         int peso_total = reservatorio + litros; // somatorio dos pesos
         if (peso_total > peso_max){
             int excedente = peso_total - peso_max;
-            System.out.println("A quantidade " + litros + " litros excede " + excedente + " litros da capacidade máxima de " + peso_max + " litros do " + getId() + "!\n");
+            String msg = "A quantidade " + litros + " litros excede " + excedente + " litros da capacidade máxima de " + peso_max + " litros do " + getId() + "!\n";
+            throw new ErrorAbastecimentoException(msg);
         } else {
             reservatorio += litros;
             System.out.println(getId() + " foi abastecido com sucesso.");
-            System.out.println("Reservatorio possui " + reservatorio + " litros.\n");
+            System.out.println("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros\n");
         }
     }
-
+    @Override
     public void apagar_fogo() throws ErrorApagarFogoException {
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
         // Verifica se o robô está dentro de um incêndio
@@ -114,7 +121,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                                 System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
                                 System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
                                 iterator.remove();
-                                Obstaculo novo_Predinho = new Obstaculo(o.getX(), o.getY(), TipoObstaculo.PREDIO, getAmbiente());
+                                Obstaculo novo_Predinho = new Obstaculo(o.getX(), o.getY(), TipoObstaculo.PREDIO, getAmbiente(), TipoEntidade.OBSTACULO);
                                 try {
                                     getAmbiente().adicionarEntidade(novo_Predinho);
                                 } catch (LocalOcupadoException | ForaDosLimitesException e1) {
@@ -183,7 +190,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
             return false; // O robô bombeiro não é comunicável se estiver desligado
         }
         return true; 
-    } // O robô bombeiro é comunicável
+    } // O robô bombeiro é comunicável quando ligado
 
 
     // Getters e Setters

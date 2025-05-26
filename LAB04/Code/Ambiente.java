@@ -42,16 +42,28 @@ public class Ambiente {
 
 
     //Metodos
+    // Inicializa o mapa e o planoXY com espaços vazios
+    // O planoXY é um recorte 2D do ambiente no plano Z = 0, onde cada posição é representada por um caractere.
     public void inicializarMapa(){
         for (int x = 0; x < largura; x++){
             for (int y = 0; y < profundidade; y++){
-                planoXY[x][y] = 'v'; // aqui irei fazer a representação do plano xy no z = 0. O 'v' é a representação para o vazio
+                planoXY[x][y] = 'v'; // faz a representação do plano xy no z = 0. O 'v' é a representação para o vazio
                 for (int z = 0; z < altura; z++){
                     mapa[x][y][z] = TipoEntidade.VAZIO;
                 }
             }
         }
     }
+    /**
+     *  Método adicionarEntidade:
+     *  Adiciona uma entidade ao ambiente, verificando se a posição está dentro dos limites e se não há colisões com outras entidades.
+     *  Se a posição for válida, a entidade é adicionada ao mapa e ao planoXY.
+     *  Se não for válida, lança exceções apropriadas.
+     * 
+     * @param e Entidade a ser adicionada ao ambiente.
+     * @throws ForaDosLimitesException Se a entidade está fora dos limites do ambiente.
+     * @throws LocalOcupadoException Se a região onde a entidade será adicionada já está ocupada por outra entidade.
+     */
     public void adicionarEntidade(Entidade e) throws ForaDosLimitesException, LocalOcupadoException{
         int X_max = e.getX() + e.getLarguraX();
         int Y_max = e.getY() + e.getLarguraY();
@@ -71,6 +83,16 @@ public class Ambiente {
         System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")");
     }
 
+    /**
+     * Método removerEntidade:
+     * Remove uma entidade do ambiente, verificando se ela existe no mapa.
+     * Se a entidade não for encontrada, lança uma exceção.
+     * Se for removida com sucesso, atualiza o mapa e o planoXY para refletir a remoção.
+     * 
+     * @param e Entidade a ser removida do ambiente.
+     * @param printar Se true, imprime uma mensagem de sucesso após a remoção.
+     * @throws EntidadeNaoEncontradaException Se a entidade não está no ambiente ou não pode ser encontrada.
+     */
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
          if (mapa[e.getX()][e.getY()][e.getZ()] == TipoEntidade.VAZIO) 
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pode ser encontrada!\n");
@@ -90,15 +112,35 @@ public class Ambiente {
             System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.");
     }
 
-    public boolean dentroDosLimites(int x, int y, int altitude) { // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
+    // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
+    public boolean dentroDosLimites(int x, int y, int altitude) { 
         if ((origemX <= x && x <= largura) && (origemY <= y && y <= altura) && (altitudeMinima <= altitude && altitude <= altura)) return true;
         return false;
     }
 
+    // Verifica se a posição (x, y, z) está Vazia ou ocupada por outra entidade.
     public boolean estaOcupado(int x, int y, int z){ 
-        return mapa[x][y][z] != TipoEntidade.VAZIO;
+        if (mapa[x][y][z] != TipoEntidade.LOCAL && mapa[x][y][z] != TipoEntidade.VAZIO) {
+            return true; // A posição está vazia ou ocupada por um local.
+        }
+        return true; // A posição está ocupada
     }
 
+    /**
+     * Método moverEntidade:
+     * Move uma entidade para uma nova posição (novoX, novoY, novoZ) no ambiente.
+     * Verifica se a nova posição está ocupada ou fora dos limites antes de mover.
+     * Se a entidade não existir no ambiente, lança uma exceção.
+     * 
+     * @param e Entidade a ser movida.
+     * @param novoX Nova coordenada X da entidade.
+     * @param novoY Nova coordenada Y da entidade.
+     * @param novoZ Nova coordenada Z da entidade.
+     * @throws LocalOcupadoException Se a nova posição já estiver ocupada por outra entidade.
+     * @throws ForaDosLimitesException Se a nova posição estiver fora dos limites do ambiente.
+     * @throws RoboDesligadoException Se a entidade for um robô desligado e não puder ser movida.
+     * @throws NaoPodeVoarException Se a entidade tentar voar sem permissão (apenas robôs bombeiros podem voar).
+     */
     public void moverEntidade(Entidade e, int novoX, int novoY,
         int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
         try{
@@ -130,6 +172,19 @@ public class Ambiente {
        
     }
 
+    /**
+     * Método verificarColisoes:
+     * Verifica se a região ocupada por uma entidade está livre ou se está fora dos limites do ambiente.
+     * Se a região estiver ocupada, lança uma exceção LocalOcupadoException.
+     * Se a região estiver fora dos limites, lança uma exceção ForaDosLimitesException.
+     * 
+     * @param e Entidade cuja região será verificada.
+     * @param novoX Nova coordenada X da entidade.
+     * @param novoY Nova coordenada Y da entidade.
+     * @param novoZ Nova coordenada Z da entidade.
+     * @throws LocalOcupadoException Se a região ocupada já estiver ocupada por outra entidade.
+     * @throws ForaDosLimitesException Se a região ocupada estiver fora dos limites do ambiente.
+     */
     public void verificarColisoes(Entidade e, int novoX, int novoY, int novoZ) throws LocalOcupadoException, ForaDosLimitesException{ 
         int x = novoX;
         int y = novoY;
@@ -147,6 +202,7 @@ public class Ambiente {
         }
     }
 
+    // Imprime o PlanoXY do ambiente, para visualizar o ambiente em 2D.
     public void visualizarAmbiente(){
         for (int x = 0; x < largura; x++){
             for (int y = 0; y < profundidade; y++){
