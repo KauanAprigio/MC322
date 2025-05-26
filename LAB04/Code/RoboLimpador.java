@@ -17,7 +17,7 @@ import LAB04.Code.Obstaculo.TipoObstaculo;
  * - aprimorar (int aumentar_raio_limpeza)
  */
 
-class RoboLimpador extends Robo {
+class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero {
     // Atributos adicionais
     private int tipo_limpeza = 0; // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
     private SensorDeLixo sensorDeLixo;// sensor de lixo com raio 10
@@ -31,9 +31,32 @@ class RoboLimpador extends Robo {
         this.raioDeLimpeza = raioDeLimpeza;
     }
 
-    // Metodos
+    // Metodos 
 
-    void definir_tipo_limpeza(int tipo){
+    public void aprimorar(int aumento_raio_limpeza){
+        //Procura a oficina e vê se o robô está dentro dos limites dela
+        for (Entidade e : getAmbiente().getEntidades()) {
+            if (e.getTipo() == TipoEntidade.OBSTACULO){
+                Obstaculo o = (Obstaculo) e;
+                if (o.getTipoObstaculo() == TipoObstaculo.OFICINA) {
+                    if (getX() <= o.getPosicaoX2() && getX() >= o.getX() && getY() <= o.getPosicaoY2() && getY() >= o.getY()) {
+                        // se o robo está na oficina, será aprimorado.
+                        System.out.println(getId() + " está dentro da oficina e pode ser aprimorado.");
+                        raioDeLimpeza += aumento_raio_limpeza;
+                        System.out.println(getId() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza + ".\n");
+                        return;
+                    } 
+                }
+            }
+        }
+        // caso o robo não esteja na oficina
+        System.out.println(getId() + " não está dentro da oficina e não pode ser aprimorado!\n");
+
+    }
+
+    //Métodos da interface SujeiraZero
+    @Override
+    public void definir_tipo_limpeza(int tipo){
         // Verifica se o tipo de limpeza é válido
         // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
         if (tipo >= 0 && tipo <= 2) {
@@ -54,6 +77,7 @@ class RoboLimpador extends Robo {
         }
     }
 
+    @Override
     public void limpar() {
         System.out.println("Tipo de limpeza atual: " + tipo_limpeza + "."); // Fala qual o tipo de limpeza
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
@@ -87,28 +111,11 @@ class RoboLimpador extends Robo {
         }
     }
 
-    public void indentificar_lixo() {
-        sensorDeLixo.monitorar(getX(), getY(), 0, getAmbiente());
-    }
-    public void aprimorar(int aumento_raio_limpeza){
-        //Procura a oficina e vê se o robô está dentro dos limites dela
-        for (Entidade e : getAmbiente().getEntidades()) {
-            if (e.getTipo() == TipoEntidade.OBSTACULO){
-                Obstaculo o = (Obstaculo) e;
-                if (o.getTipoObstaculo() == TipoObstaculo.OFICINA) {
-                    if (getX() <= o.getPosicaoX2() && getX() >= o.getX() && getY() <= o.getPosicaoY2() && getY() >= o.getY()) {
-                        // se o robo está na oficina, será aprimorado.
-                        System.out.println(getId() + " está dentro da oficina e pode ser aprimorado.");
-                        raioDeLimpeza += aumento_raio_limpeza;
-                        System.out.println(getId() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza + ".\n");
-                        return;
-                    } 
-                }
-            }
-        }
-        // caso o robo não esteja na oficina
-        System.out.println(getId() + " não está dentro da oficina e não pode ser aprimorado!\n");
 
+    //Métodos do sensoreavel
+    @Override
+    public void acionarSensores(){ // basicamente irá utilizar o sensor de fogo para ver se tem fogo próximo
+        sensorDeLixo.monitorar(getX(), getY(), getZ(), getAmbiente());
     }
 
     //Getters e Setters

@@ -21,7 +21,7 @@ import LAB04.Code.Exceptions.LocalOcupadoException;
  * - aprimora(int peso_adicional)
  */
 
-public class RoboBombeiro extends Robo {
+public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
     private int altitudeMaxima;
     private int altitude;
     private int peso_max; // peso maximo que o robo suporta;
@@ -70,6 +70,7 @@ public class RoboBombeiro extends Robo {
         }
     }
 
+    @Override
     public void adicionar_agua(int litros){
         // Verifica se o robô está dentro de um lago
         boolean dentro_lago = false;
@@ -151,10 +152,6 @@ public class RoboBombeiro extends Robo {
         }
     }
 
-    public void indentificar_fogo(){
-        sensorDeFogo.monitorar(getX(), getY(), getZ(), getAmbiente());
-    }
-
     public void aprimorar(int peso_adicional){
         //verifica se o robô esta dentro de uma oficina
         for (Entidade e : getAmbiente().getEntidades()) {
@@ -171,6 +168,12 @@ public class RoboBombeiro extends Robo {
                 }
             }
         }
+    }
+    
+    //Métodos do sensoreavel
+    @Override
+    public void acionarSensores(){ // basicamente irá utilizar o sensor de fogo para ver se tem fogo próximo
+        sensorDeFogo.monitorar(getX(), getY(), getZ(), getAmbiente());
     }
 
 
