@@ -119,9 +119,15 @@ public class Ambiente {
     }
 
     // Verifica se a posição (x, y, z) está Vazia ou ocupada por outra entidade.
-    public boolean estaOcupado(int x, int y, int z){ 
-        if (mapa[x][y][z] != TipoEntidade.LOCAL && mapa[x][y][z] != TipoEntidade.VAZIO) {
-            return true; // A posição está vazia ou ocupada por um local.
+    public boolean estaOcupado(int x, int y, int z, TipoEntidade tipo) { 
+        if (tipo == TipoEntidade.ROBO){
+            if (mapa[x][y][z] == TipoEntidade.VAZIO || mapa[x][y][z] == TipoEntidade.LOCAL) {
+                return false; // A posição está vazia ou ocupada por um Local seguro para robos
+            }
+        } else {
+            if (mapa[x][y][z] == TipoEntidade.VAZIO) {
+                return false; // A posição está vazia
+            }
         }
         return true; // A posição está ocupada
     }
@@ -192,7 +198,7 @@ public class Ambiente {
         for (; x <= e.getLarguraX() + novoX; x++) {
             for (; y <= e.getLarguraY() + novoY; y++) {
                 for (; z <= e.getAltura() + novoZ; z++) {
-                    if (estaOcupado(x, y, z)){
+                    if (estaOcupado(x, y, z, e.getTipo())){
                         throw new LocalOcupadoException("A região ocupada pelo(a) " + e.getTipo() + " está ocupada!\n");
                     } else if (!dentroDosLimites(x, y, z)) {
                         throw new ForaDosLimitesException("A região ocupada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
