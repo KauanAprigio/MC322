@@ -280,7 +280,6 @@ classDiagram
     }
     Obstaculo ..|> I_Entidade
 
-    class ComunicadorCentral {}
     ComunicadorCentral --|> A_CentralComunicacao
     ComunicadorCentral ..|> I_Entidade
     ComunicadorCentral ..|> I_Comunicavel
@@ -325,16 +324,16 @@ classDiagram
 
 
     package "Exceptions" {
-        class ErrorAbastecimentoException {}
-        class ErrorApagarFogoException {}
-        class ErrorAprimoramentoException {}
-        class ErroComunicacaoException {}
-        class ErrorLimpezaException {}
-        class EntidadeNaoEncontradaException {}
-        class ForaDosLimitesException {}
-        class LocalOcupadoException {}
-        class NaoPodeVoarException {}
-        class RoboDesligadoException {}
+        class ErrorAbastecimentoException 
+        class ErrorApagarFogoException 
+        class ErrorAprimoramentoException 
+        class ErroComunicacaoException 
+        class ErrorLimpezaException 
+        class EntidadeNaoEncontradaException 
+        class ForaDosLimitesException 
+        class LocalOcupadoException 
+        class NaoPodeVoarException 
+        class RoboDesligadoException 
     }
 
     %% Relações de Exceção
