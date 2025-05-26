@@ -183,19 +183,19 @@ classDiagram
     note "Interfaces são prefixadas com 'I_' e Classes Abstratas com 'A_'"
 
     interface I_Entidade {
-        +getX() int
-        +getY() int
-        +getZ() int
-        +getTipo() TipoEntidade
-        +getDescricao() String
-        +getRepresentacao() char
-        +getId() String
-        +mover(int, int, int)
-        +getLarguraX() int
-        +getLarguraY() int
-        +getAltura() int
-        +getAmbiente() Ambiente
-        +isComunicavel() boolean
+        + getX() int
+        + getY() int
+        + getZ() int
+        + getTipo() TipoEntidade
+        + getDescricao() String
+        + getRepresentacao() char
+        + getId() String
+        + mover(int, int, int)
+        + getLarguraX() int
+        + getLarguraY() int
+        + getAltura() int
+        + getAmbiente() Ambiente
+        + isComunicavel() boolean
     }
 
     class A_Robo {
