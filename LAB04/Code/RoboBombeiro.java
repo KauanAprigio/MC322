@@ -23,16 +23,16 @@ import LAB04.Code.Exceptions.LocalOcupadoException;
 
 public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
     private int altitudeMaxima;
-    private int altitude;
+    private int altitude = 0; // altitude do robô, começa no chão
     private int peso_max; // peso maximo que o robo suporta;
     private int reservatorio; // litros de agua no reservatorio
     private SensorDeFogo sensorDeFogo; // sensor de fogo com raio 10
     private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
     
     // Construtor
-    public RoboBombeiro(String id, EstadoRobo estado, TipoEntidade tipo, int pos_x, int pos_y, int altitude, 
+    public RoboBombeiro(String id, EstadoRobo estado, int pos_x, int pos_y, int altitude, 
                         Ambiente ambiente, int altitudeMaxima, double raiosensor, int peso_max, int raio_de_cessar_fogo) {
-        super(id, estado, tipo, pos_x, pos_y, altitude, ambiente);
+        super(id, estado, pos_x, pos_y, altitude, ambiente);
         this.altitudeMaxima = altitudeMaxima;
         this.sensorDeFogo = new SensorDeFogo(raiosensor); // sensor de fogo com raio 10
         this.peso_max = peso_max;
@@ -40,36 +40,6 @@ public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
         this.reservatorio = peso_max; // litros de agua no reservatorio (começa cheio)
     }
     
-    // Metodos
-
-    public void subir(int deltaZ) {
-        // Verifica se a nova altitude está dentro dos limites do ambiente
-        if (!getAmbiente().dentroDosLimites(getX(), getY(), getZ() + deltaZ)){
-            System.out.println(getId() + " não pode subir para essa altitude, pois está fora dos limites do ambiente!\n");
-            return;
-        }
-        else if (getZ() + deltaZ <= altitudeMaxima) {
-            altitude += deltaZ;
-            System.out.println(getId() + " subiu para " + getZ() + " metros de altitude.\n");
-        } 
-        else if (altitude + deltaZ > altitudeMaxima) {
-            System.out.println(getId() + " não pode subir acima da altitude máxima de " + altitudeMaxima + " metros!\n");
-        }
-    }
-
-    public void descer(int deltaZ) {
-        if (altitude - deltaZ >= 0) {
-            altitude -= deltaZ;
-            if (altitude == 0) { // mensagem caso volte para o chão
-                System.out.println(getId() + " retornou ao solo.\n");
-            } else { // se descer para qualquer outra altitude
-                System.out.println(getId() + " desceu para " + getZ() + " metros de altitude.\n");
-            }
-        } else { // condicional caso tente "entrar" na terra
-            System.out.println(getId() + " não pode descer abaixo do nível do solo!\n");
-        }
-    }
-
     @Override
     public void adicionar_agua(int litros){
         // Verifica se o robô está dentro de um lago
@@ -138,7 +108,7 @@ public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
                                 System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
                                 System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
                                 iterator.remove();
-                                Obstaculo novo_Predinho = new Obstaculo(o.getX(), o.getY(), TipoObstaculo.PREDIO, TipoEntidade.OBSTACULO);
+                                Obstaculo novo_Predinho = new Obstaculo(o.getX(), o.getY(), TipoObstaculo.PREDIO, getAmbiente());
                                 getAmbiente().adicionarEntidade(novo_Predinho);
                             }
                         }
@@ -188,7 +158,9 @@ public class RoboBombeiro extends Robo implements Sensoreavel, FogoZero {
     public int getAltitudeMaxima() { return altitudeMaxima; }
     public int getCapacidade() { return peso_max; }
     public int getReservatorio() { return reservatorio; }
+    public Ambiente getAmbiente() { return ambiente; }
+    public int getRaioDeCessarFogo() { return raio_de_cessar_fogo; }
+    public int getAltitude() { return altitude; }
 
     public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
-    
 }

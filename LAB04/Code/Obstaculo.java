@@ -23,18 +23,19 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     private int pos_y2;
     private int pos_z2;
     private TipoObstaculo tipoObstaculo;
-    private TipoEntidade tipo;
+    private final TipoEntidade tipo = TipoEntidade.OBSTACULO; // Definindo o tipo como OBSTACULO por padrão
+    private Ambiente ambiente; // Ambiente onde o obstáculo está localizado
 
 
     // Construtor
-    public Obstaculo(int pos_x, int pos_y, TipoObstaculo tipoObstaculo, TipoEntidade tipo) {
+    public Obstaculo(int pos_x, int pos_y, TipoObstaculo tipoObstaculo, Ambiente ambiente) {
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.pos_x2 = pos_x + tipoObstaculo.getLarguraX();
         this.pos_y2 = pos_y + tipoObstaculo.getLarguraY();
         this.pos_z2 = tipoObstaculo.getAltura();
         this.tipoObstaculo = tipoObstaculo;
-        this.tipo = tipo;
+        this.ambiente = ambiente;
     }
 
 
@@ -66,17 +67,18 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     @Override
     public char getRepresentacao() { char representacao = 'o'; return representacao; }
 
+    @Override
+    public String getId() { return getTipoObstaculo().getNome(); }
 
     @Override
-    public void mover(int deltaX, int deltaY, int deltaZ,  TipoEntidade[][][] mapa, 
-        char[][] planoXY) {
+    public void mover(int deltaX, int deltaY, int deltaZ) {
         setPosX(pos_x + deltaX);
         setPosY(pos_y + deltaY);
         for (int x = pos_x; x <= pos_x2; x++) {
             for (int y = pos_y; y <= pos_y2; y++) {
-                planoXY[x][y] = 'o';
+                getAmbiente().planoXY[x][y] = 'o';
                 for (int z = pos_z; z <= pos_z2; z++) {
-                    mapa[x][y][z] = TipoEntidade.OBSTACULO;
+                    getAmbiente().mapa[x][y][z] = TipoEntidade.OBSTACULO;
                 }
             }
         } 
@@ -88,6 +90,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public int getPosicaoX2() { return pos_x2; }
     public int getPosicaoY2() { return pos_y2; }
     public TipoObstaculo getTipoObstaculo() { return tipoObstaculo; }
+    public Ambiente getAmbiente() { return ambiente; }
 
     public void setPosX(int novo_x) { 
         this.pos_x = novo_x;

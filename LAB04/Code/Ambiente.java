@@ -116,7 +116,7 @@ public class Ambiente {
         // Verifica se o novo local está ocupado ou se está fora dos limites
         verificarColisoes(e, novoX, novoY, novoZ);
         
-        e.mover(deltaX, deltaY, deltaZ, mapa, planoXY);
+        e.mover(deltaX, deltaY, deltaZ);
     }
 
     public void executarSensores(){ 

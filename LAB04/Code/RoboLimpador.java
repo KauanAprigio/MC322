@@ -22,11 +22,12 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero {
     private int tipo_limpeza = 0; // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
     private SensorDeLixo sensorDeLixo;// sensor de lixo com raio 10
     private int raioDeLimpeza; // raio de limpeza do robô
+    Ambiente ambiente; // ambiente onde o robô está operando
 
     // Construtor
     public RoboLimpador(String id, EstadoRobo estado, TipoEntidade tipo, int pos_x,
                         int pos_y, int pos_z,Ambiente ambiente, double raio, int raioDeLimpeza) {
-        super(id, estado, tipo, pos_x, pos_y, pos_z, ambiente);
+        super(id, estado, pos_x, pos_y, pos_z, ambiente);
         this.sensorDeLixo = new SensorDeLixo(raio); // sensor de lixo com raio 10
         this.raioDeLimpeza = raioDeLimpeza;
     }
@@ -127,5 +128,6 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero {
     //Getters e Setters
     public int getTipoLimpeza() { return tipo_limpeza; }
     public int getRaioDeLimpeza() { return raioDeLimpeza; }
+    public Ambiente getAmbiente() { return ambiente; }
 }
 
