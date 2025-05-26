@@ -52,10 +52,16 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public TipoEntidade getTipo() { return tipo; }
 
     @Override
-    public String getDescricao() { 
-        String descricao = "QUALQUER COISA, SÓ PARA TER ALGO";
-        return descricao;
-    }
+    public String getDescricao() { return tipoObstaculo.getDescricao(); }
+
+    @Override
+    public int getLarguraX() { return tipoObstaculo.getLarguraX(); }
+
+    @Override
+    public int getLarguraY() { return tipoObstaculo.getLarguraY(); }
+
+    @Override
+    public int getAltura() { return tipoObstaculo.getAltura(); }
 
     @Override
     public char getRepresentacao() { char representacao = 'o'; return representacao; }
@@ -82,9 +88,6 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public int getPosicaoX2() { return pos_x2; }
     public int getPosicaoY2() { return pos_y2; }
     public TipoObstaculo getTipoObstaculo() { return tipoObstaculo; }
-    public int getLarguraX() { return tipoObstaculo.getLarguraX(); }
-    public int getLarguraY() { return tipoObstaculo.getLarguraY(); }
-    public int getAltura() { return tipoObstaculo.getAltura(); }
 
     public void setPosX(int novo_x) { 
         this.pos_x = novo_x;
@@ -119,29 +122,45 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
      * - boolean aprimora: se é um local para aprimoramento
     */
     public static enum TipoObstaculo {
-        LAGO(30, 30, 0, false, "Lago", false, false, false), 
-        FOGO(5, 5, 5, false, "Fogo", true, false, false),
-        PREDIOEMCHAMAS(30, 30, 100, true, "Prédio em chamas", true, false,false), 
-        PREDIO(30, 30, 100, true, "Prédio", false, false,false),
-        SUJEIRAENCARDIDA(0, 0, 0, false, "Sujeira encardida", false, true,false), 
-        COMIDANOCHAO(0, 0, 0, false, "Comida no chão", false, true,false), 
-        SACOLAPLASTICA(0, 0, 0, false, "Sacola plástica", false, true,false),
-        OFICINA(20, 20, 20, true, "Oficina", false, false,true); 
+        
+        LAGO(30, 30, 0, false,
+              "Lago", false, false, false,
+               "Lago: Local utilizado para abestecimento dos robôs bombeiros, eles devem estar pousados na água para abastecer o tanque!"), 
+        FOGO(5, 5, 5, false, "Fogo",
+            true, false, false, "Fogo! é urgente, Chame um robô bombeiro!"),
+        PREDIOEMCHAMAS(30, 30, 100, true,
+             "Prédio em chamas", true, false,false,
+              "Prédio em chamas! Local extremamente perigoso e instável! Chame um robô bombeiro!"), 
+        PREDIO(30, 30, 100, true, "Prédio",
+             false, false,false, 
+              "Prédio: uma construção de vários andares, industrial, comercial ou residencial. Em algum ponto podia ter estado em chamas..."),
+        SUJEIRAENCARDIDA(0, 0, 0, false,
+             "Sujeira encardida", false, true,false, 
+              "Sujeira encardida: A mais nojenta entre os tipos de lixo... Um robô limpador consegue remove-la."), 
+        COMIDANOCHAO(0, 0, 0, false, 
+            "Comida no chão", false, true,false,
+             "Comida no chão: Que desperdício... A regra dos 5 segundos não vale mais. Chame um robô limpador para tirar isso daqui"), 
+        SACOLAPLASTICA(0, 0, 0, false,
+             "Sacola plástica", false, true,false, 
+              "Sácola plástica: Plástico.. O lixo mais poluente do mundo! Faça a coisa certa e chame um robô limpador para tirar isso daqui."),
+        OFICINA(20, 20, 20, true,
+             "Oficina", false, false,true, 
+              "Oficina: Local de aprimoramento dos Robôs, Robôs bombeiros ganham peso máximo adicional e Robôs limpadores ganham um raio de limpeza maior."); 
 
 
         private final int larguraX;
         private final int larguraY;
         private final int altura;
         private String nome;
-        
-        // Atributos finais (requisito obrigatório)
         private final boolean local;
         private final boolean fogo;
         private final boolean lixo;
         private final boolean aprimora;
+        private final String descricao;
+
 
         TipoObstaculo(int larguraX, int larguraY, int altura, boolean Local, String nome,
-                            boolean fogo, boolean lixo, boolean aprimora) {
+                            boolean fogo, boolean lixo, boolean aprimora, String descricao) {
             this.larguraX = larguraX;
             this.larguraY = larguraY;
             this.altura = altura;
@@ -150,11 +169,13 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
             this.fogo = fogo;
             this.lixo = lixo;
             this.aprimora = aprimora;
+            this.descricao = descricao;
         }
         public int getLarguraX() { return larguraX; }
         public int getLarguraY() { return larguraY; }
         public int getAltura() { return altura; }
         public String getNome() { return nome; }
+        public String getDescricao() { return descricao; }
         public boolean isLocal() { return local; }
         public boolean isFogo() { return fogo; }
         public boolean isLixo() { return lixo; }
