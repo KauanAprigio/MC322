@@ -22,7 +22,8 @@ public interface Entidade {
         VAZIO,
         ROBO,
         OBSTACULO,
-        DESCONHECIDO;
+        DESCONHECIDO,
+        COMUNICADOR;
     }
 }
 
