@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class CentralComunicacao {
     //Atributos
     private ArrayList<String> mensagens;
+    private int TotalMensagens = 0;
 
 
     //Construtor
@@ -13,9 +14,12 @@ public class CentralComunicacao {
 
 
     //Metodos
-    public void registrarMensagem(String remetente, String msg){ // tem que mudar isso uma forma para armazenar o remetente ou destinatario
-        //podemos usar aquelas exceções personalizadas se passar:
-        mensagens.add(msg);
+    public void registrarMensagem(String remetente, String msg){ 
+        String entrada = "Mensagem de " + remetente + ": " + msg;
+        mensagens.add(entrada);
+        TotalMensagens++;
+        System.out.println("Mensagem registrada: " + entrada);
+        System.out.println("Total de mensagens: " + TotalMensagens + ".\n");
     }
 
     public void exibirMensagens(){ // pode fazer algo se o mensagens estiver vazio retornar um exception...
@@ -23,4 +27,6 @@ public class CentralComunicacao {
             System.out.println(mensagens.get(i));
         }
     }
+
+    public int getTotalMensagens() { return TotalMensagens; }
 }

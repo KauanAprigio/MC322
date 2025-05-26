@@ -2,6 +2,8 @@ package LAB04.Code;
 
 import java.util.ArrayList;
 
+import LAB04.Code.Exceptions.ErroComunicacaoException;
+
 public class ComunicadorCentral extends CentralComunicacao implements Entidade, Comunicavel{
     private final TipoEntidade tipo = TipoEntidade.COMUNICADOR; // Definindo o tipo como COMUNICADOR por padrão
     private int pos_x;
@@ -47,7 +49,8 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     }
 
     //basicamente ele vai ver em relacao ao robo/entidade onde ele está e com isso onde está o fogo mais próximo
-    public void avisoFogoProximo(Entidade e){
+    public void avisoFogoProximo(Entidade e) throws ErroComunicacaoException {
+        if (!e.isComunicavel()) throw new ErroComunicacaoException("Erro de comunicação: Entidade " + e.getId() + " não tem a capacidade de receber mensagens ou está indisponível no momento.\n");
         double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível
         Obstaculo fogoMaisProximo = null; // Inicializa como null para verificar se encontrou algum fogo
         for (Obstaculo fogo : fogos) {
@@ -64,9 +67,12 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             }
         }
         if (fogoMaisProximo != null) {
-            System.out.println("Comunicador Central: O fogo mais próximo de " + e.getId() + " está a uma distância de "
+            Comunicavel d = (Comunicavel) e;
+            String mensagem = "Comunicador Central: O fogo mais próximo de " + e.getId() + " está a uma distância de "
             + menorDistancia + " unidades e está localizado na posição (" 
-            + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getZ() + ").\n");
+            + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getZ() + ").\n";
+            enviarMensagem(d, mensagem);
+            registrarMensagem(getId(), mensagem);
         } else {
             System.out.println("Comunicador Central: Não há fogos próximos de " + e.getId() + ".\n");
         }
@@ -122,6 +128,9 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
 
     @Override
     public String getId() { return "ComunicadorCentral"; }
+
+    @Override
+    public boolean isComunicavel() { return true; } // O Comunicador Central é comunicável
 
 
     //Getters e Setters
