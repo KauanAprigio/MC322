@@ -18,7 +18,7 @@ public interface SujeiraZero {
      *
      * @throws ErrorLimpezaException Se a limpeza falhar.
      */
-    public void limpar() throws ErrorLimpezaException;
+    public void limpar();
     /**
      * Método definir_tipo_limpeza:
      *   Permite definir o tipo de limpeza que o robô limpador deve realizar.
