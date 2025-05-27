@@ -47,14 +47,14 @@ public class Main {
      * Configura o ambiente, obstáculos, robôs e o comunicador central.
      */
     private static void inicializarAmbiente() {
-        System.out.println("\n--- 🛠️  Configurando o Mundo Virtual 🛠️  ---");
+        System.out.println("\n--- 🛠️  Configurando o Mundo Virtual 🛠️  ---\n");
         // Ajustando tamanho para evitar OutOfBounds (índices vão de 0 a 100, logo precisa de 101)
         TipoEntidade[][][] mapa = new TipoEntidade[101][101][111]; // depois tem q comentar o pq do z ir até 111, mas acho que é para o robo bombeiro subir acima dos predios para apagar o fogo
         char[][] planoXY = new char[101][101];
         ambiente = new Ambiente(101, 101, 111, mapa, planoXY);
         ambiente.inicializarMapa();
 
-        System.out.println("Adicionando obstáculos...");
+        System.out.println("Adicionando obstáculos...\n");
         try {
             ambiente.adicionarEntidade(new Obstaculo(2, 2, TipoObstaculo.LAGO, ambiente, TipoEntidade.OBSTACULO), true);
             ambiente.adicionarEntidade(new Obstaculo(95, 0, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO),true); // Fogo para apagar
@@ -72,7 +72,7 @@ public class Main {
             System.exit(1); // Sai se o ambiente base não puder ser criado
         }
 
-        System.out.println("Adicionando robôs...");
+        System.out.println("Adicionando robôs...\n");
         try {
             // Construtor RoboLimpador: String id, EstadoRobo estado, int pos_x, int pos_y, int pos_z,Ambiente ambiente, double raio, int raioDeLimpeza
             roboLimpador = new RoboLimpador("Faxinildo_01", EstadoRobo.OFF, 0, 0, 0, ambiente, 15.0, 10);
@@ -92,10 +92,10 @@ public class Main {
      */
     private static void executarTestesAutomatizados() {
         System.out.println("\n--- 🧪 Executando Bateria de Testes 🧪 ---");
-        System.out.println("    (Silencie-se, mundo! Os testes estão começando!)");
+        System.out.println("(Silencie-se, mundo! Os testes estão começando!)\n");
 
         // --- Testes Gerais e Exceções ---
-        System.out.println("\n>> Testando Exceções Gerais...");
+        System.out.println(">> Testando Exceções Gerais...\n");
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 0); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Mover): " + e.getMessage()); }
         roboLimpador.ligar();
         roboBombeiro.ligar();
@@ -109,35 +109,37 @@ public class Main {
         } catch (Exception e) { System.err.println("Teste [OK] EntidadeNaoEncontradaException: " + e.getMessage()); }
 
         // --- Testes RoboLimpador ---
-        System.out.println("\n>> Testando RoboLimpador ("+ roboLimpador.getId() +")...");
-        try { roboLimpador.acionarSensores(); System.out.println("Teste [OK] Acionar Sensores (Ligado)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("\n>> Testando RoboLimpador ("+ roboLimpador.getId() +")...\n");
+        try { roboLimpador.acionarSensores(); System.out.println("Teste [OK] Acionar Sensores (Ligado).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.definir_tipo_limpeza(5); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Inválido): " + e.getMessage()); }
-        try { roboLimpador.definir_tipo_limpeza(0); System.out.println("Teste [OK] Definir Tipo Limpeza (0)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { roboLimpador.definir_tipo_limpeza(0); System.out.println("Teste [OK] Definir Tipo Limpeza (0).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Sem Lixo Perto): " + e.getMessage()); }
-        try { ambiente.moverEntidade(roboLimpador, 53, 41, 0); System.out.println("Teste [OK] Mover Limpador."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        try { roboLimpador.definir_tipo_limpeza(0); roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Incorreto): " + e.getMessage()); }
-        try { roboLimpador.definir_tipo_limpeza(1); roboLimpador.limpar(); System.out.println("Teste [OK] Limpou Comida."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve limpar Comida
+        try { ambiente.moverEntidade(roboLimpador, 53, 41, 0); System.out.println("Teste [OK] Mover Limpador.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
+        try { roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Incorreto): " + e.getMessage()); }
+        try { roboLimpador.definir_tipo_limpeza(1); roboLimpador.limpar(); System.out.println("Teste [OK] Limpou Comida.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve limpar Comida
         try { roboLimpador.aprimorar(10); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Fora Oficina): " + e.getMessage()); }
-        try { ambiente.moverEntidade(roboLimpador, 56, 46, 0); System.out.println("Teste [OK] Mover Limpador (Oficina)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboLimpador, 56, 46, 0); System.out.println("Teste [OK] Mover Limpador (Oficina).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.aprimorar(-5); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Valor Inválido): " + e.getMessage()); }
-        try { roboLimpador.aprimorar(5); System.out.println("Teste [OK] Aprimorou Limpador."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { roboLimpador.aprimorar(5); System.out.println("Teste [OK] Aprimorou Limpador.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         roboLimpador.desligar();
         try { roboLimpador.acionarSensores(); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Sensores): " + e.getMessage()); }
 
         // --- Testes RoboBombeiro ---
-        System.out.println("\n>> Testando RoboBombeiro (" + roboBombeiro.getId() +")...");
+        System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("\n>> Testando RoboBombeiro (" + roboBombeiro.getId() +")...\n");
         roboBombeiro.ligar();
         try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Fora Lago): " + e.getMessage()); }
-        try { ambiente.moverEntidade(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.adicionar_agua(-10); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Valor Inválido): " + e.getMessage()); }
         try { roboBombeiro.adicionar_agua(4000); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Capacidade): " + e.getMessage()); }
-        try { roboBombeiro.adicionar_agua(500); System.out.println("Teste [OK] Abasteceu Bombeiro."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        try { roboBombeiro.apagar_fogo(); System.out.println("Teste [OK] Apagar Fogo (Sem Fogo Perto)."); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
-        try { ambiente.moverEntidade(roboBombeiro, 90, 3, 0); System.out.println("Teste [OK] Mover Bombeiro (Perto Fogo)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { roboBombeiro.adicionar_agua(500); System.out.println("Teste [OK] Abasteceu Bombeiro.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { roboBombeiro.apagar_fogo(); System.out.println("Teste [OK] Apagar Fogo (Sem Fogo Perto).\n"); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboBombeiro, 90, 3, 0); System.out.println("Teste [OK] Mover Bombeiro (Perto Fogo).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Altura): " + e.getMessage()); }
-        try { ambiente.moverEntidade(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Subir Bombeiro."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        try { roboBombeiro.apagar_fogo(); System.out.println("Teste [OK] Apagou Fogo."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve apagar FOGO
-        try { ambiente.moverEntidade(roboBombeiro, 0, 40, 101); System.out.println("Teste [OK] Mover Bombeiro (Perto Prédio Chamas)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Subir Bombeiro.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { roboBombeiro.apagar_fogo(); System.out.println("Teste [OK] Apagou Fogo.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve apagar FOGO
+        try { ambiente.moverEntidade(roboBombeiro, 0, 40, 101); System.out.println("Teste [OK] Mover Bombeiro (Perto Prédio Chamas).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         
         // ERRO AO TENTAR READICIONAR O PREDIO EM CHAMAS
         try { roboBombeiro.apagar_fogo(); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Água Insuficiente): " + e.getMessage()); }
@@ -148,13 +150,14 @@ public class Main {
         try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Desligado): " + e.getMessage()); }
 
         // --- Testes ComunicadorCentral ---
-        System.out.println("\n>> Testando ComunicadorCentral...");
+         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("\n>> Testando ComunicadorCentral...\n");
         comunicador.listarFogos(); // Deve listar o Prédio em Chamas
         roboLimpador.ligar(); // Ligar limpador para testar comunicação
         roboBombeiro.ligar(); // Ligar bombeiro
         try { comunicador.avisoFogoProximo(roboLimpador); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
-        try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] Aviso Fogo (Bombeiro).");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        roboBombeiro.enviarMensagem(comunicador, roboBombeiro.getId() + ": Mensagem de teste para a central!");
+        try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] Aviso Fogo (Bombeiro).\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        roboBombeiro.enviarMensagem(comunicador, roboBombeiro.getId() + ": Mensagem de teste para a central.\n");
         comunicador.exibirMensagens();
 
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");

@@ -80,9 +80,9 @@ public class Ambiente {
             }
         } 
         if (printar){
-            System.out.println("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente");
+            System.out.println("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.");
             System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
-            System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")");
+            System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")\n");
         }
     }
 
@@ -98,7 +98,7 @@ public class Ambiente {
      */
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
         if (!entidades.contains(e)) //mudei para ver se tem essa entidade na lista de entidade, se nao tiver é pq ela nao foi adicionada
-            throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pode ser encontrada!\n");
+            throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pôde ser encontrada!\n");
         for (int x = e.getX(); x <= e.getLarguraX() + e.getX(); x++) {
             for (int y = e.getY(); y <= e.getLarguraY() + e.getY(); y++) {
                 planoXY[x][y] = 'v'; 
@@ -109,7 +109,7 @@ public class Ambiente {
         }
         entidades.remove(e);
         if (printar)
-            System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.");
+            System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.\n");
     }
 
     // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
@@ -160,7 +160,7 @@ public class Ambiente {
         if (novoZ != 0 && entidade.getTipo() != TipoEntidade.OBSTACULO) {
             Robo r = (Robo) entidade;
             if (!(r instanceof RoboBombeiro))
-                throw new NaoPodeVoarException("Movimento inválido! Entidade não pode sair do chão!");
+                throw new NaoPodeVoarException("Movimento inválido! Entidade não pode sair do chão!\n");
         }
                                 
         int deltaX = novoX - entidade.getX();
@@ -183,7 +183,7 @@ public class Ambiente {
         
         System.out.println("Entidade: " + e.getId() + " movida com sucesso para a nova posição.");
         System.out.println("Nova posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
-        System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + e.getZ() + ")");
+        System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + e.getZ() + ")\n");
     }
 
     public void executarSensores(){ 
@@ -213,10 +213,10 @@ public class Ambiente {
             for (int y = novoY; y <= e.getLarguraY() + novoY; y++) {
                 for (int z = novoZ; z <= novoZ; z++) { //tendo em vista que somente o roboBombeiro pode mudar a altura...vou deixar com um for vendo do novoZ até ele mesmo
                     if (!dentroDosLimites(x, y, z)) {
-                        throw new ForaDosLimitesException("A região ocupada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
+                        throw new ForaDosLimitesException("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }
                     else if (estaOcupado(x, y, z, e.getTipo())){
-                        throw new LocalOcupadoException("A região ocupada pelo(a) " + e.getTipo() + " está ocupada!\n");
+                        throw new LocalOcupadoException("A região desejada pelo(a) " + e.getTipo() + " está ocupada!\n");
                     } 
                 }
             }

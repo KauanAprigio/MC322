@@ -44,7 +44,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
     public void aprimorar(int upgrade) throws ErrorAprimoramentoException {
         // Verifica se o upgrade é válido
         if (upgrade <= 0) {
-            throw new ErrorAprimoramentoException("Upgrade inválido! O valor deve ser maior que zero.");
+            throw new ErrorAprimoramentoException("Upgrade inválido! O valor deve ser maior que zero!\n");
         }
         //Procura a oficina e vê se o robô está dentro dos limites dela
         for (Entidade e : getAmbiente().getEntidades()) {
@@ -59,7 +59,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                         return;
                     } else {
                         // caso o robo não esteja na oficina
-                        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!";
+                        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
                         throw new ErrorAprimoramentoException(msg);
                     }
                 }
@@ -76,17 +76,17 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
             tipo_limpeza = tipo;
             switch (tipo_limpeza) {
                 case 0:
-                    System.out.println(getId() + " está configurado para remover objetos do chão.\n");
+                    System.out.println(getId() + " está configurado para remover objetos do chão.");
                     break;
                 case 1:
-                    System.out.println(getId() + " está configurado para limpar comida do chão.\n");
+                    System.out.println(getId() + " está configurado para limpar comida do chão.");
                     break;
                 case 2:
-                    System.out.println(getId() + " está configurado para remover sujeiras encardidas.\n");
+                    System.out.println(getId() + " está configurado para remover sujeiras encardidas.");
                     break;
             }
         } else {
-            String msg = "Tipo de limpeza inválido! Escolha entre 0 (leve), 1 (pesada) ou 2 (muito pesada).";
+            String msg = "Tipo de limpeza inválido! Escolha entre 0 (leve), 1 (pesada) ou 2 (muito pesada)!\n";
             throw new ErrorLimpezaException(msg);
         }
     }
@@ -137,7 +137,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
     @Override
     public void acionarSensores() throws RoboDesligadoException{ // basicamente irá utilizar o sensor de fogo para ver se tem fogo próximo
         if (getEstado() == EstadoRobo.OFF) {
-            throw new RoboDesligadoException("O robô está desligado e não pode acionar os sensores.");
+            throw new RoboDesligadoException("O robô está desligado e não pode acionar os sensores!\n");
         }
         sensorDeLixo.monitorar(getX(), getY(), getZ(), getAmbiente());
     }

@@ -62,13 +62,13 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
             }
         }
         if (!dentro_lago) {
-            throw new ErrorAbastecimentoException(getId() + " não está em um lago e não pode abastecer água!"); 
+            throw new ErrorAbastecimentoException(getId() + " não está em um lago e não pode abastecer água!\n"); 
         }
         if (getEstado() == EstadoRobo.OFF) {
-            throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!");
+            throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!\n");
         }
         if (litros <= 0) {
-            throw new ErrorAbastecimentoException("Quantidade de litros inválida! Deve ser maior que zero.");
+            throw new ErrorAbastecimentoException("Quantidade de litros inválida! Deve ser maior que zero!\n");
         }
         int peso_total = reservatorio + litros; // somatorio dos pesos
         if (peso_total > peso_max){
@@ -78,7 +78,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
         } else {
             reservatorio += litros;
             System.out.println(getId() + " foi abastecido com sucesso.");
-            System.out.println("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros\n");
+            System.out.println("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
         }
     }
     @Override
@@ -105,7 +105,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                         
                         if (reservatorio < litros_necessarios){ // condicional caso nao tenha agua o suficiente
                             int deficit = litros_necessarios - reservatorio; // quanto ira faltar de agua para apagar o fogo
-                            String msg = getId() + " precisa de " + deficit + " litros a mais para apagar o incêndio!";
+                            String msg = getId() + " precisa de " + deficit + " litros a mais para apagar o incêndio!\n";
                             throw new ErrorApagarFogoException(msg);
                         } else {
                             reservatorio -= litros_necessarios;
@@ -134,7 +134,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                         }                         
                     } else {
                         int falta_altura = o.getZ() - getZ();
-                        String msg = getId() + " não está na altura do fogo, suba " + falta_altura + " metros para apagar o fogo!";
+                        String msg = getId() + " não está na altura do fogo, suba " + falta_altura + " metros para apagar o fogo!\n";
                         throw new ErrorApagarFogoException(msg);
                     }
                 }
@@ -146,7 +146,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     public void aprimorar(int upgrade) throws ErrorAprimoramentoException {
         // Verifica se o upgrade é válido
         if (upgrade <= 0) {
-            throw new ErrorAprimoramentoException("Upgrade inválido! O valor deve ser maior que zero.");
+            throw new ErrorAprimoramentoException("Upgrade inválido! O valor deve ser maior que zero!\n");
         }
         //verifica se o robô esta dentro de uma oficina
         for (Entidade e : getAmbiente().getEntidades()) {
@@ -158,7 +158,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                         peso_max += upgrade;
                         System.out.println("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.\n");
                     } else {
-                        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!";
+                        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
                         throw new ErrorAprimoramentoException(msg);
                     }
                 }

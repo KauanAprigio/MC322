@@ -41,12 +41,12 @@ public abstract class Robo implements Entidade {
     
     public void ligar(){
         this.estado = EstadoRobo.ON;
-        System.out.println("O robô de id:" + this.getId() + " está ligado.");
+        System.out.println("O robô de id:" + this.getId() + " está ligado.\n");
     }
 
     public void desligar(){
         this.estado = EstadoRobo.OFF;
-        System.out.println("O robô de id:" + this.getId() + " está desligado.");
+        System.out.println("O robô de id:" + this.getId() + " está desligado.\n");
     }
 
     // Getters e Setters
