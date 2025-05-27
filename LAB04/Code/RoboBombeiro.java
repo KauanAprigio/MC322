@@ -3,15 +3,8 @@ package LAB04.Code;
 import java.util.Iterator;
 import LAB04.Code.Obstaculo.TipoObstaculo;
 import LAB04.Code.AbstractClasses.Robo;
-import LAB04.Code.Exceptions.ErrorAbastecimentoException;
-import LAB04.Code.Exceptions.ForaDosLimitesException;
-import LAB04.Code.Exceptions.LocalOcupadoException;
-import LAB04.Code.Interfaces.Aprimoravel;
-import LAB04.Code.Interfaces.Comunicavel;
-import LAB04.Code.Interfaces.Entidade;
-import LAB04.Code.Interfaces.FogoZero;
-import LAB04.Code.Exceptions.ErrorApagarFogoException;
-import LAB04.Code.Exceptions.ErrorAprimoramentoException;
+import LAB04.Code.Exceptions.*;
+import LAB04.Code.Interfaces.*;
 
 /*
  * SubClasse de RoboAereo
@@ -174,13 +167,18 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     }
 
     @Override
-    public void enviarMensagem(Comunicavel destinatario, String mensagem){
-        destinatario.receberMensagem(mensagem);
+    public void enviarMensagem(Comunicavel destinatario, String mensagem) throws ErroComunicacaoException {
+        if (destinatario == null) {
+            throw new ErroComunicacaoException("Erro de comunicação: Destinatário não existe.\n");
+        }
+        destinatario.receberMensagem(mensagem, this);
     }
 
     @Override
-    public void receberMensagem(String mensagem){
-        System.out.println(mensagem);
+    public void receberMensagem(String mensagem, Comunicavel remetente){
+        // Aqui o robô bombeiro recebe a mensagem e pode processá-la ou exibi-la
+        System.out.println(getId() + " recebeu a mensagem: " + mensagem);
+        // Poderia implementar lógica adicional para processar a mensagem, se necessário
     }
 
     @Override
