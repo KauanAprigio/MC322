@@ -176,6 +176,151 @@ O Laboratório 4 introduziu conceitos mais avançados de Orientação a Objetos,
 
 ```mermaid
 ---
+title: Diagrama de classes - LAB03
+---
+classDiagram
+    direction TB
+
+    class I_Entidade {
+        <<Interface>>
+        +getX() int
+        +getY() int
+        +getZ() int
+        +getTipo() TipoEntidade
+        +getDescricao() String
+        +getRepresentacao() char
+        +getId() String
+        +mover(int, int, int) void
+        +getLarguraX() int
+        +getLarguraY() int
+        +getAltura() int
+        +getAmbiente() Ambiente
+        +isComunicavel() boolean
+    }
+
+    class A_Robo {
+        <<Abstract>>
+        -id : String
+        -estado : EstadoRobo
+        -pos_x : int
+        -pos_y : int
+        -pos_z : int
+        #ambiente : Ambiente
+        +mover(int, int, int) void
+        +ligar() void
+        +desligar() void
+        +getEstado() EstadoRobo
+    }
+    A_Robo ..|> I_Entidade : Implementa
+
+    class A_Sensor {
+        <<Abstract>>
+        -raio : double
+        +monitorar(int, int, int, Ambiente) void
+    }
+
+    class A_CentralComunicacao {
+        <<Abstract>>
+        -mensagens : List~String~
+        +registrarMensagem(String, String) void
+        +exibirMensagens() void
+    }
+
+    class I_Aprimoravel {
+        <<Interface>>
+        +aprimorar(int) void
+    }
+    class I_Comunicavel {
+        <<Interface>>
+        +enviarMensagem(Comunicavel, String) void
+        +receberMensagem(String) void
+    }
+    class I_FogoZero {
+        <<Interface>>
+        +adicionar_agua(int) void
+        +apagar_fogo() void
+    }
+    class I_Sensoreavel {
+        <<Interface>>
+        +acionarSensores() void
+    }
+    class I_SujeiraZero {
+        <<Interface>>
+        +limpar() void
+        +definir_tipo_limpeza(int) void
+    }
+
+    class RoboLimpador {
+        -tipo_limpeza : int
+        -sensorDeLixo : SensorDeLixo
+        -raioDeLimpeza : int
+    }
+    RoboLimpador --|> A_Robo : Herda de
+    RoboLimpador ..|> I_Sensoreavel : Implementa
+    RoboLimpador ..|> I_SujeiraZero : Implementa
+    RoboLimpador ..|> I_Aprimoravel : Implementa
+
+    class RoboBombeiro {
+        -altitudeMaxima : int
+        -peso_max : int
+        -reservatorio : int
+        -raio_de_cessar_fogo : int
+    }
+    RoboBombeiro --|> A_Robo : Herda de
+    RoboBombeiro ..|> I_FogoZero : Implementa
+    RoboBombeiro ..|> I_Comunicavel : Implementa
+    RoboBombeiro ..|> I_Aprimoravel : Implementa
+
+    class SensorDeLixo {
+        %% Atributos da classe SensorDeLixo, se houver
+    }
+    SensorDeLixo --|> A_Sensor : Herda de
+
+    class Obstaculo {
+        -pos_x : int
+        -pos_y : int
+        -tipoObstaculo : TipoObstaculo
+    }
+    Obstaculo ..|> I_Entidade : Implementa
+
+    class ComunicadorCentral {
+        %% Atributos da classe ComunicadorCentral, se houver
+    }
+    ComunicadorCentral --|> A_CentralComunicacao : Herda de
+    ComunicadorCentral ..|> I_Entidade : Implementa
+    ComunicadorCentral ..|> I_Comunicavel : Implementa
+
+    class Ambiente {
+        -largura : int
+        -profundidade : int
+        -altura : int
+        -entidades : List~I_Entidade~
+        -mapa : object
+        -planoXY : object
+        +adicionarEntidade(I_Entidade) void
+        +removerEntidade(I_Entidade, boolean) void
+        +moverEntidade(I_Entidade, int, int, int) void
+        +visualizarAmbiente() void
+    }
+
+    %% Relações (com legendas como no LAB03)
+    RoboLimpador "1" o-- "1" SensorDeLixo : Agregação (possui)
+    RoboBombeiro "1" -- "1" ComunicadorCentral : Associação (comunicaCom) %% Usando associação simples, pode ser 'o--' se for agregação
+    ComunicadorCentral "1" -- "*" RoboBombeiro : Associação (podeAvisar) %% Ou 'o--'
+
+    A_Robo "*" o-- "1" Ambiente : Agregação (operaEm)
+    Obstaculo "*" o-- "1" Ambiente : Agregação (contidoEm)
+    ComunicadorCentral "1" o-- "1" Ambiente : Agregação (localizadoEm)
+
+    %% Enums
+    class EstadoRobo { <<enumeration>> ON; OFF }
+    class TipoObstaculo { <<enumeration>> LAGO; FOGO /*...*/ }
+    class TipoEntidade { <<enumeration>> VAZIO; ROBO /*...*/ }
+
+    %% Relações com Enums (associação/dependência)
+    A_Robo -- EstadoRobo : Usa
+    Obstaculo -- TipoObstaculo : Usa
+    I_Entidade -- TipoEntidade : Usa---
 title: Diagrama de classes - LAB04 (Estereótipo para Interface)
 ---
 classDiagram
