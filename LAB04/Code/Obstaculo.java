@@ -20,13 +20,12 @@ import LAB04.Code.Interfaces.Entidade;
 public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu nao sei se deve dar a altura ou o final, pois sempre começa em z = 0
     private int pos_x;
     private int pos_y;
-    private int pos_z; //pos_z vai ser a altura do obstaculo
+    private final int pos_z = 0;
     private int pos_x2;
     private int pos_y2;
     private TipoObstaculo tipoObstaculo;
     private TipoEntidade tipo; // Definindo o tipo como OBSTACULO por padrão
     private Ambiente ambiente; // Ambiente onde o obstáculo está localizado
-
 
     // Construtor
     public Obstaculo(int pos_x, int pos_y, TipoObstaculo tipoObstaculo, Ambiente ambiente, TipoEntidade tipo) {
@@ -34,7 +33,6 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
         this.pos_y = pos_y;
         this.pos_x2 = pos_x + tipoObstaculo.getLarguraX();
         this.pos_y2 = pos_y + tipoObstaculo.getLarguraY();
-        this.pos_z = tipoObstaculo.getAltura();
         this.tipoObstaculo = tipoObstaculo;
         this.ambiente = ambiente;
         this.tipo = tipo;
@@ -42,6 +40,9 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
 
 
     // Metodos sobrescritos da interface
+    @Override
+    public int getAltura() { return tipoObstaculo.getAltura(); }
+
     @Override
     public int getX() { return pos_x; }
 
