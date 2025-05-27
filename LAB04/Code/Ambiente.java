@@ -153,19 +153,15 @@ public class Ambiente {
      */
     public void moverEntidade(Entidade e, int novoX, int novoY,
                             int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { 
-        
-        // // 1. Verificar se a entidade está no ambiente
-        // if (!entidades.contains(e)) {
-        //     throw new EntidadeNaoEncontradaException("Entidade não está no ambiente e não pode ser movida!\n");
-        // }
+    
 
-        // 2. Validar se a nova posição está dentro dos limites do ambiente
+        // 1. Validar se a nova posição está dentro dos limites do ambiente
         if (!dentroDosLimites(novoX, novoY, novoZ) || 
             !dentroDosLimites(novoX + e.getLarguraX(), novoY + e.getLarguraY(), novoZ + e.getAltura())) {
             throw new ForaDosLimitesException("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
         }
         
-        // 3. Validar se a entidade pode "voar" (mudar Z)
+        // 2. Validar se a entidade pode "voar" (mudar Z)
         if (e.getZ() != novoZ) { // Se há mudança na altitude
             if (e.getTipo() == TipoEntidade.ROBO) {
                 if (!(e instanceof RoboBombeiro)) {
@@ -176,20 +172,20 @@ public class Ambiente {
             }
         }
 
-        // 4. Salvar a posição antiga para limpar o mapa
+        // 3. Salvar a posição antiga para limpar o mapa
         int oldX = e.getX();
         int oldY = e.getY();
         int oldZ = e.getZ();
 
-        // 5. Mover a entidade internamente (atualizar as coordenadas da entidade)
+        // 4. Mover a entidade internamente (atualizar as coordenadas da entidade)
         // Isso pode lançar RoboDesligadoException
         e.mover(novoX - oldX, novoY - oldY, novoZ - oldZ); 
 
-        // 6. Verificar colisões na *nova* posição
+        // 5. Verificar colisões na *nova* posição
         // Chame verificarColisoes com as *novas* coordenadas da entidade (que já foram atualizadas por e.mover())
         verificarColisoes(e, e.getX(), e.getY(), e.getZ()); // Isso pode lançar LocalOcupadoException
 
-        // 7. Limpar a posição antiga no mapa 
+        // 6. Limpar a posição antiga no mapa 
         // Percorre as coordenadas da *antiga* posição e define como VAZIO
         for (int x = oldX; x <= oldX + e.getLarguraX(); x++) {
             for (int y = oldY; y <= oldY + e.getLarguraY(); y++) {
@@ -204,7 +200,7 @@ public class Ambiente {
             }
         }
         
-        // 8. Atualizar a nova posição da entidade no mapa e planoXY
+        // 7. Atualizar a nova posição da entidade no mapa e planoXY
         // Percorre as coordenadas da *nova* posição e define com a representação da entidade
         for (int x = e.getX(); x <= e.getX() + e.getLarguraX(); x++) {
             for (int y = e.getY(); y <= e.getY() + e.getLarguraY(); y++) {
@@ -260,9 +256,9 @@ public class Ambiente {
 
     // Imprime o PlanoXY do ambiente, para visualizar o ambiente em 2D.
     public void visualizarAmbiente(){
-        for (int x = 0; x < largura; x++){
-            for (int y = 0; y < profundidade; y++){
-                System.out.print(planoXY[y][x]);// printa os caracteres dando um espaço entre eles
+        for (int y = 0; y < largura; y++){
+            for (int x = 0; x < profundidade; x++){
+                System.out.print(planoXY[x][y]);// printa os caracteres dando um espaço entre eles
             }
             System.out.print("\n");
         }
