@@ -1,5 +1,6 @@
 package LAB04.Code;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import LAB04.Code.Obstaculo.TipoObstaculo;
 import LAB04.Code.Exceptions.ErrorLimpezaException;
@@ -97,6 +98,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
         System.out.println("Tipo de limpeza atual: " + tipo_limpeza + "."); // Fala qual o tipo de limpeza
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
         boolean Limpou = false; // Variável para verificar se limpou algum lixo
+        ArrayList<Entidade> lixos_ah_remover = new ArrayList<>(); // Lista para armazenar os lixos encontrados
         //mesma lógica do laço for para achar os lixos e caso ainda tenha um obstaculo ele continua vendo se é lixo
         while (iterator.hasNext()) {
             Entidade e = iterator.next();
@@ -108,30 +110,39 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                     if (distancia < raioDeLimpeza) { 
                         //caso esteja dentro do raio de limpeza vê se o modo atual consegue limpar o lixo
                         if (o.getTipoObstaculo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza == 2) {
-                            System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".\n");
+                            System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".");
                             Limpou = true; // marca que limpou algum lixo
                         } else if (o.getTipoObstaculo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza == 1) {
-                            System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".\n");
+                            System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".");
                             Limpou = true; // marca que limpou algum lixo
                         } else if (o.getTipoObstaculo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza == 0) {
-                            System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".\n");
+                            System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".");
                             Limpou = true; // marca que limpou algum lixo
-                        } 
-                        if (Limpou) {
-                            try{
-                                getAmbiente().removerEntidade(e, false); // remove o obstáculo do ambiente
-                            } catch (EntidadeNaoEncontradaException e1){
-                                // Nunca deveria acontecer, mas caso aconteça, imprime a mensagem de erro
-                                // e continua o loop para verificar outros lixos
-                                e1.printStackTrace();
-                                System.out.println("Erro Inesperado: " + e1.getMessage());
-                            }
-                            Limpou = false; // reseta a variável Limpou para verificar se limpou outro lixo
                         } else {
                             System.out.println(getId() + " não pode limpar " + o.getTipoObstaculo().getNome() + ", tente mudar o tipo de limpeza");
                             
                         }
+                        if (Limpou) {
+                            lixos_ah_remover.add(o);
+                            Limpou = false; // reseta a variável para verificar o próximo lixo}
+                        }
                     }
+                }
+            }
+        }
+        // Verifica se limpou algum lixo
+        if (lixos_ah_remover.isEmpty()) {
+            System.out.println(getId() + " não encontrou/conseguiu limpar nenhum lixo!\n");
+        } else {
+            // Remove os lixos encontrados
+            for (Entidade lixo : lixos_ah_remover) {
+                try{
+                    getAmbiente().removerEntidade(lixo, false); // remove o obstáculo do ambiente
+                } catch (EntidadeNaoEncontradaException e1){
+                    // Nunca deveria acontecer, mas caso aconteça, imprime a mensagem de erro
+                    // e continua o loop para verificar outros lixos
+                    e1.printStackTrace();
+                    System.out.println("Erro Inesperado: " + e1.getMessage());
                 }
             }
         }
