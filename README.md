@@ -165,10 +165,10 @@ classDiagram
 O Laboratório 4 introduziu conceitos mais avançados de Orientação a Objetos, focando em **Interfaces**, **Classes Abstratas** e **Tratamento de Exceções**. As principais evoluções foram:
 
 1.  **Interfaces**: Foram criadas diversas interfaces (`Entidade`, `Aprimoravel`, `Comunicavel`, `FogoZero`, `Sensoreavel`, `SujeiraZero`) para definir contratos de comportamento. Isso permitiu "simular" herança múltipla e desacoplar as classes, tornando o sistema mais flexível e extensível.
-2.  **Classes Abstratas**: `Robo` e `Sensor` foram transformadas em classes abstratas, definindo comportamentos e atributos comuns, mas forçando subclasses a implementar métodos específicos. `CentralComunicacao` também foi introduzida como abstrata.
+2.  **Classes Abstratas**: `Robo` e `Sensor` foram transformadas em classes abstratas, definindo comportamentos e atributos comuns, mas forçando subclasses a implementar métodos específicos. `CentralComunicacao` também foi transformada em abstrata.
 3.  **Tratamento de Exceções**: Um conjunto robusto de exceções personalizadas (`ForaDosLimitesException`, `LocalOcupadoException`, `ErrorLimpezaException`, etc.) foi implementado para lidar com erros de forma mais específica e clara.
 4.  **`Ambiente` 3D**: A classe `Ambiente` foi aprimorada para gerenciar um mapa 3D (`TipoEntidade[][][]`) e um plano 2D (`char[][]`), permitindo um controle de posição e colisão mais preciso e complexo. A gestão de entidades foi unificada através da interface `Entidade`.
-5.  **`ComunicadorCentral`**: Uma nova classe foi adicionada para gerenciar a comunicação entre entidades, especialmente para alertar sobre perigos como fogo.
+5.  **`ComunicadorCentral`**: Uma nova classe foi adicionada para gerenciar a comunicação entre entidades, especialmente para alertar sobre perigos como fogo. Ela herda a classe abstrata `CentralComunicacao` e implementa a interface `Comunicavel`.
 6.  **Refatoração**: As classes de Robôs e Obstáculos foram refatoradas para implementar as novas interfaces e utilizar o novo `Ambiente` e o sistema de exceções.
 7.  **Menu Interativo**: O menu foi aprimorado para refletir as novas funcionalidades e seguir as especificações, permitindo uma interação mais rica com a simulação.
 
@@ -344,6 +344,7 @@ classDiagram
 * **`ErrorApagarFogoException`**: Lançada por `RoboBombeiro` ao falhar em apagar fogo.
 * **`ErrorAprimoramentoException`**: Lançada por `RoboLimpador` e `RoboBombeiro` ao falhar no aprimoramento.
 * **`ErroComunicacaoException`**: Lançada por `ComunicadorCentral` em falhas de comunicação.
+* **`ErrorLimpezaException`**: Lançada por `RoboLimpador` quando ele recebe tipo de limpeza inválido.
 * **`EntidadeNaoEncontradaException`**: Lançada por `Ambiente` ao não encontrar uma entidade quando tenta mover ou remove-la.
 * **`ForaDosLimitesException`**: Lançada por `Ambiente` quando ações para fora do ambiente são tentadas.
 * **`LocalOcupadoException`**: Lançada por `Ambiente` quando obstáculos tentam se sobrepor ou quando robôs tentam acessar locais inválidos.
