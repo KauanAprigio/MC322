@@ -345,10 +345,10 @@ classDiagram
 * **`ErrorAprimoramentoException`**: Lançada por `RoboLimpador` e `RoboBombeiro` ao falhar no aprimoramento.
 * **`ErroComunicacaoException`**: Lançada por `ComunicadorCentral` em falhas de comunicação.
 * **`ErrorLimpezaException`**: Lançada por `RoboLimpador` em falhas de limpeza.
-* **`EntidadeNaoEncontradaException`**: Lançada por `Ambiente` ao não encontrar uma entidade.
-* **`ForaDosLimitesException`**: Lançada por `Ambiente` para ações fora do mapa.
-* **`LocalOcupadoException`**: Lançada por `Ambiente` para ações em locais já ocupados.
-* **`NaoPodeVoarException`**: Lançada por `Ambiente` quando um robô não aéreo tenta voar.
+* **`EntidadeNaoEncontradaException`**: Lançada por `Ambiente` ao não encontrar uma entidade quando tenta mover ou remove-la.
+* **`ForaDosLimitesException`**: Lançada por `Ambiente` quando ações para fora do ambiente são tentadas.
+* **`LocalOcupadoException`**: Lançada por `Ambiente` quando obstáculos tentam se sobrepor ou quando robôs tentam acessar locais inválidos.
+* **`NaoPodeVoarException`**: Lançada por `Ambiente` quando algo que não seja um robô bombeiro tenta voar.
 * **`RoboDesligadoException`**: Lançada por `Robo` ou subclasses ao tentar ações enquanto desligado.
 
 ## Compilação e Execução
