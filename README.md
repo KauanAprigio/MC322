@@ -344,7 +344,6 @@ classDiagram
 * **`ErrorApagarFogoException`**: Lançada por `RoboBombeiro` ao falhar em apagar fogo.
 * **`ErrorAprimoramentoException`**: Lançada por `RoboLimpador` e `RoboBombeiro` ao falhar no aprimoramento.
 * **`ErroComunicacaoException`**: Lançada por `ComunicadorCentral` em falhas de comunicação.
-* **`ErrorLimpezaException`**: Lançada por `RoboLimpador` em falhas de limpeza.
 * **`EntidadeNaoEncontradaException`**: Lançada por `Ambiente` ao não encontrar uma entidade quando tenta mover ou remove-la.
 * **`ForaDosLimitesException`**: Lançada por `Ambiente` quando ações para fora do ambiente são tentadas.
 * **`LocalOcupadoException`**: Lançada por `Ambiente` quando obstáculos tentam se sobrepor ou quando robôs tentam acessar locais inválidos.
