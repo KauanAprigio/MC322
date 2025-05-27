@@ -64,7 +64,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public int getLarguraY() { return tipoObstaculo.getLarguraY(); }
 
     @Override
-    public char getRepresentacao() { char representacao = 'o'; return representacao; }
+    public char getRepresentacao() { char representacao = getTipoObstaculo().getRepresentacao(); return representacao; }
 
     @Override
     public String getId() { return getTipoObstaculo().getNome(); }
@@ -125,27 +125,27 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public static enum TipoObstaculo {
         
         LAGO(30, 30, 0, false,
-              "Lago", false, false, false,
+              "Lago", false, false, false, 'l',
                "Lago: Local utilizado para abestecimento dos robôs bombeiros, eles devem estar pousados na água para abastecer o tanque!"), 
         FOGO(5, 5, 5, false, "Fogo",
-            true, false, false, "Fogo! é urgente, Chame um robô bombeiro!"),
+            true, false, false, 'f', "Fogo! é urgente, Chame um robô bombeiro!"),
         PREDIOEMCHAMAS(30, 30, 100, true,
-             "Prédio em chamas", true, false,false,
+             "Prédio em chamas", true, false,false, 'F',
               "Prédio em chamas! Local extremamente perigoso e instável! Chame um robô bombeiro!"), 
         PREDIO(30, 30, 100, true, "Prédio",
-             false, false,false, 
+             false, false,false, 'p',
               "Prédio: uma construção de vários andares, industrial, comercial ou residencial. Em algum ponto podia ter estado em chamas..."),
         SUJEIRAENCARDIDA(0, 0, 0, false,
-             "Sujeira encardida", false, true,false, 
+             "Sujeira encardida", false, true,false, 'S',
               "Sujeira encardida: A mais nojenta entre os tipos de lixo... Um robô limpador consegue remove-la."), 
         COMIDANOCHAO(0, 0, 0, false, 
-            "Comida no chão", false, true,false,
+            "Comida no chão", false, true,false, 'C',
              "Comida no chão: Que desperdício... A regra dos 5 segundos não vale mais. Chame um robô limpador para tirar isso daqui"), 
         SACOLAPLASTICA(0, 0, 0, false,
-             "Sacola plástica", false, true,false, 
+             "Sacola plástica", false, true,false, 'S',
               "Sácola plástica: Plástico.. O lixo mais poluente do mundo! Faça a coisa certa e chame um robô limpador para tirar isso daqui."),
         OFICINA(20, 20, 20, true,
-             "Oficina", false, false,true, 
+             "Oficina", false, false,true, 'o',
               "Oficina: Local de aprimoramento dos Robôs, Robôs bombeiros ganham peso máximo adicional e Robôs limpadores ganham um raio de limpeza maior."); 
 
 
@@ -157,11 +157,12 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
         private final boolean fogo;
         private final boolean lixo;
         private final boolean aprimora;
+        private final char representacao; // Descrição do obstáculo
         private final String descricao;
 
 
         TipoObstaculo(int larguraX, int larguraY, int altura, boolean Local, String nome,
-                            boolean fogo, boolean lixo, boolean aprimora, String descricao) {
+                            boolean fogo, boolean lixo, boolean aprimora, char representacao, String descricao) {
             this.larguraX = larguraX;
             this.larguraY = larguraY;
             this.altura = altura;
@@ -171,6 +172,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
             this.lixo = lixo;
             this.aprimora = aprimora;
             this.descricao = descricao;
+            this.representacao = representacao;
         }
 
         //Getters e Setters
@@ -179,6 +181,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
         public int getAltura() { return altura; }
         public String getNome() { return nome; }
         public String getDescricao() { return descricao; }
+        public char getRepresentacao() { return representacao; }
         public boolean isLocal() { return local; }
         public boolean isFogo() { return fogo; }
         public boolean isLixo() { return lixo; }
