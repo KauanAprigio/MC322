@@ -3,10 +3,11 @@ Coisas a adicionar no menu interativo:
 1 - deixar o robô bomeiro enviar alguma MENSAGEM (FEITO)
 
 2 - der a opção dentro do menu robô bombeiro para ele chamar
-     o Comunicador central perguntando onde fica o fogo mais próximo (FEITO)
+     o Comunicador central perguntando onde fica o fogo mais próximo (QUEBRADO, CENTRAL NÃO ESTÁ RESPONDENDO O ROBÔ???)
 
 3 - opção no menu principal de listar todos os obstáculos no ambiente.
 
 4 - CONSERTAR APAGAR FOGO MENU INTERATIVO (ACHO QUE TA CONSERTADO?)
 
-5 - CONSERTAR MOVER ROBO (NÃO ESTA MOVENDO, FICA DIZENDO QUE O LOCAL DESEJADO ESTÁ OCUPADO)
+5 - CONSERTAR MOVER ROBO (FEITO)
+
