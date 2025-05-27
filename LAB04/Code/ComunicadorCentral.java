@@ -11,20 +11,20 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     private final TipoEntidade tipo = TipoEntidade.COMUNICADOR; // Definindo o tipo como COMUNICADOR por padrão
     private int pos_x;
     private int pos_y;
-    private int pos_z;
+    private final int pos_z = 0;
     private Ambiente ambiente;
     private final int larguraX = 5;
     private final int larguraY = 5;
+    private final int altura = 100; // Altura do Comunicador Central, não utilizada no momento
 
     //Listas de Obstaculos
     ArrayList<Obstaculo> fogos;
     //ArrayList<Obstaculo> lixos;
 
     //Construtor
-    public ComunicadorCentral(int pos_x, int pos_y, int pos_z, Ambiente ambiente){
+    public ComunicadorCentral(int pos_x, int pos_y, Ambiente ambiente){
         this.pos_x = pos_x;
         this.pos_y = pos_y;
-        this.pos_z = pos_z;
         this.ambiente = ambiente;
         fogos = new ArrayList<Obstaculo>();
         // Adicionar os fogos do ambiente à lista de fogos
@@ -69,6 +69,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         if (!e.isComunicavel()) throw new ErroComunicacaoException("Erro de comunicação: Entidade " + e.getId() + " não tem a capacidade de receber mensagens ou está indisponível no momento.\n");
         double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível
         Obstaculo fogoMaisProximo = null; // Inicializa como null para verificar se encontrou algum fogo
+        System.out.println("A central de comunicação foi ativada: Verificando fogos perto da posição (" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")...");
         for (Obstaculo fogo : fogos) {
             // Calcula a distância entre a entidade e o fogo
             int DistanciaX = Math.max(e.getX(), fogo.getX()) - Math.min (e.getX() + e.getLarguraX(), fogo.getX() + fogo.getLarguraX());
@@ -117,6 +118,9 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     }
 
     // Metodos sobrescritos da interface Entidade
+    @Override
+    public int getAltura() { return altura; }
+
     @Override
     public int getX() { return pos_x; }
 

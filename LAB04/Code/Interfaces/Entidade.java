@@ -9,6 +9,7 @@ public interface Entidade {
     public int getX();
     public int getY();
     public int getZ();
+    public int getAltura();
 
     // Métodos para obter informações sobre a entidade
     public TipoEntidade getTipo(); // Método para obter o tipo da entidade (ex: ROBO, OBSTACULO, etc.)

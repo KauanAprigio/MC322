@@ -68,13 +68,13 @@ public class Ambiente {
     public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
         int X_max = e.getX() + e.getLarguraX();
         int Y_max = e.getY() + e.getLarguraY();
-        int Z_max = e.getZ();
+        int Z_max = e.getZ() + e.getAltura();
         verificarColisoes(e, e.getX(), e.getY(), e.getZ());
         entidades.add(e);
         for (int x = e.getX(); x <= X_max; x++) {
             for (int y = e.getY(); y <= Y_max; y++) {
                 planoXY[x][y] = e.getRepresentacao();
-                for (int z = 0; z <= Z_max; z++) {
+                for (int z = e.getZ(); z <= Z_max; z++) {
                     mapa[x][y][z] = e.getTipo();
                 }
             }
@@ -102,7 +102,7 @@ public class Ambiente {
         for (int x = e.getX(); x <= e.getLarguraX() + e.getX(); x++) {
             for (int y = e.getY(); y <= e.getLarguraY() + e.getY(); y++) {
                 planoXY[x][y] = 'v'; 
-                for (int z = 0; z <= e.getZ(); z++) {
+                for (int z = e.getZ(); z <= e.getZ() + e.getAltura(); z++) {
                     mapa[x][y][z] = TipoEntidade.VAZIO;
                 }
             }
@@ -154,7 +154,7 @@ public class Ambiente {
      */
     public void moverEntidade(Entidade e, int novoX, int novoY,
                             int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
-        Entidade entidade = e; // no caso irei usar uma entidade auxiliar so para saber qual eu estou removendo e adicionando no ambiente   
+        Entidade entidade = e;
         // Apenas Robos bombeiros podem voar.
         if (novoZ != 0 && entidade.getTipo() != TipoEntidade.OBSTACULO) {
             Robo r = (Robo) entidade;
@@ -167,14 +167,10 @@ public class Ambiente {
         int deltaX = novoX - entidade.getX();
         int deltaY = novoY - entidade.getY();
         int deltaZ = novoZ - entidade.getZ();
-        
-        // Verifica se o novo local está ocupado ou se está fora dos limites
-        verificarColisoes(entidade, novoX, novoY, novoZ);
-        
-        //PELO OQ EU VI O MOVER E ADICIONAR SOBREPOE CODIGO, TIPO ELES ATUALIZAM 2X O MAPA 3D E 2D, MUDA ISSO SERA?
-        entidade.mover(deltaX, deltaY, deltaZ);
-
         adicionarEntidade(entidade, false); // adiciona a entidade na nova posição
+        entidade.mover(deltaX, deltaY, deltaZ);    
+
+        
         try{
             removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
         } catch (EntidadeNaoEncontradaException exception) {
@@ -184,7 +180,7 @@ public class Ambiente {
         
         System.out.println("Entidade: " + e.getId() + " movida com sucesso para a nova posição.");
         System.out.println("Nova posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
-        System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + e.getZ() + ")\n");
+        System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + (e.getZ() + e.getAltura()) + ")\n");
     }
 
     public void executarSensores(){ 
@@ -207,12 +203,9 @@ public class Ambiente {
      * @throws ForaDosLimitesException Se a região ocupada estiver fora dos limites do ambiente.
      */
     public void verificarColisoes(Entidade e, int novoX, int novoY, int novoZ) throws LocalOcupadoException, ForaDosLimitesException{ 
-        
-        
-        
         for (int x = novoX; x <= e.getLarguraX() + novoX; x++) {
             for (int y = novoY; y <= e.getLarguraY() + novoY; y++) {
-                for (int z = novoZ; z <= novoZ; z++) { //tendo em vista que somente o roboBombeiro pode mudar a altura...vou deixar com um for vendo do novoZ até ele mesmo
+                for (int z = novoZ; z <= novoZ + e.getAltura(); z++) { 
                     if (!dentroDosLimites(x, y, z)) {
                         throw new ForaDosLimitesException("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }
