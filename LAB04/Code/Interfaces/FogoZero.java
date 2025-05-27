@@ -1,4 +1,5 @@
 package LAB04.Code.Interfaces;
+import LAB04.Code.Exceptions.ErroComunicacaoException;
 import LAB04.Code.Exceptions.ErrorAbastecimentoException;
 import LAB04.Code.Exceptions.ErrorApagarFogoException;
 
@@ -30,6 +31,8 @@ public interface FogoZero {
      *   O apagamento pode falhar se o robô não tiver água suficiente no tanque ou se o fogo estiver muito distante.
      *
      * @throws ErrorApagarFogoException Se o apagamento falhar.
+     * @param Central A entidade comunicável que representa o centro de controle ou a central de comando.
+     * @throws ErroComunicacaoException Se houver um erro de comunicação com a central.
      */
-    public void apagar_fogo() throws ErrorApagarFogoException;
+    public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException;
 }
