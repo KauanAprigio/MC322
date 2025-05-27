@@ -96,7 +96,7 @@ public class Ambiente {
      * @throws EntidadeNaoEncontradaException Se a entidade não está no ambiente ou não pode ser encontrada.
      */
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
-         if (mapa[e.getX()][e.getY()][e.getZ()] == TipoEntidade.VAZIO) 
+        if (mapa[e.getX()][e.getY()][e.getZ()] == TipoEntidade.VAZIO) 
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pode ser encontrada!\n");
         for (int x = e.getX(); x <= e.getLarguraX() + e.getX(); x++) {
             for (int y = e.getY(); y <= e.getLarguraY() + e.getY(); y++) {
@@ -141,29 +141,31 @@ public class Ambiente {
      * @throws NaoPodeVoarException Se a entidade tentar voar sem permissão (apenas robôs bombeiros podem voar).
      */
     public void moverEntidade(Entidade e, int novoX, int novoY,
-        int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
-        try{
-            removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
-        } catch (EntidadeNaoEncontradaException exception) {
-            System.out.println("Entidade não está no ambiente e não pode ser movida!\n");
-            return;
-        }
-
+                            int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
+                                
         // Apenas Robos bombeiros podem voar.
         if (novoZ != 0 && e.getTipo() != TipoEntidade.OBSTACULO) {
             Robo r = (Robo) e;
             if (!(r instanceof RoboBombeiro))
                 throw new NaoPodeVoarException("Movimento inválido! Entidade não pode sair do chão!");
         }
-
+                                
         int deltaX = novoX - e.getX();
         int deltaY = novoY - e.getY();
         int deltaZ = novoZ - e.getZ();
+        
         // Verifica se o novo local está ocupado ou se está fora dos limites
         verificarColisoes(e, novoX, novoY, novoZ);
-        
+                                
         e.mover(deltaX, deltaY, deltaZ);
         adicionarEntidade(e, false); // adiciona a entidade na nova posição
+        try{
+            removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
+        } catch (EntidadeNaoEncontradaException exception) {
+            System.out.println("Entidade não está no ambiente e não pode ser movida!\n");
+            return;
+        }
+        
         System.out.println("Entidade: " + e.getId() + " movida com sucesso para a nova posição.");
         System.out.println("Nova posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
         System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + (e.getZ() + e.getAltura()) + ")");

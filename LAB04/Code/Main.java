@@ -114,12 +114,21 @@ public class Main {
         try { roboLimpador.definir_tipo_limpeza(0); System.out.println("Teste [OK] Definir Tipo Limpeza (0)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Sem Lixo Perto): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 53, 41, 0); System.out.println("Teste [OK] Mover Limpador."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        
+        //AQUI TEM Q REVER, POIS ACHO QUE A EXPECTION ESTA ERRADA PORQUE ELA NAO DEIXA O ROBO LIMPAR NADA SE ELE NAO LIMPAR TUDO AO REDOR 
         try { roboLimpador.definir_tipo_limpeza(0); roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Incorreto): " + e.getMessage()); }
         try { roboLimpador.definir_tipo_limpeza(1); roboLimpador.limpar(); System.out.println("Teste [OK] Limpou Comida."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve limpar Comida
+        
         try { roboLimpador.aprimorar(10); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Fora Oficina): " + e.getMessage()); }
+        
+        //AQUI ELE NAO MOVE, POIS ACHO QUE ELE VE A OFICINA COMO OBSTACULO, LOGO FALA Q TA OCUPADO, POSSO COLOCAR Q SE TEM UM LOCAL PODER IR, pode ser ocupado = false
         try { ambiente.moverEntidade(roboLimpador, 56, 46, 0); System.out.println("Teste [OK] Mover Limpador (Oficina)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        
         try { roboLimpador.aprimorar(-5); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Valor Inválido): " + e.getMessage()); }
+        
+        //AQUI CONTINUA SEM ESTAR NO LOCAL DA OFICINA POR ISSO NAO TA CERTO AINDA
         try { roboLimpador.aprimorar(5); System.out.println("Teste [OK] Aprimorou Limpador."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        
         roboLimpador.desligar();
         try { roboLimpador.acionarSensores(); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Sensores): " + e.getMessage()); }
 
@@ -127,18 +136,34 @@ public class Main {
         System.out.println("\n>> Testando RoboBombeiro (" + roboBombeiro.getId() +")...");
         roboBombeiro.ligar();
         try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Fora Lago): " + e.getMessage()); }
+        
+        //ESSE TA DANDO B.O PELA MESMA FORMA DO BAGUI DA OFICINA, ACHO QUE NAO PODE MOVER PQ TEM O "OCUPADO = TRUE" PARA O TIPO LOCAL
         try { ambiente.moverEntidade(roboBombeiro, 5, 5, 0); System.out.println("Teste [OK] Mover Bombeiro (Lago)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        
         try { roboBombeiro.adicionar_agua(-10); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Valor Inválido): " + e.getMessage()); }
         try { roboBombeiro.adicionar_agua(4000); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Capacidade): " + e.getMessage()); }
+        
+        //AINDA NAO ESTA NO LAGO
         try { roboBombeiro.adicionar_agua(500); System.out.println("Teste [OK] Abasteceu Bombeiro."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+
+        // AQUI NUM TA CERTO ELE FALHAR? POIS NAO TEM FOGO MESMO          IXI, MAS O B.O É QUE ELE FALA Q É PRA SUBIR 100M NE ?
         try { roboBombeiro.apagar_fogo(); System.out.println("Teste [OK] Apagar Fogo (Sem Fogo Perto)."); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
+        
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 0); System.out.println("Teste [OK] Mover Bombeiro (Perto Fogo)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        
+        //AQUI ELE NAO PRINTA NADA PELO VISTO
         try { roboBombeiro.apagar_fogo(); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Altura): " + e.getMessage()); }
+        
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Subir Bombeiro."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(); System.out.println("Teste [OK] Apagou Fogo."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve apagar FOGO
         try { ambiente.moverEntidade(roboBombeiro, 5, 45, 100); System.out.println("Teste [OK] Mover Bombeiro (Perto Prédio Chamas)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        
+        //AQUI TA COM ERRO ELE TEM QUE SUBIR MAIS ACHO EU, LOGO SERIA LEGAL ABAIXAR A ALTURA DOS BAGUI PARA NO MAXIMO 90M        TA DANDO QUE A REGIAO TA OCUPADA
         try { roboBombeiro.apagar_fogo(); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Água Insuficiente): " + e.getMessage()); }
+        
         roboBombeiro.desligar();
+
+        // AQUI ELE FALA SO Q TA FORA DO LAGO, DEVE VER PRIMEIRO SE ELE TA DESLIGADO ACHO EU 
         try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Desligado): " + e.getMessage()); }
 
         // --- Testes ComunicadorCentral ---
@@ -154,6 +179,7 @@ public class Main {
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
         // Reinicia robos para o menu, garantindo que estejam em posições e estados conhecidos
         try {
+            //ACHO QUE DÁ UM CATCH PORQUE TEM QUE ADICIONAR PRIMEIRO E DEPOIS REMOVER A ENTIDADE IGUAL FIZ NA FUNCAO MOVEReNTIDADE
             ambiente.removerEntidade(roboLimpador, false);
             ambiente.removerEntidade(roboBombeiro, false);
             roboLimpador = new RoboLimpador("Faxinildo_01", EstadoRobo.OFF, 0, 0, 0, ambiente, 15.0, 10);
@@ -162,6 +188,9 @@ public class Main {
             ambiente.adicionarEntidade(roboBombeiro, true);
         } catch (Exception e) { System.err.println("Erro ao reiniciar robôs: " + e.getMessage());}
     }
+
+//DEPOIS IREI VER O MENU INTERATIVO, MAS ENQUANTO ISSO VOU CONSERTAR O QUE VI ATÉ AGORA NOS CASOS DE TESTE
+
 
     /**
      * Apresenta o menu interativo para o usuário.
