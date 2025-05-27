@@ -54,7 +54,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
             if (e.getTipo() == TipoEntidade.OBSTACULO){
                 Obstaculo o = (Obstaculo) e;
                 if (o.getTipoObstaculo().getNome() == "Lago" && o.getX() <= getX() && o.getY() <= getY() &&
-                o.getPosicaoX2() >= getX() && o.getPosicaoY2() >= getY()) {
+                o.getPosicaoX2() >= getX() && o.getPosicaoY2() >= getY() && getZ() == 1) {
                     System.out.println(getId() + " está em um lago e pode abastecer água.");
                     dentro_lago = true;
                     break;

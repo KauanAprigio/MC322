@@ -57,13 +57,14 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                         raioDeLimpeza += upgrade;
                         System.out.println(getId() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza + ".\n");
                         return;
-                    } 
+                    } else {
+                        // caso o robo não esteja na oficina
+                        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!";
+                        throw new ErrorAprimoramentoException(msg);
+                    }
                 }
             }
         }
-        // caso o robo não esteja na oficina
-        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!";
-        throw new ErrorAprimoramentoException(msg);
     }
 
     //Métodos da interface SujeiraZero

@@ -49,7 +49,6 @@ public interface Entidade {
         VAZIO,
         ROBO,
         OBSTACULO,
-        LOCAL,
         DESCONHECIDO,
         COMUNICADOR;
     }

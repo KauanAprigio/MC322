@@ -101,7 +101,7 @@ public class Main {
         roboBombeiro.ligar();
         //mudei para 102 ao inves de 101, nao sei pq tava dando OutOfBounds no 101...TEM QUE VER ISSO 
         try { ambiente.moverEntidade(roboLimpador, 102, 0, 0); } catch (Exception e) { System.err.println("Teste [OK] ForaDosLimitesException: " + e.getMessage()); }
-        try { ambiente.moverEntidade(roboLimpador, 45, 45, 0); } catch (Exception e) { System.err.println("Teste [OK] LocalOcupadoException: " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboLimpador, 2, 2, 0); } catch (Exception e) { System.err.println("Teste [OK] LocalOcupadoException: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 5); } catch (Exception e) { System.err.println("Teste [OK] NaoPodeVoarException: " + e.getMessage()); }
         try {
             Obstaculo fantasma = new Obstaculo(60, 60, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
@@ -115,21 +115,12 @@ public class Main {
         try { roboLimpador.definir_tipo_limpeza(0); System.out.println("Teste [OK] Definir Tipo Limpeza (0)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Sem Lixo Perto): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 53, 41, 0); System.out.println("Teste [OK] Mover Limpador."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        
-        //AQUI TEM Q REVER, POIS ACHO QUE A EXPECTION ESTA ERRADA PORQUE ELA NAO DEIXA O ROBO LIMPAR NADA SE ELE NAO LIMPAR TUDO AO REDOR 
         try { roboLimpador.definir_tipo_limpeza(0); roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Incorreto): " + e.getMessage()); }
         try { roboLimpador.definir_tipo_limpeza(1); roboLimpador.limpar(); System.out.println("Teste [OK] Limpou Comida."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve limpar Comida
-        
         try { roboLimpador.aprimorar(10); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Fora Oficina): " + e.getMessage()); }
-        
-        //AQUI ELE NAO MOVE, POIS ACHO QUE ELE VE A OFICINA COMO OBSTACULO, LOGO FALA Q TA OCUPADO, POSSO COLOCAR Q SE TEM UM LOCAL PODER IR, pode ser ocupado = false
         try { ambiente.moverEntidade(roboLimpador, 56, 46, 0); System.out.println("Teste [OK] Mover Limpador (Oficina)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        
         try { roboLimpador.aprimorar(-5); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Valor Inválido): " + e.getMessage()); }
-        
-        //AQUI CONTINUA SEM ESTAR NO LOCAL DA OFICINA POR ISSO NAO TA CERTO AINDA
         try { roboLimpador.aprimorar(5); System.out.println("Teste [OK] Aprimorou Limpador."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        
         roboLimpador.desligar();
         try { roboLimpador.acionarSensores(); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Sensores): " + e.getMessage()); }
 

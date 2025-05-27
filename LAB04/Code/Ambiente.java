@@ -9,6 +9,7 @@ import LAB04.Code.Exceptions.NaoPodeVoarException;
 import LAB04.Code.Exceptions.RoboDesligadoException;
 import LAB04.Code.Interfaces.Entidade;
 import LAB04.Code.Interfaces.Entidade.TipoEntidade;
+import LAB04.Code.Obstaculo.TipoObstaculo;
 
 /**
  * Classe Ambiente representa um ambiente tridimensional onde entidades podem ser adicionadas, removidas e movidas.
@@ -121,7 +122,18 @@ public class Ambiente {
     public boolean estaOcupado(int x, int y, int z, TipoEntidade tipo) { 
         TipoEntidade posicao = mapa[x][y][z];
         if (posicao == TipoEntidade.VAZIO) return false; // A posição está vazia
-        if (posicao == TipoEntidade.LOCAL && tipo == TipoEntidade.ROBO) return false; // A posição é um local e a entidade é um robô, então pode ser ocupada
+        if (posicao == TipoEntidade.OBSTACULO && tipo == TipoEntidade.ROBO){
+            for (Entidade entidade : entidades){
+                if ((entidade.getX() <= x && entidade.getLarguraX() + entidade.getX() >= x) 
+                && (entidade.getY() <= y && entidade.getLarguraY() + entidade.getY() >= y)
+                && entidade.getTipo() == TipoEntidade.OBSTACULO){
+                    Obstaculo aprimorar = (Obstaculo) entidade;
+                    if (aprimorar.getTipoObstaculo() == TipoObstaculo.OFICINA){
+                        return false; // A posição é um local e a entidade é um robô, então pode ser ocupada
+                    }
+                }
+            }
+        } 
         return true; // A posição está ocupada
     }
 
