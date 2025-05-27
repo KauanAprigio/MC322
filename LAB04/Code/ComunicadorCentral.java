@@ -112,8 +112,11 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     public void receberMensagem(String mensagem, Comunicavel remetente) throws ErroComunicacaoException {
         Entidade e = (Entidade) remetente;
         registrarMensagem(e.getId(), mensagem);
-        if (remetente instanceof RoboBombeiro) {
+        if (mensagem.toUpperCase() == "AJUDA") {
             avisoFogoProximo(e);
+        } else if (mensagem.toUpperCase() == "INCÊNDIO APAGADO") {
+            RoboBombeiro rb = (RoboBombeiro) e;
+            fogos.remove(rb.getUltimoIncendio());
         }
     }
 

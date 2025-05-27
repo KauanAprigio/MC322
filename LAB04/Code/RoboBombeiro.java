@@ -28,6 +28,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     private int peso_max; // peso maximo que o robo suporta;
     private int reservatorio; // litros de agua no reservatorio
     private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
+    private Obstaculo Ultimo_incendio = null; // ultimo incendio apagado pelo robo, para evitar apagar o mesmo incendio mais de uma vez
     
     // Construtor
     public RoboBombeiro(String id, EstadoRobo estado, int pos_x, int pos_y, int altitude, 
@@ -75,7 +76,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
         }
     }
     @Override
-    public void apagar_fogo() throws ErrorApagarFogoException {
+    public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException {
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
         // Verifica se o robô está dentro de um incêndio
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
@@ -109,6 +110,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                                 System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
                                 System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); 
                                 try{
+                                    Ultimo_incendio = o; // guarda o ultimo incendio apagado pelo robo
                                     getAmbiente().removerEntidade(o, false);
                                 } catch (EntidadeNaoEncontradaException e1) {
                                     // Nunca deveria acontecer, pois o obstaculo é um obstaculo que ja existe
@@ -118,17 +120,19 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                                 System.out.println("Prédio não mais está em chamas.");
                                 System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
                                 System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
-                                iterator.remove();
                                 Obstaculo novo_Predinho = new Obstaculo(o.getX(), o.getY(), TipoObstaculo.PREDIO, getAmbiente(), TipoEntidade.OBSTACULO);
                                 try {
+                                    Ultimo_incendio = o; // guarda o ultimo incendio apagado pelo robo
+                                    getAmbiente().removerEntidade(o, false);
                                     getAmbiente().adicionarEntidade(novo_Predinho, false);
-                                } catch (LocalOcupadoException | ForaDosLimitesException e1) {
+                                } catch (LocalOcupadoException | ForaDosLimitesException | EntidadeNaoEncontradaException e1) {
                                     // Nunca deveria acontecer, pois o predio é um obstaculo que ja existe
                                     // e o ambiente ja foi verificado para nao ter obstaculos
                                     // nesse local, mas vou deixar aqui para evitar erros futuros
                                     System.out.println("Erro Inesperado: " + e1.getMessage());
-                                }
+                                }    
                             }
+                            enviarMensagem(Central, "Incêndio apagado");
                         }                         
                     } else {
                         int falta_altura = o.getZ() - getZ();
@@ -201,6 +205,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     public int getReservatorio() { return reservatorio; }
     public int getRaioDeCessarFogo() { return raio_de_cessar_fogo; }
     public int getAltitude() { return altitude; }
+    public Obstaculo getUltimoIncendio() { return Ultimo_incendio; }
 
     public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
 }
