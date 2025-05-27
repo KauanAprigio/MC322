@@ -155,12 +155,13 @@ public class Ambiente {
     public void moverEntidade(Entidade e, int novoX, int novoY,
                             int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
         Entidade entidade = e; // no caso irei usar uma entidade auxiliar so para saber qual eu estou removendo e adicionando no ambiente   
-        //O QUE ACONTECERIA SE NOVOZ != 0, MAS É DO TIPO OBSTACULO ? TEM EXCEPTION PRA ISSO ?
         // Apenas Robos bombeiros podem voar.
         if (novoZ != 0 && entidade.getTipo() != TipoEntidade.OBSTACULO) {
             Robo r = (Robo) entidade;
             if (!(r instanceof RoboBombeiro))
                 throw new NaoPodeVoarException("Movimento inválido! Entidade não pode sair do chão!\n");
+        } else if (entidade.getTipo() == TipoEntidade.OBSTACULO  && novoZ != 0) {
+            throw new NaoPodeVoarException("Movimento inválido! Obstáculo não pode voar!\n");
         }
                                 
         int deltaX = novoX - entidade.getX();
@@ -227,9 +228,9 @@ public class Ambiente {
     public void visualizarAmbiente(){
         for (int x = 0; x < largura; x++){
             for (int y = 0; y < profundidade; y++){
-                System.out.print(planoXY[x][y] + " ");// printa os caracteres dando um espaço entre eles
+                System.out.print(planoXY[x][y]);// printa os caracteres dando um espaço entre eles
             }
-            System.out.println("");
+            System.out.print("\n");
         }
     }
 
