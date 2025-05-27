@@ -1,7 +1,6 @@
 package LAB04.Code;
 import java.util.ArrayList;
 
-import LAB04.Code.AbstractClasses.Robo;
 import LAB04.Code.Exceptions.EntidadeNaoEncontradaException;
 import LAB04.Code.Exceptions.ForaDosLimitesException;
 import LAB04.Code.Exceptions.LocalOcupadoException;
@@ -153,31 +152,73 @@ public class Ambiente {
      * @throws NaoPodeVoarException Se a entidade tentar voar sem permissão (apenas robôs bombeiros podem voar).
      */
     public void moverEntidade(Entidade e, int novoX, int novoY,
-                            int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
-        Entidade entidade = e;
-        // Apenas Robos bombeiros podem voar.
-        if (novoZ != 0 && entidade.getTipo() != TipoEntidade.OBSTACULO) {
-            Robo r = (Robo) entidade;
-            if (!(r instanceof RoboBombeiro))
-                throw new NaoPodeVoarException("Movimento inválido! Entidade não pode sair do chão!\n");
-        } else if (entidade.getTipo() == TipoEntidade.OBSTACULO  && novoZ != 0) {
-            throw new NaoPodeVoarException("Movimento inválido! Obstáculo não pode voar!\n");
-        }
-                                
-        int deltaX = novoX - entidade.getX();
-        int deltaY = novoY - entidade.getY();
-        int deltaZ = novoZ - entidade.getZ();
-        adicionarEntidade(entidade, false); // adiciona a entidade na nova posição
-        entidade.mover(deltaX, deltaY, deltaZ);    
+                            int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { 
+        
+        // // 1. Verificar se a entidade está no ambiente
+        // if (!entidades.contains(e)) {
+        //     throw new EntidadeNaoEncontradaException("Entidade não está no ambiente e não pode ser movida!\n");
+        // }
 
-        
-        try{
-            removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
-        } catch (EntidadeNaoEncontradaException exception) {
-            System.out.println("Entidade não está no ambiente e não pode ser movida!\n");
-            return;
+        // 2. Validar se a nova posição está dentro dos limites do ambiente
+        if (!dentroDosLimites(novoX, novoY, novoZ) || 
+            !dentroDosLimites(novoX + e.getLarguraX(), novoY + e.getLarguraY(), novoZ + e.getAltura())) {
+            throw new ForaDosLimitesException("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
         }
         
+        // 3. Validar se a entidade pode "voar" (mudar Z)
+        if (e.getZ() != novoZ) { // Se há mudança na altitude
+            if (e.getTipo() == TipoEntidade.ROBO) {
+                if (!(e instanceof RoboBombeiro)) {
+                    throw new NaoPodeVoarException("Movimento inválido! Robô " + e.getId() + " não pode voar (apenas Robôs Bombeiros podem)!\n");
+                }
+            } else { // Se não é um robô
+                throw new NaoPodeVoarException("Movimento inválido! Entidade do tipo " + e.getTipo() + " não pode voar!\n");
+            }
+        }
+
+        // 4. Salvar a posição antiga para limpar o mapa
+        int oldX = e.getX();
+        int oldY = e.getY();
+        int oldZ = e.getZ();
+
+        // 5. Mover a entidade internamente (atualizar as coordenadas da entidade)
+        // Isso pode lançar RoboDesligadoException
+        e.mover(novoX - oldX, novoY - oldY, novoZ - oldZ); 
+
+        // 6. Verificar colisões na *nova* posição
+        // Chame verificarColisoes com as *novas* coordenadas da entidade (que já foram atualizadas por e.mover())
+        verificarColisoes(e, e.getX(), e.getY(), e.getZ()); // Isso pode lançar LocalOcupadoException
+
+        // 7. Limpar a posição antiga no mapa 
+        // Percorre as coordenadas da *antiga* posição e define como VAZIO
+        for (int x = oldX; x <= oldX + e.getLarguraX(); x++) {
+            for (int y = oldY; y <= oldY + e.getLarguraY(); y++) {
+                if (x >= 0 && x < largura && y >= 0 && y < profundidade) {
+                    planoXY[x][y] = 'v';
+                }
+                for (int z = oldZ; z <= oldZ + e.getAltura(); z++) {
+                    if (x >= 0 && x < largura && y >= 0 && y < profundidade && z >= 0 && z < altura) {
+                        mapa[x][y][z] = TipoEntidade.VAZIO;
+                    }
+                }
+            }
+        }
+        
+        // 8. Atualizar a nova posição da entidade no mapa e planoXY
+        // Percorre as coordenadas da *nova* posição e define com a representação da entidade
+        for (int x = e.getX(); x <= e.getX() + e.getLarguraX(); x++) {
+            for (int y = e.getY(); y <= e.getY() + e.getLarguraY(); y++) {
+                if (x >= 0 && x < largura && y >= 0 && y < profundidade) {
+                    planoXY[x][y] = e.getRepresentacao();
+                }
+                for (int z = e.getZ(); z <= e.getZ() + e.getAltura(); z++) {
+                     if (x >= 0 && x < largura && y >= 0 && y < profundidade && z >= 0 && z < altura) {
+                        mapa[x][y][z] = e.getTipo();
+                    }
+                }
+            }
+        }
+
         System.out.println("Entidade: " + e.getId() + " movida com sucesso para a nova posição.");
         System.out.println("Nova posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
         System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + (e.getZ() + e.getAltura()) + ")\n");
@@ -221,7 +262,7 @@ public class Ambiente {
     public void visualizarAmbiente(){
         for (int x = 0; x < largura; x++){
             for (int y = 0; y < profundidade; y++){
-                System.out.print(planoXY[x][y]);// printa os caracteres dando um espaço entre eles
+                System.out.print(planoXY[y][x]);// printa os caracteres dando um espaço entre eles
             }
             System.out.print("\n");
         }
