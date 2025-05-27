@@ -64,7 +64,7 @@ public class Main {
             ambiente.adicionarEntidade(new Obstaculo(52, 41, TipoObstaculo.COMIDANOCHAO, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 2
             ambiente.adicionarEntidade(new Obstaculo(54, 42, TipoObstaculo.SACOLAPLASTICA, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 3
             ambiente.adicionarEntidade(new Obstaculo(55, 45, TipoObstaculo.OFICINA, ambiente, TipoEntidade.OBSTACULO), true); // Oficina
-            comunicador = new ComunicadorCentral(49, 50, 0, ambiente);
+            comunicador = new ComunicadorCentral(49, 50, ambiente);
             ambiente.adicionarEntidade(comunicador, true);
 
         } catch (ForaDosLimitesException | LocalOcupadoException e) {
@@ -170,14 +170,14 @@ public class Main {
             Menu_interativo.adicionarEntidade(new RoboBombeiro("Diego", EstadoRobo.OFF, 0, 0, 0, Menu_interativo, 105, 3000, 20), true);
             Menu_interativo.adicionarEntidade( new RoboLimpador("Gustavo", EstadoRobo.OFF, 0, 2, 0, Menu_interativo, 15, 15), true);
             Menu_interativo.adicionarEntidade( new RoboBombeiro("Kauan", EstadoRobo.OFF, 50, 50, 0, Menu_interativo, 85, 4000, 20), true);
-            Menu_interativo.adicionarEntidade( new RoboLimpador("Gustavo", EstadoRobo.OFF, 0, 2, 0, Menu_interativo, 15, 15), true);
+            Menu_interativo.adicionarEntidade( new RoboLimpador("Esther", EstadoRobo.OFF, 100, 100, 0, Menu_interativo, 30, 15), true);
         } catch (Exception e) { System.err.println("Erro ao iniciar robôs: " + e.getMessage());}
         try {
             Menu_interativo.adicionarEntidade(new Obstaculo(5, 5, TipoObstaculo.FOGO, Menu_interativo, TipoEntidade.OBSTACULO), true);
             Menu_interativo.adicionarEntidade(new Obstaculo(15, 15, TipoObstaculo.PREDIOEMCHAMAS, Menu_interativo, TipoEntidade.OBSTACULO), true);
 
 
-            ComunicadorCentral Menu_comunicador = new ComunicadorCentral(50, 50, 0, Menu_interativo);
+            ComunicadorCentral Menu_comunicador = new ComunicadorCentral(50, 50, Menu_interativo);
             comunicador = Menu_comunicador; // Atualiza o comunicador para o novo ambiente
             Menu_interativo.adicionarEntidade(comunicador, true);
         } catch (Exception e) {
@@ -435,10 +435,8 @@ public class Main {
                         break;
                     case 4:
                         System.out.print("Digite sua mensagem para a central: ");
-                        scanner.nextLine(); // Consome a nova linha pendente
                         String msg = scanner.nextLine();
-                        rb.enviarMensagem(comunicador, rb.getId() + ": " + msg);
-                        System.out.println("Mensagem enviada!");
+                        rb.enviarMensagem(comunicador, msg);
                         break;
                     case 5: break;
                     default: System.out.println("Ação inválida!"); break;
