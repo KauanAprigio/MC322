@@ -91,7 +91,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
     }
 
     @Override
-    public void limpar() throws ErrorLimpezaException {
+    public void limpar() {
         System.out.println("Tipo de limpeza atual: " + tipo_limpeza + "."); // Fala qual o tipo de limpeza
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
         //mesma lógica do laço for para achar os lixos e caso ainda tenha um obstaculo ele continua vendo se é lixo
@@ -116,8 +116,8 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                             
                             // se não pode limpar
                         } else {
-                            String msg = getId() + " não pode limpar " + o.getTipoObstaculo().getNome() + ", tente mudar o tipo de limpeza";
-                            throw new ErrorLimpezaException(msg);
+                            System.out.println(getId() + " não pode limpar " + o.getTipoObstaculo().getNome() + ", tente mudar o tipo de limpeza");
+                            
                         }
                     }
                 }
