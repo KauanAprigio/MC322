@@ -108,7 +108,12 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                                 // por isso nao botei depois, a fim de englobar os dois casos
                                 System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
                                 System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); 
-                                iterator.remove();
+                                try{
+                                    getAmbiente().removerEntidade(o, false);
+                                } catch (EntidadeNaoEncontradaException e1) {
+                                    // Nunca deveria acontecer, pois o obstaculo é um obstaculo que ja existe
+                                    System.out.println("Erro Inesperado: " + e1.getMessage());
+                                }
                             } else if (o.getTipoObstaculo() == TipoObstaculo.PREDIOEMCHAMAS) {
                                 System.out.println("Prédio não mais está em chamas.");
                                 System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
