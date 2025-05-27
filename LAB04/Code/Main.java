@@ -128,29 +128,18 @@ public class Main {
         System.out.println("\n>> Testando RoboBombeiro (" + roboBombeiro.getId() +")...");
         roboBombeiro.ligar();
         try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Fora Lago): " + e.getMessage()); }
-        
-        //ESSE TA DANDO B.O PELA MESMA FORMA DO BAGUI DA OFICINA, ACHO QUE NAO PODE MOVER PQ TEM O "OCUPADO = TRUE" PARA O TIPO LOCAL
-        try { ambiente.moverEntidade(roboBombeiro, 5, 5, 0); System.out.println("Teste [OK] Mover Bombeiro (Lago)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        
+        try { ambiente.moverEntidade(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.adicionar_agua(-10); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Valor Inválido): " + e.getMessage()); }
         try { roboBombeiro.adicionar_agua(4000); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Capacidade): " + e.getMessage()); }
-        
-        //AINDA NAO ESTA NO LAGO
         try { roboBombeiro.adicionar_agua(500); System.out.println("Teste [OK] Abasteceu Bombeiro."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-
-        // AQUI NUM TA CERTO ELE FALHAR? POIS NAO TEM FOGO MESMO          IXI, MAS O B.O É QUE ELE FALA Q É PRA SUBIR 100M NE ?
         try { roboBombeiro.apagar_fogo(); System.out.println("Teste [OK] Apagar Fogo (Sem Fogo Perto)."); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
-        
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 0); System.out.println("Teste [OK] Mover Bombeiro (Perto Fogo)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        
-        //AQUI ELE NAO PRINTA NADA PELO VISTO
         try { roboBombeiro.apagar_fogo(); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Altura): " + e.getMessage()); }
-        
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Subir Bombeiro."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(); System.out.println("Teste [OK] Apagou Fogo."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve apagar FOGO
-        try { ambiente.moverEntidade(roboBombeiro, 5, 45, 100); System.out.println("Teste [OK] Mover Bombeiro (Perto Prédio Chamas)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboBombeiro, 0, 40, 101); System.out.println("Teste [OK] Mover Bombeiro (Perto Prédio Chamas)."); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         
-        //AQUI TA COM ERRO ELE TEM QUE SUBIR MAIS ACHO EU, LOGO SERIA LEGAL ABAIXAR A ALTURA DOS BAGUI PARA NO MAXIMO 90M        TA DANDO QUE A REGIAO TA OCUPADA
+        // ERRO AO TENTAR READICIONAR O PREDIO EM CHAMAS
         try { roboBombeiro.apagar_fogo(); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Água Insuficiente): " + e.getMessage()); }
         
         roboBombeiro.desligar();

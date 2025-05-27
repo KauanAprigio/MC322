@@ -23,6 +23,7 @@ public abstract class CentralComunicacao {
     }
 
     public void exibirMensagens(){ // pode fazer algo se o mensagens estiver vazio retornar um exception...
+        System.out.println("Exibindo todas as mensagens:");
         for(int i = 0; i < mensagens.size(); i++){
             System.out.println(mensagens.get(i));
         }

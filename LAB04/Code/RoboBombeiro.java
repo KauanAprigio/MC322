@@ -43,7 +43,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
         this.altitudeMaxima = altitudeMaxima;
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
-        this.reservatorio = peso_max; // litros de agua no reservatorio (começa cheio)
+        this.reservatorio = peso_max / 2; // litros de agua no reservatorio (começa na metade)
     }
     
     @Override
@@ -90,10 +90,10 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
             Entidade e = iterator.next();
             if (e.getTipo() == TipoEntidade.OBSTACULO){
                 Obstaculo o = (Obstaculo) e;
-
-                // Nesse bloco aqui vejo se ele está perto o suficiente de algum obstpaculo que tenha fogo
+                
+                // Nesse bloco aqui vejo se ele está perto o suficiente de algum obstaculo que tenha fogo
                 int Xmaisproximo = Math.max(o.getX(), Math.min(getX(), o.getPosicaoX2()));
-                int Ymaisproximo = Math.max(o.getX(), Math.min(getY(), o.getPosicaoY2()));
+                int Ymaisproximo = Math.max(o.getY(), Math.min(getY(), o.getPosicaoY2()));
                 double distancia = Math.sqrt(Math.pow(Xmaisproximo - getX(), 2) + Math.pow(Ymaisproximo - getY(), 2));
                 
                 if (o.getTipoObstaculo().isFogo() && distancia <= raio_de_cessar_fogo) { // Condional caso o obstaculo detectado seja um fogo
@@ -132,8 +132,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                                 }
                             }
                         }                         
-                    }
-                    else {
+                    } else {
                         int falta_altura = o.getZ() - getZ();
                         String msg = getId() + " não está na altura do fogo, suba " + falta_altura + " metros para apagar o fogo!";
                         throw new ErrorApagarFogoException(msg);

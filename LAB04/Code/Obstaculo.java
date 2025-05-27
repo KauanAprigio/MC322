@@ -172,6 +172,8 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
             this.aprimora = aprimora;
             this.descricao = descricao;
         }
+
+        //Getters e Setters
         public int getLarguraX() { return larguraX; }
         public int getLarguraY() { return larguraY; }
         public int getAltura() { return altura; }

@@ -86,8 +86,8 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         }
         if (fogoMaisProximo != null) {
             Comunicavel d = (Comunicavel) e;
-            String mensagem = "Comunicador Central: O fogo mais próximo de " + e.getId() + " está a uma distância de "
-            + menorDistancia + " unidades e está localizado na posição (" 
+            String mensagem = "O fogo mais próximo de " + e.getId() + " está a uma distância de "
+            + menorDistancia + " metros e está localizado na posição (" 
             + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getZ() + ").\n";
             enviarMensagem(d, mensagem);
             // Salva a mensagem no histórico de mensagens do comunicador central
