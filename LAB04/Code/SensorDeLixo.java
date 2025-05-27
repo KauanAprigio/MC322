@@ -28,7 +28,7 @@ public class SensorDeLixo extends Sensor {
                     // Lógica para calcular o ponto mais próximo dentro dos limites do obstáculo e calcular a distância deste ponto para o robo.
                     int Xmaisproximo = Math.max(o.getX(), Math.min(x, o.getPosicaoX2()));
                     int Ymaisproximo = Math.max(o.getY(), Math.min(y, o.getPosicaoY2()));
-                    int Zmaisproximo = Math.max(0, Math.min(altura, o.getAlturinha()));
+                    int Zmaisproximo = Math.max(0, Math.min(altura, o.getZ()));
                     double distancia = Math.sqrt(Math.pow(Xmaisproximo - x, 2) + Math.pow(Ymaisproximo - y, 2) + Math.pow(Zmaisproximo - altura, 2));
                     
                     if (distancia <= getRaio()) { // aqui vê se o lixo está dentro da distancia do raio, se estiver o contador adiciona +1 para contagem de lixos

@@ -67,13 +67,13 @@ public class Ambiente {
     public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
         int X_max = e.getX() + e.getLarguraX();
         int Y_max = e.getY() + e.getLarguraY();
-        int Z_max = e.getZ() + e.getAltura();
+        int Z_max = e.getZ();
         verificarColisoes(e, e.getX(), e.getY(), e.getZ());
         entidades.add(e);
         for (int x = e.getX(); x <= X_max; x++) {
             for (int y = e.getY(); y <= Y_max; y++) {
                 planoXY[x][y] = e.getRepresentacao();
-                for (int z = e.getZ(); z <= Z_max; z++) {
+                for (int z = 0; z <= Z_max; z++) {
                     mapa[x][y][z] = e.getTipo();
                 }
             }
@@ -101,7 +101,7 @@ public class Ambiente {
         for (int x = e.getX(); x <= e.getLarguraX() + e.getX(); x++) {
             for (int y = e.getY(); y <= e.getLarguraY() + e.getY(); y++) {
                 planoXY[x][y] = 'v'; 
-                for (int z = e.getZ(); z <= e.getAltura() + e.getZ(); z++) {
+                for (int z = 0; z <= e.getZ(); z++) {
                     mapa[x][y][z] = TipoEntidade.VAZIO;
                 }
             }
@@ -142,7 +142,8 @@ public class Ambiente {
      */
     public void moverEntidade(Entidade e, int novoX, int novoY,
                             int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
-                                
+                          
+        //O QUE ACONTECERIA SE NOVOZ != 0, MAS É DO TIPO OBSTACULO ? TEM EXCEPTION PRA ISSO ?
         // Apenas Robos bombeiros podem voar.
         if (novoZ != 0 && e.getTipo() != TipoEntidade.OBSTACULO) {
             Robo r = (Robo) e;
@@ -168,7 +169,7 @@ public class Ambiente {
         
         System.out.println("Entidade: " + e.getId() + " movida com sucesso para a nova posição.");
         System.out.println("Nova posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
-        System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + (e.getZ() + e.getAltura()) + ")");
+        System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + e.getZ() + ")");
     }
 
     public void executarSensores(){ 
@@ -196,7 +197,7 @@ public class Ambiente {
         
         for (int x = novoX; x <= e.getLarguraX() + novoX; x++) {
             for (int y = novoY; y <= e.getLarguraY() + novoY; y++) {
-                for (int z = novoZ; z <= e.getAltura() + novoZ; z++) {
+                for (int z = novoZ; z <= novoZ; z++) { //tendo em vista que somente o roboBombeiro pode mudar a altura...vou deixar com um for vendo do novoZ até ele mesmo
                     if (!dentroDosLimites(x, y, z)) {
                         throw new ForaDosLimitesException("A região ocupada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }

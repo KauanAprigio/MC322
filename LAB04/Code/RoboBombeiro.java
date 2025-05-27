@@ -97,7 +97,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                 double distancia = Math.sqrt(Math.pow(Xmaisproximo - getX(), 2) + Math.pow(Ymaisproximo - getY(), 2));
                 
                 if (o.getTipoObstaculo().isFogo() && distancia <= raio_de_cessar_fogo) { // Condional caso o obstaculo detectado seja um fogo
-                    if (o.getAltura() <= getZ()){ // condicional para ver se está na altura do fogo
+                    if (o.getZ() <= getZ()){ // condicional para ver se está na altura do fogo
                         System.out.println(getId() + " está próximo de um incêndio.");
 
                         if (o.getTipoObstaculo() == TipoObstaculo.FOGO) litros_necessarios = 100; // quantidade de agua para apagar o fogo
@@ -134,7 +134,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                         }                         
                     }
                     else {
-                        int falta_altura = o.getAltura() - getZ();
+                        int falta_altura = o.getZ() - getZ();
                         String msg = getId() + " não está na altura do fogo, suba " + falta_altura + " metros para apagar o fogo!";
                         throw new ErrorApagarFogoException(msg);
                     }

@@ -15,7 +15,6 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     private Ambiente ambiente;
     private final int larguraX = 5;
     private final int larguraY = 5;
-    private final int altura = 100;
 
     //Listas de Obstaculos
     ArrayList<Obstaculo> fogos;
@@ -76,7 +75,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             if (DistanciaX <= 0) { DistanciaX = 0; } // se a distancia for negativa, significa que o fogo está tocando a entidade
             int DistanciaY = Math.max(e.getY(), fogo.getY()) - Math.min (e.getY() + e.getLarguraY(), fogo.getY() + fogo.getLarguraY());
             if (DistanciaY <= 0) { DistanciaY = 0; } // se a distancia for negativa, significa que o fogo está tocando a entidade
-            int DistanciaZ = Math.max(e.getZ(), fogo.getZ()) - Math.min (e.getZ() + e.getAltura(), fogo.getZ() + fogo.getAltura());
+            int DistanciaZ = Math.max (e.getZ(),fogo.getZ()) - Math.min(e.getZ(), fogo.getZ());
             if (DistanciaZ <= 0) { DistanciaZ = 0; } // se a distancia for negativa, significa que o fogo está tocando a entidade
             double distancia = Math.sqrt(Math.pow(DistanciaX, 2) + Math.pow(DistanciaY, 2) + Math.pow(DistanciaZ, 2));
 
@@ -100,7 +99,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
 
     public void adicionarFogo(Obstaculo fogo) {
         fogos.add(fogo);
-        System.out.println("Comunicador Central: Fogo da posição (" + fogo.getX() + ", " + fogo.getY() + "). Registraado pelo comunicador central\n");
+        System.out.println("Comunicador Central: Fogo na posição (" + fogo.getX() + ", " + fogo.getY() + "). Registrado pelo comunicador central\n");
     }
 
     // Metodos sobrescritos da interface Comunicavel
@@ -147,9 +146,6 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
 
     @Override
     public int getLarguraY () { return larguraY; }
-
-    @Override
-    public int getAltura(){ return altura; }
 
     @Override
     public String getId() { return "ComunicadorCentral"; }

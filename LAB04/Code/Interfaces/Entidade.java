@@ -32,7 +32,6 @@ public interface Entidade {
     // Dimensões da entidade
     public int getLarguraX ();
     public int getLarguraY ();
-    public int getAltura();
 
     // Método para obter o ambiente onde a entidade está localizada
     public Ambiente getAmbiente();

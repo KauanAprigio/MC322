@@ -14,7 +14,6 @@ public abstract class Robo implements Entidade {
     private int pos_z;
     private final int larguraX = 0;
     private final int larguraY = 0;
-    private final int altura = 0;
     Ambiente ambiente; // Ambiente onde o robô está operando
 
 
@@ -69,9 +68,6 @@ public abstract class Robo implements Entidade {
 
     @Override
     public int getLarguraY() { return larguraY; }
-
-    @Override
-    public int getAltura() { return altura; }
 
     @Override
     public String getId(){ return id; }

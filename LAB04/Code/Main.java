@@ -49,7 +49,7 @@ public class Main {
     private static void inicializarAmbiente() {
         System.out.println("\n--- 🛠️  Configurando o Mundo Virtual 🛠️  ---");
         // Ajustando tamanho para evitar OutOfBounds (índices vão de 0 a 100, logo precisa de 101)
-        TipoEntidade[][][] mapa = new TipoEntidade[101][101][111];
+        TipoEntidade[][][] mapa = new TipoEntidade[101][101][111]; // depois tem q comentar o pq do z ir até 111, mas acho que é para o robo bombeiro subir acima dos predios para apagar o fogo
         char[][] planoXY = new char[101][101];
         ambiente = new Ambiente(101, 101, 111, mapa, planoXY);
         ambiente.inicializarMapa();
@@ -64,7 +64,7 @@ public class Main {
             ambiente.adicionarEntidade(new Obstaculo(52, 41, TipoObstaculo.COMIDANOCHAO, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 2
             ambiente.adicionarEntidade(new Obstaculo(54, 42, TipoObstaculo.SACOLAPLASTICA, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 3
             ambiente.adicionarEntidade(new Obstaculo(55, 45, TipoObstaculo.OFICINA, ambiente, TipoEntidade.OBSTACULO), true); // Oficina
-            comunicador = new ComunicadorCentral(49, 50, 0, ambiente);
+            comunicador = new ComunicadorCentral(49, 50, 100, ambiente);
             ambiente.adicionarEntidade(comunicador, true);
 
         } catch (ForaDosLimitesException | LocalOcupadoException e) {

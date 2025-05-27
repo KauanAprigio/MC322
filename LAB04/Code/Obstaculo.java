@@ -20,10 +20,9 @@ import LAB04.Code.Interfaces.Entidade;
 public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu nao sei se deve dar a altura ou o final, pois sempre começa em z = 0
     private int pos_x;
     private int pos_y;
-    private final int pos_z = 0;
+    private int pos_z; //pos_z vai ser a altura do obstaculo
     private int pos_x2;
     private int pos_y2;
-    private int pos_z2;
     private TipoObstaculo tipoObstaculo;
     private TipoEntidade tipo; // Definindo o tipo como OBSTACULO por padrão
     private Ambiente ambiente; // Ambiente onde o obstáculo está localizado
@@ -35,7 +34,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
         this.pos_y = pos_y;
         this.pos_x2 = pos_x + tipoObstaculo.getLarguraX();
         this.pos_y2 = pos_y + tipoObstaculo.getLarguraY();
-        this.pos_z2 = tipoObstaculo.getAltura();
+        this.pos_z = tipoObstaculo.getAltura();
         this.tipoObstaculo = tipoObstaculo;
         this.ambiente = ambiente;
         this.tipo = tipo;
@@ -65,9 +64,6 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public int getLarguraY() { return tipoObstaculo.getLarguraY(); }
 
     @Override
-    public int getAltura() { return tipoObstaculo.getAltura(); }
-
-    @Override
     public char getRepresentacao() { char representacao = 'o'; return representacao; }
 
     @Override
@@ -80,7 +76,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
         for (int x = pos_x; x <= pos_x2; x++) {
             for (int y = pos_y; y <= pos_y2; y++) {
                 getAmbiente().getplanoXY()[x][y] = 'o';
-                for (int z = pos_z; z <= pos_z2; z++) {
+                for (int z = 0; z <= pos_z; z++) {
                     getAmbiente().getMapa()[x][y][z] = TipoEntidade.OBSTACULO;
                 }
             }
@@ -89,7 +85,6 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
 
 
     // Getters e Setters
-    public int getAlturinha() { return pos_z2; } // só para tirar a linha amarela, mas nem sei se vou usar kkkkkkk
     public int getPosicaoX2() { return pos_x2; }
     public int getPosicaoY2() { return pos_y2; }
     public TipoObstaculo getTipoObstaculo() { return tipoObstaculo; }
