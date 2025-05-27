@@ -90,8 +90,6 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             + menorDistancia + " metros e está localizado na posição (" 
             + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getZ() + ").\n";
             enviarMensagem(d, mensagem);
-            // Salva a mensagem no histórico de mensagens do comunicador central
-            registrarMensagem(getId(), mensagem);
         } else {
             System.out.println("Comunicador Central: Não há fogos próximos de " + e.getId() + ".\n");
         }
@@ -104,13 +102,18 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
 
     // Metodos sobrescritos da interface Comunicavel
     @Override
-    public void enviarMensagem(Comunicavel destinatario, String mensagem){
-        destinatario.receberMensagem(mensagem);
+    public void enviarMensagem(Comunicavel destinatario, String mensagem) throws ErroComunicacaoException {
+        destinatario.receberMensagem(mensagem, destinatario);
+        registrarMensagem(getId(), mensagem);
     }
 
     @Override
-    public void receberMensagem(String mensagem){
-        System.out.println(mensagem);
+    public void receberMensagem(String mensagem, Comunicavel remetente) throws ErroComunicacaoException {
+        Entidade e = (Entidade) remetente;
+        registrarMensagem(e.getId(), mensagem);
+        if (remetente instanceof RoboBombeiro) {
+            avisoFogoProximo(e);
+        }
     }
 
     // Metodos sobrescritos da interface Entidade
