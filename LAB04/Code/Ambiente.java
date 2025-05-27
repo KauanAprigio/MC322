@@ -96,7 +96,7 @@ public class Ambiente {
      * @throws EntidadeNaoEncontradaException Se a entidade não está no ambiente ou não pode ser encontrada.
      */
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
-        if (mapa[e.getX()][e.getY()][e.getZ()] == TipoEntidade.VAZIO) 
+        if (!entidades.contains(e)) //mudei para ver se tem essa entidade na lista de entidade, se nao tiver é pq ela nao foi adicionada
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pode ser encontrada!\n");
         for (int x = e.getX(); x <= e.getLarguraX() + e.getX(); x++) {
             for (int y = e.getY(); y <= e.getLarguraY() + e.getY(); y++) {
@@ -142,24 +142,26 @@ public class Ambiente {
      */
     public void moverEntidade(Entidade e, int novoX, int novoY,
                             int novoZ ) throws LocalOcupadoException, ForaDosLimitesException, RoboDesligadoException, NaoPodeVoarException { // aqui eu nao sei como faria para mover o z, porque um predio por exemplo na pode começar sem ser do 0 + PODE TER UM EXCEPTION SE A ENTIDADE NAO EXISTIR
-                          
+        Entidade entidade = e; // no caso irei usar uma entidade auxiliar so para saber qual eu estou removendo e adicionando no ambiente   
         //O QUE ACONTECERIA SE NOVOZ != 0, MAS É DO TIPO OBSTACULO ? TEM EXCEPTION PRA ISSO ?
         // Apenas Robos bombeiros podem voar.
-        if (novoZ != 0 && e.getTipo() != TipoEntidade.OBSTACULO) {
-            Robo r = (Robo) e;
+        if (novoZ != 0 && entidade.getTipo() != TipoEntidade.OBSTACULO) {
+            Robo r = (Robo) entidade;
             if (!(r instanceof RoboBombeiro))
                 throw new NaoPodeVoarException("Movimento inválido! Entidade não pode sair do chão!");
         }
                                 
-        int deltaX = novoX - e.getX();
-        int deltaY = novoY - e.getY();
-        int deltaZ = novoZ - e.getZ();
+        int deltaX = novoX - entidade.getX();
+        int deltaY = novoY - entidade.getY();
+        int deltaZ = novoZ - entidade.getZ();
         
         // Verifica se o novo local está ocupado ou se está fora dos limites
-        verificarColisoes(e, novoX, novoY, novoZ);
-                                
-        e.mover(deltaX, deltaY, deltaZ);
-        adicionarEntidade(e, false); // adiciona a entidade na nova posição
+        verificarColisoes(entidade, novoX, novoY, novoZ);
+        
+        //PELO OQ EU VI O MOVER E ADICIONAR SOBREPOE CODIGO, TIPO ELES ATUALIZAM 2X O MAPA 3D E 2D, MUDA ISSO SERA?
+        entidade.mover(deltaX, deltaY, deltaZ);
+
+        adicionarEntidade(entidade, false); // adiciona a entidade na nova posição
         try{
             removerEntidade(e, false); // aqui reutilizarei o metodo para remover a entidade e colocar espaços vazios
         } catch (EntidadeNaoEncontradaException exception) {

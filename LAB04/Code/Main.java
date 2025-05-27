@@ -99,11 +99,11 @@ public class Main {
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 0); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Mover): " + e.getMessage()); }
         roboLimpador.ligar();
         roboBombeiro.ligar();
-        try { ambiente.moverEntidade(roboLimpador, 101, 0, 0); } catch (Exception e) { System.err.println("Teste [OK] ForaDosLimitesException: " + e.getMessage()); }
-        try { ambiente.moverEntidade(roboLimpador, 2, 2, 0); } catch (Exception e) { System.err.println("Teste [OK] LocalOcupadoException: " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboLimpador, 102, 0, 0); } catch (Exception e) { System.err.println("Teste [OK] ForaDosLimitesException: " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboLimpador, 45, 45, 0); } catch (Exception e) { System.err.println("Teste [OK] LocalOcupadoException: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 5); } catch (Exception e) { System.err.println("Teste [OK] NaoPodeVoarException: " + e.getMessage()); }
         try {
-            Obstaculo fantasma = new Obstaculo(200, 200, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
+            Obstaculo fantasma = new Obstaculo(60, 60, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
             ambiente.removerEntidade(fantasma, true);
         } catch (Exception e) { System.err.println("Teste [OK] EntidadeNaoEncontradaException: " + e.getMessage()); }
 
