@@ -78,6 +78,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     @Override
     public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException {
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
+        boolean encontrou_fogo = false; // flag para verificar se encontrou algum fogo
         // Verifica se o robô está dentro de um incêndio
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
         while (iterator.hasNext()) {
@@ -133,6 +134,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                                 }    
                             }
                             enviarMensagem(Central, "Incêndio apagado");
+                            encontrou_fogo = true; // marca que encontrou um fogo para apagar
                         }                         
                     } else {
                         int falta_altura = o.getZ() - getZ();
@@ -141,6 +143,10 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                     }
                 }
             }
+        }
+        if (!encontrou_fogo) {
+            String msg = getId() + " não encontrou nenhum incêndio próximo para apagar!\n";
+            throw new ErrorApagarFogoException(msg);
         }
     }
 
@@ -208,4 +214,5 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     public Obstaculo getUltimoIncendio() { return Ultimo_incendio; }
 
     public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
+    public void setUltimoIncendio(Obstaculo ultimo_incendio) { this.Ultimo_incendio = ultimo_incendio; }
 }

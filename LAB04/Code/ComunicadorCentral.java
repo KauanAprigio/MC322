@@ -92,7 +92,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getZ() + ").\n";
             enviarMensagem(d, mensagem);
         } else {
-            System.out.println("Comunicador Central: Não há fogos próximos de " + e.getId() + ".\n");
+            System.out.println("Comunicador Central: Não há fogos remananescentes no ambiente. Parabéns! Você salvou o ambiente! 🥳\n");
         }
     }
 
@@ -112,11 +112,12 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     public void receberMensagem(String mensagem, Comunicavel remetente) throws ErroComunicacaoException {
         Entidade e = (Entidade) remetente;
         registrarMensagem(e.getId(), mensagem);
-        if (mensagem.toUpperCase() == "AJUDA") {
+        if (mensagem.equalsIgnoreCase("AJUDA")) {
             avisoFogoProximo(e);
-        } else if (mensagem.toUpperCase() == "INCÊNDIO APAGADO") {
+        } else if (mensagem.equalsIgnoreCase("INCÊNDIO APAGADO")) {
             RoboBombeiro rb = (RoboBombeiro) e;
             fogos.remove(rb.getUltimoIncendio());
+            rb.setUltimoIncendio(null);
         }
     }
 
