@@ -175,9 +175,13 @@ public class Main {
         try {
             Menu_interativo.adicionarEntidade(new Obstaculo(5, 5, TipoObstaculo.FOGO, Menu_interativo, TipoEntidade.OBSTACULO), true);
             Menu_interativo.adicionarEntidade(new Obstaculo(15, 15, TipoObstaculo.PREDIOEMCHAMAS, Menu_interativo, TipoEntidade.OBSTACULO), true);
-
-
-            ComunicadorCentral Menu_comunicador = new ComunicadorCentral(50, 50, Menu_interativo);
+            Menu_interativo.adicionarEntidade(new Obstaculo(3, 3, TipoObstaculo.SACOLAPLASTICA, Menu_interativo, TipoEntidade.OBSTACULO), false);
+            Menu_interativo.adicionarEntidade(new Obstaculo(4, 4, TipoObstaculo.COMIDANOCHAO, Menu_interativo, TipoEntidade.OBSTACULO), false);
+            Menu_interativo.adicionarEntidade(new Obstaculo(6, 2, TipoObstaculo.SUJEIRAENCARDIDA, Menu_interativo, TipoEntidade.OBSTACULO), false);
+            Menu_interativo.adicionarEntidade(new Obstaculo(60, 5, TipoObstaculo.OFICINA, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(5, 60, TipoObstaculo.LAGO, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(69, 69, TipoObstaculo.PREDIO, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            ComunicadorCentral Menu_comunicador = new ComunicadorCentral(51, 51, Menu_interativo);
             comunicador = Menu_comunicador; // Atualiza o comunicador para o novo ambiente
             Menu_interativo.adicionarEntidade(comunicador, true);
         } catch (Exception e) {
@@ -380,7 +384,7 @@ public class Main {
             System.out.println("3. Acionar Sensores de Lixo");
             System.out.println("4. Aprimorar Raio (Ir à Oficina)");
             System.out.println("5. Voltar");
-            System.out.print("O que o Faxinildo vai fazer?: ");
+            System.out.print("O que o " + rl.getId() + " vai fazer?: ");
             opcao = lerOpcao();
 
             try {
@@ -417,7 +421,7 @@ public class Main {
             System.out.println("3. Aprimorar Reservatório (Ir à Oficina)");
             System.out.println("4. Enviar Mensagem (para Central)");
             System.out.println("5. Voltar");
-            System.out.print("Escolha sua opção: ");
+            System.out.print("O que o " + rb.getId() + " vai fazer?: ");
             opcao = lerOpcao();
 
             try {
