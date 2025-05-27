@@ -9,6 +9,7 @@ import LAB04.Code.Interfaces.Entidade;
 import LAB04.Code.Interfaces.Sensoreavel;
 import LAB04.Code.Interfaces.SujeiraZero;
 import LAB04.Code.AbstractClasses.Robo;
+import LAB04.Code.Exceptions.EntidadeNaoEncontradaException;
 import LAB04.Code.Exceptions.ErrorAprimoramentoException;
 
 /* 
@@ -95,6 +96,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
     public void limpar() {
         System.out.println("Tipo de limpeza atual: " + tipo_limpeza + "."); // Fala qual o tipo de limpeza
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
+        boolean Limpou = false; // Variável para verificar se limpou algum lixo
         //mesma lógica do laço for para achar os lixos e caso ainda tenha um obstaculo ele continua vendo se é lixo
         while (iterator.hasNext()) {
             Entidade e = iterator.next();
@@ -107,15 +109,24 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                         //caso esteja dentro do raio de limpeza vê se o modo atual consegue limpar o lixo
                         if (o.getTipoObstaculo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza == 2) {
                             System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".\n");
-                            iterator.remove();
+                            Limpou = true; // marca que limpou algum lixo
                         } else if (o.getTipoObstaculo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza == 1) {
                             System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".\n");
-                            iterator.remove();
+                            Limpou = true; // marca que limpou algum lixo
                         } else if (o.getTipoObstaculo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza == 0) {
                             System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".\n");
-                            iterator.remove();
-                            
-                            // se não pode limpar
+                            Limpou = true; // marca que limpou algum lixo
+                        } 
+                        if (Limpou) {
+                            try{
+                                getAmbiente().removerEntidade(e, false); // remove o obstáculo do ambiente
+                            } catch (EntidadeNaoEncontradaException e1){
+                                // Nunca deveria acontecer, mas caso aconteça, imprime a mensagem de erro
+                                // e continua o loop para verificar outros lixos
+                                e1.printStackTrace();
+                                System.out.println("Erro Inesperado: " + e1.getMessage());
+                            }
+                            Limpou = false; // reseta a variável Limpou para verificar se limpou outro lixo
                         } else {
                             System.out.println(getId() + " não pode limpar " + o.getTipoObstaculo().getNome() + ", tente mudar o tipo de limpeza");
                             
