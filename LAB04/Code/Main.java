@@ -64,7 +64,7 @@ public class Main {
             ambiente.adicionarEntidade(new Obstaculo(52, 41, TipoObstaculo.COMIDANOCHAO, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 2
             ambiente.adicionarEntidade(new Obstaculo(54, 42, TipoObstaculo.SACOLAPLASTICA, ambiente, TipoEntidade.OBSTACULO), true); // Lixo 3
             ambiente.adicionarEntidade(new Obstaculo(55, 45, TipoObstaculo.OFICINA, ambiente, TipoEntidade.OBSTACULO), true); // Oficina
-            comunicador = new ComunicadorCentral(49, 50, 100, ambiente);
+            comunicador = new ComunicadorCentral(49, 50, 0, ambiente);
             ambiente.adicionarEntidade(comunicador, true);
 
         } catch (ForaDosLimitesException | LocalOcupadoException e) {
@@ -157,20 +157,33 @@ public class Main {
         roboBombeiro.ligar(); // Ligar bombeiro
         try { comunicador.avisoFogoProximo(roboLimpador); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
         try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] Aviso Fogo (Bombeiro).\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        roboBombeiro.enviarMensagem(comunicador, roboBombeiro.getId() + ": Mensagem de teste para a central.\n");
+        //roboBombeiro.enviarMensagem(comunicador, roboBombeiro.getId() + ": Mensagem de teste para a central.\n");
         comunicador.exibirMensagens();
 
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
         // Reinicia robos para o menu, garantindo que estejam em posições e estados conhecidos
+        char[][] plano_Menu_interativo = new char[105][105];
+        TipoEntidade[][][] mapa_Menu_interativo = new TipoEntidade[105][105][110]; // Aumentando o tamanho do mapa para o menu interativo
+        Ambiente Menu_interativo = new Ambiente(105, 105, 105, mapa_Menu_interativo, plano_Menu_interativo);
+        Menu_interativo.inicializarMapa();
         try {
-            //ACHO QUE DÁ UM CATCH PORQUE TEM QUE ADICIONAR PRIMEIRO E DEPOIS REMOVER A ENTIDADE IGUAL FIZ NA FUNCAO MOVEReNTIDADE
-            ambiente.removerEntidade(roboLimpador, false);
-            ambiente.removerEntidade(roboBombeiro, false);
-            roboLimpador = new RoboLimpador("Faxinildo_01", EstadoRobo.OFF, 0, 0, 0, ambiente, 15.0, 10);
-            roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 45, 45, 0, ambiente, 105, 3000, 15);
-            ambiente.adicionarEntidade(roboLimpador, true);
-            ambiente.adicionarEntidade(roboBombeiro, true);
-        } catch (Exception e) { System.err.println("Erro ao reiniciar robôs: " + e.getMessage());}
+            Menu_interativo.adicionarEntidade(new RoboBombeiro("Diego", EstadoRobo.OFF, 0, 0, 0, Menu_interativo, 105, 3000, 20), true);
+            Menu_interativo.adicionarEntidade( new RoboLimpador("Gustavo", EstadoRobo.OFF, 0, 2, 0, Menu_interativo, 15, 15), true);
+            Menu_interativo.adicionarEntidade( new RoboBombeiro("Kauan", EstadoRobo.OFF, 50, 50, 0, Menu_interativo, 85, 4000, 20), true);
+            Menu_interativo.adicionarEntidade( new RoboLimpador("Gustavo", EstadoRobo.OFF, 0, 2, 0, Menu_interativo, 15, 15), true);
+        } catch (Exception e) { System.err.println("Erro ao iniciar robôs: " + e.getMessage());}
+        try {
+            Menu_interativo.adicionarEntidade(new Obstaculo(5, 5, TipoObstaculo.FOGO, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(15, 15, TipoObstaculo.PREDIOEMCHAMAS, Menu_interativo, TipoEntidade.OBSTACULO), true);
+
+
+            ComunicadorCentral Menu_comunicador = new ComunicadorCentral(50, 50, 0, Menu_interativo);
+            comunicador = Menu_comunicador; // Atualiza o comunicador para o novo ambiente
+            Menu_interativo.adicionarEntidade(comunicador, true);
+        } catch (Exception e) {
+            System.err.println("Erro ao iniciar os Obstáculos: " + e.getMessage());
+        }
+        ambiente = Menu_interativo; // Atualiza o ambiente para o menu interativo
     }
 
 //DEPOIS IREI VER O MENU INTERATIVO, MAS ENQUANTO ISSO VOU CONSERTAR O QUE VI ATÉ AGORA NOS CASOS DE TESTE
@@ -313,16 +326,17 @@ public class Main {
         int deltaX = 0, deltaY = 0, deltaZ = 0;
 
         switch (comando) {
-            case "W": deltaY = 1; break;
-            case "S": deltaY = -1; break;
-            case "A": deltaX = -1; break;
-            case "D": deltaX = 1; break;
+            case "W": deltaY = 5; break;
+            case "S": deltaY = -5; break;
+            case "A": deltaX = -5; break;
+            case "D": deltaX = 5; break;
             case "U": deltaZ = 5; break; // Sobe 5 unidades
             case "J": deltaZ = -5; break; // Desce 5 unidades
             default: System.out.println("Direção inválida!"); return;
         }
 
         try {
+            System.out.printf("Posição_anterior: (%d, %d, %d)\n", robo.getX(), robo.getY(), robo.getZ());
             int novoX = robo.getX() + deltaX;
             int novoY = robo.getY() + deltaY;
             int novoZ = robo.getZ() + deltaZ;
@@ -354,8 +368,6 @@ public class Main {
             menuRoboLimpador((RoboLimpador) robo);
         } else if (robo instanceof RoboBombeiro) {
             menuRoboBombeiro((RoboBombeiro) robo);
-        } else {
-            System.out.println("Este robô é do tipo básico, só sabe andar e sonhar com ovelhas elétricas.");
         }
     }
 
@@ -364,7 +376,7 @@ public class Main {
          do {
             System.out.println("\n--- Ações Específicas: " + rl.getId() + " ---");
             System.out.println("1. Definir Tipo Limpeza");
-            System.out.println("2. Limpar Área (Cuidado pra não aspirar o gato!)");
+            System.out.println("2. Limpar Área");
             System.out.println("3. Acionar Sensores de Lixo");
             System.out.println("4. Aprimorar Raio (Ir à Oficina)");
             System.out.println("5. Voltar");
@@ -405,7 +417,7 @@ public class Main {
             System.out.println("3. Aprimorar Reservatório (Ir à Oficina)");
             System.out.println("4. Enviar Mensagem (para Central)");
             System.out.println("5. Voltar");
-            System.out.print("Missão para o Chama_Boy?: ");
+            System.out.print("Escolha sua opção: ");
             opcao = lerOpcao();
 
             try {
