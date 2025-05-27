@@ -135,6 +135,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                             }
                             enviarMensagem(Central, "Incêndio apagado");
                             encontrou_fogo = true; // marca que encontrou um fogo para apagar
+                            break; // Apaga apenas 1 fogo por vez, se quiser apagar mais, precisa chamar o método novamente
                         }                         
                     } else {
                         int falta_altura = o.getZ() - getZ();
