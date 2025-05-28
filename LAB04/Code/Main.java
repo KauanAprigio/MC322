@@ -112,7 +112,7 @@ public class Main {
             ambiente.removerEntidade(fantasma, true);
         } catch (Exception e) { System.err.println("Teste [OK] EntidadeNaoEncontradaException: " + e.getMessage()); }
         
-        try {
+        try { //aqui a mesma coisa...talvez nao precise já que eu fiz essa mesma exceptiona antes
             Obstaculo entidade_movel = new Obstaculo(60, 60, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
             ambiente.moverEntidade(entidade_movel, 200,60, 0);
         } catch (Exception e) { System.err.println("Teste [OK] ForaDosLimitesException: " + e.getMessage()); }
@@ -127,17 +127,16 @@ public class Main {
             ambiente.moverEntidade(entidade_movel, 40,0, 0);
         } catch (Exception e) { System.err.println("Teste [OK] LocalOcupadoException:: " + e.getMessage()); }
         
-        System.out.println("AQUI TEM ERRO");
         // Aqui é só para printar que o obstaculo realmente foi removido/movido
-        try { // DANDO ERRO, sepa a mover ta com problema, MAS IREI CONSERTAR DAQUI A POUCO
+        try {
         Obstaculo entidade_teste = new Obstaculo(50, 70, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);    
             ambiente.adicionarEntidade(entidade_teste, true);
-            ambiente.moverEntidade(entidade_teste,70,70,0);
+            ambiente.moverEntidade(entidade_teste,80,80,0);
             ambiente.removerEntidade(entidade_teste, true);
         } catch (Exception e){
-            System.out.println("NAO DEU BAO GAROTAO" + e.getMessage());
+            System.out.println("Teste [FALHA]" + e.getMessage());
         }
-        System.out.println("O ERRO VAI ATE AQUI ");
+        
 
 
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 0); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Mover): " + e.getMessage()); }

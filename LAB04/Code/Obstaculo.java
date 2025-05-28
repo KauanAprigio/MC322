@@ -74,8 +74,8 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
     public void mover(int deltaX, int deltaY, int deltaZ) {
         setPosX(pos_x + deltaX);
         setPosY(pos_y + deltaY);
-        for (int x = pos_x; x <= pos_x2; x++) {
-            for (int y = pos_y; y <= pos_y2; y++) {
+        for (int x = getX(); x <= pos_x2; x++) {
+            for (int y = getY(); y <= pos_y2; y++) {
                 getAmbiente().getplanoXY()[x][y] = 'o';
                 for (int z = 0; z <= getAltura(); z++) {
                     getAmbiente().getMapa()[x][y][z] = TipoEntidade.OBSTACULO;

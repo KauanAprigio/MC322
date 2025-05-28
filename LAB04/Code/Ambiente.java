@@ -108,7 +108,7 @@ public class Ambiente {
         }
         entidades.remove(e);
         if (printar)
-            System.out.println("A Entidade do tipo: " + e.getTipo() + " foi removida com sucesso.\n");
+            System.out.println("A Entidade " + e.getId() + ", do tipo " + e.getTipo() + ", foi removida com sucesso.\n");
     }
 
     // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
@@ -177,13 +177,14 @@ public class Ambiente {
         int oldY = e.getY();
         int oldZ = e.getZ();
 
-        // 4. Mover a entidade internamente (atualizar as coordenadas da entidade)
+        // 4. Verificar colisões na *nova* posição
+        // Chame verificarColisoes com as *novas* coordenadas da entidade (que já foram atualizadas por e.mover())
+        verificarColisoes(e, novoX, novoY, novoZ); // Isso pode lançar LocalOcupadoException
+        
+        // 5. Mover a entidade internamente (atualizar as coordenadas da entidade)
         // Isso pode lançar RoboDesligadoException
         e.mover(novoX - oldX, novoY - oldY, novoZ - oldZ); 
 
-        // 5. Verificar colisões na *nova* posição
-        // Chame verificarColisoes com as *novas* coordenadas da entidade (que já foram atualizadas por e.mover())
-        verificarColisoes(e, novoX, novoY, novoZ); // Isso pode lançar LocalOcupadoException
 
         // 6. Limpar a posição antiga no mapa 
         // Percorre as coordenadas da *antiga* posição e define como VAZIO
