@@ -96,6 +96,50 @@ public class Main {
 
         // --- Testes Gerais e Exceções ---
         System.out.println(">> Testando Exceções Gerais...\n");
+
+        try {
+            Obstaculo entidade_out = new Obstaculo(200, 200, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
+            ambiente.adicionarEntidade(entidade_out, true);
+        } catch ( Exception e) { System.err.println("Teste [OK] ForaDosLimitesException: " + e.getMessage()); }
+        
+        try {
+            Obstaculo entidade_Ocupada = new Obstaculo(40, 0, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
+            ambiente.adicionarEntidade(entidade_Ocupada, true);
+        } catch ( Exception e) { System.err.println("Teste [OK] LocalOcupadoException: " + e.getMessage()); }
+
+        try {
+            Obstaculo fantasma = new Obstaculo(60, 60, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
+            ambiente.removerEntidade(fantasma, true);
+        } catch (Exception e) { System.err.println("Teste [OK] EntidadeNaoEncontradaException: " + e.getMessage()); }
+        
+        try {
+            Obstaculo entidade_movel = new Obstaculo(60, 60, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
+            ambiente.moverEntidade(entidade_movel, 200,60, 0);
+        } catch (Exception e) { System.err.println("Teste [OK] ForaDosLimitesException: " + e.getMessage()); }
+        
+        try { 
+            Obstaculo entidade_movel = new Obstaculo(60, 60, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
+            ambiente.moverEntidade(entidade_movel, 60,60, 60);
+        } catch (Exception e) { System.err.println("Teste [OK] NaoPodeVoarException: " + e.getMessage()); }
+        
+        try {//talvez nao precise, pois é o mesmo print de quando tento adicionar uma entidade no local que ja tem outra
+            Obstaculo entidade_movel = new Obstaculo(60, 60, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
+            ambiente.moverEntidade(entidade_movel, 40,0, 0);
+        } catch (Exception e) { System.err.println("Teste [OK] LocalOcupadoException:: " + e.getMessage()); }
+        
+        System.out.println("AQUI TEM ERRO");
+        // Aqui é só para printar que o obstaculo realmente foi removido/movido
+        try { // DANDO ERRO, sepa a mover ta com problema, MAS IREI CONSERTAR DAQUI A POUCO
+        Obstaculo entidade_teste = new Obstaculo(50, 70, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);    
+            ambiente.adicionarEntidade(entidade_teste, true);
+            ambiente.moverEntidade(entidade_teste,70,70,0);
+            ambiente.removerEntidade(entidade_teste, true);
+        } catch (Exception e){
+            System.out.println("NAO DEU BAO GAROTAO" + e.getMessage());
+        }
+        System.out.println("O ERRO VAI ATE AQUI ");
+
+
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 0); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Mover): " + e.getMessage()); }
         roboLimpador.ligar();
         roboBombeiro.ligar();
@@ -103,10 +147,6 @@ public class Main {
         try { ambiente.moverEntidade(roboLimpador, 102, 0, 0); } catch (Exception e) { System.err.println("Teste [OK] ForaDosLimitesException: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 2, 2, 0); } catch (Exception e) { System.err.println("Teste [OK] LocalOcupadoException: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 5); } catch (Exception e) { System.err.println("Teste [OK] NaoPodeVoarException: " + e.getMessage()); }
-        try {
-            Obstaculo fantasma = new Obstaculo(60, 60, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);
-            ambiente.removerEntidade(fantasma, true);
-        } catch (Exception e) { System.err.println("Teste [OK] EntidadeNaoEncontradaException: " + e.getMessage()); }
 
         // --- Testes RoboLimpador ---
         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
