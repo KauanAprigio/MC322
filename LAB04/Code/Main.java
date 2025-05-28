@@ -130,15 +130,14 @@ public class Main {
         // Aqui é só para printar que o obstaculo realmente foi removido/movido
         try {
         Obstaculo entidade_teste = new Obstaculo(50, 70, TipoObstaculo.FOGO, ambiente, TipoEntidade.OBSTACULO);    
-            ambiente.adicionarEntidade(entidade_teste, true);
+            ambiente.adicionarEntidade(entidade_teste, false);
             ambiente.moverEntidade(entidade_teste,80,80,0);
             ambiente.removerEntidade(entidade_teste, true);
         } catch (Exception e){
             System.out.println("Teste [FALHA]" + e.getMessage());
         }
         
-
-
+        
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 0); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Mover): " + e.getMessage()); }
         roboLimpador.ligar();
         roboBombeiro.ligar();
