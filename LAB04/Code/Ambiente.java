@@ -80,7 +80,7 @@ public class Ambiente {
         } 
         if (printar){
             System.out.println("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.");
-            System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
+            System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + Z_max + ")");
             System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")\n");
         }
     }
@@ -183,7 +183,7 @@ public class Ambiente {
 
         // 5. Verificar colisões na *nova* posição
         // Chame verificarColisoes com as *novas* coordenadas da entidade (que já foram atualizadas por e.mover())
-        verificarColisoes(e, e.getX(), e.getY(), e.getZ()); // Isso pode lançar LocalOcupadoException
+        verificarColisoes(e, novoX, novoY, novoZ); // Isso pode lançar LocalOcupadoException
 
         // 6. Limpar a posição antiga no mapa 
         // Percorre as coordenadas da *antiga* posição e define como VAZIO
