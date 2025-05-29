@@ -15,7 +15,7 @@ public abstract class Robo implements Entidade {
     private final int larguraX = 0;
     private final int larguraY = 0;
     private final int altura = 0;
-    Ambiente ambiente; // Ambiente onde o robô está operando
+    private Ambiente ambiente; // Ambiente onde o robô está operando
 
 
     //Construtor
@@ -62,7 +62,9 @@ public abstract class Robo implements Entidade {
         OFF; // desligado
     }
 
+    @Override
     public Ambiente getAmbiente() { return ambiente; }
+
     @Override
     public int getAltura() { return altura; }
 
