@@ -28,16 +28,18 @@ public class Ambiente {
     ArrayList<Entidade> entidades;
     TipoEntidade[][][] mapa;
     char[][] planoXY; // aqui irei usar esse plano para representar o ambiente 2d, no caso o plano xy com z = 0
+    String nome; // nome do ambiente, pode ser usado para identificar o ambiente
 
     
     //Construtor
-    public Ambiente(int largura, int profundidade, int altura, TipoEntidade[][][] mapa, char[][] planoXY){
+    public Ambiente(int largura, int profundidade, int altura, TipoEntidade[][][] mapa, char[][] planoXY, String nome) {
         this.largura = largura;
         this.profundidade = profundidade;
         this.altura = altura;
         this.mapa = mapa;
         this.planoXY = planoXY;
         entidades = new ArrayList<Entidade>();
+        this.nome = nome; // nome padrão do ambiente
     }
 
 
@@ -270,4 +272,9 @@ public class Ambiente {
     public ArrayList<Entidade> getEntidades() { return entidades; }
     public char[][] getplanoXY() { return planoXY; }
     public TipoEntidade[][][] getMapa() { return mapa; }
+    public int getLargura() { return largura; }
+    public int getProfundidade() { return profundidade; }
+    public int getAltura() { return altura; }
+    public String getNome() { return nome; }
+    
 }
