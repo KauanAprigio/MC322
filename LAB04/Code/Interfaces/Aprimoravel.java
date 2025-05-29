@@ -16,8 +16,15 @@ public interface Aprimoravel {
      *   Pode lançar uma exceção ErrorAprimoramentoException se o aprimoramento falhar.
      *   Aprimoramento pode falhar se o robô estiver fora de uma oficina ou se o valor de upgrade for inválido.
      *
-     * @param upgrade Valor de upgrade a ser aplicado.
+     * 
      * @throws ErrorAprimoramentoException Se o aprimoramento falhar.
      */
-    public void aprimorar(int upgrade) throws ErrorAprimoramentoException;
+    public void aprimorar() throws ErrorAprimoramentoException;
+
+    /**
+     * 
+     * @return boolean
+     *   Retorna true se a entidade está aprimorada, false caso contrário.
+     */
+    public boolean estahAprimorado();
 }

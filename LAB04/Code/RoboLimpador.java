@@ -32,6 +32,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
     private int tipo_limpeza = 0; // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
     private SensorDeLixo sensorDeLixo;// sensor de lixo com raio 10
     private int raioDeLimpeza; // raio de limpeza do robô
+    private boolean aprimorado = false; // variável para verificar se o robô foi aprimorado
 
     // Construtor
     public RoboLimpador(String id, EstadoRobo estado, int pos_x,
@@ -43,20 +44,21 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
 
     // Metodos 
     @Override
-    public void aprimorar(int upgrade) throws ErrorAprimoramentoException {
-        // Verifica se o upgrade é válido
-        if (upgrade <= 0) {
-            throw new ErrorAprimoramentoException("Upgrade inválido! O valor deve ser maior que zero!\n");
-        }
+    public void aprimorar() throws ErrorAprimoramentoException {
         //Procura a oficina e vê se o robô está dentro dos limites dela
         for (Entidade e : getAmbiente().getEntidades()) {
             if (e.getTipo() == TipoEntidade.OBSTACULO){
                 Obstaculo o = (Obstaculo) e;
                 if (o.getTipoObstaculo() == TipoObstaculo.OFICINA) {
                     if (getX() <= o.getPosicaoX2() && getX() >= o.getX() && getY() <= o.getPosicaoY2() && getY() >= o.getY()) {
+                        if (aprimorado) {
+                            // caso o robo já esteja aprimorado
+                            String msg = getId() + " já está aprimorado e não pode ser aprimorado novamente!\n";
+                            throw new ErrorAprimoramentoException(msg);
+                        }
                         // se o robo está na oficina, será aprimorado.
-                        System.out.println(getId() + " está dentro da oficina e pode ser aprimorado.");
-                        raioDeLimpeza += upgrade;
+                        raioDeLimpeza += 15; // aumenta o raio de limpeza em 15
+                        aprimorado = true; // marca que o robô foi aprimorado
                         System.out.println(getId() + " teve seu raio de limpeza aumentado para " + raioDeLimpeza + ".\n");
                         return;
                     } else {
@@ -67,6 +69,11 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                 }
             }
         }
+    }
+    @Override
+    public boolean estahAprimorado() {
+        // Verifica se o robô está aprimorado
+        return aprimorado;
     }
 
     //Métodos da interface SujeiraZero

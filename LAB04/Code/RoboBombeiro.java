@@ -29,6 +29,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     private int reservatorio; // litros de agua no reservatorio
     private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
     private Obstaculo Ultimo_incendio = null; // ultimo incendio apagado pelo robo, para evitar apagar o mesmo incendio mais de uma vez
+    private boolean aprimorado = false; // variável para verificar se o robô foi aprimorado
     
     // Construtor
     public RoboBombeiro(String id, EstadoRobo estado, int pos_x, int pos_y, int altitude, 
@@ -155,20 +156,23 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     }
 
     @Override
-    public void aprimorar(int upgrade) throws ErrorAprimoramentoException {
-        // Verifica se o upgrade é válido
-        if (upgrade <= 0) {
-            throw new ErrorAprimoramentoException("Upgrade inválido! O valor deve ser maior que zero!\n");
-        }
+    public void aprimorar() throws ErrorAprimoramentoException {
         //verifica se o robô esta dentro de uma oficina
         for (Entidade e : getAmbiente().getEntidades()) {
             if(e.getTipo() == TipoEntidade.OBSTACULO){
                 Obstaculo o = (Obstaculo) e;
                 if (o.getTipoObstaculo() == TipoObstaculo.OFICINA) {
                     if (getX() <= o.getPosicaoX2() && getX() >= o.getX() && getY() <= o.getPosicaoY2() && getY() >= o.getY()) {
+                        if (aprimorado) {
+                            String msg = getId() + " já está aprimorado e não pode ser aprimorado novamente!\n";
+                            throw new ErrorAprimoramentoException(msg);
+                        }
                         System.out.println(getId() + " está dentro da oficina e pode ser aprimorado.");
-                        peso_max += upgrade;
+                        peso_max += 1500; // aumenta a capacidade máxima de peso em 1500 litros
+                        reservatorio = peso_max; // atualiza o reservatório para a nova capacidade máxima
+                        aprimorado = true; // marca que o robô foi aprimorado
                         System.out.println("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.\n");
+                        System.out.println(getId() + " está com o reservatório cheio!");
                     } else {
                         String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
                         throw new ErrorAprimoramentoException(msg);
@@ -208,6 +212,12 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
         return true; 
     } // O robô bombeiro é comunicável quando ligado
 
+    @Override
+    public boolean estahAprimorado() {
+        // Verifica se o robô está aprimorado
+        return aprimorado;
+    }
+    
 
     // Getters e Setters
     public int getAltitudeMaxima() { return altitudeMaxima; }
