@@ -5,11 +5,13 @@ Coisas a adicionar no menu interativo:
 2 - der a opção dentro do menu robô bombeiro para ele chamar
      o Comunicador central perguntando onde fica o fogo mais próximo (CONSERTADO)
 
-3 - opção no menu principal de listar todos os obstáculos no ambiente.
+3 - opção no menu principal de listar todos os obstáculos no ambiente. (FEITO)
 
-4 - CONSERTAR APAGAR FOGO MENU INTERATIVO (ACHO QUE TA CONSERTADO?)
+4 - CONSERTAR APAGAR FOGO MENU INTERATIVO (FEITO)
 
 5 - CONSERTAR MOVER ROBO (FEITO)
 
-6 - CONSERTAR OS CASOS TESTE. NÃO ESTÃO SENDO TESTADOS TODOS OS CASOS (NEM PERTO).
+6 - CONSERTAR OS CASOS TESTE. NÃO ESTÃO SENDO TESTADOS TODOS OS CASOS (FEITO).
+
+7 - COLOCAR MAIS OBSTÁCULOS NO MENU INTERATIVO E TALVEZ BALANCEAR UM POUCO OS NÚMEROS
 
