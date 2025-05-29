@@ -48,12 +48,15 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
             if (e.getTipo() == TipoEntidade.OBSTACULO){
                 Obstaculo o = (Obstaculo) e;
                 if (o.getTipoObstaculo().getNome() == "Lago" && o.getX() <= getX() && o.getY() <= getY() &&
-                o.getPosicaoX2() >= getX() && o.getPosicaoY2() >= getY() && getZ() == 1) {
+                o.getPosicaoX2() >= getX() && o.getPosicaoY2() >= getY()) {
                     System.out.println(getId() + " está em um lago e pode abastecer água.");
                     dentro_lago = true;
                     break;
                 }
             }
+        }
+        if (dentro_lago && getAltitude() > 1) {
+            throw new ErrorAbastecimentoException(getId() + " está voando, desça para altura 1 para abastecer água!\n");  // Se o robô estiver voando, não pode abastecer
         }
         if (!dentro_lago) {
             throw new ErrorAbastecimentoException(getId() + " não está em um lago e não pode abastecer água!\n"); 
