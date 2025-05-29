@@ -361,20 +361,34 @@ public class Main {
 
     private static void controlarMovimento(Robo robo) {
         System.out.println("\n--- 🧭 Controle de Movimento 🧭 ---");
-        System.out.println("Use W (Norte), S (Sul), A (Oeste), D (Leste).");
+        System.out.println("Andar 5 metros em uma direção: Use W (Norte), S (Sul), A (Oeste), D (Leste).");
         System.out.println("Use U (Cima), J (Baixo) - Apenas para Bombeiros.");
+        System.out.println("Escolha a variação exata da posição: Use E (Escolher)");
         System.out.print("Digite seu comando (ex: W): ");
         String comando = scanner.next().toUpperCase();
         int deltaX = 0, deltaY = 0, deltaZ = 0;
 
         switch (comando) {
-            case "W": deltaY = 5; break;
-            case "S": deltaY = -5; break;
+            case "W": deltaY = -5; break;
+            case "S": deltaY = 5; break;
             case "A": deltaX = -5; break;
             case "D": deltaX = 5; break;
-            case "U": deltaZ = 5; break; // Sobe 5 unidades
-            case "J": deltaZ = -5; break; // Desce 5 unidades
-            default: System.out.println("Direção inválida!"); return;
+            case "U": deltaZ = 20; break; // Sobe 20 unidades
+            case "J": deltaZ = -20; break; // Desce 20 unidades
+            case "E":
+                System.out.println("Escolha quanto andar em x, y e z robô:");
+                System.out.print("Digite a variação em X: ");
+                deltaX = lerOpcao();
+                System.out.print("Digite a variação em Y: ");
+                deltaY = lerOpcao();
+                if (robo instanceof RoboBombeiro) {
+                    System.out.print("Digite a variação em Z (altura): ");
+                    deltaZ = lerOpcao();
+                } else {
+                    deltaZ = 0; // RoboLimpador não usa Z
+                }
+                break;
+            default: System.out.println("Opção inválida!"); return;
         }
 
         try {
