@@ -51,7 +51,7 @@ public class Main {
         // Ajustando tamanho para evitar OutOfBounds (índices vão de 0 a 100, logo precisa de 101)
         TipoEntidade[][][] mapa = new TipoEntidade[101][101][111]; // depois tem q comentar o pq do z ir até 111, mas acho que é para o robo bombeiro subir acima dos predios para apagar o fogo
         char[][] planoXY = new char[101][101];
-        ambiente = new Ambiente(101, 101, 111, mapa, planoXY);
+        ambiente = new Ambiente(101, 101, 111, mapa, planoXY, "Ambiente de Teste");
         ambiente.inicializarMapa();
 
         System.out.println("Adicionando obstáculos...\n");
@@ -156,10 +156,10 @@ public class Main {
         try { ambiente.moverEntidade(roboLimpador, 53, 41, 0); System.out.println("Teste [OK] Mover Limpador.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
         try { roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Incorreto): " + e.getMessage()); }
         try { roboLimpador.definir_tipo_limpeza(1); roboLimpador.limpar(); System.out.println("Teste [OK] Limpou Comida.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve limpar Comida
-        try { roboLimpador.aprimorar(10); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Fora Oficina): " + e.getMessage()); }
+        try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Fora Oficina): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 56, 46, 0); System.out.println("Teste [OK] Mover Limpador (Oficina).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        try { roboLimpador.aprimorar(-5); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Valor Inválido): " + e.getMessage()); }
-        try { roboLimpador.aprimorar(5); System.out.println("Teste [OK] Aprimorou Limpador.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] aprimorou: " + e.getMessage()); }
+        try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoExceptionr: " + e.getMessage()); }
         roboLimpador.desligar();
         try { roboLimpador.acionarSensores(); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Sensores): " + e.getMessage()); }
 
@@ -201,8 +201,8 @@ public class Main {
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
         // Reinicia robos para o menu, garantindo que estejam em posições e estados conhecidos
         char[][] plano_Menu_interativo = new char[105][105];
-        TipoEntidade[][][] mapa_Menu_interativo = new TipoEntidade[105][105][110]; // Aumentando o tamanho do mapa para o menu interativo
-        Ambiente Menu_interativo = new Ambiente(105, 105, 105, mapa_Menu_interativo, plano_Menu_interativo);
+        TipoEntidade[][][] mapa_Menu_interativo = new TipoEntidade[105][105][105]; // Aumentando o tamanho do mapa para o menu interativo
+        Ambiente Menu_interativo = new Ambiente(105, 105, 105, mapa_Menu_interativo, plano_Menu_interativo, "Unicamp");
         Menu_interativo.inicializarMapa();
         try {
             Menu_interativo.adicionarEntidade(new RoboBombeiro("Diego", EstadoRobo.OFF, 0, 0, 0, Menu_interativo, 105, 3000, 20), true);
@@ -248,10 +248,11 @@ public class Main {
                 case 2: escolherRoboParaInteragir(); break;
                 case 3: visualizarMapa(); break;
                 case 4: listarMensagens(); break;
-                case 5: break; // Apenas sai do loop
+                case 5: listarObstaculos(); break;
+                case 6: break; // Apenas sai do loop
                 default: System.out.println("Opção inválida! Parece que você apertou o botão errado. Tente de novo!"); break;
             }
-        } while (opcao != 5);
+        } while (opcao != 6);
         System.out.println("\nSaindo do menu interativo. Foi um prazer, piloto!");
     }
 
@@ -260,8 +261,9 @@ public class Main {
         System.out.println("1. Listar todos os robôs (por tipo e estado)");
         System.out.println("2. Escolher um robô para interagir");
         System.out.println("3. Visualizar o mapa 2D (visão de cima)");
-        System.out.println("4. Listar mensagens trocadas (via Central)");
-        System.out.println("5. Sair do Simulador");
+        System.out.println("4. Listar mensagens trocadas");
+        System.out.println("5. Listar Obstáculos no ambiente");
+        System.out.println("6. Sair do Simulador");
         System.out.print("Escolha sua ação, comandante: ");
     }
 
@@ -350,13 +352,25 @@ public class Main {
             RoboLimpador rl = (RoboLimpador) robo;
             System.out.println("Tipo Limpeza Atual: " + rl.getTipoLimpeza());
             System.out.println("Raio de Limpeza: " + rl.getRaioDeLimpeza());
+            if (rl.estahAprimorado()) {
+                System.out.println(rl.getId() + " já foi aprimorado ao máximo!");
+            } else {
+                System.out.println(rl.getId() + " Não foi aprimorado ainda!");
+                System.out.println("Vá até uma oficina para acrescentar 15m ao raio de detecção de lixos.");
+            }
         } else if (robo instanceof RoboBombeiro) {
             RoboBombeiro rb = (RoboBombeiro) robo;
             System.out.println("Altitude Atual: " + rb.getZ()); // Usamos getZ() pois altitude não é mais um atributo direto
             System.out.println("Reservatório: " + rb.getReservatorio() + "/" + rb.getCapacidade() + "L");
             System.out.println("Altitude Máxima Permitida: " + rb.getAltitudeMaxima());
+            if (rb.estahAprimorado()) {
+                System.out.println(rb.getId() + " já foi aprimorado ao máximo!");
+            } else {
+                System.out.println(rb.getId() + " Não foi aprimorado ainda!");
+                System.out.println("Vá até uma oficina para acrescentar 1500L de capacidade máxima no reservatório.");
+            }
         }
-         System.out.println("-------------------------");
+        System.out.println("-------------------------");
     }
 
     private static void controlarMovimento(Robo robo) {
@@ -426,6 +440,33 @@ public class Main {
             menuRoboBombeiro((RoboBombeiro) robo);
         }
     }
+    private static void listarObstaculos() {
+        System.out.println("-----------------------------");
+        System.out.printf("Ambiente: %s, Dimensões: %d x %d x %d\n",
+                ambiente.getNome(), ambiente.getLargura(), ambiente.getAltura(), ambiente.getProfundidade());
+        System.out.println("--- 🏗️ Lista de Obstáculos 🏗️ ---");
+        List<Obstaculo> obstaculos = ambiente.getEntidades().stream()
+                .filter(e -> e.getTipo() == TipoEntidade.OBSTACULO)
+                .map(e -> (Obstaculo) e)
+                .collect(Collectors.toList());
+
+        if (obstaculos.isEmpty()) {
+            System.out.println("Nenhum obstáculo encontrado! O caminho está livre.");
+            System.out.println("-----------------------------------");
+            return;
+        }
+
+        for (Obstaculo obs : obstaculos) {
+            System.out.printf("ID: %s, Tipo: %s, Posição do canto inferior esquerdo: (%d, %d, %d)\n",
+                    obs.getId(), obs.getTipoObstaculo(), obs.getX(), obs.getY(), obs.getZ());
+            System.out.printf("Representação no mapa 2D: %s\n", obs.getRepresentacao());
+            System.out.printf("Dimensões: %d x %d x %d\n", obs.getLarguraX(), obs.getLarguraY(), obs.getAltura());
+            System.out.println("Descrição: " + obs.getDescricao());
+            System.out.println("-----------------------------------");
+        }
+        System.out.printf("Total de obstáculos: %d\n", obstaculos.size());
+        System.out.println("-----------------------------------");
+    }
 
     private static void menuRoboLimpador(RoboLimpador rl) {
          int opcao;
@@ -449,9 +490,7 @@ public class Main {
                     case 2: rl.limpar(); System.out.println("Faxina concluída (ou tentada)!"); break;
                     case 3: rl.acionarSensores(); break;
                     case 4:
-                        System.out.print("Digite o valor do upgrade para o raio (ex: 5): ");
-                        int up = lerOpcao();
-                        rl.aprimorar(up);
+                        rl.aprimorar();
                         break;
                     case 5: break;
                     default: System.out.println("Ação inválida!"); break;
@@ -485,9 +524,7 @@ public class Main {
                         break;
                     case 2: rb.apagar_fogo(comunicador); System.out.println("Operação anti-fogo executada!"); break;
                     case 3:
-                        System.out.print("Digite o valor do upgrade para o peso (ex: 500): ");
-                        int up = lerOpcao();
-                        rb.aprimorar(up);
+                        rb.aprimorar();
                         break;
                     case 4:
                         System.out.println("Digite \"AJUDA\" para receber a localização do incêndio mais próximo.");
