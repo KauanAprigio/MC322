@@ -3,6 +3,7 @@ package LAB04.Code;
 import LAB04.Code.AbstractClasses.Robo;
 import LAB04.Code.AbstractClasses.Robo.EstadoRobo;
 import LAB04.Code.Exceptions.*;
+import LAB04.Code.Interfaces.Comunicavel;
 import LAB04.Code.Interfaces.Entidade.TipoEntidade;
 import LAB04.Code.Obstaculo.TipoObstaculo;
 
@@ -195,7 +196,11 @@ public class Main {
         try { roboBombeiro.aprimorar(); System.out.println("Teste [OK] Aprimorado com sucesso.\n"); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
         try { roboBombeiro.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Já está aprimorado): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
-
+        
+        // teste de comunicação
+        Comunicavel robozin = new RoboBombeiro("jao", EstadoRobo.ON, 100, 0, 0, ambiente, 100, 100, 100);
+        try { roboBombeiro.enviarMensagem(robozin, "NAO VAI ENVIAR NADA GAROTAO"); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
+        
         // testes com o robo desligado
         roboBombeiro.desligar(); 
         try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Desligado): " + e.getMessage()); }

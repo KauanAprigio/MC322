@@ -196,8 +196,9 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
 
     @Override
     public void enviarMensagem(Comunicavel destinatario, String mensagem) throws ErroComunicacaoException {
-        if (destinatario == null) {
-            throw new ErroComunicacaoException("Erro de comunicação: Destinatário não existe.\n");
+        Entidade destino = (Entidade) destinatario;
+        if (!getAmbiente().getEntidades().contains(destino) || destinatario == null) {
+            throw new ErroComunicacaoException("Erro de comunicação: Destinatário não existe!\n");
         }
         destinatario.receberMensagem(mensagem, this);
     }
