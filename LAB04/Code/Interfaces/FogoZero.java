@@ -2,6 +2,7 @@ package LAB04.Code.Interfaces;
 import LAB04.Code.Exceptions.ErroComunicacaoException;
 import LAB04.Code.Exceptions.ErrorAbastecimentoException;
 import LAB04.Code.Exceptions.ErrorApagarFogoException;
+import LAB04.Code.Exceptions.RoboDesligadoException;
 
 /**
  * Interface FogoZero:
@@ -21,7 +22,7 @@ public interface FogoZero {
      * @param litros Quantidade de água a ser adicionada em litros.
      * @throws ErrorAbastecimentoException Se o abastecimento falhar.
      */
-    public void adicionar_agua(int litros) throws ErrorAbastecimentoException;
+    public void adicionar_agua(int litros) throws ErrorAbastecimentoException, RoboDesligadoException;
 
 
     /**
@@ -34,5 +35,5 @@ public interface FogoZero {
      * @param Central A entidade comunicável que representa o centro de controle ou a central de comando.
      * @throws ErroComunicacaoException Se houver um erro de comunicação com a central.
      */
-    public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException;
+    public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException, RoboDesligadoException;
 }

@@ -42,7 +42,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     }
     
     @Override
-    public void adicionar_agua(int litros) throws ErrorAbastecimentoException {
+    public void adicionar_agua(int litros) throws ErrorAbastecimentoException, RoboDesligadoException {
         // Verifica se o robô está dentro de um lago
         boolean dentro_lago = false;
         for (Entidade e : getAmbiente().getEntidades()) {
@@ -50,6 +50,11 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                 Obstaculo o = (Obstaculo) e;
                 if (o.getTipoObstaculo().getNome() == "Lago" && o.getX() <= getX() && o.getY() <= getY() &&
                 o.getPosicaoX2() >= getX() && o.getPosicaoY2() >= getY()) {
+                    if (getEstado() == EstadoRobo.OFF){
+                        String msg = "O robô" + getId() + " não pôde se abastecer, pois está desligado!\n";
+                        throw new RoboDesligadoException(msg);
+                    }
+
                     System.out.println(getId() + " está em um lago e pode abastecer água.");
                     dentro_lago = true;
                     break;
@@ -80,7 +85,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
         }
     }
     @Override
-    public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException {
+    public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException, RoboDesligadoException {
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
         boolean encontrou_fogo = false; // flag para verificar se encontrou algum fogo
         // Verifica se o robô está dentro de um incêndio
@@ -96,6 +101,11 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                 double distancia = Math.sqrt(Math.pow(Xmaisproximo - getX(), 2) + Math.pow(Ymaisproximo - getY(), 2));
                 
                 if (o.getTipoObstaculo().isFogo() && distancia <= raio_de_cessar_fogo) { // Condional caso o obstaculo detectado seja um fogo
+                    if (getEstado() == EstadoRobo.OFF){ // condicional caso o robo esteja desligado
+                        String msg = "O robô" + getId() + " não pôde se abastecer, pois está desligado!\n";
+                        throw new RoboDesligadoException(msg);
+                    }
+                    
                     if (o.getZ() <= getZ()){ // condicional para ver se está na altura do fogo
                         System.out.println(getId() + " está próximo de um incêndio.");
 
