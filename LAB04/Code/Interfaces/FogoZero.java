@@ -22,7 +22,7 @@ public interface FogoZero {
      * @param litros Quantidade de água a ser adicionada em litros.
      * @throws ErrorAbastecimentoException Se o abastecimento falhar.
      */
-    public void adicionar_agua(int litros) throws ErrorAbastecimentoException, RoboDesligadoException;
+    public void adicionar_agua(int litros) throws ErrorAbastecimentoException;
 
 
     /**
