@@ -89,7 +89,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             Comunicavel d = (Comunicavel) e;
             String mensagem = "O fogo mais próximo de " + e.getId() + " está a uma distância de "
             + menorDistancia + " metros e está localizado na posição (" 
-            + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getZ() + ").\n";
+            + fogoMaisProximo.getX() + ", " + fogoMaisProximo.getY() + ", " + fogoMaisProximo.getAltura() + ").\n";
             enviarMensagem(d, mensagem);
         } else {
             System.out.println("Comunicador Central: Não há fogos remananescentes no ambiente. Parabéns! Você salvou o ambiente! 🥳\n");
@@ -149,7 +149,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     @Override
     public void mover(int deltaX, int deltaY, int deltaZ) {
         // Não é possível mover o Comunicador Central, pois ele é fixo no ambiente.
-        System.out.println("Comunicador Central não pode ser movido.");
+        System.out.println("Comunicador Central não pode ser movido!\n");
     }
 
     @Override

@@ -170,11 +170,22 @@ public class Main {
         try { ambiente.moverEntidade(roboLimpador, 56, 46, 0); System.out.println("Teste [OK] Mover Limpador (Oficina).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] aprimorou: " + e.getMessage()); }
         try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoExceptionr: " + e.getMessage()); }
-    
+        
+
+        // --- Testes ComunicadorCentral ---
+         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("\n>> Testando ComunicadorCentral...\n");
+        comunicador.mover(0, 0, 0);
+        comunicador.listarFogos(); // Deve listar o Prédio em Chamas
+        try { comunicador.avisoFogoProximo(roboLimpador); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
+        try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] Aviso Fogo (Bombeiro).\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        //roboBombeiro.enviarMensagem(comunicador, roboBombeiro.getId() + ": Mensagem de teste para a central.\n");
+        comunicador.exibirMensagens();
+
+
         // --- Testes RoboBombeiro ---
         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println("\n>> Testando RoboBombeiro (" + roboBombeiro.getId() +")...\n");
-        
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Mover Bombeiro (Perto fogo).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Fora Oficina): " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Água insuficiente): " + e.getMessage()); }
@@ -206,16 +217,9 @@ public class Main {
         try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Desligado): " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador);; } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException : " + e.getMessage()); }
 
-        // --- Testes ComunicadorCentral ---
-         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
-        System.out.println("\n>> Testando ComunicadorCentral...\n");
-        comunicador.listarFogos(); // Deve listar o Prédio em Chamas
-        roboLimpador.ligar(); // Ligar limpador para testar comunicação
-        roboBombeiro.ligar(); // Ligar bombeiro
-        try { comunicador.avisoFogoProximo(roboLimpador); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
-        try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] Aviso Fogo (Bombeiro).\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        //roboBombeiro.enviarMensagem(comunicador, roboBombeiro.getId() + ": Mensagem de teste para a central.\n");
-        comunicador.exibirMensagens();
+        // Algumas exceções quando o bombeiro ja apagou todos os fogos
+        comunicador.listarFogos();
+        try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] nenhum fogo próximo.\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
 
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
         // Reinicia robos para o menu, garantindo que estejam em posições e estados conhecidos
