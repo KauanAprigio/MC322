@@ -149,20 +149,27 @@ public class Main {
         // --- Testes RoboLimpador ---
         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println("\n>> Testando RoboLimpador ("+ roboLimpador.getId() +")...\n");
-        try { roboLimpador.acionarSensores(); System.out.println("Teste [OK] Acionar Sensores (Ligado).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        
+        //casos com o robo desligado
+        roboLimpador.desligar();
+        try { roboLimpador.acionarSensores(); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException : " + e.getMessage()); }
+        try { roboLimpador.definir_tipo_limpeza(2); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException : " + e.getMessage()); }
+        try { roboLimpador.limpar();; } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException : " + e.getMessage()); }
+        
+        //agora irei religar o robo
+        roboLimpador.ligar();
+        try { roboLimpador.acionarSensores(); System.out.println("Teste [OK] Acionar Sensores.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.definir_tipo_limpeza(5); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Inválido): " + e.getMessage()); }
-        try { roboLimpador.definir_tipo_limpeza(0); System.out.println("Teste [OK] Definir Tipo Limpeza (0).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        try { roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Sem Lixo Perto): " + e.getMessage()); }
+        try { roboLimpador.definir_tipo_limpeza(1); System.out.println("Teste [OK] Definir Tipo Limpeza (1).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { roboLimpador.limpar(); System.out.println("Teste [OK] não limpou nada.\n");} catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Sem Lixo Perto): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 53, 41, 0); System.out.println("Teste [OK] Mover Limpador.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
-        try { roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Incorreto): " + e.getMessage()); }
-        try { roboLimpador.definir_tipo_limpeza(1); roboLimpador.limpar(); System.out.println("Teste [OK] Limpou Comida.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve limpar Comida
+        try { roboLimpador.limpar(); System.out.println("Teste [OK] limpou a sacola plástica e a comida\n"); } catch (Exception e) { System.err.println("Teste [FALHA] : " + e.getMessage()); }
+        try { roboLimpador.definir_tipo_limpeza(2); roboLimpador.limpar(); System.out.println("Teste [OK] Limpou Sujeira encardida.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve limpar Comida
         try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Fora Oficina): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 56, 46, 0); System.out.println("Teste [OK] Mover Limpador (Oficina).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] aprimorou: " + e.getMessage()); }
         try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoExceptionr: " + e.getMessage()); }
-        roboLimpador.desligar();
-        try { roboLimpador.acionarSensores(); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Sensores): " + e.getMessage()); }
-
+    
         // --- Testes RoboBombeiro ---
         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println("\n>> Testando RoboBombeiro (" + roboBombeiro.getId() +")...\n");

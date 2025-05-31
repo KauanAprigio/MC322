@@ -82,7 +82,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
         // Verifica se o tipo de limpeza é válido
         // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
         if (getEstado() == EstadoRobo.OFF){
-            String mensagem = "O robô" + getId() + " não pôde escolher o tipo de limpeza, pois está desligado!";
+            String mensagem = "O robô" + getId() + " não pôde escolher o tipo de limpeza, pois está desligado!\n";
             throw new RoboDesligadoException(mensagem);
         }
         
@@ -106,7 +106,11 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
     }
 
     @Override
-    public void limpar() {
+    public void limpar() throws RoboDesligadoException {
+        if (getEstado() == EstadoRobo.OFF){
+            String mensagem = "O robô" + getId() + " não pôde fazer a limpeza, pois está desligado!\n";
+            throw new RoboDesligadoException(mensagem);
+        }
         System.out.println("Tipo de limpeza atual: " + tipo_limpeza + "."); // Fala qual o tipo de limpeza
         Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
         boolean Limpou = false; // Variável para verificar se limpou algum lixo
@@ -121,13 +125,13 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
                     int distancia = (int) Math.sqrt(Math.pow(o.getX() - getX(), 2) + Math.pow(o.getY() - getY(), 2));
                     if (distancia < raioDeLimpeza) { 
                         //caso esteja dentro do raio de limpeza vê se o modo atual consegue limpar o lixo
-                        if (o.getTipoObstaculo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza == 2) {
+                        if (o.getTipoObstaculo() == TipoObstaculo.SUJEIRAENCARDIDA && tipo_limpeza >= 2) {
                             System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".");
                             Limpou = true; // marca que limpou algum lixo
-                        } else if (o.getTipoObstaculo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza == 1) {
+                        } else if (o.getTipoObstaculo() == TipoObstaculo.COMIDANOCHAO && tipo_limpeza >= 1) {
                             System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".");
                             Limpou = true; // marca que limpou algum lixo
-                        } else if (o.getTipoObstaculo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza == 0) {
+                        } else if (o.getTipoObstaculo() == TipoObstaculo.SACOLAPLASTICA && tipo_limpeza >= 0) {
                             System.out.println(getId() + " limpou " + o.getTipoObstaculo().getNome() + ".");
                             Limpou = true; // marca que limpou algum lixo
                         } else {
