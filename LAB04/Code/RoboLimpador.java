@@ -78,9 +78,14 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
 
     //Métodos da interface SujeiraZero
     @Override
-    public void definir_tipo_limpeza(int tipo) throws ErrorLimpezaException {
+    public void definir_tipo_limpeza(int tipo) throws ErrorLimpezaException, RoboDesligadoException {
         // Verifica se o tipo de limpeza é válido
         // 0 = limpeza leve, 1 = limpeza pesada, 2 = limpeza muito pesada
+        if (getEstado() == EstadoRobo.OFF){
+            String mensagem = "O robô" + getId() + " não pôde escolher o tipo de limpeza, pois está desligado!";
+            throw new RoboDesligadoException(mensagem);
+        }
+        
         if (tipo >= 0 && tipo <= 2) {
             tipo_limpeza = tipo;
             switch (tipo_limpeza) {

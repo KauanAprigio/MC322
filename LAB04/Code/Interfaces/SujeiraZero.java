@@ -1,6 +1,7 @@
 package LAB04.Code.Interfaces;
 
 import LAB04.Code.Exceptions.ErrorLimpezaException;
+import LAB04.Code.Exceptions.RoboDesligadoException;
 /**
  * Interface SujeiraZero:
  * Define o contrato para entidades que podem limpar sujeira.
@@ -28,5 +29,5 @@ public interface SujeiraZero {
      * @param tipo Tipo de limpeza a ser definido.
      * @throws ErrorLimpezaException Se o tipo de limpeza for inválido.
      */
-    public void definir_tipo_limpeza(int tipo) throws ErrorLimpezaException;
+    public void definir_tipo_limpeza(int tipo) throws ErrorLimpezaException, RoboDesligadoException;
 }
