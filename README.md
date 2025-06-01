@@ -203,7 +203,7 @@ classDiagram
         -pos_y : int
         -tipoObstaculo : TipoObstaculo
     }
-    Obstaculo ..|> I_Entidade : Implementa
+    
 
     %% Enums
     class EstadoRobo { 
@@ -260,7 +260,7 @@ classDiagram
         +desligar() void
         +getEstado() EstadoRobo
     }
-    A_Robo ..|> I_Entidade : Implementa
+    
     
 
     class I_Aprimoravel {
@@ -300,21 +300,14 @@ classDiagram
         -reservatorio : int
         -raio_de_cessar_fogo : int
     }
-    RoboBombeiro --|> A_Robo : Herança
-    RoboBombeiro ..|> I_FogoZero : Implementa
-    RoboBombeiro ..|> I_Comunicavel : Implementa
-    RoboBombeiro ..|> I_Aprimoravel : Implementa
-    RoboLimpador --|> A_Robo : Herança
-    RoboLimpador ..|> I_Sensoreavel : Implementa
-    RoboLimpador ..|> I_SujeiraZero : Implementa
-    RoboLimpador ..|> I_Aprimoravel : Implementa
+    
 
     class A_Sensor {
         <<Abstract>>
         -raio : double
         +monitorar(int, int, int, Ambiente) void
     }
-    SensorDeLixo --|> A_Sensor : Herança
+    
 
     class A_CentralComunicacao {
         <<Abstract>>
@@ -329,9 +322,7 @@ classDiagram
         +avisoFogoProximo(Entidade) void
         +adicionarFogo(Obstaculo) void
     }
-    ComunicadorCentral --|> A_CentralComunicacao : Herança
-    ComunicadorCentral ..|> I_Entidade : Implementa
-    ComunicadorCentral ..|> I_Comunicavel : Implementa
+    
 
     
 
@@ -342,6 +333,20 @@ classDiagram
     A_Robo "*" o-- "1" Ambiente : Agregação 
     Obstaculo "*" o-- "1" Ambiente : Agregação 
     ComunicadorCentral "1" o-- "1" Ambiente : Agregação
+    ComunicadorCentral --|> A_CentralComunicacao : Herança
+    ComunicadorCentral ..|> I_Entidade : Implementa
+    ComunicadorCentral ..|> I_Comunicavel : Implementa
+    SensorDeLixo --|> A_Sensor : Herança
+    RoboBombeiro --|> A_Robo : Herança
+    RoboBombeiro ..|> I_FogoZero : Implementa
+    RoboBombeiro ..|> I_Comunicavel : Implementa
+    RoboBombeiro ..|> I_Aprimoravel : Implementa
+    RoboLimpador --|> A_Robo : Herança
+    RoboLimpador ..|> I_Sensoreavel : Implementa
+    RoboLimpador ..|> I_SujeiraZero : Implementa
+    RoboLimpador ..|> I_Aprimoravel : Implementa
+    A_Robo ..|> I_Entidade : Implementa
+    Obstaculo ..|> I_Entidade : Implementa
 ```
 
 ## Interfaces Criadas
