@@ -179,7 +179,7 @@ O Laboratório 4 introduziu conceitos mais avançados de Orientação a Objetos,
 title: Diagrama de classes - LAB04
 ---
 classDiagram
-    direction TB
+    direction LR
 
     class Ambiente {
         -largura : int
@@ -198,7 +198,7 @@ classDiagram
         +estahOcupado(int, int, int, TipoEntidade) boolean
         +verificarColisoes(Entidade, int, int, int) boolean
     }
-    
+
     %% Enums
     class EstadoRobo { <<enumeration>> ON; OFF }
     class TipoObstaculo { <<enumeration>> LAGO; FOGO; PREDIOEMCHAMAS; PREDIO; SUJEIRAENCARDIDA; COMIDANOCHAO; SACOLAPLASTICA; OFICINA }
