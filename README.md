@@ -300,10 +300,15 @@ classDiagram
         -entidades : List~I_Entidade~
         -mapa : object
         -planoXY : object
+        
         +adicionarEntidade(I_Entidade) void
         +removerEntidade(I_Entidade, boolean) void
         +moverEntidade(I_Entidade, int, int, int) void
         +visualizarAmbiente() void
+        +inicializarMapa() void 
+        +dentroDosLimites(int, int, int) boolean
+        +estahOcupado(int, int, int, TipoEntidade) boolean
+        +verificarColisoes(Entidade, int, int, int) boolean
     }
 
     %% Relações
