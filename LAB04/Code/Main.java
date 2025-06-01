@@ -138,14 +138,14 @@ public class Main {
             System.out.println("Teste [FALHA]" + e.getMessage());
         }
         
-        
+        //testes de movimentacao do robo
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 0); } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException (Mover): " + e.getMessage()); }
         roboLimpador.ligar();
-        roboBombeiro.ligar();
-        //mudei para 102 ao inves de 101, nao sei pq tava dando OutOfBounds no 101...TEM QUE VER ISSO 
+        roboBombeiro.ligar(); 
         try { ambiente.moverEntidade(roboLimpador, 102, 0, 0); } catch (Exception e) { System.err.println("Teste [OK] ForaDosLimitesException: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 2, 2, 0); } catch (Exception e) { System.err.println("Teste [OK] LocalOcupadoException: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 1, 1, 5); } catch (Exception e) { System.err.println("Teste [OK] NaoPodeVoarException: " + e.getMessage()); }
+
 
         // --- Testes RoboLimpador ---
         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
@@ -170,7 +170,8 @@ public class Main {
         try { ambiente.moverEntidade(roboLimpador, 56, 46, 0); System.out.println("Teste [OK] Mover Limpador (Oficina).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] aprimorou: " + e.getMessage()); }
         try { roboLimpador.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoExceptionr: " + e.getMessage()); }
-        
+        System.out.println(roboLimpador.getDescricao());
+
 
         // --- Testes ComunicadorCentral ---
          System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
@@ -194,10 +195,9 @@ public class Main {
         try { roboBombeiro.adicionar_agua(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Altura Inválida): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
         try { roboBombeiro.adicionar_agua(); System.out.println("Teste [OK] Abasteceu Bombeiro.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        
+        try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Sem fogo perto): " + e.getMessage()); }
+        try { ambiente.moverEntidade(roboBombeiro, 75, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Próximo do fogo).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
         try { roboBombeiro.enviarMensagem(comunicador,"AJUDA"); System.out.println("Teste [OK] Bombeiro pediu ajuda.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-
-        try { roboBombeiro.apagar_fogo(comunicador); System.out.println("Teste [OK] Apagar Fogo (Sem Fogo Perto).\n"); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 0); System.out.println("Teste [OK] Mover Bombeiro (Perto Fogo).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Altura): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Subir Bombeiro.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
@@ -207,7 +207,6 @@ public class Main {
         try { ambiente.moverEntidade(roboBombeiro, 60, 46, 0); System.out.println("Teste [OK] Mover Oficina.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.aprimorar(); System.out.println("Teste [OK] Aprimorado com sucesso.\n"); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
         try { roboBombeiro.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Já está aprimorado): " + e.getMessage()); }
-        try { ambiente.moverEntidade(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
         
         // teste de comunicação
         Comunicavel robozin = new RoboBombeiro("jao", EstadoRobo.ON, 100, 0, 0, ambiente, 100, 100, 100);
