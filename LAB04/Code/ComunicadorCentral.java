@@ -6,6 +6,7 @@ import LAB04.Code.AbstractClasses.CentralComunicacao;
 import LAB04.Code.Exceptions.ErroComunicacaoException;
 import LAB04.Code.Interfaces.Comunicavel;
 import LAB04.Code.Interfaces.Entidade;
+import LAB04.Code.Obstaculo.TipoObstaculo;
 
 public class ComunicadorCentral extends CentralComunicacao implements Entidade, Comunicavel{
     private final TipoEntidade tipo = TipoEntidade.COMUNICADOR; // Definindo o tipo como COMUNICADOR por padrão
@@ -38,7 +39,29 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         }
     }
 
+
     // Métodos
+    /**
+     * Método local_Lago:
+     *  Método para mostrar ao robô onde está o lago para abastecer aguá.
+     */
+    public void local_Lago(){
+        for (Entidade e : getAmbiente().getEntidades()){
+            if (e.getTipo() == TipoEntidade.OBSTACULO){
+                Obstaculo lago = (Obstaculo) e;
+                if (lago.getTipoObstaculo() == TipoObstaculo.LAGO){
+                    int x2 = e.getX() + e.getLarguraX();
+                    int y2 = e.getY() + e.getLarguraY();
+                    System.out.println("O Lago para abastecimento se encontra entre as coordenadas:");
+                    System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + "1)");
+                    System.out.println("Posição do canto superior direito: " + "(" + x2 + ", " + y2 + ", " + "1)\n");
+                }
+            }
+        
+        }
+
+    } 
+
     /**
      * Método listarFogos:
      *  Método para listar todos os fogos no ambiente.
