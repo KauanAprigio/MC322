@@ -189,13 +189,11 @@ public class Main {
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Mover Bombeiro (Perto fogo).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Fora Oficina): " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Água insuficiente): " + e.getMessage()); }
-        try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Fora Lago): " + e.getMessage()); }
+        try { roboBombeiro.adicionar_agua(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Fora Lago): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 5, 5, 5); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Altura Inválida): " + e.getMessage()); }
+        try { roboBombeiro.adicionar_agua(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Altura Inválida): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
-        try { roboBombeiro.adicionar_agua(-10); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Valor Inválido): " + e.getMessage()); }
-        try { roboBombeiro.adicionar_agua(4000); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Capacidade): " + e.getMessage()); }
-        try { roboBombeiro.adicionar_agua(3000); System.out.println("Teste [OK] Abasteceu Bombeiro.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        try { roboBombeiro.adicionar_agua(); System.out.println("Teste [OK] Abasteceu Bombeiro.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador); System.out.println("Teste [OK] Apagar Fogo (Sem Fogo Perto).\n"); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 0); System.out.println("Teste [OK] Mover Bombeiro (Perto Fogo).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Altura): " + e.getMessage()); }
@@ -214,7 +212,7 @@ public class Main {
         
         // testes com o robo desligado
         roboBombeiro.desligar(); 
-        try { roboBombeiro.adicionar_agua(100); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Desligado): " + e.getMessage()); }
+        try { roboBombeiro.adicionar_agua(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Desligado): " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador);; } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException : " + e.getMessage()); }
 
         // Algumas exceções quando o bombeiro ja apagou todos os fogos
@@ -236,9 +234,18 @@ public class Main {
         try {
             Menu_interativo.adicionarEntidade(new Obstaculo(5, 5, TipoObstaculo.FOGO, Menu_interativo, TipoEntidade.OBSTACULO), true);
             Menu_interativo.adicionarEntidade(new Obstaculo(15, 15, TipoObstaculo.PREDIOEMCHAMAS, Menu_interativo, TipoEntidade.OBSTACULO), true);
-            Menu_interativo.adicionarEntidade(new Obstaculo(3, 3, TipoObstaculo.SACOLAPLASTICA, Menu_interativo, TipoEntidade.OBSTACULO), false);
-            Menu_interativo.adicionarEntidade(new Obstaculo(4, 4, TipoObstaculo.COMIDANOCHAO, Menu_interativo, TipoEntidade.OBSTACULO), false);
-            Menu_interativo.adicionarEntidade(new Obstaculo(6, 2, TipoObstaculo.SUJEIRAENCARDIDA, Menu_interativo, TipoEntidade.OBSTACULO), false);
+            Menu_interativo.adicionarEntidade(new Obstaculo(3, 3, TipoObstaculo.SACOLAPLASTICA, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(4, 4, TipoObstaculo.COMIDANOCHAO, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(6, 2, TipoObstaculo.SUJEIRAENCARDIDA, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(1, 1,TipoObstaculo.SACOLAPLASTICA, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(104, 100, TipoObstaculo.SUJEIRAENCARDIDA, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(100, 104, TipoObstaculo.COMIDANOCHAO, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(50, 99, TipoObstaculo.FOGO, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(60, 27, TipoObstaculo.FOGO, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(60, 35, TipoObstaculo.SUJEIRAENCARDIDA, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(64, 39,TipoObstaculo.SACOLAPLASTICA, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(68, 35, TipoObstaculo.COMIDANOCHAO, Menu_interativo, TipoEntidade.OBSTACULO), true);
+            Menu_interativo.adicionarEntidade(new Obstaculo(74, 30, TipoObstaculo.PREDIOEMCHAMAS, Menu_interativo, TipoEntidade.OBSTACULO), true);
             Menu_interativo.adicionarEntidade(new Obstaculo(60, 5, TipoObstaculo.OFICINA, Menu_interativo, TipoEntidade.OBSTACULO), true);
             Menu_interativo.adicionarEntidade(new Obstaculo(5, 60, TipoObstaculo.LAGO, Menu_interativo, TipoEntidade.OBSTACULO), true);
             Menu_interativo.adicionarEntidade(new Obstaculo(69, 69, TipoObstaculo.PREDIO, Menu_interativo, TipoEntidade.OBSTACULO), true);
@@ -269,9 +276,9 @@ public class Main {
             switch (opcao) {
                 case 1: listarRobos(); break;
                 case 2: escolherRoboParaInteragir(); break;
-                case 3: visualizarMapa(); break;
-                case 4: listarMensagens(); break;
-                case 5: listarObstaculos(); break;
+                case 3: listarObstaculos(); break;
+                case 4: visualizarMapa(); break;
+                case 5: listarMensagens(); break;
                 case 6: break; // Apenas sai do loop
                 default: System.out.println("Opção inválida! Parece que você apertou o botão errado. Tente de novo!"); break;
             }
@@ -283,9 +290,9 @@ public class Main {
         System.out.println("\n--- Menu Principal ---");
         System.out.println("1. Listar todos os robôs (por tipo e estado)");
         System.out.println("2. Escolher um robô para interagir");
-        System.out.println("3. Visualizar o mapa 2D (visão de cima)");
-        System.out.println("4. Listar mensagens trocadas");
-        System.out.println("5. Listar Obstáculos no ambiente");
+        System.out.println("3. Listar Obstáculos no ambiente");
+        System.out.println("4. Visualizar o mapa 2D (Z = 0)");
+        System.out.println("5. Listar mensagens trocadas");
         System.out.println("6. Sair do Simulador");
         System.out.print("Escolha sua ação, comandante: ");
     }
@@ -478,14 +485,21 @@ public class Main {
             System.out.println("-----------------------------------");
             return;
         }
+        System.out.println("Todas as posições dadas são dos cantos inferiores esquerdos" +
+        " dos obstáculos de acordo com o sistema de coordenadas.");
 
-        for (Obstaculo obs : obstaculos) {
-            System.out.printf("ID: %s, Tipo: %s, Posição do canto inferior esquerdo: (%d, %d, %d)\n",
-                    obs.getId(), obs.getTipoObstaculo(), obs.getX(), obs.getY(), obs.getZ());
-            System.out.printf("Representação no mapa 2D: %s\n", obs.getRepresentacao());
-            System.out.printf("Dimensões: %d x %d x %d\n", obs.getLarguraX(), obs.getLarguraY(), obs.getAltura());
-            System.out.println("Descrição: " + obs.getDescricao());
-            System.out.println("-----------------------------------");
+        for (TipoObstaculo tipo : TipoObstaculo.values()) {
+            List<Obstaculo> obsTipo = obstaculos.stream()
+                    .filter(o -> o.getTipoObstaculo() == tipo)
+                    .collect(Collectors.toList());
+            if (!obsTipo.isEmpty()) {
+                System.out.println("Obstáculos do Tipo " + tipo + ":");
+                System.out.printf("Representação no mapa 2D: \"%s\".\n", tipo.getRepresentacao());
+                System.out.printf("Dimensões: (%d, %d, %d).\n", tipo.getLarguraX(), tipo.getLarguraY(), tipo.getAltura());
+                System.out.printf("Descrição: %s\n", tipo.getDescricao());
+                obsTipo.forEach(o -> System.out.printf(" - Posição: (%d, %d, %d).\n", o.getX(), o.getY(), o.getZ()));
+                System.out.println("-----------------------------------");
+            }
         }
         System.out.printf("Total de obstáculos: %d\n", obstaculos.size());
         System.out.println("-----------------------------------");
@@ -510,7 +524,7 @@ public class Main {
                         int tipo = lerOpcao();
                         rl.definir_tipo_limpeza(tipo);
                         break;
-                    case 2: rl.limpar(); System.out.println("Faxina concluída (ou tentada)!"); break;
+                    case 2: rl.limpar(); System.out.println("Faxina concluída!"); break;
                     case 3: rl.acionarSensores(); break;
                     case 4:
                         rl.aprimorar();
@@ -541,9 +555,7 @@ public class Main {
             try {
                 switch (opcao) {
                     case 1:
-                        System.out.print("Digite a quantidade de litros (ex: 1000): ");
-                        int litros = lerOpcao();
-                        rb.adicionar_agua(litros);
+                        rb.adicionar_agua();
                         break;
                     case 2: rb.apagar_fogo(comunicador); System.out.println("Operação anti-fogo executada!"); break;
                     case 3:
@@ -567,9 +579,9 @@ public class Main {
     }
 
     private static void visualizarMapa() {
-        System.out.println("\n--- 🗺️  Mapa do Ambiente (Visão Superior Z=0) 🗺️  ---");
+        System.out.println("\n--- 🗺️  Mapa do Ambiente (Visão Z=0) 🗺️  ---");
         ambiente.visualizarAmbiente();
-        System.out.println("Legenda: r = Robô, o = Obstáculo, c = Comunicador, v = Vazio");
+        System.out.println("Legenda: r = Robô, v = Vazio");
         System.out.println("(Lembre-se: O mapa 2D não mostra a altitude!)");
     }
 
