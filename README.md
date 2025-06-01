@@ -181,6 +181,29 @@ title: Diagrama de classes - LAB04
 classDiagram
     direction TB
 
+    class Ambiente {
+        -largura : int
+        -profundidade : int
+        -altura : int
+        -entidades : List~I_Entidade~
+        -mapa : object
+        -planoXY : object
+        
+        +adicionarEntidade(I_Entidade) void
+        +removerEntidade(I_Entidade, boolean) void
+        +moverEntidade(I_Entidade, int, int, int) void
+        +visualizarAmbiente() void
+        +inicializarMapa() void 
+        +dentroDosLimites(int, int, int) boolean
+        +estahOcupado(int, int, int, TipoEntidade) boolean
+        +verificarColisoes(Entidade, int, int, int) boolean
+    }
+    
+    %% Enums
+    class EstadoRobo { <<enumeration>> ON; OFF }
+    class TipoObstaculo { <<enumeration>> LAGO; FOGO; PREDIOEMCHAMAS; PREDIO; SUJEIRAENCARDIDA; COMIDANOCHAO; SACOLAPLASTICA; OFICINA }
+    class TipoEntidade { <<enumeration>> VAZIO; ROBO; OBSTACULO; COMUNICADOR; DESCONHECIDO }
+
     class I_Entidade {
         <<Interface>>
         +getX() int
@@ -289,23 +312,7 @@ classDiagram
     ComunicadorCentral ..|> I_Entidade : Implementa
     ComunicadorCentral ..|> I_Comunicavel : Implementa
 
-    class Ambiente {
-        -largura : int
-        -profundidade : int
-        -altura : int
-        -entidades : List~I_Entidade~
-        -mapa : object
-        -planoXY : object
-        
-        +adicionarEntidade(I_Entidade) void
-        +removerEntidade(I_Entidade, boolean) void
-        +moverEntidade(I_Entidade, int, int, int) void
-        +visualizarAmbiente() void
-        +inicializarMapa() void 
-        +dentroDosLimites(int, int, int) boolean
-        +estahOcupado(int, int, int, TipoEntidade) boolean
-        +verificarColisoes(Entidade, int, int, int) boolean
-    }
+    
 
     %% Relações
     RoboLimpador "1" o-- "1" SensorDeLixo : Agregação
@@ -314,16 +321,6 @@ classDiagram
     A_Robo "*" o-- "1" Ambiente : Agregação 
     Obstaculo "*" o-- "1" Ambiente : Agregação 
     ComunicadorCentral "1" o-- "1" Ambiente : Agregação
-
-    %% Enums
-    class EstadoRobo { <<enumeration>> ON; OFF }
-    class TipoObstaculo { <<enumeration>> LAGO; FOGO /*...*/ }
-    class TipoEntidade { <<enumeration>> VAZIO; ROBO /*...*/ }
-
-    %% Relações com Enums (associação/dependência)
-    A_Robo -- EstadoRobo : Usa
-    Obstaculo -- TipoObstaculo : Usa
-    I_Entidade -- TipoEntidade : Usa
 ```
 
 ## Interfaces Criadas
