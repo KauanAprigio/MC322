@@ -362,11 +362,13 @@ classDiagram
     * Implementada por: `RoboBombeiro`, `ComunicadorCentral`.
 * **`I_FogoZero`**: Define as ações de um robô bombeiro para lidar com fogo.
     * Implementada por: `RoboBombeiro`.
-* **`I_Sensoreavel`**: Define a capacidade de usar sensores.
+* **`I_Sensoreavel`**: Define a capacidade de usar sensores. *
     * Implementada por: `RoboLimpador`.
 * **`I_SujeiraZero`**: Define as ações de um robô limpador.
     * Implementada por: `RoboLimpador`.
 
+  * OBS: O Método `acionarsensores` foi removido da classe `ambiente` e sua funcionalidade foi passada para métodos
+dessa interface. Assim, para acionar o sensor de um robô basta chamar a função `acionarsensores` própria do Robô
 ## Exceções Personalizadas
 
 * **`ErrorAbastecimentoException`**: Lançada por `RoboBombeiro` ao tentar adicionar água de forma inadequada.
