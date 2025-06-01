@@ -197,7 +197,12 @@ classDiagram
         +getAmbiente() Ambiente
         +isComunicavel() boolean
     }
-
+    class Obstaculo {
+        -pos_x : int
+        -pos_y : int
+        -tipoObstaculo : TipoObstaculo
+    }
+    Obstaculo ..|> I_Entidade : Implementa
     class A_Robo {
         <<Abstract>>
         -id : String
@@ -212,24 +217,27 @@ classDiagram
         +getEstado() EstadoRobo
     }
     A_Robo ..|> I_Entidade : Implementa
-
-    class A_Sensor {
-        <<Abstract>>
-        -raio : double
-        +monitorar(int, int, int, Ambiente) void
-    }
-
-    class A_CentralComunicacao {
-        <<Abstract>>
-        -mensagens : List~String~
-        +registrarMensagem(String, String) void
-        +exibirMensagens() void
-    }
+    
 
     class I_Aprimoravel {
         <<Interface>>
         +aprimorar() void
         +estahAprimorado() boolean
+    }
+    
+    class I_Sensoreavel {
+        <<Interface>>
+        +acionarSensores() void
+    }
+    class I_SujeiraZero {
+        <<Interface>>
+        +limpar() void
+        +definir_tipo_limpeza(int) void
+    }
+    class RoboLimpador {
+        -tipo_limpeza : int
+        -sensorDeLixo : SensorDeLixo
+        -raioDeLimpeza : int
     }
     class I_Comunicavel {
         <<Interface>>
@@ -241,25 +249,6 @@ classDiagram
         +adicionar_agua() void
         +apagar_fogo() void
     }
-    class I_Sensoreavel {
-        <<Interface>>
-        +acionarSensores() void
-    }
-    class I_SujeiraZero {
-        <<Interface>>
-        +limpar() void
-        +definir_tipo_limpeza(int) void
-    }
-
-    class RoboLimpador {
-        -tipo_limpeza : int
-        -sensorDeLixo : SensorDeLixo
-        -raioDeLimpeza : int
-    }
-    RoboLimpador --|> A_Robo : Herança
-    RoboLimpador ..|> I_Sensoreavel : Implementa
-    RoboLimpador ..|> I_SujeiraZero : Implementa
-    RoboLimpador ..|> I_Aprimoravel : Implementa
 
     class RoboBombeiro {
         -altitudeMaxima : int
@@ -271,18 +260,25 @@ classDiagram
     RoboBombeiro ..|> I_FogoZero : Implementa
     RoboBombeiro ..|> I_Comunicavel : Implementa
     RoboBombeiro ..|> I_Aprimoravel : Implementa
+    RoboLimpador --|> A_Robo : Herança
+    RoboLimpador ..|> I_Sensoreavel : Implementa
+    RoboLimpador ..|> I_SujeiraZero : Implementa
+    RoboLimpador ..|> I_Aprimoravel : Implementa
 
-    class SensorDeLixo {
-        %% Atributos da classe SensorDeLixo, se houver
+    class A_Sensor {
+        <<Abstract>>
+        -raio : double
+        +monitorar(int, int, int, Ambiente) void
     }
     SensorDeLixo --|> A_Sensor : Herança
 
-    class Obstaculo {
-        -pos_x : int
-        -pos_y : int
-        -tipoObstaculo : TipoObstaculo
+    class A_CentralComunicacao {
+        <<Abstract>>
+        -mensagens : List~String~
+        +registrarMensagem(String, String) void
+        +exibirMensagens() void
     }
-    Obstaculo ..|> I_Entidade : Implementa
+
 
     class ComunicadorCentral {
         +listarFogos() void
