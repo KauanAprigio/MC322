@@ -96,11 +96,6 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         }
     }
 
-    public void adicionarFogo(Obstaculo fogo) {
-        fogos.add(fogo);
-        System.out.println("Comunicador Central: Fogo na posição (" + fogo.getX() + ", " + fogo.getY() + "). Registrado pelo comunicador central\n");
-    }
-
     // Metodos sobrescritos da interface Comunicavel
     @Override
     public void enviarMensagem(Comunicavel destinatario, String mensagem) throws ErroComunicacaoException {

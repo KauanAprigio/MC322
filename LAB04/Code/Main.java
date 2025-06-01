@@ -176,7 +176,7 @@ public class Main {
          System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println("\n>> Testando ComunicadorCentral...\n");
         comunicador.mover(0, 0, 0);
-        comunicador.listarFogos(); // Deve listar o Prédio em Chamas
+        comunicador.listarFogos();
         try { comunicador.avisoFogoProximo(roboLimpador); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
         try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] Aviso Fogo (Bombeiro).\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         //roboBombeiro.enviarMensagem(comunicador, roboBombeiro.getId() + ": Mensagem de teste para a central.\n");
@@ -194,6 +194,9 @@ public class Main {
         try { roboBombeiro.adicionar_agua(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Altura Inválida): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
         try { roboBombeiro.adicionar_agua(); System.out.println("Teste [OK] Abasteceu Bombeiro.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+        
+        try { roboBombeiro.enviarMensagem(comunicador,"AJUDA"); System.out.println("Teste [OK] Bombeiro pediu ajuda.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
+
         try { roboBombeiro.apagar_fogo(comunicador); System.out.println("Teste [OK] Apagar Fogo (Sem Fogo Perto).\n"); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
         try { ambiente.moverEntidade(roboBombeiro, 90, 3, 0); System.out.println("Teste [OK] Mover Bombeiro (Perto Fogo).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { System.err.println("Teste [OK] ErrorApagarFogoException (Altura): " + e.getMessage()); }
