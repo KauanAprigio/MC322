@@ -162,7 +162,7 @@ public class Main {
         try { roboLimpador.acionarSensores(); System.out.println("Teste [OK] Acionar Sensores.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboLimpador.definir_tipo_limpeza(5); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Tipo Inválido): " + e.getMessage()); }
         try { roboLimpador.definir_tipo_limpeza(1); System.out.println("Teste [OK] Definir Tipo Limpeza (1).\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        try { roboLimpador.limpar(); System.out.println("Teste [OK] não limpou nada.\n");} catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Sem Lixo Perto): " + e.getMessage()); }
+        try { roboLimpador.limpar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorLimpezaException (Sem Lixo Perto): " + e.getMessage()); }
         try { ambiente.moverEntidade(roboLimpador, 53, 41, 0); System.out.println("Teste [OK] Mover Limpador.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }        
         try { roboLimpador.limpar(); System.out.println("Teste [OK] limpou a sacola plástica e a comida\n"); } catch (Exception e) { System.err.println("Teste [FALHA] : " + e.getMessage()); }
         try { roboLimpador.definir_tipo_limpeza(2); roboLimpador.limpar(); System.out.println("Teste [OK] Limpou Sujeira encardida.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); } // Deve limpar Comida
