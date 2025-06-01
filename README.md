@@ -198,6 +198,12 @@ classDiagram
         +estahOcupado(int, int, int, TipoEntidade) boolean
         +verificarColisoes(Entidade, int, int, int) boolean
     }
+    class Obstaculo {
+        -pos_x : int
+        -pos_y : int
+        -tipoObstaculo : TipoObstaculo
+    }
+    Obstaculo ..|> I_Entidade : Implementa
 
     %% Enums
     class EstadoRobo { 
@@ -240,12 +246,7 @@ classDiagram
         +getAmbiente() Ambiente
         +isComunicavel() boolean
     }
-    class Obstaculo {
-        -pos_x : int
-        -pos_y : int
-        -tipoObstaculo : TipoObstaculo
-    }
-    Obstaculo ..|> I_Entidade : Implementa
+    
     class A_Robo {
         <<Abstract>>
         -id : String
