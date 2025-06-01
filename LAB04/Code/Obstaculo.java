@@ -137,7 +137,7 @@ public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu 
              false, false,false, 'p',
               "Prédio: uma construção de vários andares, industrial, comercial ou residencial. Em algum ponto podia ter estado em chamas..."),
         SUJEIRAENCARDIDA(0, 0, 0, false,
-             "Sujeira encardida", false, true,false, 'S',
+             "Sujeira encardida", false, true,false, 'E',
               "Sujeira encardida: A mais nojenta entre os tipos de lixo... Um robô limpador consegue remove-la."), 
         COMIDANOCHAO(0, 0, 0, false, 
             "Comida no chão", false, true,false, 'C',
