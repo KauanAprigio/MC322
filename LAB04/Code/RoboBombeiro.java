@@ -41,7 +41,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     }
     
     @Override
-    public void adicionar_agua(int litros) throws ErrorAbastecimentoException {
+    public void adicionar_agua() throws ErrorAbastecimentoException {
         // Verifica se o robô está dentro de um lago
         boolean dentro_lago = false;
         for (Entidade e : getAmbiente().getEntidades()) {
@@ -66,20 +66,10 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
         if (getEstado() == EstadoRobo.OFF) {
             throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!\n");
         }
-        if (litros <= 0) {
-            throw new ErrorAbastecimentoException("Quantidade de litros inválida! Deve ser maior que zero!\n");
-        }
         
-        int peso_total = reservatorio + litros; // somatorio dos pesos
-        if (peso_total > peso_max){
-            int excedente = peso_total - peso_max;
-            String msg = "A quantidade " + litros + " litros excede " + excedente + " litros da capacidade máxima de " + peso_max + " litros do " + getId() + "!\n";
-            throw new ErrorAbastecimentoException(msg);
-        } else {
-            reservatorio += litros;
-            System.out.println(getId() + " foi abastecido com sucesso.");
-            System.out.println("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
-        }
+        reservatorio = peso_max; // Abastece o reservatório até o máximo
+        System.out.println(getId() + " foi abastecido com sucesso.");
+        System.out.println("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
     }
     @Override
     public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException, RoboDesligadoException {
@@ -102,7 +92,7 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
                 double distancia = Math.sqrt(Math.pow(Xmaisproximo - getX(), 2) + Math.pow(Ymaisproximo - getY(), 2));
                 
                 if (o.getTipoObstaculo().isFogo() && distancia <= raio_de_cessar_fogo) { // Condional caso o obstaculo detectado seja um fogo
-                    if (o.getAltura() <= getZ()){ // condicional para ver se está na altura do fogo
+                    if (getZ() < o.getAltura()){ // condicional para ver se está na altura do fogo
                         System.out.println(getId() + " está próximo de um incêndio.");
 
                         if (o.getTipoObstaculo() == TipoObstaculo.FOGO) litros_necessarios = 100; // quantidade de agua para apagar o fogo
@@ -156,7 +146,8 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
             }
         }
         if (!encontrou_fogo) {
-            System.out.println(getId() + " não encontrou nenhum incêndio próximo para apagar.\n");
+            String msg = getId() + " não encontrou nenhum incêndio próximo para apagar.\n";
+            throw new ErrorApagarFogoException(msg);
         }
     }
 
