@@ -169,7 +169,7 @@ O Laboratório 4 introduziu conceitos mais avançados de Orientação a Objetos,
 3.  **Tratamento de Exceções**: Um conjunto robusto de exceções personalizadas (`ForaDosLimitesException`, `LocalOcupadoException`, `ErrorLimpezaException`, etc.) foi implementado para lidar com erros de forma mais específica e clara.
 4.  **`Ambiente` 3D**: A classe `Ambiente` foi aprimorada para gerenciar um mapa 3D (`TipoEntidade[][][]`) e um plano 2D (`char[][]`), permitindo um controle de posição e colisão mais preciso e complexo. A gestão de entidades foi unificada através da interface `Entidade`.
 5.  **`ComunicadorCentral`**: Uma nova classe foi adicionada para gerenciar a comunicação entre entidades, especialmente para alertar sobre perigos como fogo. Ela herda a classe abstrata `CentralComunicacao` e implementa a interface `Comunicavel`.
-6.  **Refatoração**: As classes de Robôs e Obstáculos foram refatoradas para implementar as novas interfaces e utilizar o novo `Ambiente` e o sistema de exceções.
+6.  **Refatoração**: As subclasses de Robôs e a classe Obstáculo foram refatoradas para implementar as novas interfaces e utilizar o novo `Ambiente` e o sistema de exceções.
 7.  **Menu Interativo**: O menu foi aprimorado para refletir as novas funcionalidades e seguir as especificações, permitindo uma interação mais rica com a simulação.
 
 ## Diagrama de Classes - LAB04
@@ -228,16 +228,17 @@ classDiagram
 
     class I_Aprimoravel {
         <<Interface>>
-        +aprimorar(int) void
+        +aprimorar() void
+        +estahAprimorado() boolean
     }
     class I_Comunicavel {
         <<Interface>>
         +enviarMensagem(Comunicavel, String) void
-        +receberMensagem(String) void
+        +receberMensagem(String, Comunicavel) void
     }
     class I_FogoZero {
         <<Interface>>
-        +adicionar_agua(int) void
+        +adicionar_agua() void
         +apagar_fogo() void
     }
     class I_Sensoreavel {
@@ -255,7 +256,7 @@ classDiagram
         -sensorDeLixo : SensorDeLixo
         -raioDeLimpeza : int
     }
-    RoboLimpador --|> A_Robo : Herda de
+    RoboLimpador --|> A_Robo : Herança
     RoboLimpador ..|> I_Sensoreavel : Implementa
     RoboLimpador ..|> I_SujeiraZero : Implementa
     RoboLimpador ..|> I_Aprimoravel : Implementa
@@ -266,7 +267,7 @@ classDiagram
         -reservatorio : int
         -raio_de_cessar_fogo : int
     }
-    RoboBombeiro --|> A_Robo : Herda de
+    RoboBombeiro --|> A_Robo : Herança
     RoboBombeiro ..|> I_FogoZero : Implementa
     RoboBombeiro ..|> I_Comunicavel : Implementa
     RoboBombeiro ..|> I_Aprimoravel : Implementa
@@ -274,7 +275,7 @@ classDiagram
     class SensorDeLixo {
         %% Atributos da classe SensorDeLixo, se houver
     }
-    SensorDeLixo --|> A_Sensor : Herda de
+    SensorDeLixo --|> A_Sensor : Herança
 
     class Obstaculo {
         -pos_x : int
@@ -284,9 +285,11 @@ classDiagram
     Obstaculo ..|> I_Entidade : Implementa
 
     class ComunicadorCentral {
-        %% Atributos da classe ComunicadorCentral, se houver
+        +listarFogos() void
+        +avisoFogoProximo(Entidade) void
+        +adicionarFogo(Obstaculo) void
     }
-    ComunicadorCentral --|> A_CentralComunicacao : Herda de
+    ComunicadorCentral --|> A_CentralComunicacao : Herança
     ComunicadorCentral ..|> I_Entidade : Implementa
     ComunicadorCentral ..|> I_Comunicavel : Implementa
 
@@ -303,14 +306,13 @@ classDiagram
         +visualizarAmbiente() void
     }
 
-    %% Relações (com legendas como no LAB03)
-    RoboLimpador "1" o-- "1" SensorDeLixo : Agregação (possui)
-    RoboBombeiro "1" -- "1" ComunicadorCentral : Associação (comunicaCom) %% Usando associação simples, pode ser 'o--' se for agregação
-    ComunicadorCentral "1" -- "*" RoboBombeiro : Associação (podeAvisar) %% Ou 'o--'
-
-    A_Robo "*" o-- "1" Ambiente : Agregação (operaEm)
-    Obstaculo "*" o-- "1" Ambiente : Agregação (contidoEm)
-    ComunicadorCentral "1" o-- "1" Ambiente : Agregação (localizadoEm)
+    %% Relações
+    RoboLimpador "1" o-- "1" SensorDeLixo : Agregação
+    RoboBombeiro "1" -- "1" ComunicadorCentral : Associação
+    ComunicadorCentral "1" -- "*" RoboBombeiro : Associação
+    A_Robo "*" o-- "1" Ambiente : Agregação 
+    Obstaculo "*" o-- "1" Ambiente : Agregação 
+    ComunicadorCentral "1" o-- "1" Ambiente : Agregação
 
     %% Enums
     class EstadoRobo { <<enumeration>> ON; OFF }
