@@ -179,7 +179,7 @@ O Laboratório 4 introduziu conceitos mais avançados de Orientação a Objetos,
 title: Diagrama de classes - LAB04
 ---
 classDiagram
-    direction BT
+    direction TB
 
     class Ambiente {
         -largura : int
