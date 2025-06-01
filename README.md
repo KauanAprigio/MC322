@@ -365,7 +365,7 @@ classDiagram
 * **`I_Sensoreavel`**: Define a capacidade de usar sensores.
     * Implementada por: `RoboLimpador`.
 * **`I_SujeiraZero`**: Define as ações de um robô limpador.
-    * Implementada por: `RoboLimpador`.\
+    * Implementada por: `RoboLimpador`.
 
 * OBS: O Método `acionarsensores` foi removido da classe `ambiente` e sua funcionalidade foi passada para métodos
 da interface `Sensoreavel`. Assim, para acionar o sensor de um robô basta chamar a função `acionarsensores` própria do Robô
