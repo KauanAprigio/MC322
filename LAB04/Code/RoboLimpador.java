@@ -106,7 +106,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
     }
 
     @Override
-    public void limpar() throws RoboDesligadoException {
+    public void limpar() throws RoboDesligadoException, ErrorLimpezaException {
         if (getEstado() == EstadoRobo.OFF){
             String mensagem = "O robô" + getId() + " não pôde fazer a limpeza, pois está desligado!\n";
             throw new RoboDesligadoException(mensagem);
@@ -148,7 +148,7 @@ class RoboLimpador extends Robo implements Sensoreavel, SujeiraZero, Aprimoravel
         }
         // Verifica se limpou algum lixo
         if (lixos_ah_remover.isEmpty()) {
-            System.out.println(getId() + " não encontrou/conseguiu limpar nenhum lixo!\n");
+            throw new ErrorLimpezaException(getId() + " não encontrou/conseguiu limpar nenhum lixo!\n");
         } else {
             // Remove os lixos encontrados
             for (Entidade lixo : lixos_ah_remover) {
