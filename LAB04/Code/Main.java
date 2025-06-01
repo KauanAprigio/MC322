@@ -180,8 +180,8 @@ public class Main {
         comunicador.listarFogos();
         try { comunicador.avisoFogoProximo(roboLimpador); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
         try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] Aviso Fogo (Bombeiro).\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
-        //roboBombeiro.enviarMensagem(comunicador, roboBombeiro.getId() + ": Mensagem de teste para a central.\n");
         comunicador.exibirMensagens();
+        System.out.println(comunicador.getDescricao());
 
 
         // --- Testes RoboBombeiro ---
@@ -207,19 +207,21 @@ public class Main {
         try { ambiente.moverEntidade(roboBombeiro, 60, 46, 0); System.out.println("Teste [OK] Mover Oficina.\n"); } catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         try { roboBombeiro.aprimorar(); System.out.println("Teste [OK] Aprimorado com sucesso.\n"); } catch (Exception e) { System.err.println("Teste [FALHA - Inesperado]: " + e.getMessage()); }
         try { roboBombeiro.aprimorar(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAprimoramentoException (Já está aprimorado): " + e.getMessage()); }
-        
+        System.out.println(roboBombeiro.getDescricao());
+
         // teste de comunicação
         Comunicavel robozin = new RoboBombeiro("jao", EstadoRobo.ON, 100, 0, 0, ambiente, 100, 100, 100);
         try { roboBombeiro.enviarMensagem(robozin, "NAO VAI ENVIAR NADA GAROTAO"); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
+        
+        // Algumas exceções quando o bombeiro ja apagou todos os fogos
+        comunicador.listarFogos();
+        try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] nenhum fogo próximo.\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
         
         // testes com o robo desligado
         roboBombeiro.desligar(); 
         try { roboBombeiro.adicionar_agua(); } catch (Exception e) { System.err.println("Teste [OK] ErrorAbastecimentoException (Desligado): " + e.getMessage()); }
         try { roboBombeiro.apagar_fogo(comunicador);; } catch (Exception e) { System.err.println("Teste [OK] RoboDesligadoException : " + e.getMessage()); }
 
-        // Algumas exceções quando o bombeiro ja apagou todos os fogos
-        comunicador.listarFogos();
-        try { comunicador.avisoFogoProximo(roboBombeiro); System.out.println("Teste [OK] nenhum fogo próximo.\n");} catch (Exception e) { System.err.println("Teste [FALHA]: " + e.getMessage()); }
 
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
         // Reinicia robos para o menu, garantindo que estejam em posições e estados conhecidos
