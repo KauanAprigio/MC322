@@ -222,13 +222,6 @@ public class Ambiente {
         System.out.println("Nova posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
         System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + (e.getZ() + e.getAltura()) + ")\n");
     }
-
-    public void executarSensores(){ 
-        // pode ser usado para ativar os sensores de todos os robôs no ambiente. 
-        // Tipo só chamar a função ativar sensores deles...
-       
-    }
-
     /**
      * Método verificarColisoes:
      * Verifica se a região ocupada por uma entidade está livre ou se está fora dos limites do ambiente.
