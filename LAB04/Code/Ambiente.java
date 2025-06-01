@@ -254,7 +254,7 @@ public class Ambiente {
     public void visualizarAmbiente(){
         for (int y = 0; y < largura; y++){
             for (int x = 0; x < profundidade; x++){
-                System.out.print(planoXY[x][y]);// printa os caracteres dando um espaço entre eles
+                System.out.print(planoXY[x][y]); // quando usa espaço entre os caracteres dá uma zoada não dá para ver direito as coisas...
             }
             System.out.print("\n");
         }
