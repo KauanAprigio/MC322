@@ -200,9 +200,29 @@ classDiagram
     }
 
     %% Enums
-    class EstadoRobo { <<enumeration>> ON; OFF }
-    class TipoObstaculo { <<enumeration>> LAGO; FOGO; PREDIOEMCHAMAS; PREDIO; SUJEIRAENCARDIDA; COMIDANOCHAO; SACOLAPLASTICA; OFICINA }
-    class TipoEntidade { <<enumeration>> VAZIO; ROBO; OBSTACULO; COMUNICADOR; DESCONHECIDO }
+    class EstadoRobo { 
+        <<enumeration>> 
+        + ON 
+        + OFF
+    }
+   class TipoObstaculo {
+        <<enumeration>>
+        + LAGO
+        + FOGO
+        + PREDIOEMCHAMAS
+        + PREDIO
+        + SUJEIRAENCARDIDA
+        + COMIDANOCHAO
+        + SACOLAPLASTICA
+        + OFICINA
+    }
+    class TipoEntidade { <<enumeration>> 
+        + VAZIO 
+        + ROBO 
+        + OBSTACULO 
+        + COMUNICADOR 
+        + DESCONHECIDO 
+    }
 
     class I_Entidade {
         <<Interface>>
