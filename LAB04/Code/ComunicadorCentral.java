@@ -132,6 +132,8 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         registrarMensagem(e.getId(), mensagem);
         if (mensagem.equalsIgnoreCase("AJUDA")) {
             avisoFogoProximo(e);
+        } else if (mensagem.equalsIgnoreCase("AGUA")){
+            local_Lago();
         } else if (mensagem.equalsIgnoreCase("INCÊNDIO APAGADO")) {
             RoboBombeiro rb = (RoboBombeiro) e;
             fogos.remove(rb.getUltimoIncendio());

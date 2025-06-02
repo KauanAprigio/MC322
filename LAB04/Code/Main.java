@@ -78,7 +78,7 @@ public class Main {
             // Construtor RoboLimpador: String id, EstadoRobo estado, int pos_x, int pos_y, int pos_z,Ambiente ambiente, double raio, int raioDeLimpeza
             roboLimpador = new RoboLimpador("Faxinildo_01", EstadoRobo.OFF, 0, 0, 0, ambiente, 15.0, 10);
             // Construtor RoboBombeiro: String id, EstadoRobo estado, int pos_x, int pos_y, int altitude, Ambiente ambiente, int altitudeMaxima, double raiosensor, int peso_max, int raio_de_cessar_fogo
-            roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 45, 45, 0, ambiente, 105, 3000, 15);
+            roboBombeiro = new RoboBombeiro("Chama_Boy_02", EstadoRobo.OFF, 45, 45, 0, 0, ambiente, 105, 3000, 15);
             ambiente.adicionarEntidade(roboLimpador, true);
             ambiente.adicionarEntidade(roboBombeiro, true);
         } catch (ForaDosLimitesException | LocalOcupadoException e) {
@@ -212,7 +212,7 @@ public class Main {
         System.out.println(roboBombeiro.getDescricao());
 
         // teste de comunicação
-        Comunicavel robozin = new RoboBombeiro("jao", EstadoRobo.ON, 100, 0, 0, ambiente, 100, 100, 100);
+        Comunicavel robozin = new RoboBombeiro("jao", EstadoRobo.ON, 100, 0, 0, 0, ambiente, 100, 100, 100);
         try { roboBombeiro.enviarMensagem(robozin, "NAO VAI ENVIAR NADA GAROTAO"); } catch (Exception e) { System.err.println("Teste [OK] ErroComunicacaoException: " + e.getMessage()); }
         
         // Algumas exceções quando o bombeiro ja apagou todos os fogos
@@ -232,9 +232,9 @@ public class Main {
         Ambiente Menu_interativo = new Ambiente(105, 105, 105, mapa_Menu_interativo, plano_Menu_interativo, "Unicamp");
         Menu_interativo.inicializarMapa();
         try {
-            Menu_interativo.adicionarEntidade(new RoboBombeiro("Diego", EstadoRobo.OFF, 0, 0, 0, Menu_interativo, 105, 3000, 20), true);
+            Menu_interativo.adicionarEntidade(new RoboBombeiro("Diego", EstadoRobo.OFF, 0, 0, 0, 1100, Menu_interativo, 105, 3000, 20), true);
             Menu_interativo.adicionarEntidade( new RoboLimpador("Gustavo", EstadoRobo.OFF, 0, 2, 0, Menu_interativo, 15, 15), true);
-            Menu_interativo.adicionarEntidade( new RoboBombeiro("Kauan", EstadoRobo.OFF, 50, 50, 0, Menu_interativo, 85, 4000, 20), true);
+            Menu_interativo.adicionarEntidade( new RoboBombeiro("Kauan", EstadoRobo.OFF, 50, 50, 0, 1100, Menu_interativo, 85, 4000, 20), true);
             Menu_interativo.adicionarEntidade( new RoboLimpador("Esther", EstadoRobo.OFF, 100, 100, 0, Menu_interativo, 30, 15), true);
         } catch (Exception e) { System.err.println("Erro ao iniciar robôs: " + e.getMessage());}
         try {
@@ -568,7 +568,7 @@ public class Main {
                         rb.aprimorar();
                         break;
                     case 4:
-                        System.out.println("Digite \"AJUDA\" para receber a localização do incêndio mais próximo.");
+                        System.out.println("Digite \"AJUDA\" ou \"AGUA\" para receber a localização do incêndio mais próximo ou onde está o lago.");
                         System.out.print("Digite sua mensagem para a central: ");
                         String msg = scanner.nextLine();
                         rb.enviarMensagem(comunicador, msg);

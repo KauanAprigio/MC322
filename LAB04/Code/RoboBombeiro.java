@@ -31,13 +31,13 @@ public class RoboBombeiro extends Robo implements FogoZero, Comunicavel, Aprimor
     private boolean aprimorado = false; // variável para verificar se o robô foi aprimorado
     
     // Construtor
-    public RoboBombeiro(String id, EstadoRobo estado, int pos_x, int pos_y, int pos_z, 
+    public RoboBombeiro(String id, EstadoRobo estado, int pos_x, int pos_y, int pos_z, int reservatorio,
                         Ambiente ambiente, int altitudeMaxima, int peso_max, int raio_de_cessar_fogo) {
         super("Bombeiro_"+id, estado, pos_x, pos_y, pos_z, ambiente);
         this.altitudeMaxima = altitudeMaxima;
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
-        this.reservatorio = 0; // litros de agua no reservatorio (começa vazio)
+        this.reservatorio = reservatorio; // litros de agua no reservatorio (começa vazio)
     }
     
     @Override
