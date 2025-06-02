@@ -491,7 +491,7 @@ public class Main {
             System.out.println("-----------------------------------");
             return;
         }
-        System.out.println("Todas as posições dadas são dos cantos inferiores esquerdos" +
+        System.out.println("Todas as posições dadas são dos cantos superiores esquerdos" +
         " dos obstáculos de acordo com o sistema de coordenadas.");
 
         for (TipoObstaculo tipo : TipoObstaculo.values()) {
@@ -503,7 +503,7 @@ public class Main {
                 System.out.printf("Representação no mapa 2D: \"%s\".\n", tipo.getRepresentacao());
                 System.out.printf("Dimensões: (%d, %d, %d).\n", tipo.getLarguraX(), tipo.getLarguraY(), tipo.getAltura());
                 System.out.printf("Descrição: %s\n", tipo.getDescricao());
-                obsTipo.forEach(o -> System.out.printf(" - Posição: (%d, %d, %d).\n", o.getX(), o.getY(), o.getAltura()));
+                obsTipo.forEach(o -> System.out.printf(" - Posição: (%d, %d).\n", o.getX(), o.getY()));
                 System.out.println("-----------------------------------");
             }
         }
