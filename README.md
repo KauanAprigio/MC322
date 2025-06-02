@@ -167,10 +167,13 @@ O Laboratório 4 introduziu conceitos mais avançados de Orientação a Objetos,
 1.  **Interfaces**: Foram criadas diversas interfaces (`Entidade`, `Aprimoravel`, `Comunicavel`, `FogoZero`, `Sensoreavel`, `SujeiraZero`) para definir contratos de comportamento. Isso permitiu "simular" herança múltipla e desacoplar as classes, tornando o sistema mais flexível e extensível.
 2.  **Classes Abstratas**: `Robo` e `Sensor` foram transformadas em classes abstratas, definindo comportamentos e atributos comuns, mas forçando subclasses a implementar métodos específicos. `CentralComunicacao` também foi transformada em abstrata.
 3.  **Tratamento de Exceções**: Um conjunto robusto de exceções personalizadas (`ForaDosLimitesException`, `LocalOcupadoException`, `ErrorLimpezaException`, etc.) foi implementado para lidar com erros de forma mais específica e clara.
-4.  **`Ambiente` 3D**: A classe `Ambiente` foi aprimorada para gerenciar um mapa 3D (`TipoEntidade[][][]`) e um plano 2D (`char[][]`), permitindo um controle de posição e colisão mais preciso e complexo. A gestão de entidades foi unificada através da interface `Entidade`.
+4.  **`Ambiente` 3D**: A classe `Ambiente` foi aprimorada para gerenciar um mapa 3D (`TipoEntidade[][][]`) e um plano 2D (`char[][]`) *, permitindo um controle de posição e colisão mais preciso e complexo. A gestão de entidades foi unificada através da interface `Entidade`.
 5.  **`ComunicadorCentral`**: Uma nova classe foi adicionada para gerenciar a comunicação entre entidades, especialmente para alertar sobre perigos como fogo. Ela herda a classe abstrata `CentralComunicacao` e implementa a interface `Comunicavel`.
 6.  **Refatoração**: As subclasses de Robôs e a classe Obstáculo foram refatoradas para implementar as novas interfaces e utilizar o novo `Ambiente` e o sistema de exceções.
 7.  **Menu Interativo**: O menu foi aprimorado para refletir as novas funcionalidades e seguir as especificações, permitindo uma interação mais rica com a simulação.
+
+* OBS: O plano 2D não fica legal em uma janela de terminal pequena. É recomendado utilizar o terminal em tela
+cheia para melhor experiência do simulador.
 
 ## Diagrama de Classes - LAB04
 
@@ -320,7 +323,7 @@ classDiagram
     class ComunicadorCentral {
         +listarFogos() void
         +avisoFogoProximo(Entidade) void
-        +adicionarFogo(Obstaculo) void
+        +local_Lago() void 
     }
     
 
@@ -364,6 +367,8 @@ classDiagram
 * **`I_SujeiraZero`**: Define as ações de um robô limpador.
     * Implementada por: `RoboLimpador`.
 
+* OBS: O Método `acionarsensores` foi removido da classe `ambiente` e sua funcionalidade foi passada para métodos
+da interface `Sensoreavel`. Assim, para acionar o sensor de um robô basta chamar a função `acionarsensores` própria do Robô
 ## Exceções Personalizadas
 
 * **`ErrorAbastecimentoException`**: Lançada por `RoboBombeiro` ao tentar adicionar água de forma inadequada.
