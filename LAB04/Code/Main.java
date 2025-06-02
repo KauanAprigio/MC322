@@ -503,7 +503,7 @@ public class Main {
                 System.out.printf("Representação no mapa 2D: \"%s\".\n", tipo.getRepresentacao());
                 System.out.printf("Dimensões: (%d, %d, %d).\n", tipo.getLarguraX(), tipo.getLarguraY(), tipo.getAltura());
                 System.out.printf("Descrição: %s\n", tipo.getDescricao());
-                obsTipo.forEach(o -> System.out.printf(" - Posição: (%d, %d, %d).\n", o.getX(), o.getY(), o.getZ()));
+                obsTipo.forEach(o -> System.out.printf(" - Posição: (%d, %d, %d).\n", o.getX(), o.getY(), o.getAltura()));
                 System.out.println("-----------------------------------");
             }
         }
