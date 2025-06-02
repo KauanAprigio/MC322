@@ -115,7 +115,7 @@ public class Ambiente {
 
     // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
     public boolean dentroDosLimites(int x, int y, int altitude) { 
-        if ((origemX <= x && x <= largura) && (origemY <= y && y <= altura) && (altitudeMinima <= altitude && altitude <= altura)) return true;
+        if ((origemX <= x && x <= largura) && (origemY <= y && y <= profundidade) && (altitudeMinima <= altitude && altitude <= altura)) return true;
         return false;
     }
 
