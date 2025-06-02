@@ -82,7 +82,7 @@ public class Ambiente {
         } 
         if (printar){
             System.out.println("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.");
-            System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + Z_max + ")");
+            System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
             System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")\n");
         }
     }
