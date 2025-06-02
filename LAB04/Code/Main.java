@@ -412,7 +412,7 @@ public class Main {
     private static void controlarMovimento(Robo robo) {
         System.out.println("\n--- 🧭 Controle de Movimento 🧭 ---");
         System.out.println("Andar 5 metros em uma direção: Use W (Norte), S (Sul), A (Oeste), D (Leste).");
-        System.out.println("Use U (Cima), J (Baixo) - Apenas para Bombeiros.");
+        System.out.println("Subir ou abaixar 20 metros use U (Cima), J (Baixo) - Apenas para Bombeiros.");
         System.out.println("Escolha a variação exata da posição: Use E (Escolher)");
         System.out.print("Digite seu comando (ex: W): ");
         String comando = scanner.next().toUpperCase();
