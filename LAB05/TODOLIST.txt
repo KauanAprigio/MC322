@@ -15,8 +15,6 @@ Lista de coisas para serem implementadas/ corrigidas.
 6 - Criar as configurações iniciais do ambiente em config.txt e Implementar LeitorConfig para ler as configurações 
     (Eu to afim de fzr isso parece divertido)
 
-OBS: Eu nn vejo pq voltar a fzr aquele bagulho de "Entidade" q a gente fez pro lab 4. Pq na real os Obstaculos e os 
-    Robos tem bem pouco em comum em termos de o q eles fazem. 
-    Especialmente agora nesse lab q nn vai precisar ficar criando caso teste de ficar mexendo obstáculo.
-    Por isso eu separei Robos de Obstaculos agr eles são classes sem herança em comum.
-    No ambiente Acho q da pra adicionar listas separadas pra obstáculos e robôs
+OBS: eu acho q gente devia remover o método moverentidade do ambiente pq nesse laboratório acho q nn vai
+    precisar fzr aqueles 1 milhao de casos teste e ficar movendo obstáculos. Aí a gente deixa mover pra algo exclusivo
+    de RObôs e remove da interface Entidades
