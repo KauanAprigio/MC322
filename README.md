@@ -395,7 +395,7 @@ da interface `Sensoreavel`. Assim, para acionar o sensor de um robô basta chama
 ## Compilação e Execução
 
 ### COMPILAÇÃO:
-    javac LAB05/src/main/*.java LAB05/src/ambiente/*.java -d LAB05/bin
+    javac LAB05/src/main/*.java LAB05/src/ambiente/*.java LAB05/src/Obstaculos/*.java  LAB05/src/Missoes/*.java LAB05/src/Robos/*.java LAB05/src/Exceptions/*.java -d LAB05/bin
 
 ### PARA RODAR:
     java -cp LAB05/bin LAB05.src.main.Main

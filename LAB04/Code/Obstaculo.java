@@ -17,7 +17,9 @@ import LAB04.Code.Interfaces.Entidade;
  */
 // Obstaculos São aproximados a paralelepipedos para facilitar os calculos de colisão
 // e detecção de proximidade
-public class Obstaculo implements Entidade { // rever conceito de posZ, pois eu nao sei se deve dar a altura ou o final, pois sempre começa em z = 0
+public class Obstaculo implements Entidade { 
+
+    
     private int pos_x;
     private int pos_y;
     private final int pos_z = 0;
