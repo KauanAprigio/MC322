@@ -1,6 +1,6 @@
 package LAB05.src.Missoes;
 import LAB05.src.Ambiente.Ambiente;
-import LAB05.src.Robos.Robo;
+import LAB05.src.Entidades.Robos.Robo;
 
 public class MissaoLimpador implements Missao {
     @Override
