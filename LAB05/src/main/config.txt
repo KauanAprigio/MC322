@@ -1,0 +1,3 @@
+Arquivo para facilitar a inicialização do simulador.
+Possui as configurações para montar o ambiente, instanciar os robôs e atribuir missões
+automaticamente.

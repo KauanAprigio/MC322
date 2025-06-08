@@ -1,5 +1,5 @@
-package LAB05.src.ambiente;
+package LAB05.src.Ambiente;
 
-public class ambiente {
+public class Ambiente {
     
 }
