@@ -1,4 +1,4 @@
-package LAB05.src.Entidades;
+package LAB05.src.Entidades.Interfaces;
 import LAB05.src.Ambiente.Ambiente;
 
 
