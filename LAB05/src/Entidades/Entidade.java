@@ -7,6 +7,9 @@ public interface Entidade {
     public int getX_1();
     public int getY_1();
     public int getZ_1();
+    public int getX_2();
+    public int getY_2();
+    public int getZ_2();
 
     // Métodos para obter informações sobre a entidade
     public TipoEntidade getTipo(); // Método para obter o tipo da entidade (ex: ROBO, OBSTACULO, etc.)
@@ -21,7 +24,7 @@ public interface Entidade {
     // Dimensões da entidade
     public int getLarguraX ();
     public int getLarguraY ();
-    public int getAltura();
+    public int getLarguraZ();
 
     // Método para obter o ambiente onde a entidade está localizada
     public Ambiente getAmbiente();
@@ -38,7 +41,9 @@ public interface Entidade {
     public static enum TipoEntidade{
         VAZIO,
         ROBO,
-        OBSTACULO,
+        FOGO,
+        LIXO,
+        LOCAL,          // Robôs podem entrar e sair livremente de locais
         COMUNICADOR;
     }
 }
