@@ -97,7 +97,7 @@ public class Ambiente {
      * @throws EntidadeNaoEncontradaException Se a entidade não está no ambiente ou não pode ser encontrada.
      */
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
-        if (!entidades.contains(e)) //mudei para ver se tem essa entidade na lista de entidade, se nao tiver é pq ela nao foi adicionada
+        if (!entidades.contains(e)) 
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pôde ser encontrada!\n");
         for (int x = e.getX_1(); x <= e.getX_2(); x++) {
             for (int y = e.getY_1(); y <= e.getY_2(); y++) {
@@ -129,10 +129,9 @@ public class Ambiente {
     }
 
     /**
-     * Método moverEntidade:
-     * Move uma entidade para uma nova posição (novoX, novoY, novoZ) no ambiente.
+     * Método moverRobo:
+     * Move um robô para uma nova posição (novoX, novoY, novoZ) no ambiente.
      * Verifica se a nova posição está ocupada ou fora dos limites antes de mover.
-     * Se a entidade não existir no ambiente, lança uma exceção.
      * 
      * @param e Entidade a ser movida.
      * @param novoX Nova coordenada X da entidade.
@@ -143,11 +142,12 @@ public class Ambiente {
      * @throws RoboDesligadoException Se a entidade for um robô desligado e não puder ser movida.
      * @throws NaoPodeVoarException Se a entidade tentar voar sem permissão (apenas robôs bombeiros podem voar).
      */
-    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ ) throws RoboDesligadoException, MovimentoInvalidoexception { 
-        if (e.getTipo() != TipoEntidade.ROBO) { throw new MovimentoInvalidoexception("Apenas entidades do tipo ROBO podem se mover"); }
+    public void moverRobo(Entidade e, int novoX, int novoY, int novoZ ) throws RoboDesligadoException, MovimentoInvalidoexception, EntidadeNaoEncontradaException { 
+       if (!entidades.contains(e)) 
+            throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pôde ser encontrada!\n");
+
+        if (e.getTipo() != TipoEntidade.ROBO) { throw new MovimentoInvalidoexception("Apenas entidades do tipo ROBO podem se mover\n"); }
         Robo r = (Robo) e;
-
-
     
         if (e.getZ_1() != novoZ) { // Se há mudança na altitude
             if (!(r instanceof RoboBombeiro)) {
@@ -155,12 +155,11 @@ public class Ambiente {
             }
         }
 
-        
         int oldX = e.getX_1();
         int oldY = e.getY_1();
         int oldZ = e.getZ_1();
 
-        verificarColisoes(r, novoX, novoY, novoZ); // Isso pode lançar LocalOcupadoException
+        verificarColisoes(r, novoX, novoY, novoZ); 
         
         r.mover(novoX - oldX, novoY - oldY, novoZ - oldZ); 
 
