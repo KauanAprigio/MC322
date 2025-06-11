@@ -1,3 +1,28 @@
-Arquivo para facilitar a inicialização do simulador.
-Possui as configurações para montar o ambiente, instanciar os robôs e atribuir missões
-automaticamente.
+# Arquivo para facilitar a inicialização do simulador.
+# Possui as configurações para montar o ambiente, instanciar os robôs e atribuir missões
+# automaticamente.
+
+# --- inicialização do Ambiente ---
+Ambiente 105 105 105 Unicamp
+FOGO FOGO 5 5
+FOGO PREDIOEMCHAMAS 15 15
+LIXO COMIDANOCHAO 4 4
+LIXO SACOLAPLASTICA 3 3
+LIXO SUJEIRAENCARDIDA 6 2
+LIXO SACOLAPLASTICA 1 1
+LIXO SUJEIRAENCARDIDA 104 100
+LIXO COMIDANOCHAO 100 104
+FOGO FOGO 50 99
+FOGO FOGO 60 27
+LIXO SUJEIRAENCARDIDA 60 35
+LIXO SACOLAPLASTICA 64 39
+LIXO COMIDANOCHAO 68 35
+FOGO PREDIOEMCHAMAS 74 30
+LOCAL OFICINA 60 5
+LOCAL LAGO 5 60
+LOCAL PREDIO 69 69
+COMUNICADOR 51 51
+# --- instanciação dos robôs ---
+Robo RoboBombeiro 0 0 0
+Robo RoboLimpador 100 100 0 
+# -- atribuição de missões
