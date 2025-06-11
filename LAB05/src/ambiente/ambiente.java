@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import LAB05.src.Entidades.*;
 import LAB05.src.Entidades.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
-import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
 import LAB05.src.Entidades.Robos.*;
 import LAB05.src.Exceptions.*;
 
@@ -123,17 +122,8 @@ public class Ambiente {
     public boolean estaOcupado(int x, int y, int z, TipoEntidade tipo) { 
         TipoEntidade posicao = mapa[x][y][z];
         if (posicao == TipoEntidade.VAZIO) return false; // A posição está vazia
-        if (posicao == TipoEntidade.OBSTACULO && tipo == TipoEntidade.ROBO){
-            for (Entidade entidade : entidades){
-                if ((entidade.getX_1() <= x && entidade.getX_2() >= x) 
-                && (entidade.getY_1() <= y && entidade.getY_2() >= y)
-                && entidade.getTipo() == TipoEntidade.OBSTACULO){
-                    Obstaculo aprimorar = (Obstaculo) entidade;
-                    if (aprimorar.getTipoObstaculo() == TipoObstaculo.OFICINA){
-                        return false; // A posição é um local e a entidade é um robô, então pode ser ocupada
-                    }
-                }
-            }
+        if (posicao == TipoEntidade.LOCAL && tipo == TipoEntidade.ROBO){
+            return false;
         } 
         return true; // A posição está ocupada
     }
