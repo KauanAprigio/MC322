@@ -1,7 +1,7 @@
 package LAB05.src.Entidades.Robos;
-import LAB05.src.Entidades.Entidade;
 import LAB05.src.Exceptions.RoboDesligadoException;
 import LAB05.src.Ambiente.Ambiente;
+import LAB05.src.Entidades.Interfaces.Entidade;
 
 
 public class Robo implements Entidade {

@@ -3,8 +3,8 @@ package LAB05.src.Ambiente;
 import java.util.ArrayList;
 
 
-import LAB05.src.Entidades.*;
-import LAB05.src.Entidades.Entidade.TipoEntidade;
+import LAB05.src.Entidades.Interfaces.Entidade;
+import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Robos.*;
 import LAB05.src.Exceptions.*;

@@ -1,5 +1,5 @@
 package LAB05.src.Entidades.Obstaculos;
-import LAB05.src.Entidades.*;
+import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Ambiente.Ambiente;
 
 /*
