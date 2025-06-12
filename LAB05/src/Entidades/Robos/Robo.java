@@ -17,6 +17,8 @@ public class Robo implements Entidade {
     private Ambiente ambiente;
     private final TipoEntidade tipo = TipoEntidade.ROBO; // Definindo o tipo como ROBO por padrão
     private EstadoRobo estado = EstadoRobo.OFF; // Estado inicial do robô é desligado
+    private boolean estahEmLocal = false;
+    private char LocalAtualRep = 'v';
 
     // Construtor
     public Robo(String id, String descricao, int pos_x, int pos_y, int pos_z, char representacao, Ambiente ambiente) {
@@ -35,6 +37,14 @@ public class Robo implements Entidade {
         pos_x += deltaX;
         pos_y += deltaY;
         pos_z += deltaZ;
+        if (ambiente.getMapa()[pos_x][pos_y][pos_z] == TipoEntidade.VAZIO) {
+            setEstahEmLocal(false);
+            setLocal('v');
+        }
+        else{
+            setEstahEmLocal(true);
+            setLocal(ambiente.getplanoXY()[pos_x][pos_y]);
+        } 
     }
 
     // getters e setters para os atributos do implemento da interface Entidade
@@ -56,6 +66,10 @@ public class Robo implements Entidade {
     public Ambiente getAmbiente() { return ambiente; }
     public TipoEntidade getTipo() { return tipo; }
     public EstadoRobo getEstado() { return estado; }
+    public boolean EstahEmLocal() { return estahEmLocal; }
+    public void setEstahEmLocal(boolean e) { this.estahEmLocal = e; }
+    public void setLocal(char r) { LocalAtualRep = r; }
+    public char getLocalAtualRep() { return LocalAtualRep; }
 
     public enum EstadoRobo {
         ON, // ligado

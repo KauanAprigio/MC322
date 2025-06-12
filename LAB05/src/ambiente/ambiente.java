@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
-import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Robos.*;
 import LAB05.src.Exceptions.*;
 
@@ -119,12 +118,12 @@ public class Ambiente {
     }
 
     // Verifica se a posição (x, y, z) está Vazia ou ocupada por outra entidade.
-    public boolean estaOcupado(int x, int y, int z, TipoEntidade tipo) { 
+    public boolean estaOcupado(int x, int y, int z, Entidade e) { 
         TipoEntidade posicao = mapa[x][y][z];
         if (posicao == TipoEntidade.VAZIO) return false; // A posição está vazia
-        if (posicao == TipoEntidade.LOCAL && tipo == TipoEntidade.ROBO){
+        if (posicao == TipoEntidade.LOCAL && e.getTipo() == TipoEntidade.ROBO) {
             return false;
-        } 
+        }   
         return true; // A posição está ocupada
     }
 
@@ -142,49 +141,36 @@ public class Ambiente {
      * @throws RoboDesligadoException Se a entidade for um robô desligado e não puder ser movida.
      * @throws NaoPodeVoarException Se a entidade tentar voar sem permissão (apenas robôs bombeiros podem voar).
      */
-    public void moverRobo(Entidade e, int novoX, int novoY, int novoZ ) throws RoboDesligadoException, MovimentoInvalidoexception, EntidadeNaoEncontradaException { 
-       if (!entidades.contains(e)) 
-            throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pôde ser encontrada!\n");
-
-        if (e.getTipo() != TipoEntidade.ROBO) { throw new MovimentoInvalidoexception("Apenas entidades do tipo ROBO podem se mover\n"); }
-        Robo r = (Robo) e;
+    public void moverRobo(Robo r, int novoX, int novoY, int novoZ ) throws RoboDesligadoException, MovimentoInvalidoexception, EntidadeNaoEncontradaException { 
+       if (!entidades.contains(r)) 
+            throw new EntidadeNaoEncontradaException("Robô não está no ambiente ou não pôde ser encontrado!\n");
     
-        if (e.getZ_1() != novoZ) { // Se há mudança na altitude
+        if (r.getZ_1() != novoZ) { // Se há mudança na altitude
             if (!(r instanceof RoboBombeiro)) {
                 throw new MovimentoInvalidoexception("Robô " + r.getId() + " não pode voar (apenas Robôs Bombeiros podem)!\n");
             }
         }
+        int oldX = r.getX_1();
+        int oldY = r.getY_1();
+        int oldZ = r.getZ_1();
 
-        int oldX = e.getX_1();
-        int oldY = e.getY_1();
-        int oldZ = e.getZ_1();
-
+        // Verifica se a nova posição está ocupada
         verificarColisoes(r, novoX, novoY, novoZ); 
-        
+
+        // Se a nova posição está vazia ou é um local =>
+        // Limpeza da posição antiga:
+         // se estava em um local volta a posição para tipoLocal
+        if (r.EstahEmLocal()) mapa[oldX][oldY][oldZ] = TipoEntidade.LOCAL;
+        // se não estava em um local a posição anterior vota a ser vazia
+        else mapa[oldX][oldZ][oldZ] = TipoEntidade.VAZIO;
+        // se estava no chão, atualiza o plano
+        if (oldZ == 0) planoXY[oldX][oldY] = r.getLocalAtualRep();
+
         r.mover(novoX - oldX, novoY - oldY, novoZ - oldZ); 
 
-        boolean mapaAtualizado = false;
-        for (Entidade o : getEntidades()) {
-            if (o.getTipo() == TipoEntidade.LOCAL){
-                o = (Obstaculo) o;
-                if (o.getX_1() <= r.getX_1() && o.getY_1() <= r.getY_1() &&
-                o.getX_2() >= r.getX_2() && o.getY_2() >= r.getY_2()) {
-                    if (oldZ == 0) {
-                        planoXY[oldX][oldY] = o.getRepresentacao();
-                    } else {
-                        planoXY[oldX][oldY] = 'v';
-                    }
-                    mapa[oldX][oldY][oldZ] = o.getTipo();
-                    mapaAtualizado = true;
-                }
-            }
-        }
-        if (!mapaAtualizado) {
-            mapa[oldX][oldY][oldZ] = TipoEntidade.VAZIO;
-            planoXY[oldX][oldY] = 'v';
-        }
-        if (r.getZ_1() == 0) planoXY[r.getX_1()][r.getY_2()] = 'r';
-        mapa[r.getX_1()][r.getY_2()][r.getZ_2()] = TipoEntidade.ROBO;
+
+        if (r.getZ_1() == 0) planoXY[r.getX_1()][r.getY_1()] = 'r';
+        mapa[r.getX_1()][r.getY_1()][r.getZ_1()] = TipoEntidade.ROBO;
         
         
         // DENOVO PRINTAR PARA ARQUIVO TXT
@@ -212,7 +198,7 @@ public class Ambiente {
                     if (!dentroDosLimites(x, y, z)) {
                         throw new MovimentoInvalidoexception("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }
-                    else if (estaOcupado(x, y, z, e.getTipo())){
+                    else if (estaOcupado(x, y, z, e)){
                         throw new MovimentoInvalidoexception("A região desejada pelo(a) " + e.getTipo() + " está ocupada!\n");
                     } 
                 }
