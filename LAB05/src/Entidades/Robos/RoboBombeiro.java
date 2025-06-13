@@ -7,16 +7,16 @@ import LAB05.src.Entidades.Interfaces.Comunicavel;
 import LAB05.src.Exceptions.*;
 
 public class RoboBombeiro extends AgenteInteligente implements Comunicavel, Aprimoravel {
-    private int altitudeMaxima;
+    //private int altitudeMaxima;
     private int peso_max; // peso maximo que o robo suporta;
     private int reservatorio; // litros de agua no reservatorio
-    private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
+    //private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
     private boolean aprimorado = false; // variável para verificar se o robô foi aprimorado
     private ComunicadorCentral Central;
     private int[] FogoMaisProx = null;
 
-    public RoboBombeiro(String id, String descricao, int x_1, int y_1, int z_1, char representacao, Ambiente ambiente) {
-        super(id, descricao, x_1, y_1, z_1, representacao, ambiente);
+    public RoboBombeiro(String id, int x_1, int y_1, int z_1, char representacao, Ambiente ambiente) {
+        super(id, x_1, y_1, z_1, representacao, ambiente);
     }
     
     @Override
@@ -44,18 +44,19 @@ public class RoboBombeiro extends AgenteInteligente implements Comunicavel, Apri
 
     @Override
     public void aprimorar() throws ErrorAprimoramentoException {
+        getAmbiente().getLogger().inicializarAcao("Aprimoramento", getId());
         //verifica se o robô esta dentro de uma oficina  
         if (getLocalAtualRep() == 'o'){
             if (estahAprimorado()) {
                 String msg = getId() + " já está aprimorado e não pode ser aprimorado novamente!\n";
                 throw new ErrorAprimoramentoException(msg);
             }
-            System.out.println(getId() + " está dentro da oficina e pode ser aprimorado.");
+            getAmbiente().getLogger().logAcao(getId() + " está dentro da oficina e pode ser aprimorado.");
             peso_max += 1500; // aumenta a capacidade máxima de peso em 1500 litros
             reservatorio = peso_max; // atualiza o reservatório para a nova capacidade máxima
             aprimorado = true; // marca que o robô foi aprimorado
-            System.out.println("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.");
-            System.out.println(getId() + " está com o reservatório cheio.\n");
+            getAmbiente().getLogger().finalizarAcao("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.");
+            getAmbiente().getLogger().logAcao(getId() + " está com o reservatório cheio.\n");
         } else {
             String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
             throw new ErrorAprimoramentoException(msg);
@@ -63,6 +64,7 @@ public class RoboBombeiro extends AgenteInteligente implements Comunicavel, Apri
     }
 
     public void adicionar_agua() throws ErrorAbastecimentoException {
+        getAmbiente().getLogger().inicializarAcao("Abastecimento", getId());
         // Verifica se o robô está dentro de um lago        
         if (getZ_1() != 1) {
             throw new ErrorAbastecimentoException(getId() + " está muito alto, desça para altura 1 para abastecer água!\n");  // Se o robô estiver voando, não pode abastecer
@@ -75,8 +77,8 @@ public class RoboBombeiro extends AgenteInteligente implements Comunicavel, Apri
             throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!\n");
         }
         reservatorio = peso_max; // Abastece o reservatório até o máximo
-        System.out.println(getId() + " foi abastecido com sucesso.");
-        System.out.println("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
+        getAmbiente().getLogger().logAcao("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
+        getAmbiente().getLogger().finalizarAcao(getId() + " foi abastecido com sucesso.");
     }
   
     @Override
@@ -89,7 +91,8 @@ public class RoboBombeiro extends AgenteInteligente implements Comunicavel, Apri
         return descricao;
     }
 
-
+    // EU NÃO ACHO QUE ESSA LÓGICA DE TROCA DE MSGS FAZ MUITO SENTIDO
+    // ALTERAR ELA OU PENSAR EM COMO VAI FUNCIONAR O APAGAR_FOGO
     public void ComunicarComCentral (String msg) {
         EnviarMensagem(msg, Central);
     }

@@ -7,6 +7,7 @@ import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Robos.*;
 import LAB05.src.Exceptions.*;
+import LAB05.src.Logger.Logger;
 
 /**
  * Classe Ambiente representa um ambiente tridimensional onde entidades podem ser adicionadas, removidas e movidas.
@@ -27,6 +28,7 @@ public class Ambiente {
     private TipoEntidade[][][] mapa;
     private String nome; // nome do ambiente, pode ser usado para identificar o ambiente
     private char[][] planoXY;
+    private Logger logger;
 
     //Construtor
     public Ambiente(int larguraZ, int larguraX, int larguraY, TipoEntidade[][][] mapa, char[][] planoXY, String nome) {
@@ -36,7 +38,8 @@ public class Ambiente {
         this.mapa = mapa;
         this.planoXY = planoXY;
         entidades = new ArrayList<Entidade>();
-        this.nome = nome; // nome padrão do ambiente
+        this.nome = "Ambiente_"+nome; // nome padrão do ambiente
+        this.logger = new Logger();
     }
 
 
@@ -53,17 +56,8 @@ public class Ambiente {
             }
         }
     }
-    /**
-     *  Método adicionarEntidade:
-     *  Adiciona uma entidade ao ambiente, verificando se a posição está dentro dos limites e se não há colisões com outras entidades.
-     *  Se a posição for válida, a entidade é adicionada ao mapa e ao planoXY.
-     *  Se não for válida, lança exceções apropriadas.
-     * 
-     * @param e Entidade a ser adicionada ao ambiente.
-     * @throws ForaDosLimitesException Se a entidade está fora dos limites do ambiente.
-     * @throws LocalOcupadoException Se a região onde a entidade será adicionada já está ocupada por outra entidade.
-     */
-    public void adicionarEntidade(Entidade e, boolean printar) throws MovimentoInvalidoexception{
+    public void adicionarEntidade(Entidade e) throws ForaDosLimitesException, LocalOcupadoException{
+        logger.inicializarAcao("adicionarEntidade", nome);
         verificarColisoes(e, e.getX_1(), e.getY_1(), e.getZ_1());
         int X_max = e.getX_2();
         int Y_max = e.getY_2();
@@ -77,25 +71,12 @@ public class Ambiente {
                 }
             }
         } 
-        if (printar){
-            // IMPLEMENTAR ALGO PARA ESCREVER PARA UM ARQUIVO DE TEXTO
-            // System.out.println("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.");
-            // System.out.println("Posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
-            // System.out.println("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")\n");
-        }
+        logger.logAcao("Posição do canto inferior esquerdo: " + "(" + e.getX_1() + ", " + e.getY_1() + ", " + e.getZ_1() + ")");
+        logger.logAcao("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")\n");
+        logger.finalizarAcao("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.");
     }
-
-    /**
-     * Método removerEntidade:
-     * Remove uma entidade do ambiente, verificando se ela existe no mapa.
-     * Se a entidade não for encontrada, lança uma exceção.
-     * Se for removida com sucesso, atualiza o mapa e o planoXY para refletir a remoção.
-     * 
-     * @param e Entidade a ser removida do ambiente.
-     * @param printar Se true, imprime uma mensagem de sucesso após a remoção.
-     * @throws EntidadeNaoEncontradaException Se a entidade não está no ambiente ou não pode ser encontrada.
-     */
-    public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
+    public void removerEntidade(Entidade e) throws EntidadeNaoEncontradaException {
+        logger.inicializarAcao("removerEntidade", nome);
         if (!entidades.contains(e)) 
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pôde ser encontrada!\n");
         for (int x = e.getX_1(); x <= e.getX_2(); x++) {
@@ -107,8 +88,7 @@ public class Ambiente {
             }
         }
         entidades.remove(e);
-        if (printar)
-            System.out.println("A Entidade " + e.getId() + ", do tipo " + e.getTipo() + ", foi removida com sucesso.\n");
+        logger.logAcao("A Entidade " + e.getId() + ", do tipo " + e.getTipo() + ", foi removida com sucesso.\n");
     }
 
     // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
@@ -127,27 +107,15 @@ public class Ambiente {
         return true; // A posição está ocupada
     }
 
-    /**
-     * Método moverRobo:
-     * Move um robô para uma nova posição (novoX, novoY, novoZ) no ambiente.
-     * Verifica se a nova posição está ocupada ou fora dos limites antes de mover.
-     * 
-     * @param e Entidade a ser movida.
-     * @param novoX Nova coordenada X da entidade.
-     * @param novoY Nova coordenada Y da entidade.
-     * @param novoZ Nova coordenada Z da entidade.
-     * @throws LocalOcupadoException Se a nova posição já estiver ocupada por outra entidade.
-     * @throws ForaDosLimitesException Se a nova posição estiver fora dos limites do ambiente.
-     * @throws RoboDesligadoException Se a entidade for um robô desligado e não puder ser movida.
-     * @throws NaoPodeVoarException Se a entidade tentar voar sem permissão (apenas robôs bombeiros podem voar).
-     */
-    public void moverRobo(Robo r, int novoX, int novoY, int novoZ ) throws RoboDesligadoException, MovimentoInvalidoexception, EntidadeNaoEncontradaException { 
-       if (!entidades.contains(r)) 
+    public void moverRobo(Robo r, int novoX, int novoY, int novoZ ) throws RoboDesligadoException, NaoPodeVoarException, 
+        EntidadeNaoEncontradaException, ForaDosLimitesException, LocalOcupadoException { 
+        logger.inicializarAcao("moverRobo", nome);
+        if (!entidades.contains(r)) 
             throw new EntidadeNaoEncontradaException("Robô não está no ambiente ou não pôde ser encontrado!\n");
     
         if (r.getZ_1() != novoZ) { // Se há mudança na altitude
             if (!(r instanceof RoboBombeiro)) {
-                throw new MovimentoInvalidoexception("Robô " + r.getId() + " não pode voar (apenas Robôs Bombeiros podem)!\n");
+                throw new NaoPodeVoarException("Robô " + r.getId() + " não pode voar (apenas Robôs Bombeiros podem)!\n");
             }
         }
         int oldX = r.getX_1();
@@ -173,33 +141,20 @@ public class Ambiente {
         mapa[r.getX_1()][r.getY_1()][r.getZ_1()] = TipoEntidade.ROBO;
         
         
-        // DENOVO PRINTAR PARA ARQUIVO TXT
-        // System.out.println("Entidade: " + e.getId() + " movida com sucesso para a nova posição.");
-        // System.out.println("Nova posição do canto inferior esquerdo: " + "(" + e.getX() + ", " + e.getY() + ", " + e.getZ() + ")");
-        // System.out.println("Nova posição do canto superior direito: " + "(" + (e.getX() + e.getLarguraX()) + ", " + (e.getY() + e.getLarguraY()) + ", " + (e.getZ() + e.getAltura()) + ")\n");
+        
+        logger.logAcao("Nova posição: " + "(" + r.getX_1() + ", " + r.getY_1() + ", " + r.getZ_1() + ")");
+        logger.finalizarAcao(r.getId() + " movido com sucesso para a nova posição.");
     }
-    /**
-     * Método verificarColisoes:
-     * Verifica se a região ocupada por uma entidade está livre ou se está fora dos limites do ambiente.
-     * Se a região estiver ocupada, lança uma exceção LocalOcupadoException.
-     * Se a região estiver fora dos limites, lança uma exceção ForaDosLimitesException.
-     * 
-     * @param e Entidade cuja região será verificada.
-     * @param novoX Nova coordenada X da entidade.
-     * @param novoY Nova coordenada Y da entidade.
-     * @param novoZ Nova coordenada Z da entidade.
-     * @throws LocalOcupadoException Se a região ocupada já estiver ocupada por outra entidade.
-     * @throws ForaDosLimitesException Se a região ocupada estiver fora dos limites do ambiente.
-     */
-    public void verificarColisoes(Entidade e, int novoX, int novoY, int novoZ) throws MovimentoInvalidoexception{ 
+   
+    public void verificarColisoes(Entidade e, int novoX, int novoY, int novoZ) throws ForaDosLimitesException, LocalOcupadoException{ 
         for (int x = novoX; x <= e.getLarguraX() + novoX; x++) {
             for (int y = novoY; y <= e.getLarguraY() + novoY; y++) {
                 for (int z = novoZ; z <= novoZ + e.getLarguraZ(); z++) { 
                     if (!dentroDosLimites(x, y, z)) {
-                        throw new MovimentoInvalidoexception("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
+                        throw new ForaDosLimitesException("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }
                     else if (estaOcupado(x, y, z, e)){
-                        throw new MovimentoInvalidoexception("A região desejada pelo(a) " + e.getTipo() + " está ocupada!\n");
+                        throw new LocalOcupadoException("A região desejada pelo(a) " + e.getTipo() + " está ocupada!\n");
                     } 
                 }
             }
@@ -225,5 +180,6 @@ public class Ambiente {
     public int getLarguraY() { return larguraY; }
     public int getLarguraZ() { return larguraZ; }
     public String getNome() { return nome; }
+    public Logger getLogger() { return logger; }
     
 }
