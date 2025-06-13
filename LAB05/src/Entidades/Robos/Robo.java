@@ -9,7 +9,6 @@ public class Robo implements Entidade {
     private int pos_y;
     private int pos_z;
     private String id;
-    private String descricao;
     private final int larguraX = 0;
     private final int larguraY = 0;
     private final int larguraZ = 0;
@@ -21,9 +20,8 @@ public class Robo implements Entidade {
     private char LocalAtualRep = 'v';
 
     // Construtor
-    public Robo(String id, String descricao, int pos_x, int pos_y, int pos_z, char representacao, Ambiente ambiente) {
+    public Robo(String id, int pos_x, int pos_y, int pos_z, char representacao, Ambiente ambiente) {
         this.id = id;
-        this.descricao = descricao;
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.pos_z = pos_z;
@@ -58,7 +56,6 @@ public class Robo implements Entidade {
 
     
     public String getId() { return id; }
-    public String getDescricao() { return descricao; }
     public int getLarguraX() { return larguraX; }
     public int getLarguraY() { return larguraY; }
     public int getLarguraZ() { return larguraZ; }
@@ -74,6 +71,12 @@ public class Robo implements Entidade {
     public enum EstadoRobo {
         ON, // ligado
         OFF; // desligado
+    }
+
+    @Override
+    public String getDescricao() { 
+        String descricao = "Robô básico, sem nenhuma ação especial além de poder se mover pelo ambiente, porém é Base para os robôs limpadores e bombeiros.";
+        return descricao;
     }
 
 }
