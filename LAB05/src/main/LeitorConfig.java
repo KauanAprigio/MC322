@@ -3,6 +3,7 @@ package LAB05.src.main;
 import java.util.Scanner;
 
 import LAB05.src.Ambiente.Ambiente;
+import LAB05.src.Entidades.ComunicadorCentral;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
@@ -70,6 +71,8 @@ public class LeitorConfig {
                             default:
                                 break;
                         }
+                    case "COMUNICADOR":
+                        a.adicionarEntidade(new ComunicadorCentral(scanner.nextInt(), scanner.nextInt(), a));
                     default:
                         scanner.nextLine();
                         break;
