@@ -1,20 +1,9 @@
 Lista de coisas para serem implementadas/ corrigidas.
 
-1 - Implementar classe Robo (acho que se mover e ligar/desligar q nem no lab 4 é suficiente)
+1 - Falta implementar a lógica de apagar fogo do robô RoboBombeiro
 
-2 - Implementar as lógicas das missões. Até agora tem missãobombeiro e missãolimpador que eu imagino
-    ser apagar todos os fogos do ambiente e limpar o ambiente respectivamente. (Não sei como o comunicador ou os sensores entram nisso ainda)
+2 - Falta implementar o robô limpador e os sensores
 
-3 - Implementar o Ambiente. Acho q nn tem problema deixar igual ao lab 4
+3 - Falta implementar as Missões
 
-4 - Implementar RoboBombeiro, RoboLimpador, Sensores e comunicador central. 
-    (deve ter q alterar a lógica aqui considerando as missões. Talvez o comunicador central que oriente os robôs durante as missões) 
-
-5 - Implementar Obstáculos (dnv da pra ficar igual ao lab 4)
-
-6 - Criar as configurações iniciais do ambiente em config.txt e Implementar LeitorConfig para ler as configurações 
-    (Eu to afim de fzr isso parece divertido)
-
-OBS: eu acho q gente devia remover o método moverentidade do ambiente pq nesse laboratório acho q nn vai
-    precisar fzr aqueles 1 milhao de casos teste e ficar movendo obstáculos. Aí a gente deixa mover pra algo exclusivo
-    de RObôs e remove da interface Entidades
+4 - Falta implementar a lógica de troca de msgs
