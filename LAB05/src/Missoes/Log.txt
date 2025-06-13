@@ -1,2 +1,0 @@
-Arquivo onde será registrado os logs de execução das missões automatizadas,
-acho q deveria ser escrito todos os passos 1 por linha
