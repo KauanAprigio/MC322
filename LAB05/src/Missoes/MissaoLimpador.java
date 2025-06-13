@@ -7,5 +7,11 @@ public class MissaoLimpador implements Missao {
     public void executar(Robo r, Ambiente a) {
         // Implementação da missão de limpeza
     }
+
+    @Override
+    public String getDetalhes() {
+        String msg = "qlqr coisa só pra ter";
+        return msg;
+    }
     
 }

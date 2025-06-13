@@ -8,4 +8,9 @@ public class MissaoBombeiro implements Missao {
     public void executar(Robo r, Ambiente a) {
         // Implementação da missão de bombeiro
     }
+    @Override
+    public String getDetalhes() {
+        String msg = "qlqr coisa só pra ter";
+        return msg;
+    }
 }
