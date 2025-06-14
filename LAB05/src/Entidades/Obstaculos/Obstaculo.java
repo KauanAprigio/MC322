@@ -127,5 +127,8 @@ public class Obstaculo implements Entidade {
             this.descricao = descricao;
             this.representacao = representacao;
         }
+
+        //getters e setters
+        public String getNome() { return nome; }
     }
 }
