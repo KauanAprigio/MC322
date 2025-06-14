@@ -1,6 +1,6 @@
-package LAB05.src.main;
+package LAB05.src.Main;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
     }

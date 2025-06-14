@@ -1,4 +1,4 @@
-package LAB05.src.main;
+package LAB05.src.Main;
 
 import java.util.Scanner;
 
