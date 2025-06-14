@@ -73,9 +73,9 @@ public class Obstaculo implements Entidade {
      * - FOGO: removível pelo robô bombeiro.
      * - PREDIOEMCHAMAS: Fogo - removível pelo robô bombeiro e vira um prédio.
      * - PREDIO: Local - não removível
-     * - SUJEIRAENCARDIDA: Lixo - removível pelo robô limpador no modo de limpeza pesada
-     * - COMIDANOCHAO: Lixo - removível pelo robô limpador no modo de limpeza média
-     * - SACOLAPLASTICA: Lixo - removível pelo robô limpador no modo de limpeza leve
+     * - SUJEIRAENCARDIDA: Lixo - removível pelo robô limpador 
+     * - COMIDANOCHAO: Lixo - removível pelo robô limpador
+     * - SACOLAPLASTICA: Lixo - removível pelo robô limpador
      * - OFICINA: Local - melhoria de robôs: não removível
      * 
      * Atributos:

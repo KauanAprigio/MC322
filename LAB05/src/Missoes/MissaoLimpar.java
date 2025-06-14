@@ -2,7 +2,7 @@ package LAB05.src.Missoes;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.Robos.Robo;
 
-public class MissaoLimpador implements Missao {
+public class MissaoLimpar implements Missao {
     @Override
     public void executar(Robo r, Ambiente a) {
         // Implementação da missão de limpeza
