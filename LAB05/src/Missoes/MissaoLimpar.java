@@ -23,8 +23,14 @@ public class MissaoLimpar implements Missao {
             if (distancia < limpador.getRaioLimpeza()) { 
                 limpador.getLixos().remove(lixo);
                 System.out.println(limpador.getId() + " limpou " + lixo.getTipoObstaculo().getNome() + ".");
+                try { 
+                    limpador.getAmbiente().removerEntidade(lixo);
+                } catch (Exception e){
+                    System.out.println("Não é para cair aqui " + e);
+                }
             }
         }
+
     }
 
     @Override
