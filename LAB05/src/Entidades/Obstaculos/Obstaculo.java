@@ -81,12 +81,8 @@ public class Obstaculo implements Entidade {
      * Atributos:
      * - int larguraX: largurax do obstáculo
      * - int larguraY: larguray do obstáculo
-     * - int altura: altura do obstáculo
-     * - boolean local: se o obstáculo é um local de reabastecimento ou melhoria
+     * - int larguraZ: altura do obstáculo
      * - String nome: nome do obstáculo
-     * - boolean fogo: se o obstáculo é ou tem fogo
-     * - boolean lixo: se o obstáculo é lixo
-     * - boolean aprimora: se é um local para aprimoramento
     */
     public static enum TipoObstaculo {
         
