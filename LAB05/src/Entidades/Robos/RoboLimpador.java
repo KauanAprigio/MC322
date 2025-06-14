@@ -1,12 +1,17 @@
 package LAB05.src.Entidades.Robos;
+import java.util.ArrayList;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Exceptions.*;
-
+import LAB05.src.Entidades.Obstaculos.*;
 
 public class RoboLimpador extends AgenteInteligente {
+    private ArrayList<Obstaculo> lixos;
+    private int pos_x_lixo = 200;
+    private int pos_y_lixo = 200;
 
     public RoboLimpador(String id, int x_1, int y_1, int z_1, char representacao, Ambiente ambiente) {
         super("RoboLimpador_"+id, x_1, y_1, z_1, representacao, ambiente);
+        lixos = new ArrayList<Obstaculo>();
     }
 
     @Override
@@ -25,4 +30,11 @@ public class RoboLimpador extends AgenteInteligente {
         return descricao;
     }
     
+    //Getters e Setters
+    public ArrayList<Obstaculo> getLixos() { return lixos; }
+    public int getLixoX() { return pos_x_lixo; }
+    public int getLixoY() { return pos_y_lixo; }
+
+    public void setLixoX(int pos_x) { this.pos_x_lixo = pos_x; }
+    public void setLixoY(int pos_y) { this.pos_y_lixo = pos_y; }
 }
