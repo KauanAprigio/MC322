@@ -23,14 +23,14 @@ public class Logger {
     // Ativa o modo missão
     public void inicializarMissao(Missao m, String Agente) {
         printer.printf("---- MISSÃO %d ----\n", MissaoAtual);
-        printer.printf("Agente %s Inicializando missão....\n %s\n", Agente, m.getDetalhes());
+        printer.printf("Agente %s inicializando missão....\n %s\n", Agente, m.getDetalhes());
         MissaoIniciada = true;
         instrucaoAtualMissao = 1;
     }
 
     // Indica que uma ação começou (movimento, apagar fogo, adicionar entidade ao ambiente etc...)
     public void inicializarAcao(String acao, String Origem) {
-        printer.printf("%d - Ação do tipo %s, inicilizada por: \n", instrucaoAtualGLobal, acao, Origem); // Marca o início de uma nova ação
+        printer.printf("%d - Ação do tipo %s, inicializada por: %s\n", instrucaoAtualGLobal, acao, Origem); // Marca o início de uma nova ação
         acaoIniciada = true;
     }
 
@@ -43,7 +43,7 @@ public class Logger {
     }
     // Durante a missão cada instrução possuí um índice único daquela missão
     public void logTxtMissao(String txt) {
-        printer.printf("   %d -> " + txt + "\n", instrucaoAtualMissao);
+        printer.printf("   %d -> %s\n", instrucaoAtualMissao, txt);
         instrucaoAtualMissao++;
     }
 
@@ -58,7 +58,7 @@ public class Logger {
 
     // Indica que a ação ocorrendo finalizou seja por um erro ou porque chegou ao fim
     public void finalizarAcao(String Resultado) {
-        printer.printf("Ação %d Encerrada: %s", instrucaoAtualGLobal, Resultado);
+        printer.printf("Ação %d encerrada: %s", instrucaoAtualGLobal, Resultado);
         instrucaoAtualGLobal++;
         acaoIniciada = false;
     }
