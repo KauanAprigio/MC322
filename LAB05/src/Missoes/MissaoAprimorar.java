@@ -1,19 +1,20 @@
 package LAB05.src.Missoes;
-
-import LAB03.Code.Obstaculo;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
+import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Robos.Robo;
+import LAB05.src.Entidades.Robos.RoboLimpador;
 import LAB05.src.Exceptions.MissaoInvalidaException;
 
 public class MissaoAprimorar {
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException{
+        //faço o laço para encontrar as dimensões da oficina mais proxima e mover para lá
         for (Entidade e : r.getAmbiente().getEntidades()){
             if (e.getTipo() == TipoEntidade.LOCAL){
                 Obstaculo oficina = (Obstaculo) e;
-                int Xmaisproximo = Math.max(oficina.getPosicaoX1(), Math.min(r.getX_1(), oficina.getPosicaoX2()));
-                int Ymaisproximo = Math.max(oficina.getPosicaoY1(), Math.min(r.getY_1(), oficina.getPosicaoY2()));
+                int Xmaisproximo = Math.max(oficina.getX_1(), Math.min(r.getX_1(), oficina.getX_2()));
+                int Ymaisproximo = Math.max(oficina.getX_1(), Math.min(r.getY_1(), oficina.getX_2()));
                 try {
                     r.getAmbiente().moverRobo(r, Ymaisproximo, Xmaisproximo, 0);
                 } catch (Exception message) {
@@ -21,8 +22,17 @@ public class MissaoAprimorar {
                 }
             }
         }
-
+        RoboLimpador robo = (RoboLimpador) r; // faço o casting para ter o estahAprimorado
+        if (!(robo.estahAprimorado())){
+            int raio = robo.getRaioLimpeza() + 15; // adiciono 15m ao raio atual
+            robo.setRaioLimpeza(raio); //atualizo o raio
+            robo.setAprimorar(true); // marca que o robô foi aprimorado
+            System.out.println(robo.getId() + " teve seu raio de limpeza aumentado para " + raio + ".\n");    
+        } else {
+            System.out.println("já está aprimorado"); // aqui deveria ter exceção, mas tem que usar try catch faço depois isso
+        }
     }
+
     public String getDetalhes(){
         String msg = "Procura a Oficina no ambiente e move o robô para lá";
         return msg;

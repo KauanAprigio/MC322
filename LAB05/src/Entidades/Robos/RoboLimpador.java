@@ -5,12 +5,13 @@ import LAB05.src.Exceptions.*;
 import LAB05.src.Entidades.Obstaculos.*;
 
 public class RoboLimpador extends AgenteInteligente {
+    private int raio_limpeza;
+    private boolean aprimorado = false;
     private ArrayList<Obstaculo> lixos;
-    private int pos_x_lixo = 200;
-    private int pos_y_lixo = 200;
 
-    public RoboLimpador(String id, int x_1, int y_1, int z_1, char representacao, Ambiente ambiente) {
+    public RoboLimpador(String id, int x_1, int y_1, int z_1, char representacao, Ambiente ambiente, int raio_limpeza) {
         super("RoboLimpador_"+id, x_1, y_1, z_1, representacao, ambiente);
+        this.raio_limpeza = raio_limpeza;
         lixos = new ArrayList<Obstaculo>();
     }
 
@@ -32,9 +33,9 @@ public class RoboLimpador extends AgenteInteligente {
     
     //Getters e Setters
     public ArrayList<Obstaculo> getLixos() { return lixos; }
-    public int getLixoX() { return pos_x_lixo; }
-    public int getLixoY() { return pos_y_lixo; }
+    public int getRaioLimpeza() { return raio_limpeza; }
+    public boolean estahAprimorado() { return aprimorado; }
 
-    public void setLixoX(int pos_x) { this.pos_x_lixo = pos_x; }
-    public void setLixoY(int pos_y) { this.pos_y_lixo = pos_y; }
+    public void setRaioLimpeza(int raio) { this.raio_limpeza = raio; }
+    public void setAprimorar(boolean aprimorar) { this.aprimorado = aprimorar; }
 }
