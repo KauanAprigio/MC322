@@ -5,11 +5,11 @@ import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Robos.Robo;
 import LAB05.src.Entidades.Robos.RoboLimpador;
-import LAB05.src.Exceptions.ErrorAprimoramentoException;
 import LAB05.src.Exceptions.MissaoInvalidaException;
 
-public class MissaoAprimorar {
-    public void executar(Robo r, Ambiente a) throws MissaoInvalidaException, ErrorAprimoramentoException{
+public class MissaoAprimorar implements Missao{
+    @Override
+    public void executar(Robo r, Ambiente a) throws MissaoInvalidaException{
         //faço o laço para encontrar as dimensões da oficina mais proxima e mover para lá
         for (Entidade e : r.getAmbiente().getEntidades()){
             if (e.getTipo() == TipoEntidade.LOCAL){
@@ -30,12 +30,13 @@ public class MissaoAprimorar {
             robo.setAprimorar(true); // marca que o robô foi aprimorado
             System.out.println(robo.getId() + " teve seu raio de limpeza aumentado para " + raio + ".\n");    
         } else {
-            throw new ErrorAprimoramentoException("O robô já está aprimorado!");
+            System.out.println("tem que ver como posso resolver isso, PORQUE ERA PARA TER EXCEPTION AQUI!!!!");
         }
     }
 
+    @Override
     public String getDetalhes(){
-        String msg = "Procura a Oficina no ambiente e move o robô para lá";
+        String msg = "Procura a Oficina no ambiente e move o robô para lá, além de fazer o aprimoramento dele.";
         return msg;
     }
 }
