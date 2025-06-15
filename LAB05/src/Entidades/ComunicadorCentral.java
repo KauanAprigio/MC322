@@ -66,6 +66,8 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         return maisProximo;
     }
 
+    public ArrayList<Obstaculo> getFogos(){ return fogos; }
+
     @Override
     public int getX_1() { 
         return pos_x;

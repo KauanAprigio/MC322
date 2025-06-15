@@ -1,5 +1,4 @@
 package LAB05.src.Entidades.Robos;
-import java.util.Iterator;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.ComunicadorCentral;
 import LAB05.src.Entidades.Interfaces.Comunicavel;
@@ -65,78 +64,59 @@ public class RoboBombeiro extends Robo implements Comunicavel {
             throw new RoboDesligadoException(msg);
         }
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
-        boolean encontrou_fogo = false; // flag para verificar se encontrou algum fogo
-        // Verifica se o robô está dentro de um incêndio
-        Iterator<Entidade> iterator = getAmbiente().getEntidades().iterator();
-        while (iterator.hasNext()) {
-            Entidade e = iterator.next();
-            if (e.getTipo() == TipoEntidade.FOGO){
-                Obstaculo fogo = (Obstaculo) e;
-                
-                // Nesse bloco aqui vejo se ele está perto o suficiente de algum obstaculo que tenha fogo
-                int Xmaisproximo = Math.max(fogo.getX_1(), Math.min(getX_1(), fogo.getX_2()));
-                int Ymaisproximo = Math.max(fogo.getY_1(), Math.min(getY_1(), fogo.getY_2()));
-                double distancia = Math.sqrt(Math.pow(Xmaisproximo - getX_1(), 2) + Math.pow(Ymaisproximo - getY_1(), 2));
-                
-                if (distancia <= raio_de_cessar_fogo) { // Condional caso o obstaculo detectado seja um fogo
-                    if (getZ_1() >= fogo.getZ_2()){ // condicional para ver se está na altura do fogo
-                        System.out.println(getId() + " está próximo de um incêndio.");
-
-                        if (fogo.getTipoObstaculo() == TipoObstaculo.FOGO) litros_necessarios = 100; // quantidade de agua para apagar o fogo
-                        else if (fogo.getTipoObstaculo() == TipoObstaculo.PREDIOEMCHAMAS) litros_necessarios = 1000; // quantidade de agua para apagar o predio em chamas
-                        
-                        if (reservatorio < litros_necessarios){ // condicional caso nao tenha agua o suficiente
-                            int deficit = litros_necessarios - reservatorio; // quanto ira faltar de agua para apagar o fogo
-                            String msg = getId() + " precisa de " + deficit + " litros a mais para apagar o incêndio!\n";
-                            throw new ErrorApagarFogoException(msg);
-                        } else {
-                            reservatorio -= litros_necessarios;
-                            if (fogo.getTipoObstaculo() == TipoObstaculo.FOGO) {
-                                System.out.println("Incêndio apagado com sucesso.");
-                                // esse print está duplicado, pois quero que apareça tudo do robo primeiro depois da remoção do objeto,
-                                // por isso nao botei depois, a fim de englobar os dois casos
-                                System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
-                                System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); 
-                                try{
-                                    Ultimo_incendio = fogo; // guarda o ultimo incendio apagado pelo robo
-                                    getAmbiente().removerEntidade(fogo,false);
-                                } catch (EntidadeNaoEncontradaException e1) {
-                                    // Nunca deveria acontecer, pois o obstaculo é um obstaculo que ja existe
-                                    System.out.println("Erro Inesperado: " + e1.getMessage());
-                                }
-                            } else if (fogo.getTipoObstaculo() == TipoObstaculo.PREDIOEMCHAMAS) {
-                                System.out.println("Prédio não mais está em chamas.");
-                                System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
-                                System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
-                                Obstaculo novo_Predinho = new Obstaculo(fogo.getX_1(), fogo.getY_1(), TipoObstaculo.PREDIO, getAmbiente(), TipoEntidade.LOCAL);
-                                try {
-                                    Ultimo_incendio = fogo; // guarda o ultimo incendio apagado pelo robo
-                                    getAmbiente().removerEntidade(fogo, false);
-                                    getAmbiente().adicionarEntidade(novo_Predinho, false);
-                                } catch (LocalOcupadoException | ForaDosLimitesException | EntidadeNaoEncontradaException e1) {
-                                    // Nunca deveria acontecer, pois o predio é um obstaculo que ja existe
-                                    // e o ambiente ja foi verificado para nao ter obstaculos
-                                    // nesse local, mas vou deixar aqui para evitar erros futuros
-                                    System.out.println("Erro Inesperado: " + e1.getMessage());
-                                }    
-                            }
-                            enviarMensagem(Central, "Incêndio apagado");
-                            encontrou_fogo = true; // marca que encontrou um fogo para apagar
-                            break; // Apaga apenas 1 fogo por vez, se quiser apagar mais, precisa chamar o método novamente
-                        }                         
-                    } else {
-                        int falta_altura = fogo.getZ_2() - getZ_1();
-                        String msg = getId() + " não está na altura do fogo, suba " + falta_altura + " metros para apagar o fogo!\n";
-                        throw new ErrorApagarFogoException(msg);
-                    }
-                }
-            }
-        }
-        if (!encontrou_fogo) {
+        incendio_proximo = central.LocalizarFogoMaisProx(this);
+        if (incendio_proximo == null){
             String msg = getId() + " não encontrou nenhum incêndio próximo para apagar.\n";
             throw new ErrorApagarFogoException(msg);
         }
+        try{
+            getAmbiente().moverRobo(this, incendio_proximo.getX_1(), incendio_proximo.getY_1(), 101);
+        } catch (Exception e){
+            System.out.println("DEU B.O" + e);
+        }
+            if (incendio_proximo.getTipoObstaculo() == TipoObstaculo.FOGO) litros_necessarios = 100; // quantidade de agua para apagar o fogo
+            else if (incendio_proximo.getTipoObstaculo() == TipoObstaculo.PREDIOEMCHAMAS) litros_necessarios = 1000; // quantidade de agua para apagar o predio em chamas
+                        
+            if (reservatorio < litros_necessarios){ // condicional caso nao tenha agua o suficiente
+                int deficit = litros_necessarios - reservatorio; // quanto ira faltar de agua para apagar o fogo
+                String msg = getId() + " precisa de " + deficit + " litros a mais para apagar o incêndio!\n";
+                throw new ErrorApagarFogoException(msg);
+            } else {
+                reservatorio -= litros_necessarios;
+                if (incendio_proximo.getTipoObstaculo() == TipoObstaculo.FOGO) {
+                    System.out.println("Incêndio apagado com sucesso.");
+                    // esse print está duplicado, pois quero que apareça tudo do robo primeiro depois da remoção do objeto,
+                    // por isso nao botei depois, a fim de englobar os dois casos
+                    System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
+                    System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); 
+                    try{
+                        Ultimo_incendio = incendio_proximo; // guarda o ultimo incendio apagado pelo robo
+                        getAmbiente().removerEntidade(incendio_proximo,false);
+                        central.getFogos().remove(incendio_proximo);
+                    } catch (EntidadeNaoEncontradaException e1) {
+                        // Nunca deveria acontecer, pois o obstaculo é um obstaculo que ja existe
+                        System.out.println("Erro Inesperado: " + e1.getMessage());
+                    }
+                } else if (incendio_proximo.getTipoObstaculo() == TipoObstaculo.PREDIOEMCHAMAS) {
+                    System.out.println("Prédio não mais está em chamas.");
+                    System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
+                    System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
+                    Obstaculo novo_Predinho = new Obstaculo(incendio_proximo.getX_1(), incendio_proximo.getY_1(), TipoObstaculo.PREDIO, getAmbiente(), TipoEntidade.LOCAL);
+                    try {
+                        Ultimo_incendio = incendio_proximo; // guarda o ultimo incendio apagado pelo robo
+                        getAmbiente().removerEntidade(incendio_proximo, false);
+                        getAmbiente().adicionarEntidade(novo_Predinho, false);
+                    } catch (LocalOcupadoException | ForaDosLimitesException | EntidadeNaoEncontradaException e1) {
+                        // Nunca deveria acontecer, pois o predio é um obstaculo que ja existe
+                        // e o ambiente ja foi verificado para nao ter obstaculos
+                        // nesse local, mas vou deixar aqui para evitar erros futuros
+                        System.out.println("Erro Inesperado: " + e1.getMessage());
+                    }    
+                }
+                    enviarMensagem(Central, "Incêndio apagado");
+            }                         
     }
+    
 
     public void aprimorar() throws ErrorAprimoramentoException {
         //verifica se o robô esta dentro de uma oficina
