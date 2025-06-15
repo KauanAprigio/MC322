@@ -12,7 +12,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     private int peso_max; // peso maximo que o robo suporta;
     private int reservatorio; // litros de agua no reservatorio
     private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
-    private Obstaculo Ultimo_incendio = null; // ultimo incendio apagado pelo robo, para evitar apagar o mesmo incendio mais de uma vez
     private boolean aprimorado = false; // variável para verificar se o robô foi aprimorado
     private Obstaculo incendio_proximo = null;
     private ComunicadorCentral central;
@@ -65,8 +64,8 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         }
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
         incendio_proximo = central.LocalizarFogoMaisProx(this);
-        if (incendio_proximo == null){
-            String msg = getId() + " não encontrou nenhum incêndio próximo para apagar.\n";
+        if (incendio_proximo == null){ // normalmente quando não tiver mais nenhum incêndio
+            String msg = getId() + " não há mais incêndios para apagar.\n";
             throw new ErrorApagarFogoException(msg);
         }
         try{
@@ -90,9 +89,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
                     System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
                     System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); 
                     try{
-                        Ultimo_incendio = incendio_proximo; // guarda o ultimo incendio apagado pelo robo
                         getAmbiente().removerEntidade(incendio_proximo,false);
-                        central.getFogos().remove(incendio_proximo);
                     } catch (EntidadeNaoEncontradaException e1) {
                         // Nunca deveria acontecer, pois o obstaculo é um obstaculo que ja existe
                         System.out.println("Erro Inesperado: " + e1.getMessage());
@@ -103,7 +100,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
                     System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n");
                     Obstaculo novo_Predinho = new Obstaculo(incendio_proximo.getX_1(), incendio_proximo.getY_1(), TipoObstaculo.PREDIO, getAmbiente(), TipoEntidade.LOCAL);
                     try {
-                        Ultimo_incendio = incendio_proximo; // guarda o ultimo incendio apagado pelo robo
                         getAmbiente().removerEntidade(incendio_proximo, false);
                         getAmbiente().adicionarEntidade(novo_Predinho, false);
                     } catch (LocalOcupadoException | ForaDosLimitesException | EntidadeNaoEncontradaException e1) {
@@ -113,7 +109,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
                         System.out.println("Erro Inesperado: " + e1.getMessage());
                     }    
                 }
-                    enviarMensagem(Central, "Incêndio apagado");
+                    enviarMensagem(Central, "Incêndio apagado"); // aqui irá tirar o fogo do array fogos do ComunicadorCentral
             }                         
     }
     
@@ -186,10 +182,8 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     public int getCapacidade() { return peso_max; }
     public int getReservatorio() { return reservatorio; }
     public int getRaioDeCessarFogo() { return raio_de_cessar_fogo; }
-    public Obstaculo getUltimoIncendio() { return Ultimo_incendio; }
-    public Obstaculo incendioProximo() { return incendio_proximo; }
+    public Obstaculo getIncendioProximo() { return incendio_proximo; }
 
     public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
-    public void setUltimoIncendio(Obstaculo ultimo_incendio) { this.Ultimo_incendio = ultimo_incendio; }
     public void setIncendioProximo (Obstaculo incencio) { this.incendio_proximo = incencio; }
 }

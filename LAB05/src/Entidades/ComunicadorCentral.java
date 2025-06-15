@@ -8,6 +8,7 @@ import LAB05.src.Entidades.Interfaces.Comunicavel;
 import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Robos.Robo;
+import LAB05.src.Entidades.Robos.RoboBombeiro;
 
 public class ComunicadorCentral extends CentralComunicacao implements Entidade, Comunicavel{
 
@@ -31,12 +32,17 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
 
     @Override
     public void enviarMensagem(Comunicavel destinatario, String mensagem) {
-        
+        receberMensagem(mensagem, destinatario); // aqui basicamente ele irá enviar uma mensagem
     }
 
     @Override
     public void receberMensagem(String mensagem, Comunicavel remetente) {
-        
+        RoboBombeiro bombeiro = (RoboBombeiro) remetente;
+        registrarMensagem((bombeiro.getId()), mensagem);
+        if (mensagem.equalsIgnoreCase("INCÊNDIO APAGADO")) {
+            fogos.remove(bombeiro.getIncendioProximo());
+            bombeiro.setIncendioProximo(null);
+        }
     }
 
     public void listarFogos(Ambiente ambiente){ 
