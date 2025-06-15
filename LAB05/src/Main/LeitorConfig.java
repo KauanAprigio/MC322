@@ -24,10 +24,10 @@ public class LeitorConfig {
                     case "FOGO":
                         switch (scanner.next()) {
                             case "FOGO":
-                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.FOGO, a, TipoEntidade.FOGO));
+                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.FOGO, a, TipoEntidade.FOGO), true);
                                 break;
                             case "PREDIOEMCHAMAS":
-                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.PREDIOEMCHAMAS, a, TipoEntidade.FOGO));
+                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.PREDIOEMCHAMAS, a, TipoEntidade.FOGO), true);
                                 break;
                             default:
                                 break;
@@ -35,13 +35,13 @@ public class LeitorConfig {
                     case "LIXO":
                         switch (scanner.next()) {
                             case "COMIDANOCHAO":
-                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.COMIDANOCHAO, a, TipoEntidade.LIXO));
+                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.COMIDANOCHAO, a, TipoEntidade.LIXO), true);
                                 break;
                             case "SACOLAPLASTICA":
-                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.SACOLAPLASTICA, a, TipoEntidade.LIXO));
+                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.SACOLAPLASTICA, a, TipoEntidade.LIXO), true);
                                 break;
                             case "SUJEIRAENCARDIDA":
-                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.SUJEIRAENCARDIDA, a, TipoEntidade.LIXO));
+                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.SUJEIRAENCARDIDA, a, TipoEntidade.LIXO), true);
                                 break;
                             default:
                                 break;
@@ -49,13 +49,13 @@ public class LeitorConfig {
                     case "LOCAL":
                         switch (scanner.next()) {
                             case "LAGO":
-                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.LAGO, a, TipoEntidade.LOCAL));
+                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.LAGO, a, TipoEntidade.LOCAL), true);
                                 break;
                             case "PREDIO":
-                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.PREDIO, a, TipoEntidade.LOCAL));
+                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.PREDIO, a, TipoEntidade.LOCAL), true);
                                 break;
                             case "OFICINA":
-                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.OFICINA, a, TipoEntidade.LOCAL));
+                                a.adicionarEntidade(new Obstaculo(scanner.nextInt(), scanner.nextInt(), TipoObstaculo.OFICINA, a, TipoEntidade.LOCAL), true);
                                 break;
                             default:
                                 break;
@@ -63,16 +63,16 @@ public class LeitorConfig {
                     case "ROBO":
                         switch (scanner.next()) {
                             case "RoboBombeiro":
-                                a.adicionarEntidade(new Robo(scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(),'y', a));
+                                a.adicionarEntidade(new Robo(scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(),'y', a), true);
                                 break;
                             case "RoboLimpador":
-                                a.adicionarEntidade(new Robo(scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(),'x', a));
+                                a.adicionarEntidade(new Robo(scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(),'x', a), true);
                                 break;
                             default:
                                 break;
                         }
                     case "COMUNICADOR":
-                        a.adicionarEntidade(new ComunicadorCentral(scanner.nextInt(), scanner.nextInt(), a));
+                        a.adicionarEntidade(new ComunicadorCentral(scanner.nextInt(), scanner.nextInt(), a), true);
                     default:
                         scanner.nextLine();
                         break;

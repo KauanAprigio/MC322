@@ -25,12 +25,12 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     }
 
     @Override
-    public void EnviarMensagem(String msg, Comunicavel remetente) {
+    public void enviarMensagem(Comunicavel destinatario, String mensagem) {
         
     }
 
     @Override
-    public void receberMensagem(String msg) {
+    public void receberMensagem(String mensagem, Comunicavel remetente) {
         
     }
 

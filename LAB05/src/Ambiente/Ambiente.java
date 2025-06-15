@@ -56,7 +56,7 @@ public class Ambiente {
             }
         }
     }
-    public void adicionarEntidade(Entidade e) throws ForaDosLimitesException, LocalOcupadoException{
+    public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
         logger.inicializarAcao("adicionarEntidade", nome);
         verificarColisoes(e, e.getX_1(), e.getY_1(), e.getZ_1());
         int X_max = e.getX_2();
@@ -70,12 +70,14 @@ public class Ambiente {
                     mapa[x][y][z] = e.getTipo();
                 }
             }
-        } 
-        logger.logAcao("Posição do canto inferior esquerdo: " + "(" + e.getX_1() + ", " + e.getY_1() + ", " + e.getZ_1() + ")");
-        logger.logAcao("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")\n");
-        logger.finalizarAcao("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.");
+        }
+        if (printar){
+            logger.logAcao("Posição do canto inferior esquerdo: " + "(" + e.getX_1() + ", " + e.getY_1() + ", " + e.getZ_1() + ")");
+            logger.logAcao("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")\n");
+            logger.finalizarAcao("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.");
+        }
     }
-    public void removerEntidade(Entidade e) throws EntidadeNaoEncontradaException {
+    public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
         logger.inicializarAcao("removerEntidade", nome);
         if (!entidades.contains(e)) 
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pôde ser encontrada!\n");
@@ -88,7 +90,9 @@ public class Ambiente {
             }
         }
         entidades.remove(e);
-        logger.logAcao("A Entidade " + e.getId() + ", do tipo " + e.getTipo() + ", foi removida com sucesso.\n");
+        if (printar){
+            logger.logAcao("A Entidade " + e.getId() + ", do tipo " + e.getTipo() + ", foi removida com sucesso.\n");
+        }
     }
 
     // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
