@@ -3,6 +3,7 @@ import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
+import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
 import LAB05.src.Entidades.Robos.Robo;
 import LAB05.src.Entidades.Robos.RoboLimpador;
 import LAB05.src.Exceptions.MissaoInvalidaException;
@@ -14,12 +15,14 @@ public class MissaoAprimorar implements Missao{
         for (Entidade e : r.getAmbiente().getEntidades()){
             if (e.getTipo() == TipoEntidade.LOCAL){
                 Obstaculo oficina = (Obstaculo) e;
-                int Xmaisproximo = Math.max(oficina.getX_1(), Math.min(r.getX_1(), oficina.getX_2()));
-                int Ymaisproximo = Math.max(oficina.getX_1(), Math.min(r.getY_1(), oficina.getX_2()));
-                try {
-                    r.getAmbiente().moverRobo(r, Ymaisproximo, Xmaisproximo, 0);
-                } catch (Exception message) {
-                    System.out.println("Não conseguiu mover por conta do seguinte erro:" + message);
+                if (oficina.getTipoObstaculo() == TipoObstaculo.OFICINA){
+                    int Xmaisproximo = Math.max(oficina.getX_1(), Math.min(r.getX_1(), oficina.getX_2()));
+                    int Ymaisproximo = Math.max(oficina.getX_1(), Math.min(r.getY_1(), oficina.getX_2()));
+                    try {
+                        r.getAmbiente().moverRobo(r, Ymaisproximo, Xmaisproximo, 0);
+                    } catch (Exception message) {
+                        System.out.println("Não conseguiu mover por conta do seguinte erro:" + message);
+                    }
                 }
             }
         }
@@ -30,7 +33,7 @@ public class MissaoAprimorar implements Missao{
             robo.setAprimorar(true); // marca que o robô foi aprimorado
             System.out.println(robo.getId() + " teve seu raio de limpeza aumentado para " + raio + ".\n");    
         } else {
-            System.out.println("tem que ver como posso resolver isso, PORQUE ERA PARA TER EXCEPTION AQUI!!!!");
+            throw new MissaoInvalidaException("O robô já foi aprimorado anteriormente.");
         }
     }
 

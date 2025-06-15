@@ -12,6 +12,11 @@ Lista de coisas para serem implementadas/ corrigidas.
 
 Falta colocar o logger em tudo que eu fiz
 
-Os robos precisam de composição devo botar a Central como algo que o Bombeiro tem, um SensorDeLixo para o Limpador
+falta rever exception e deixar o codigo mais pumba, deixar de ser tao simples
 
-fazer o comunicador central
+falta fazer a main/menu interativo
+
+
+
+
+

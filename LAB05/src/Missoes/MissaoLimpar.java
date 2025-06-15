@@ -21,10 +21,10 @@ public class MissaoLimpar implements Missao {
             Obstaculo lixo = iterator.next();              
             int distancia = (int) Math.sqrt(Math.pow(lixo.getX_1() - limpador.getX_1(), 2) + Math.pow(lixo.getY_1() - limpador.getY_1(), 2));
             if (distancia < limpador.getRaioLimpeza()) { 
-                limpador.getLixos().remove(lixo);
                 System.out.println(limpador.getId() + " limpou " + lixo.getTipoObstaculo().getNome() + ".");
                 try { 
-                    limpador.getAmbiente().removerEntidade(lixo,false);
+                    limpador.getAmbiente().removerEntidade(lixo,false); // remove do ambiente
+                    iterator.remove(); // remove do arraylist<Obstaculo> lixos usando o iterator
                 } catch (Exception e){
                     System.out.println("Não é para cair aqui " + e);
                 }

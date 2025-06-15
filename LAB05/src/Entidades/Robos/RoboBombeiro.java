@@ -23,7 +23,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
         this.reservatorio = reservatorio; // litros de agua no reservatorio (começa vazio)
-        central = new ComunicadorCentral(47, 47, ambiente); // vai ficar sempre no meio do mapa
     }
     
     public void adicionar_agua() throws ErrorAbastecimentoException {
