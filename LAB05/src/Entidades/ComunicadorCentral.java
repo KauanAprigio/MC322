@@ -1,9 +1,12 @@
 package LAB05.src.Entidades;
 
 
+import java.util.ArrayList;
+
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.Interfaces.Comunicavel;
 import LAB05.src.Entidades.Interfaces.Entidade;
+import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Robos.Robo;
 
 public class ComunicadorCentral extends CentralComunicacao implements Entidade, Comunicavel{
@@ -12,6 +15,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     private final int larguraY = 5;
     private final int larguraZ = 100;
 
+    private ArrayList<Obstaculo> fogos;
     private final char representacao = 'c';
     private int pos_x;
     private int pos_y;
@@ -22,6 +26,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.ambiente = a;
+        fogos = new ArrayList<Obstaculo>();
     }
 
     @Override
@@ -34,8 +39,31 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         
     }
 
-    public void LocalizarFogoMaisProx (Robo r) {
+    public void listarFogos(Ambiente ambiente){ 
+        for (Entidade e : ambiente.getEntidades()){
+            if (e.getTipo() == TipoEntidade.FOGO){
+                Obstaculo fogo = (Obstaculo) e;
+                fogos.add(fogo);
+            }
+        }
+        System.out.println("O Comunicador sabe de todos os fogos que estão pelo ambiente");
+    }
 
+    public Obstaculo LocalizarFogoMaisProx (Robo robozin) {
+        double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível
+        Obstaculo maisProximo = null; // Inicializa como null para verificar se encontrou algum lixo
+        for (Obstaculo fogo : fogos) {
+            // Calcula a distância entre a entidade e o fogo
+            int DistanciaX = Math.max(robozin.getX_1(), fogo.getX_1()) - Math.min (robozin.getX_1(), fogo.getX_1());
+            int DistanciaY = Math.max(robozin.getY_1(), fogo.getY_1()) - Math.min (robozin.getY_1(), fogo.getY_1());
+            double distancia = Math.sqrt(Math.pow(DistanciaX, 2) + Math.pow(DistanciaY, 2));
+            
+            if (distancia < menorDistancia) {
+                menorDistancia = distancia;
+                maisProximo = fogo; // Atualiza o fogo mais próximo
+            }
+        }
+        return maisProximo;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package LAB05.src.Entidades.Robos;
 import java.util.Iterator;
 import LAB05.src.Ambiente.Ambiente;
+import LAB05.src.Entidades.ComunicadorCentral;
 import LAB05.src.Entidades.Interfaces.Comunicavel;
 import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
@@ -14,7 +15,8 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
     private Obstaculo Ultimo_incendio = null; // ultimo incendio apagado pelo robo, para evitar apagar o mesmo incendio mais de uma vez
     private boolean aprimorado = false; // variável para verificar se o robô foi aprimorado
-    
+    private Obstaculo incendio_proximo = null;
+    private ComunicadorCentral central;
     // Construtor
     public RoboBombeiro(String id, int pos_x, int pos_y, int pos_z, char representacao, int reservatorio,
                         Ambiente ambiente, int altitudeMaxima, int peso_max, int raio_de_cessar_fogo) {
@@ -23,6 +25,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
         this.reservatorio = reservatorio; // litros de agua no reservatorio (começa vazio)
+        central = new ComunicadorCentral(47, 47, ambiente); // vai ficar sempre no meio do mapa
     }
     
     public void adicionar_agua() throws ErrorAbastecimentoException {
@@ -204,7 +207,9 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     public int getReservatorio() { return reservatorio; }
     public int getRaioDeCessarFogo() { return raio_de_cessar_fogo; }
     public Obstaculo getUltimoIncendio() { return Ultimo_incendio; }
+    public Obstaculo incendioProximo() { return incendio_proximo; }
 
     public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
     public void setUltimoIncendio(Obstaculo ultimo_incendio) { this.Ultimo_incendio = ultimo_incendio; }
+    public void setIncendioProximo (Obstaculo incencio) { this.incendio_proximo = incencio; }
 }

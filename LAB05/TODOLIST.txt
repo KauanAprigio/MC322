@@ -7,3 +7,11 @@ Lista de coisas para serem implementadas/ corrigidas.
 3 - Falta implementar as Missões
 
 4 - Falta implementar a lógica de troca de msgs
+
+///////////////////
+
+Falta colocar o logger em tudo que eu fiz
+
+Os robos precisam de composição devo botar a Central como algo que o Bombeiro tem, um SensorDeLixo para o Limpador
+
+fazer o comunicador central
