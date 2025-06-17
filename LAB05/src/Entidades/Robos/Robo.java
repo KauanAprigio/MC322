@@ -37,11 +37,11 @@ public class Robo implements Entidade {
         pos_z += deltaZ;
         if (ambiente.getMapa()[pos_x][pos_y][pos_z] == TipoEntidade.VAZIO) {
             setEstahEmLocal(false);
-            setLocal('v');
+            setLocalAtualRep('v');
         }
         else{
             setEstahEmLocal(true);
-            setLocal(ambiente.getplanoXY()[pos_x][pos_y]);
+            setLocalAtualRep(ambiente.getplanoXY()[pos_x][pos_y]);
         } 
     }
 
@@ -65,7 +65,7 @@ public class Robo implements Entidade {
     public EstadoRobo getEstado() { return estado; }
     public boolean getEstahEmLocal() { return estahEmLocal; }
     public void setEstahEmLocal(boolean e) { this.estahEmLocal = e; }
-    public void setLocal(char r) { LocalAtualRep = r; }
+    public void setLocalAtualRep(char r) { LocalAtualRep = r; }
     public char getLocalAtualRep() { return LocalAtualRep; }
 
     public enum EstadoRobo {

@@ -17,7 +17,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     // Construtor
     public RoboBombeiro(String id, int pos_x, int pos_y, int pos_z, char representacao, int reservatorio,
                         Ambiente ambiente, int altitudeMaxima, int peso_max, int raio_de_cessar_fogo) {
-        super("Bombeiro_"+id, pos_x, pos_y, pos_z, representacao, ambiente);
+        super("Bombeiro_"+id, pos_x, pos_y, pos_z, 'B', ambiente);
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
         this.reservatorio = reservatorio; // litros de agua no reservatorio (começa vazio)

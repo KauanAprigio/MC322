@@ -13,7 +13,7 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     private SensorDeVarredura sensor;
 
     public RoboLimpador(String id, int x_1, int y_1, int z_1, char representacao, Ambiente ambiente, int raio_limpeza) {
-        super("RoboLimpador_"+id, x_1, y_1, z_1, representacao, ambiente);
+        super("RoboLimpador_"+id, x_1, y_1, z_1, 'L', ambiente);
         this.raio_limpeza = raio_limpeza;
         sensor = new SensorDeVarredura();
     }

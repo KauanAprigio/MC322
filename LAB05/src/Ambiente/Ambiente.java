@@ -106,6 +106,10 @@ public class Ambiente {
         TipoEntidade posicao = mapa[x][y][z];
         if (posicao == TipoEntidade.VAZIO) return false; // A posição está vazia
         if (posicao == TipoEntidade.LOCAL && e.getTipo() == TipoEntidade.ROBO) {
+            // condicional que impede que os robôs colidem com prédios e que o roboLimpador entre no lago
+            if ((planoXY[x][y] == 'l' && e.getRepresentacao() == 'L') || planoXY[x][y] == 'p'){
+                return true;
+            }
             return false;
         }   
         return true; // A posição está ocupada
