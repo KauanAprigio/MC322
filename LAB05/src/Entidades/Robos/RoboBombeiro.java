@@ -35,7 +35,8 @@ public class RoboBombeiro extends Robo implements Comunicavel {
             throw new ErrorApagarFogoException(msg);
         }
         try{
-            getAmbiente().moverRobo(this, incendio_proximo.getX_1(), incendio_proximo.getY_1(), 101);
+            // move o robo para acima do incendio, z = 101 para ter certeza que estará acima do predio também em 100% dos casos
+            getAmbiente().moverRobo(this, incendio_proximo.getX_1(), incendio_proximo.getY_1(), 101); 
         } catch (Exception e){
             System.out.println("DEU B.O" + e);
         }
@@ -47,6 +48,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
                 String msg = getId() + " precisa de " + deficit + " litros a mais para apagar o incêndio!\n";
                 throw new ErrorApagarFogoException(msg);
             } else {
+                //irá apagar ou o fogo ou o prédio em chamas
                 reservatorio -= litros_necessarios;
                 if (incendio_proximo.getTipoObstaculo() == TipoObstaculo.FOGO) {
                     System.out.println("Incêndio apagado com sucesso.");
@@ -79,22 +81,27 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     
     public void aprimorar() throws ErrorAprimoramentoException {
         getAmbiente().getLogger().inicializarAcao("Aprimoramento", getId());
-        //verifica se o robô esta dentro de uma oficina
+
+        //robos desligados nao podem ser aprimorados
          if (getEstado() == EstadoRobo.OFF) {
             throw new ErrorAprimoramentoException("Não foi possível aprimorar o robô: " + getId() + " pois ele está desligado!\n");
         }
+        
+        //confirma se está na oficina
         if (getLocalAtualRep() == 'o'){
-            if (estahAprimorado()) {
+            if (estahAprimorado()) { // se já estiver aprimorado não pode fazer o upgrade
                 String msg = getId() + " já está aprimorado e não pode ser aprimorado novamente!\n";
                 throw new ErrorAprimoramentoException(msg);
             }
+
+            //bloco para ser aprimorado com 1500l no reservatorio
             getAmbiente().getLogger().logAcao(getId() + " está dentro da oficina e pode ser aprimorado.");
             peso_max += 1500; // aumenta a capacidade máxima de peso em 1500 litros
             reservatorio = peso_max; // atualiza o reservatório para a nova capacidade máxima
             aprimorado = true; // marca que o robô foi aprimorado
             getAmbiente().getLogger().finalizarAcao("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.");
             getAmbiente().getLogger().logAcao(getId() + " está com o reservatório cheio.\n");
-        } else {
+        } else { // caso não esteja em um oficina
             String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
             throw new ErrorAprimoramentoException(msg);
         }
@@ -102,14 +109,17 @@ public class RoboBombeiro extends Robo implements Comunicavel {
 
     public void adicionar_agua() throws ErrorAbastecimentoException {
         getAmbiente().getLogger().inicializarAcao("Abastecimento", getId());
+        //condicional para ver se o robo está na altura adequada para abastecer
         if (getZ_1() != 1) {
             throw new ErrorAbastecimentoException(getId() + " está muito alto, desça para altura 1 para abastecer água!\n");  // Se o robô estiver voando, não pode abastecer
         }
         
+        //robos desligados não podem abastecer agua
         if (getEstado() == EstadoRobo.OFF) {
             throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!\n");
         }
 
+        //confirmo se está no lago e abasteço o robo
         if (getLocalAtualRep() == 'l'){
             reservatorio = peso_max; // Abastece o reservatório até o máximoAdd commentMore actions
             getAmbiente().getLogger().logAcao("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
