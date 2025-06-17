@@ -22,24 +22,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
         this.reservatorio = reservatorio; // litros de agua no reservatorio (começa vazio)
     }
-    
-    public void adicionar_agua() throws ErrorAbastecimentoException {
-        getAmbiente().getLogger().inicializarAcao("Abastecimento", getId());
-        if (getZ_1() != 1) {
-            throw new ErrorAbastecimentoException(getId() + " está muito alto, desça para altura 1 para abastecer água!\n");  // Se o robô estiver voando, não pode abastecer
-        }
-        
-        if (getEstado() == EstadoRobo.OFF) {
-            throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!\n");
-        }
-
-        if (getLocalAtualRep() == 'l'){
-            reservatorio = peso_max; // Abastece o reservatório até o máximoAdd commentMore actions
-            getAmbiente().getLogger().logAcao("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
-            getAmbiente().getLogger().finalizarAcao(getId() + " foi abastecido com sucesso.");
-        }
-    }
-    
 
     public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException, RoboDesligadoException {
         if (getEstado() == EstadoRobo.OFF){ // condicional caso o robo esteja desligado
@@ -68,8 +50,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
                 reservatorio -= litros_necessarios;
                 if (incendio_proximo.getTipoObstaculo() == TipoObstaculo.FOGO) {
                     System.out.println("Incêndio apagado com sucesso.");
-                    // esse print está duplicado, pois quero que apareça tudo do robo primeiro depois da remoção do objeto,
-                    // por isso nao botei depois, a fim de englobar os dois casos
                     System.out.println("Foram usados " + litros_necessarios + " litros para apagar o incêndio.");
                     System.out.println("O reservatório está atualmente com " + reservatorio + " litros.\n"); 
                     try{
@@ -99,7 +79,10 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     
     public void aprimorar() throws ErrorAprimoramentoException {
         getAmbiente().getLogger().inicializarAcao("Aprimoramento", getId());
-        //verifica se o robô esta dentro de uma oficina  
+        //verifica se o robô esta dentro de uma oficina
+         if (getEstado() == EstadoRobo.OFF) {
+            throw new ErrorAprimoramentoException("Não foi possível aprimorar o robô: " + getId() + " pois ele está desligado!\n");
+        }
         if (getLocalAtualRep() == 'o'){
             if (estahAprimorado()) {
                 String msg = getId() + " já está aprimorado e não pode ser aprimorado novamente!\n";
@@ -114,6 +97,23 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         } else {
             String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
             throw new ErrorAprimoramentoException(msg);
+        }
+    }
+
+    public void adicionar_agua() throws ErrorAbastecimentoException {
+        getAmbiente().getLogger().inicializarAcao("Abastecimento", getId());
+        if (getZ_1() != 1) {
+            throw new ErrorAbastecimentoException(getId() + " está muito alto, desça para altura 1 para abastecer água!\n");  // Se o robô estiver voando, não pode abastecer
+        }
+        
+        if (getEstado() == EstadoRobo.OFF) {
+            throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!\n");
+        }
+
+        if (getLocalAtualRep() == 'l'){
+            reservatorio = peso_max; // Abastece o reservatório até o máximoAdd commentMore actions
+            getAmbiente().getLogger().logAcao("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
+            getAmbiente().getLogger().finalizarAcao(getId() + " foi abastecido com sucesso.");
         }
     }
 
