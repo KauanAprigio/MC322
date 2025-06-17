@@ -39,7 +39,7 @@ public class Ambiente {
         this.planoXY = planoXY;
         entidades = new ArrayList<Entidade>();
         this.nome = "Ambiente_"+nome; // nome padrão do ambiente
-        this.logger = new Logger();
+        this.logger = new Logger("Log.txt");
     }
 
 
@@ -86,7 +86,6 @@ public class Ambiente {
             logger.inicializarAcao("removerEntidade", nome);
         }
         if (!entidades.contains(e)){
-            logger.logErr("Não foi possível finalizar a ação, pois a entidade não está no ambiente ou não pôde ser encontrada!\n");
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pôde ser encontrada!\n");
         }
 
@@ -128,13 +127,11 @@ public class Ambiente {
         EntidadeNaoEncontradaException, ForaDosLimitesException, LocalOcupadoException { 
         logger.inicializarAcao("moverRobo", nome);
         if (!entidades.contains(r)){
-            logger.logErr("Não foi possível finalizar a ação, pois o robô não está no ambiente ou não pôde ser encontrada!\n");
             throw new EntidadeNaoEncontradaException("Robô não está no ambiente ou não pôde ser encontrado!\n");
         }
     
         if (r.getZ_1() != novoZ) { // Se há mudança na altitude
             if (!(r instanceof RoboBombeiro)) {
-                logger.logErr("Não foi possível finalizar a ação, pois o robô não pode voar!\n");
                 throw new NaoPodeVoarException("Robô " + r.getId() + " não pode voar (apenas Robôs Bombeiros podem)!\n");
             }
         }
@@ -171,11 +168,9 @@ public class Ambiente {
             for (int y = novoY; y <= e.getLarguraY() + novoY; y++) {
                 for (int z = novoZ; z <= novoZ + e.getLarguraZ(); z++) { 
                     if (!dentroDosLimites(x, y, z)) {
-                        logger.logErr("Não foi possível finalizar a ação, pois a coordenada desejada está fora dos limites do ambiente!\n");
                         throw new ForaDosLimitesException("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }
                     else if (estaOcupado(x, y, z, e)){
-                        logger.logErr("Não foi possível finalizar a ação, pois a coordenada desejada está sendo ocupada por outra entidade!\n");
                         throw new LocalOcupadoException("A região desejada pelo(a) " + e.getTipo() + " está ocupada!\n");
                     } 
                 }

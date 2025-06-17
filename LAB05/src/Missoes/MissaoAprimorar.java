@@ -43,14 +43,12 @@ public class MissaoAprimorar implements Missao{
             robo.getAmbiente().getLogger().logAcao(robo.getId() + " teve seu raio de limpeza aumentado para " + raio + ".\n");
             robo.getAmbiente().getLogger().finalizarMissao("O agente " + robo.getId() + " finalizou sua missão de aprimoramento com sucesso.\n");
         } else {
-            robo.getAmbiente().getLogger().logErr("Não foi possível finalizar a missão, pois o agente já está aprimorado!\n");
             throw new MissaoInvalidaException("O robô já foi aprimorado anteriormente.\n");
         }
     }
 
     @Override
-    public String getDetalhes(){
-        String msg = "Procura a Oficina no ambiente e move o robô para lá, além de fazer o aprimoramento dele.";
-        return msg;
+    public String getDetalhes(){ 
+        return "Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.";
     }
 }

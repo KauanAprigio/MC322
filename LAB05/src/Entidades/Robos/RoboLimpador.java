@@ -26,7 +26,6 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
         if (temMissao()) {
             missao.executar(this, a);
         } else {
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois o robô encontra-se sem nenhuma missão!\\n");
             throw new SemMissaoException("Nenhuma missão atribuída ao RoboLimpador.");
         }
     }
@@ -41,7 +40,6 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     @Override
     public void executarSensores(){
         sensor.varreruda(this);
-        System.out.println("O sensor foi ativado com sucesso, o robô " + getId() + " tem a localidade de todos os lixos");
     }
 
     

@@ -11,7 +11,6 @@ public class MissaoMoverProximo implements Missao {
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException {
         r.getAmbiente().getLogger().inicializarMissao(this, r.getId());
         if (!(r instanceof RoboLimpador)){
-            r.getAmbiente().getLogger().logErr("Não foi possível finalizar a missão, pois o robô não é um roboLimpador!\n");
             throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
         }
         RoboLimpador limpador = (RoboLimpador) r; //aqui faço um casting e uso de um ponteiro para facilitar a busca
@@ -43,8 +42,7 @@ public class MissaoMoverProximo implements Missao {
 
     @Override
     public String getDetalhes() {
-        String msg = "Faz a movimentação para o lixo mais próximo.";
-        return msg;
+        return "Ir para o lixo mais próximo.";
     }
     
 }

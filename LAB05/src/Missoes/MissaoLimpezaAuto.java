@@ -15,7 +15,6 @@ public class MissaoLimpezaAuto implements Missao {
         MissaoMoverProximo mover = new MissaoMoverProximo();
 
         if (!(r instanceof RoboLimpador)){
-            r.getAmbiente().getLogger().logErr("Não foi possível finalizar a missão, pois o robô deve ser um limpador!\n");
             throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
         }
         
@@ -42,7 +41,6 @@ public class MissaoLimpezaAuto implements Missao {
 
     @Override
     public String getDetalhes(){
-        String msg = "Basicamente vai utilizar de todas as missões para deixar o robô 100% automático enquanto ainda tiver lixos.";
-        return msg;
+        return "Limpeza completa do ambiente";
     }
 }

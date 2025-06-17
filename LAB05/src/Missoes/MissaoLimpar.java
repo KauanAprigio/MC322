@@ -12,7 +12,6 @@ public class MissaoLimpar implements Missao {
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException {
         r.getAmbiente().getLogger().inicializarMissao(this, r.getId());
         if (!(r instanceof RoboLimpador)){
-            r.getAmbiente().getLogger().logErr("Não foi possível finalizar a missão, pois o robô não é um roboLimpador!\n");
             throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
         }
 
@@ -41,8 +40,7 @@ public class MissaoLimpar implements Missao {
 
     @Override
     public String getDetalhes() {
-        String msg = "Faz a limpeza dos lixos próximos";
-        return msg;
+        return "Limpeza dos lixos próximos";
     }
     
 }

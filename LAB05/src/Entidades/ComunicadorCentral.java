@@ -54,18 +54,16 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         
         RoboBombeiro bombeiro = (RoboBombeiro) destinatario;
         if (bombeiro.getEstado() == EstadoRobo.OFF){
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois o robô encontra-se desligado!\n");
             throw new ErroComunicacaoException("Erro de comunicação, o robo " + getId() + " está desligado!");
         }
 
-         if (!getAmbiente().getEntidades().contains(bombeiro) || destinatario == null) {
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois não foi possível encontrar o destinatário!\n");
+        if (!getAmbiente().getEntidades().contains(bombeiro) || destinatario == null) {
             throw new ErroComunicacaoException("Erro de comunicação: Destinatário não existe!\n");
         }
         bombeiro.receberMensagem(mensagem, this); // aqui basicamente ele irá enviar uma mensagem
         registrarMensagem(getId(), mensagem);
 
-        getAmbiente().getLogger().finalizarAcao("O enviarMensagem foi finalizado com sucesso.\n");
+        getAmbiente().getLogger().finalizarAcao("O mensagem enviada com sucesso.\n");
     }
 
     @Override
@@ -75,7 +73,8 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         registrarMensagem((bombeiro.getId()), mensagem);
         if (mensagem.equalsIgnoreCase("INCÊNDIO APAGADO")) {
             try{
-                enviarMensagem(bombeiro, "Entendido, irei atualizar os incêndios que ainda estão no ambiente");
+                getAmbiente().getLogger().finalizarAcao("Mesagem recebida pela central");
+                enviarMensagem(bombeiro, "Atualizando os incêndios que ainda estão no ambiente");
             } catch (ErroComunicacaoException message) {
                 getAmbiente().getLogger().logErr(message);
             }
@@ -88,7 +87,6 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             String coordenada = "(" + oficina.getX_1() + "," + oficina.getY_1() + "," + "0).";
             System.out.println("Você poderá aprimorar-se caso for para a posição: " + coordenada);
         }
-        getAmbiente().getLogger().finalizarAcao(getId() + " finalizou com sucesso o receberMensagem, o qual trouxe a mensagem: " + mensagem + "\n");
     }
 
     public Obstaculo LocalizarFogoMaisProx (Robo robozin) {

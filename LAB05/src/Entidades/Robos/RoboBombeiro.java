@@ -26,14 +26,12 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     public void apagar_fogo(Comunicavel Central) throws ErrorApagarFogoException, ErroComunicacaoException, RoboDesligadoException {
         getAmbiente().getLogger().inicializarAcao("Apagar fogo", getId());
         if (getEstado() == EstadoRobo.OFF){ // condicional caso o robo esteja desligado
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois o robô encontra-se desligado!\n");
             String msg = "O robô" + getId() + " não pode combater nenhum fogo, pois está desligado!\n";
             throw new RoboDesligadoException(msg);
         }
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
         incendio_proximo = central.LocalizarFogoMaisProx(this);
         if (incendio_proximo == null){ // normalmente quando não tiver mais nenhum incêndio
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois não há mais incêndios para serem apagados!\n");
             String msg = getId() + " não há mais incêndios para apagar.\n";
             throw new ErrorApagarFogoException(msg);
         }
@@ -48,7 +46,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
             else if (incendio_proximo.getTipoObstaculo() == TipoObstaculo.PREDIOEMCHAMAS) litros_necessarios = 1000; // quantidade de agua para apagar o predio em chamas
                         
             if (reservatorio < litros_necessarios){ // condicional caso nao tenha agua o suficiente
-                getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois não há água suficiente no reservatório!\n");
                 int deficit = litros_necessarios - reservatorio; // quanto ira faltar de agua para apagar o fogo
                 String msg = getId() + " precisa de " + deficit + " litros a mais para apagar o incêndio!\n";
                 throw new ErrorApagarFogoException(msg);
@@ -90,14 +87,12 @@ public class RoboBombeiro extends Robo implements Comunicavel {
 
         //robos desligados nao podem ser aprimorados
          if (getEstado() == EstadoRobo.OFF) {
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois o robô encontra-se desligado!\n");
             throw new ErrorAprimoramentoException("Não foi possível aprimorar o robô: " + getId() + " pois ele está desligado!\n");
         }
         
         //confirma se está na oficina
         if (getLocalAtualRep() == 'o'){
             if (estahAprimorado()) { // se já estiver aprimorado não pode fazer o upgrade
-                getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois o robô já está aprimorado!\n");
                 String msg = getId() + " já está aprimorado e não pode ser aprimorado novamente!\n";
                 throw new ErrorAprimoramentoException(msg);
             }
@@ -114,7 +109,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
             getAmbiente().getLogger().logAcao(getId() + " está com o reservatório cheio.");
             getAmbiente().getLogger().finalizarAcao("O Aprimoramento de " + getId() + " foi finalizado com sucesso.\n");
         } else { // caso não esteja em um oficina
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois o robô não está em uma oficina!\n");
             String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
             throw new ErrorAprimoramentoException(msg);
         }
@@ -124,13 +118,11 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         getAmbiente().getLogger().inicializarAcao("Abastecimento", getId());
         //condicional para ver se o robo está na altura adequada para abastecer
         if (getZ_1() != 1) {
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois o robô não está na altura adequada!\n");
             throw new ErrorAbastecimentoException(getId() + " está muito alto, desça para altura 1 para abastecer água!\n");  // Se o robô estiver voando, não pode abastecer
         }
         
         //robos desligados não podem abastecer agua
         if (getEstado() == EstadoRobo.OFF) {
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois o robô encontra-se desligado!\n");
             throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!\n");
         }
 
@@ -162,18 +154,17 @@ public class RoboBombeiro extends Robo implements Comunicavel {
 
         //robo verifica se já tem uma central no ambiente, caso não tenha ele não consegue fazer a comunicação
         if (!getAmbiente().getEntidades().contains(destino) || destinatario == null) {
-            getAmbiente().getLogger().logErr("Não foi possível finalizar a ação, pois não foi possível encontrar o destinatário!\n");
             throw new ErroComunicacaoException("Erro de comunicação: Destinatário não existe!\n");
         }
         destinatario.receberMensagem(mensagem, this);
-        getAmbiente().getLogger().finalizarAcao("O enviarMensagem foi finalizado com sucesso.\n");
+        getAmbiente().getLogger().finalizarAcao("Enviou com sucesso a mensagem.\n");
     }
 
     @Override
     public void receberMensagem(String mensagem, Comunicavel remetente){
         getAmbiente().getLogger().inicializarAcao("receberMensagem", getId());
         // Aqui o robô bombeiro recebe a mensagem e pode processá-la ou exibi-la
-        getAmbiente().getLogger().finalizarAcao(getId() + " finalizou com sucesso o receberMensagem, o qual trouxe a mensagem: " + mensagem + "\n");
+        getAmbiente().getLogger().finalizarAcao(getId() + " recebebeu a mensagem de: " + mensagem + "\n");
         // Poderia implementar lógica adicional para processar a mensagem, se necessário
     }
 
