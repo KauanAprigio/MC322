@@ -25,12 +25,27 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     private int pos_y;
     private final int pos_z = 0;
     private Ambiente ambiente; // Ambiente onde o obstáculo está localizado
+    private Obstaculo oficina;
+    private Obstaculo lago;
+
 
     public ComunicadorCentral(int pos_x, int pos_y, Ambiente a) {
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.ambiente = a;
         fogos = new ArrayList<Obstaculo>();
+        for (Entidade e : ambiente.getEntidades()){ // loop para armezenar os obstaculos que serão usados futuramente pelo bombeiro
+            // para armazenar como Obstaculo irei fazer castings
+            if (e.getTipo() == TipoEntidade.FOGO){
+                fogos.add( (Obstaculo) e); 
+            } else if (e.getTipo() == TipoEntidade.LOCAL){
+                if (e.getRepresentacao() == 'o'){
+                    oficina = (Obstaculo) e;
+                } else if (e.getRepresentacao() == 'l'){
+                    lago = (Obstaculo) e;
+                }
+            }
+        }
     }
 
     @Override
@@ -59,17 +74,13 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             }
             fogos.remove(bombeiro.getIncendioProximo());
             bombeiro.setIncendioProximo(null);
-        }
-    }
-
-    public void listarFogos(Ambiente ambiente){ 
-        for (Entidade e : ambiente.getEntidades()){
-            if (e.getTipo() == TipoEntidade.FOGO){
-                Obstaculo fogo = (Obstaculo) e;
-                fogos.add(fogo);
-            }
-        }
-        System.out.println("O Comunicador sabe de todos os fogos que estão pelo ambiente");
+        } else if (mensagem.equalsIgnoreCase("ABASTECIMENTO")){
+            String coordenada = "(" + lago.getX_1() + "," + lago.getY_1() + "," + "1).";
+            System.out.println("Você poderá abastecer se for para a posição: " + coordenada);
+        } else if (mensagem.equalsIgnoreCase("APRIMORAMENTO")){
+            String coordenada = "(" + oficina.getX_1() + "," + oficina.getY_1() + "," + "0).";
+            System.out.println("Você poderá aprimorar-se caso for para a posição: " + coordenada);
+        } 
     }
 
     public Obstaculo LocalizarFogoMaisProx (Robo robozin) {
@@ -90,6 +101,8 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     }
 
     public ArrayList<Obstaculo> getFogos(){ return fogos; }
+    public Obstaculo getOficina() { return oficina; }
+    public Obstaculo getLago() { return lago; }
 
     @Override
     public int getX_1() { 
