@@ -63,7 +63,7 @@ public class Robo implements Entidade {
     public Ambiente getAmbiente() { return ambiente; }
     public TipoEntidade getTipo() { return tipo; }
     public EstadoRobo getEstado() { return estado; }
-    public boolean getEstahEmLocal() { return estahEmLocal; }
+    public boolean estahEmLocal() { return estahEmLocal; }
     public void setEstahEmLocal(boolean e) { this.estahEmLocal = e; }
     public void setLocalAtualRep(char r) { LocalAtualRep = r; }
     public char getLocalAtualRep() { return LocalAtualRep; }

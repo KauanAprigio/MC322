@@ -136,7 +136,7 @@ public class Ambiente {
         // Se a nova posição está vazia ou é um local =>
         // Limpeza da posição antiga:
          // se estava em um local volta a posição para tipoLocal
-        if (r.getEstahEmLocal()) mapa[oldX][oldY][oldZ] = TipoEntidade.LOCAL;
+        if (r.estahEmLocal()) mapa[oldX][oldY][oldZ] = TipoEntidade.LOCAL;
         // se não estava em um local a posição anterior vota a ser vazia
         else mapa[oldX][oldZ][oldZ] = TipoEntidade.VAZIO;
         // se estava no chão, atualiza o plano
@@ -145,7 +145,7 @@ public class Ambiente {
         r.mover(novoX - oldX, novoY - oldY, novoZ - oldZ); 
 
 
-        if (r.getZ_1() == 0) planoXY[r.getX_1()][r.getY_1()] = 'r';
+        if (r.getZ_1() == 0) planoXY[r.getX_1()][r.getY_1()] = r.getRepresentacao();
         mapa[r.getX_1()][r.getY_1()][r.getZ_1()] = TipoEntidade.ROBO;
         
         
