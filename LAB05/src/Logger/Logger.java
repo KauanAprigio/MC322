@@ -5,16 +5,23 @@ import java.io.PrintWriter;
 import LAB05.src.Missoes.Missao;
 
 public class Logger {
-    private static int instrucaoAtualGLobal = 1;
-    private static int instrucaoAtualMissao = 1;
-    private static int MissaoAtual = 1;
-    private boolean MissaoIniciada = false;
-    private boolean acaoIniciada = false;
+    private static int acaoAtualGLobal = 0;
+    private static int acaoProxGLobal = 1;
+
+    private static int acaoAtualMissao = 0;
+    private static int acaoProxMissao = 1;
+
+    private static int MissaoAtual = 0;
+    private static int MissaoProx = 1;
+
+    private static int MissoesIniciadas = 0;
+    private static int acoesIniciada = 0;
+    
     private static PrintWriter printer;
 
-    public Logger () {
+    public Logger (String filename) {
         try {
-            Logger.printer = new PrintWriter("Log.txt");
+            Logger.printer = new PrintWriter(filename);
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -22,72 +29,67 @@ public class Logger {
     } 
     // Ativa o modo missão
     public void inicializarMissao(Missao m, String Agente) {
-        printer.printf("---- MISSÃO %d ----\n", MissaoAtual);
+        MissaoAtual = MissaoProx;
+        printer.printf("------- MISSÃO %d -------\n", MissaoAtual);
         printer.printf("Agente %s inicializando missão....\n %s\n", Agente, m.getDetalhes());
-        MissaoIniciada = true;
-        instrucaoAtualMissao = 1;
+        MissaoProx = MissaoAtual+1;
+        MissoesIniciadas++;
     }
 
     // Indica que uma ação começou (movimento, apagar fogo, adicionar entidade ao ambiente etc...)
     public void inicializarAcao(String acao, String Origem) {
-        printer.printf("%d - Ação do tipo %s, inicializada por: %s\n", instrucaoAtualGLobal, acao, Origem); // Marca o início de uma nova ação
-        acaoIniciada = true;
+        if (MissoesIniciadas != 0){ // Missao ativa {
+            acaoAtualMissao = acaoProxMissao;
+            printer.printf("%d - Ação do tipo %s, inicializada por: %s\n", acaoAtualMissao, acao, Origem); // Marca o início de uma nova ação
+            acaoProxMissao = acaoAtualMissao + 1;
+            acoesIniciada++;
+        }
+        else {
+            acaoAtualGLobal = acaoProxGLobal;
+            printer.printf("%d - Ação do tipo %s, inicializada por: %s\n", acaoAtualGLobal, acao, Origem); // Marca o início de uma nova ação
+            acaoProxGLobal = acaoAtualGLobal + 1;
+            acoesIniciada++;
+        }
     }
 
     public void logAcao(String txt) {
-        if (MissaoIniciada) {
-            logTxtMissao(txt);
-            return;
-        }
         printer.println("   -> " + txt);
     }
-    // Durante a missão cada instrução possuí um índice único daquela missão
-    public void logTxtMissao(String txt) {
-        printer.printf("   %d -> %s\n", instrucaoAtualMissao, txt);
-        instrucaoAtualMissao++;
-    }
-
-    
     public void finalizarMissao(String Resultado) {
-        MissaoIniciada = false;
-        printer.printf("---- Fim Missão %d ----\n", MissaoAtual);
-        printer.printf("Relatório da missão: %s", Resultado);
-        MissaoAtual++;
-        instrucaoAtualMissao = 1;
+        printer.printf("------- Fim Missão %d -------\n", MissaoAtual);
+        printer.printf("Relatório da missão: %s\n", Resultado);
+        printer.printf("Total de ações executadas: %d", acaoAtualMissao);
+        MissaoAtual--;
+        MissoesIniciadas--;
     }
 
     // Indica que a ação ocorrendo finalizou seja por um erro ou porque chegou ao fim
     public void finalizarAcao(String Resultado) {
-        printer.printf("Ação %d encerrada: %s", instrucaoAtualGLobal, Resultado);
-        instrucaoAtualGLobal++;
-        acaoIniciada = false;
+        if (MissoesIniciadas != 0) {  // Missao ativa
+            printer.printf("    -> Ação %d encerrada: %s", acaoAtualMissao, Resultado);
+            acaoAtualMissao--;
+            acoesIniciada--;
+        } else {
+            printer.printf("Ação %d encerrada: %s", acaoAtualGLobal, Resultado);
+            acaoAtualGLobal--;
+            acoesIniciada--;
+        }
     }
 
     // Finaliza a missão/ ação e loga o erro
     // Chamar esse método em todo bloco (try-catch)
     public void logErr(Exception e) {
-        if (MissaoIniciada) {
-            if (acaoIniciada) finalizarAcao("Erro!");
-            finalizarMissao(e.getMessage());
-        } else if (acaoIniciada) {
-            finalizarAcao(e.getMessage());
-        } else {
+        if (MissoesIniciadas == 0 && acoesIniciada == 0) {
             printer.println("Exceção detectada: " + e.getMessage());
+            return;
         }
+        while (acoesIniciada != 0) {
+            finalizarAcao(e.getMessage());
+        }
+        while (MissoesIniciadas != 0) {
+            finalizarMissao(e.getMessage());
+        } 
     }
-
-    // Finaliza a missão/ ação e loga o erro
-    //Será usado quando não tem o bloco try-catch, mas nos métodos quando você só tem a exception em si
-    public void logErr(String msg) {
-    if (MissaoIniciada) {
-        if (acaoIniciada) finalizarAcao("Erro!");
-        finalizarMissao(msg);
-    } else if (acaoIniciada) {
-        finalizarAcao(msg);
-    } else {
-        printer.println("Erro detectado: " + msg);
-    }
-}
 
     //Após o término do uso. Fechar o logger
     public void fecharLogger() {
