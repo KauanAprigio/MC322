@@ -10,7 +10,9 @@ import LAB05.src.Exceptions.MissaoInvalidaException;
 public class MissaoLimpar implements Missao {
     @Override
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException {
+        r.getAmbiente().getLogger().inicializarMissao(this, r.getId());
         if (!(r instanceof RoboLimpador)){
+            r.getAmbiente().getLogger().logErr("Não foi possível finalizar a missão, pois o robô não é um roboLimpador!\n");
             throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
         }
 
@@ -21,13 +23,16 @@ public class MissaoLimpar implements Missao {
             Obstaculo lixo = iterator.next();              
             int distancia = (int) Math.sqrt(Math.pow(lixo.getX_1() - limpador.getX_1(), 2) + Math.pow(lixo.getY_1() - limpador.getY_1(), 2));
             if (distancia < limpador.getRaioLimpeza()) { 
-                try { 
+                try {
+                    limpador.getAmbiente().getLogger().logAcao("Verificando distância para efetuar a limpeza.");
                     limpador.getAmbiente().removerEntidade(lixo,false); // remove do ambiente
                     iterator.remove(); // remove do arraylist<Obstaculo> lixos usando o iterator
-                    System.out.println(limpador.getId() + " limpou " + lixo.getTipoObstaculo().getNome() + ".");
                     limpador.getComunicador().registrarMensagem(limpador.getId(), "Limpeza de " + lixo.getId() + " foi concluída com sucesso.");
+                    
+                    limpador.getAmbiente().getLogger().logAcao(limpador.getId() + " limpou " + lixo.getTipoObstaculo().getNome() + ".");
+                    limpador.getAmbiente().getLogger().finalizarMissao("Missão de limpeza finalizada com sucesso.\n");
                 } catch (Exception e){
-                    System.out.println("Não é para cair aqui " + e);
+                    limpador.getAmbiente().getLogger().logErr(e);
                 }
             }
         }

@@ -76,6 +76,19 @@ public class Logger {
         }
     }
 
+    // Finaliza a missão/ ação e loga o erro
+    //Será usado quando não tem o bloco try-catch, mas nos métodos quando você só tem a exception em si
+    public void logErr(String msg) {
+    if (MissaoIniciada) {
+        if (acaoIniciada) finalizarAcao("Erro!");
+        finalizarMissao(msg);
+    } else if (acaoIniciada) {
+        finalizarAcao(msg);
+    } else {
+        printer.println("Erro detectado: " + msg);
+    }
+}
+
     //Após o término do uso. Fechar o logger
     public void fecharLogger() {
         printer.close();

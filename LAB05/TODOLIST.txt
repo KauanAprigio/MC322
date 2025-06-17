@@ -10,10 +10,6 @@ Lista de coisas para serem implementadas/ corrigidas.
 
 ///////////////////
 
-Falta colocar o logger em tudo que eu fiz
-
-falta rever exception e deixar o codigo mais pumba, deixar de ser tao simples
-
 falta fazer a main/menu interativo
 
 

@@ -47,6 +47,7 @@ public class Ambiente {
     // Inicializa o mapa e o planoXY com espaços vazios
     // O planoXY é um recorte 2D do ambiente no plano Z = 0, onde cada posição é representada por um caractere.
     public void inicializarMapa(){
+        logger.inicializarAcao("inicializarMapa", nome);
         for (int x = 0; x < larguraX; x++){
             for (int y = 0; y < larguraY; y++){
                 planoXY[x][y] = 'v'; // faz a representação do plano xy no z = 0. O 'v' é a representação para o vazio
@@ -55,9 +56,12 @@ public class Ambiente {
                 }
             }
         }
+        logger.finalizarAcao("Mapa inicializado com sucesso.\n");
     }
     public void adicionarEntidade(Entidade e, boolean printar) throws ForaDosLimitesException, LocalOcupadoException{
-        logger.inicializarAcao("adicionarEntidade", nome);
+        if (printar){
+            logger.inicializarAcao("adicionarEntidade", nome);
+        }
         verificarColisoes(e, e.getX_1(), e.getY_1(), e.getZ_1());
         int X_max = e.getX_2();
         int Y_max = e.getY_2();
@@ -73,14 +77,19 @@ public class Ambiente {
         }
         if (printar){
             logger.logAcao("Posição do canto inferior esquerdo: " + "(" + e.getX_1() + ", " + e.getY_1() + ", " + e.getZ_1() + ")");
-            logger.logAcao("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")\n");
-            logger.finalizarAcao("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.");
+            logger.logAcao("Posição do canto superior direito: " + "(" + X_max + ", " + Y_max + ", " + Z_max + ")");
+            logger.finalizarAcao("Entidade do tipo: "+ e.getTipo() +" adicionada ao ambiente.\n");
         }
     }
     public void removerEntidade(Entidade e, boolean printar) throws EntidadeNaoEncontradaException {
-        logger.inicializarAcao("removerEntidade", nome);
-        if (!entidades.contains(e)) 
+        if (printar){
+            logger.inicializarAcao("removerEntidade", nome);
+        }
+        if (!entidades.contains(e)){
+            logger.logErr("Não foi possível finalizar a ação, pois a entidade não está no ambiente ou não pôde ser encontrada!\n");
             throw new EntidadeNaoEncontradaException("Entidade não está no ambiente ou não pôde ser encontrada!\n");
+        }
+
         for (int x = e.getX_1(); x <= e.getX_2(); x++) {
             for (int y = e.getY_1(); y <= e.getY_2(); y++) {
                 planoXY[x][y] = 'v'; 
@@ -91,7 +100,7 @@ public class Ambiente {
         }
         entidades.remove(e);
         if (printar){
-            logger.logAcao("A Entidade " + e.getId() + ", do tipo " + e.getTipo() + ", foi removida com sucesso.\n");
+            logger.finalizarAcao("A Entidade " + e.getId() + ", do tipo " + e.getTipo() + ", foi removida com sucesso.\n");
         }
     }
 
@@ -118,11 +127,14 @@ public class Ambiente {
     public void moverRobo(Robo r, int novoX, int novoY, int novoZ ) throws RoboDesligadoException, NaoPodeVoarException, 
         EntidadeNaoEncontradaException, ForaDosLimitesException, LocalOcupadoException { 
         logger.inicializarAcao("moverRobo", nome);
-        if (!entidades.contains(r)) 
+        if (!entidades.contains(r)){
+            logger.logErr("Não foi possível finalizar a ação, pois o robô não está no ambiente ou não pôde ser encontrada!\n");
             throw new EntidadeNaoEncontradaException("Robô não está no ambiente ou não pôde ser encontrado!\n");
+        }
     
         if (r.getZ_1() != novoZ) { // Se há mudança na altitude
             if (!(r instanceof RoboBombeiro)) {
+                logger.logErr("Não foi possível finalizar a ação, pois o robô não pode voar!\n");
                 throw new NaoPodeVoarException("Robô " + r.getId() + " não pode voar (apenas Robôs Bombeiros podem)!\n");
             }
         }
@@ -151,7 +163,7 @@ public class Ambiente {
         
         
         logger.logAcao("Nova posição: " + "(" + r.getX_1() + ", " + r.getY_1() + ", " + r.getZ_1() + ")");
-        logger.finalizarAcao(r.getId() + " movido com sucesso para a nova posição.");
+        logger.finalizarAcao(r.getId() + " movido com sucesso para a nova posição.\n");
     }
    
     public void verificarColisoes(Entidade e, int novoX, int novoY, int novoZ) throws ForaDosLimitesException, LocalOcupadoException{ 
@@ -159,9 +171,11 @@ public class Ambiente {
             for (int y = novoY; y <= e.getLarguraY() + novoY; y++) {
                 for (int z = novoZ; z <= novoZ + e.getLarguraZ(); z++) { 
                     if (!dentroDosLimites(x, y, z)) {
+                        logger.logErr("Não foi possível finalizar a ação, pois a coordenada desejada está fora dos limites do ambiente!\n");
                         throw new ForaDosLimitesException("A região desejada pelo(a) " + e.getTipo() + " está fora dos limites do ambiente!\n");
                     }
                     else if (estaOcupado(x, y, z, e)){
+                        logger.logErr("Não foi possível finalizar a ação, pois a coordenada desejada está sendo ocupada por outra entidade!\n");
                         throw new LocalOcupadoException("A região desejada pelo(a) " + e.getTipo() + " está ocupada!\n");
                     } 
                 }
@@ -171,12 +185,14 @@ public class Ambiente {
 
     // Imprime o PlanoXY do ambiente, para visualizar o ambiente em 2D.
     public void visualizarAmbiente(){
+        logger.inicializarAcao("visualizarAmbiente", nome);
         for (int x = 0; x < getLarguraX(); x++){
             for (int y = 0; y < getLarguraY(); y++){
                 System.out.print(planoXY[x][y] + " "); // quando usa espaço entre os caracteres dá uma zoada não dá para ver direito as coisas...
             }
             System.out.print("\n");
         }
+        logger.finalizarAcao("Visualização do ambiente concluída.\n");
     }
 
 

@@ -8,15 +8,17 @@ import LAB05.src.Entidades.Robos.RoboLimpador;
 
 public class SensorDeVarredura {
     public void varreruda(AgenteInteligente agente){
+        agente.getAmbiente().getLogger().inicializarAcao("varredura", "Sensor de varredura");
         if (agente instanceof RoboLimpador){
             RoboLimpador robo = (RoboLimpador) agente;
+            agente.getAmbiente().getLogger().logAcao("Começará a varredura para encontrar todos os lixos.");
             for (Entidade e : agente.getAmbiente().getEntidades()){
                 if (e.getTipo() == TipoEntidade.LIXO){
                     Obstaculo lixo = (Obstaculo) e;
                     robo.getLixos().add(lixo);
                 }
             }
-            System.out.println("Agora o " + robo.getId() + " sabe de todos os lixos que estão no ambiente, vamos limpá-los.");
+            agente.getAmbiente().getLogger().finalizarAcao("Varredura finalizada com sucesso.\n");
         }       
     }
 }

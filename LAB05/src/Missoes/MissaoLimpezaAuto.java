@@ -8,11 +8,14 @@ import LAB05.src.Exceptions.MissaoInvalidaException;
 public class MissaoLimpezaAuto implements Missao {
     @Override
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException{
+        r.getAmbiente().getLogger().inicializarMissao(this, r.getId());
+        
         MissaoAprimorar aprimora = new MissaoAprimorar();
         MissaoLimpar limpar = new MissaoLimpar();
         MissaoMoverProximo mover = new MissaoMoverProximo();
 
         if (!(r instanceof RoboLimpador)){
+            r.getAmbiente().getLogger().logErr("Não foi possível finalizar a missão, pois o robô deve ser um limpador!\n");
             throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
         }
         
@@ -31,8 +34,9 @@ public class MissaoLimpezaAuto implements Missao {
                 limpador.setMissao(limpar);
                 limpador.executarMissao(limpador.getAmbiente());
             }
+            limpador.getAmbiente().getLogger().finalizarMissao("Missão de limpezaAuto finalizada com sucesso.");
         } catch (Exception e){
-            System.err.println("deu algum B.O que não era para dar, como:" + e);
+            limpador.getAmbiente().getLogger().logErr(e);
         }
     }
 
