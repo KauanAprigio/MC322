@@ -602,7 +602,7 @@ classDiagram
 
 ## Exceções Personalizadas
 
-  * **`MissaoInvalidaException`**: Lançada quando uma missão é atribuída a um robô que não pode executá-la (ex: `MissaoLimpar` para um `RoboLimpador`).
+  * **`MissaoInvalidaException`**: Lançada quando uma missão é atribuída a um robô que não pode executá-la (ex: `MissaoLimpar` para um `RoboBombeiro`).
   * **`SemMissaoException`**: Lançada quando o método `executarMissao` de um `AgenteInteligente` é chamado, mas nenhuma missão foi atribuída.
   * **`ErroComunicacaoException`**: Lançada quando há uma falha na comunicação, como tentar enviar uma mensagem para um destinatário inexistente ou um robô desligado.
   * **`ErrorApagarFogoException`**: Lançada pelo `RoboBombeiro` se ele não tiver água suficiente ou se não houver fogo ao alcance para apagar.
