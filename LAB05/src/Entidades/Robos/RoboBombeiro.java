@@ -136,7 +136,10 @@ public class RoboBombeiro extends Robo implements Comunicavel {
 
     @Override
     public void enviarMensagem(Comunicavel destinatario, String mensagem) throws ErroComunicacaoException {
+        // no caso o enviarMensagem do robo não precisa de uma verificação maior porque ele só comunica-se com a central, que não desliga e sempre é comunicavel
         Entidade destino = (Entidade) destinatario;
+
+        //robo verifica se já tem uma central no ambiente, caso não tenha ele não consegue fazer a comunicação
         if (!getAmbiente().getEntidades().contains(destino) || destinatario == null) {
             throw new ErroComunicacaoException("Erro de comunicação: Destinatário não existe!\n");
         }

@@ -9,6 +9,9 @@ import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Robos.Robo;
 import LAB05.src.Entidades.Robos.RoboBombeiro;
+import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
+import LAB05.src.Exceptions.ErroComunicacaoException;
+
 
 public class ComunicadorCentral extends CentralComunicacao implements Entidade, Comunicavel{
 
@@ -31,8 +34,17 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     }
 
     @Override
-    public void enviarMensagem(Comunicavel destinatario, String mensagem) {
-        receberMensagem(mensagem, destinatario); // aqui basicamente ele irá enviar uma mensagem
+    public void enviarMensagem(Comunicavel destinatario, String mensagem) throws ErroComunicacaoException {
+        RoboBombeiro bombeiro = (RoboBombeiro) destinatario;
+        if (bombeiro.getEstado() == EstadoRobo.OFF){
+            throw new ErroComunicacaoException("Erro de comunicação, o robo " + getId() + " está desligado!");
+        }
+
+         if (!getAmbiente().getEntidades().contains(bombeiro) || destinatario == null) {
+            throw new ErroComunicacaoException("Erro de comunicação: Destinatário não existe!\n");
+        }
+        bombeiro.receberMensagem(mensagem, this); // aqui basicamente ele irá enviar uma mensagem
+        registrarMensagem(getId(), mensagem);
     }
 
     @Override
@@ -40,6 +52,11 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         RoboBombeiro bombeiro = (RoboBombeiro) remetente;
         registrarMensagem((bombeiro.getId()), mensagem);
         if (mensagem.equalsIgnoreCase("INCÊNDIO APAGADO")) {
+            try{
+                enviarMensagem(bombeiro, "Entendido, irei atualizar os incêndios que ainda estão no ambiente");
+            } catch (ErroComunicacaoException message) {
+                System.out.println("DEU B.O, no caso deu: " + message);
+            }
             fogos.remove(bombeiro.getIncendioProximo());
             bombeiro.setIncendioProximo(null);
         }
