@@ -1,16 +1,12 @@
 Lista de coisas para serem implementadas/ corrigidas.
 
-1 - Falta implementar a lógica de apagar fogo do robô RoboBombeiro
+- falta fazer a main/menu interativo
 
-2 - Falta implementar o robô limpador e os sensores
+- atualizar a leitorconfig para atribuir missoes 
 
-3 - Falta implementar as Missões
+- conversar com ped sobre missões, no caso se elas estão de acordo
 
-4 - Falta implementar a lógica de troca de msgs
-
-///////////////////
-
-falta fazer a main/menu interativo
+...acho q é só se tiver mais coisa pode botar aqui que a gente vê
 
 
 
