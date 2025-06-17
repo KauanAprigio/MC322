@@ -9,7 +9,8 @@ import LAB05.src.Entidades.ComunicadorCentral;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
-import LAB05.src.Entidades.Robos.Robo;
+import LAB05.src.Entidades.Robos.RoboBombeiro;
+import LAB05.src.Entidades.Robos.RoboLimpador;
 
 public class LeitorConfig {
     private Scanner scanner;
@@ -50,7 +51,6 @@ public class LeitorConfig {
                 }
 
                 String tipoPrincipal = scannerAuxiliar.next(); // armazena a primeira palavra para ver o case que vai cair
-
                 switch (tipoPrincipal) { //divisao dos casos aqui, nao precisaria mudar o nome das variaveis x,y e z se a ordem do config.txt fosse diferente
                     case "FOGO":
                         String tipoFogo = scannerAuxiliar.next();
@@ -101,9 +101,9 @@ public class LeitorConfig {
                         int yRobo = scannerAuxiliar.nextInt();
                         int zRobo = scannerAuxiliar.nextInt(); // Para o robo bombeiro
                         if (tipoRobo.equals("RoboBombeiro")) {
-                            ambiente.adicionarEntidade(new Robo(nomeRobo, xRobo, yRobo, zRobo, 'B', ambiente), true);
+                            ambiente.adicionarEntidade(new RoboBombeiro(nomeRobo, xRobo, yRobo, zRobo, 'B', 3000, ambiente, 3000, 15), true);
                         } else if (tipoRobo.equals("RoboLimpador")) {
-                            ambiente.adicionarEntidade(new Robo(nomeRobo, xRobo, yRobo, zRobo, 'L', ambiente), true);
+                            ambiente.adicionarEntidade(new RoboLimpador(nomeRobo, xRobo, yRobo, zRobo, 'L', ambiente, 15), true);
                         }
                         break;
                     case "COMUNICADOR":

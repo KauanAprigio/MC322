@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import LAB05.src.Entidades.Interfaces.Comunicavel;
+import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
@@ -69,6 +70,14 @@ public class Main {
      * Executa uma série de testes para validar as funcionalidades e exceções.
      */
     private static void executarTestesAutomatizados() {
+        // instanciando os robos que já alocamos com o leitor config
+        for (Entidade e : ambiente.getEntidades()){
+            if (e.getRepresentacao() == 'L'){
+                roboLimpador = (RoboLimpador) e;
+            } else if (e.getRepresentacao() == 'B'){
+                roboBombeiro = (RoboBombeiro) e;
+            }
+        }
         System.out.println("\n--- 🧪 Executando Bateria de Testes 🧪 ---");
         System.out.println("(Silencie-se, mundo! Os testes estão começando!)\n");
 

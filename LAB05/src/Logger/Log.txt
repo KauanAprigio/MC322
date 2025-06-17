@@ -1,158 +1,140 @@
 1 - Ação do tipo inicializarMapa, inicializada por: Ambiente_Ambiente de Teste
 Ação 1 encerrada: Mapa inicializado com sucesso.
-
 2 - Ação do tipo inicializarAmbiente, inicializada por: Main
 3 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (5, 5, 0)
    -> Posição do canto superior direito: (10, 10, 5)
 Ação 3 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
-
 4 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (15, 15, 0)
    -> Posição do canto superior direito: (45, 45, 100)
 Ação 4 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
-
 5 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (4, 4, 0)
    -> Posição do canto superior direito: (4, 4, 0)
 Ação 5 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 6 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (3, 3, 0)
    -> Posição do canto superior direito: (3, 3, 0)
 Ação 6 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 7 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (6, 2, 0)
    -> Posição do canto superior direito: (6, 2, 0)
 Ação 7 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 8 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (1, 1, 0)
    -> Posição do canto superior direito: (1, 1, 0)
 Ação 8 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 9 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (104, 100, 0)
    -> Posição do canto superior direito: (104, 100, 0)
 Ação 9 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 10 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (100, 104, 0)
    -> Posição do canto superior direito: (100, 104, 0)
 Ação 10 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 11 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (50, 99, 0)
    -> Posição do canto superior direito: (55, 104, 5)
 Ação 11 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
-
 12 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (60, 27, 0)
    -> Posição do canto superior direito: (65, 32, 5)
 Ação 12 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
-
 13 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (60, 35, 0)
    -> Posição do canto superior direito: (60, 35, 0)
 Ação 13 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 14 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (64, 39, 0)
    -> Posição do canto superior direito: (64, 39, 0)
 Ação 14 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 15 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (68, 35, 0)
    -> Posição do canto superior direito: (68, 35, 0)
 Ação 15 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
-
 16 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (74, 30, 0)
    -> Posição do canto superior direito: (104, 60, 100)
 Ação 16 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
-
 17 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (60, 5, 0)
    -> Posição do canto superior direito: (80, 25, 20)
 Ação 17 encerrada: Entidade do tipo: LOCAL adicionada ao ambiente.
-
 18 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (5, 60, 0)
    -> Posição do canto superior direito: (35, 90, 0)
 Ação 18 encerrada: Entidade do tipo: LOCAL adicionada ao ambiente.
-
 19 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (69, 69, 0)
    -> Posição do canto superior direito: (99, 99, 100)
 Ação 19 encerrada: Entidade do tipo: LOCAL adicionada ao ambiente.
-
 20 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (51, 51, 0)
    -> Posição do canto superior direito: (56, 56, 100)
 Ação 20 encerrada: Entidade do tipo: COMUNICADOR adicionada ao ambiente.
-
 21 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (0, 0, 0)
    -> Posição do canto superior direito: (0, 0, 0)
 Ação 21 encerrada: Entidade do tipo: ROBO adicionada ao ambiente.
-
 22 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
    -> Posição do canto inferior esquerdo: (100, 100, 0)
    -> Posição do canto superior direito: (100, 100, 0)
 Ação 22 encerrada: Entidade do tipo: ROBO adicionada ao ambiente.
-
 Ação 21 encerrada: Inicialização do ambiente concluída.
-
 23 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
 Ação 23 encerrada: A região desejada pelo(a) FOGO está fora dos limites do ambiente!
-
 24 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
 Ação 24 encerrada: A região desejada pelo(a) FOGO está ocupada!
-
 25 - Ação do tipo removerEntidade, inicializada por: Ambiente_Ambiente de Teste
 Ação 25 encerrada: Entidade não está no ambiente ou não pôde ser encontrada!
-
 26 - Ação do tipo removerEntidade, inicializada por: Ambiente_Ambiente de Teste
 Ação 26 encerrada: A Entidade Fogo, do tipo FOGO, foi removida com sucesso.
-
 27 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 27 encerrada: Robô não está no ambiente ou não pôde ser encontrado!
-
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.aprimorar()" because "LAB05.src.Main.Main.roboBombeiro" is null
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.apagar_fogo(LAB05.src.Entidades.Interfaces.Comunicavel)" because "LAB05.src.Main.Main.roboBombeiro" is null
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.adicionar_agua()" because "LAB05.src.Main.Main.roboBombeiro" is null
-28 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 28 encerrada: Robô não está no ambiente ou não pôde ser encontrado!
-
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.adicionar_agua()" because "LAB05.src.Main.Main.roboBombeiro" is null
-29 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 29 encerrada: Robô não está no ambiente ou não pôde ser encontrado!
-
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.adicionar_agua()" because "LAB05.src.Main.Main.roboBombeiro" is null
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.apagar_fogo(LAB05.src.Entidades.Interfaces.Comunicavel)" because "LAB05.src.Main.Main.roboBombeiro" is null
-30 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 30 encerrada: Robô não está no ambiente ou não pôde ser encontrado!
-
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.enviarMensagem(LAB05.src.Entidades.Interfaces.Comunicavel, String)" because "LAB05.src.Main.Main.roboBombeiro" is null
+Ação 27 encerrada: Não foi possível mover o robô: Bombeiro_Kauan pois ele está desligado!
+28 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+Ação 28 encerrada: Não foi possível aprimorar o robô: Bombeiro_Kauan pois ele está desligado!
+29 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+Ação 29 encerrada: O robôBombeiro_Kauan não pode combater nenhum fogo, pois está desligado!
+30 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+Ação 30 encerrada: Bombeiro_Kauan está muito alto, desça para altura 1 para abastecer água!
 31 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 31 encerrada: Robô não está no ambiente ou não pôde ser encontrado!
-
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.apagar_fogo(LAB05.src.Entidades.Interfaces.Comunicavel)" because "LAB05.src.Main.Main.roboBombeiro" is null
-32 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 32 encerrada: Robô não está no ambiente ou não pôde ser encontrado!
-
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.apagar_fogo(LAB05.src.Entidades.Interfaces.Comunicavel)" because "LAB05.src.Main.Main.roboBombeiro" is null
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.enviarMensagem(LAB05.src.Entidades.Interfaces.Comunicavel, String)" because "LAB05.src.Main.Main.roboBombeiro" is null
+Ação 31 encerrada: A região desejada pelo(a) ROBO está ocupada!
+32 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+Ação 32 encerrada: Bombeiro_Kauan está muito alto, desça para altura 1 para abastecer água!
 33 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 33 encerrada: Robô não está no ambiente ou não pôde ser encontrado!
-
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.apagar_fogo(LAB05.src.Entidades.Interfaces.Comunicavel)" because "LAB05.src.Main.Main.roboBombeiro" is null
-34 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 34 encerrada: Robô não está no ambiente ou não pôde ser encontrado!
-
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.aprimorar()" because "LAB05.src.Main.Main.roboBombeiro" is null
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.aprimorar()" because "LAB05.src.Main.Main.roboBombeiro" is null
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.enviarMensagem(LAB05.src.Entidades.Interfaces.Comunicavel, String)" because "LAB05.src.Main.Main.roboBombeiro" is null
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.adicionar_agua()" because "LAB05.src.Main.Main.roboBombeiro" is null
-Exceção detectada: Cannot invoke "LAB05.src.Entidades.Robos.RoboBombeiro.apagar_fogo(LAB05.src.Entidades.Interfaces.Comunicavel)" because "LAB05.src.Main.Main.roboBombeiro" is null
+Ação 33 encerrada: A região desejada pelo(a) ROBO está ocupada!
+34 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+Ação 34 encerrada: Bombeiro_Kauan está muito alto, desça para altura 1 para abastecer água!
+35 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+Ação 35 encerrada: O robôBombeiro_Kauan não pode combater nenhum fogo, pois está desligado!
+36 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+Ação 36 encerrada: Não foi possível mover o robô: Bombeiro_Kauan pois ele está desligado!
+37 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+Ação 37 encerrada: Erro de comunicação: Destinatário não existe!
+38 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+Ação 38 encerrada: Não foi possível mover o robô: Bombeiro_Kauan pois ele está desligado!
+39 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+Ação 39 encerrada: O robôBombeiro_Kauan não pode combater nenhum fogo, pois está desligado!
+40 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+Ação 40 encerrada: Não foi possível mover o robô: Bombeiro_Kauan pois ele está desligado!
+41 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+Ação 41 encerrada: O robôBombeiro_Kauan não pode combater nenhum fogo, pois está desligado!
+42 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+Ação 42 encerrada: Erro de comunicação: Destinatário não existe!
+43 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+Ação 43 encerrada: Não foi possível mover o robô: Bombeiro_Kauan pois ele está desligado!
+44 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+Ação 44 encerrada: O robôBombeiro_Kauan não pode combater nenhum fogo, pois está desligado!
+45 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+Ação 45 encerrada: Não foi possível mover o robô: Bombeiro_Kauan pois ele está desligado!
+46 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+Ação 46 encerrada: Não foi possível aprimorar o robô: Bombeiro_Kauan pois ele está desligado!
+47 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+Ação 47 encerrada: Não foi possível aprimorar o robô: Bombeiro_Kauan pois ele está desligado!
+48 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+Ação 48 encerrada: Erro de comunicação: Destinatário não existe!
+49 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+Ação 49 encerrada: Bombeiro_Kauan está muito alto, desça para altura 1 para abastecer água!
+50 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+Ação 50 encerrada: O robôBombeiro_Kauan não pode combater nenhum fogo, pois está desligado!
