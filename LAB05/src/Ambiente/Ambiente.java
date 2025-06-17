@@ -132,7 +132,7 @@ public class Ambiente {
         // Se a nova posição está vazia ou é um local =>
         // Limpeza da posição antiga:
          // se estava em um local volta a posição para tipoLocal
-        if (r.EstahEmLocal()) mapa[oldX][oldY][oldZ] = TipoEntidade.LOCAL;
+        if (r.getEstahEmLocal()) mapa[oldX][oldY][oldZ] = TipoEntidade.LOCAL;
         // se não estava em um local a posição anterior vota a ser vazia
         else mapa[oldX][oldZ][oldZ] = TipoEntidade.VAZIO;
         // se estava no chão, atualiza o plano

@@ -26,33 +26,20 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     }
     
     public void adicionar_agua() throws ErrorAbastecimentoException {
-        // Verifica se o robô está dentro de um lago
-        boolean dentro_lago = false;
-        for (Entidade e : getAmbiente().getEntidades()) {
-            if (e.getTipo() == TipoEntidade.LOCAL){
-                Obstaculo o = (Obstaculo) e;
-                if (o.getTipoObstaculo().getNome() == "Lago" && o.getX_1() <= getX_1() && o.getY_1() <= getY_1() &&
-                o.getX_2() >= getX_1() && o.getY_2() >= getY_1()) {
-                    if (getZ_1() != 1) {
-                        throw new ErrorAbastecimentoException(getId() + " está voando, desça para altura 1 para abastecer água!\n");  // Se o robô estiver voando, não pode abastecer
-                    }
-                    System.out.println(getId() + " está em um lago e pode abastecer água.");
-                    dentro_lago = true;
-                    break;
-                }
-            }
+        getAmbiente().getLogger().inicializarAcao("Abastecimento", getId());
+        if (getZ_1() != 1) {
+            throw new ErrorAbastecimentoException(getId() + " está muito alto, desça para altura 1 para abastecer água!\n");  // Se o robô estiver voando, não pode abastecer
         }
         
-        if (!dentro_lago) {
-            throw new ErrorAbastecimentoException(getId() + " não está em um lago e não pode abastecer água!\n"); 
-        }
         if (getEstado() == EstadoRobo.OFF) {
             throw new ErrorAbastecimentoException("Não foi possível abastecer o robô: " + getId() + " pois ele está desligado!\n");
         }
-        
-        reservatorio = peso_max; // Abastece o reservatório até o máximo
-        System.out.println(getId() + " foi abastecido com sucesso.");
-        System.out.println("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
+
+        if (getLocalAtualRep() == 'l'){
+            reservatorio = peso_max; // Abastece o reservatório até o máximoAdd commentMore actions
+            getAmbiente().getLogger().logAcao("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
+            getAmbiente().getLogger().finalizarAcao(getId() + " foi abastecido com sucesso.");
+        }
     }
     
 
@@ -112,30 +99,23 @@ public class RoboBombeiro extends Robo implements Comunicavel {
             }                         
     }
     
-
     public void aprimorar() throws ErrorAprimoramentoException {
-        //verifica se o robô esta dentro de uma oficina
-        for (Entidade e : getAmbiente().getEntidades()) {
-            if(e.getTipo() == TipoEntidade.LOCAL){
-                Obstaculo o = (Obstaculo) e;
-                if (o.getTipoObstaculo() == TipoObstaculo.OFICINA) {
-                    if (getX_1() <= o.getX_2() && getX_1() >= o.getX_1() && getY_1() <= o.getY_2() && getY_1() >= o.getY_1()) {
-                        if (aprimorado) {
-                            String msg = getId() + " já está aprimorado e não pode ser aprimorado novamente!\n";
-                            throw new ErrorAprimoramentoException(msg);
-                        }
-                        System.out.println(getId() + " está dentro da oficina e pode ser aprimorado.");
-                        peso_max += 1500; // aumenta a capacidade máxima de peso em 1500 litros
-                        reservatorio = peso_max; // atualiza o reservatório para a nova capacidade máxima
-                        aprimorado = true; // marca que o robô foi aprimorado
-                        System.out.println("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.");
-                        System.out.println(getId() + " está com o reservatório cheio.\n");
-                    } else {
-                        String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
-                        throw new ErrorAprimoramentoException(msg);
-                    }
-                }
+        getAmbiente().getLogger().inicializarAcao("Aprimoramento", getId());
+        //verifica se o robô esta dentro de uma oficina  
+        if (getLocalAtualRep() == 'o'){
+            if (estahAprimorado()) {
+                String msg = getId() + " já está aprimorado e não pode ser aprimorado novamente!\n";
+                throw new ErrorAprimoramentoException(msg);
             }
+            getAmbiente().getLogger().logAcao(getId() + " está dentro da oficina e pode ser aprimorado.");
+            peso_max += 1500; // aumenta a capacidade máxima de peso em 1500 litros
+            reservatorio = peso_max; // atualiza o reservatório para a nova capacidade máxima
+            aprimorado = true; // marca que o robô foi aprimorado
+            getAmbiente().getLogger().finalizarAcao("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.");
+            getAmbiente().getLogger().logAcao(getId() + " está com o reservatório cheio.\n");
+        } else {
+            String msg = getId() + " não está dentro da oficina e não pode ser aprimorado!\n";
+            throw new ErrorAprimoramentoException(msg);
         }
     }
 
