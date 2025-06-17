@@ -8,7 +8,6 @@ import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
 import LAB05.src.Exceptions.*;
 
 public class RoboBombeiro extends Robo implements Comunicavel {
-    private int altitudeMaxima;
     private int peso_max; // peso maximo que o robo suporta;
     private int reservatorio; // litros de agua no reservatorio
     private int raio_de_cessar_fogo; // raio para ter uma distancia segura para apagar o fogo
@@ -19,7 +18,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     public RoboBombeiro(String id, int pos_x, int pos_y, int pos_z, char representacao, int reservatorio,
                         Ambiente ambiente, int altitudeMaxima, int peso_max, int raio_de_cessar_fogo) {
         super("Bombeiro_"+id, pos_x, pos_y, pos_z, representacao, ambiente);
-        this.altitudeMaxima = altitudeMaxima;
         this.peso_max = peso_max;
         this.raio_de_cessar_fogo = raio_de_cessar_fogo;
         this.reservatorio = reservatorio; // litros de agua no reservatorio (começa vazio)
@@ -157,12 +155,10 @@ public class RoboBombeiro extends Robo implements Comunicavel {
     
 
     // Getters e Setters
-    public int getAltitudeMaxima() { return altitudeMaxima; }
     public int getCapacidade() { return peso_max; }
     public int getReservatorio() { return reservatorio; }
     public int getRaioDeCessarFogo() { return raio_de_cessar_fogo; }
     public Obstaculo getIncendioProximo() { return incendio_proximo; }
 
-    public void setAltitudeMaxima(int altitudeMaxima) { this.altitudeMaxima = altitudeMaxima; }
     public void setIncendioProximo (Obstaculo incencio) { this.incendio_proximo = incencio; }
 }
