@@ -30,6 +30,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
             throw new RoboDesligadoException(msg);
         }
         int litros_necessarios = 0; // quantidade de agua para apagar o fogo
+        getAmbiente().getLogger().logAcao(getId() + " está contactando a central para localizar o próximo fogo...");
         incendio_proximo = central.LocalizarFogoMaisProx(this);
         if (incendio_proximo == null){ // normalmente quando não tiver mais nenhum incêndio
             String msg = getId() + " não há mais incêndios para apagar.\n";
@@ -38,7 +39,6 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         try{
             // move o robo para acima do incendio, z = 101 para ter certeza que estará acima do predio também em 100% dos casos
             getAmbiente().moverRobo(this, incendio_proximo.getX_1(), incendio_proximo.getY_1(), 101); 
-            getAmbiente().getLogger().logAcao(getId() + " moveu para próximo do incêndio.");
         } catch (Exception e){
             getAmbiente().getLogger().logErr(e);
         }
@@ -156,6 +156,8 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         if (!getAmbiente().getEntidades().contains(destino) || destinatario == null) {
             throw new ErroComunicacaoException("Erro de comunicação: Destinatário não existe!\n");
         }
+        // aqui se enquadra com sensores ativados para o logger
+        getAmbiente().getLogger().logAcao(getId() + " está contactando a central para localizar o próximo fogo..."); 
         destinatario.receberMensagem(mensagem, this);
         getAmbiente().getLogger().finalizarAcao("Enviou com sucesso a mensagem.\n");
     }

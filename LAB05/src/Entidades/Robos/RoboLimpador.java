@@ -39,7 +39,9 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
 
     @Override
     public void executarSensores(){
+        getAmbiente().getLogger().inicializarAcao("executarSensor", getId());
         sensor.varreruda(this);
+        getAmbiente().getLogger().finalizarAcao("A execução do sensor foi finalizada com sucesso.\n");
     }
 
     

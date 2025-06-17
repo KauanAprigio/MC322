@@ -28,7 +28,7 @@ public class MissaoMoverProximo implements Missao {
                 maisProximo = lixo; // Atualiza o lixo mais próximo
             }
         }
-        limpador.getAmbiente().getLogger().logAcao("Lixo encontrado e movendo-se até ele...");
+        limpador.getAmbiente().getLogger().logAcao("Lixo selecionado e movendo-se até ele...");
         try { // devo melhorar isso, por exemplo eu devo 
             limpador.getAmbiente().moverRobo(limpador, maisProximo.getX_1() + 1, maisProximo.getY_1() + 1, 0);
             limpador.getComunicador().registrarMensagem(limpador.getId(), "Movimento para o lixo mais próximo foi concluído com sucesso.");

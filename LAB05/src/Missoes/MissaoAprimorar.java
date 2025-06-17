@@ -24,7 +24,6 @@ public class MissaoAprimorar implements Missao{
                     int Ymaisproximo = Math.max(oficina.getX_1(), Math.min(r.getY_1(), oficina.getX_2()));
                     try {
                         r.getAmbiente().moverRobo(r, Ymaisproximo, Xmaisproximo, 0);
-                        r.getAmbiente().getLogger().logAcao("Moveu-se até a oficina...");
                     } catch (Exception message) {
                         r.getAmbiente().getLogger().logErr(message);
                     }

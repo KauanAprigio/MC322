@@ -90,6 +90,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
     }
 
     public Obstaculo LocalizarFogoMaisProx (Robo robozin) {
+        getAmbiente().getLogger().inicializarAcao("localizarFogoPróximo", getId());
         double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível
         Obstaculo maisProximo = null; // Inicializa como null para verificar se encontrou algum lixo
         for (Obstaculo fogo : fogos) {
@@ -103,6 +104,9 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
                 maisProximo = fogo; // Atualiza o fogo mais próximo
             }
         }
+        // aqui não irei dar a coordenada do fogo, pois já farei isso quando o robo for mover para o fogo
+        getAmbiente().getLogger().logAcao("O fogo " + maisProximo.getId() + "foi localizado");
+        getAmbiente().getLogger().finalizarAcao("A localização do fogo mais proximo ao " + robozin.getId() + "foi finalizada com sucesso.\n");
         return maisProximo;
     }
 
