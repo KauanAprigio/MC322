@@ -101,9 +101,9 @@ public class LeitorConfig {
                         int yRobo = scannerAuxiliar.nextInt();
                         int zRobo = scannerAuxiliar.nextInt(); // Para o robo bombeiro
                         if (tipoRobo.equals("RoboBombeiro")) {
-                            ambiente.adicionarEntidade(new Robo(nomeRobo, xRobo, yRobo, zRobo, 'y', ambiente), true);
+                            ambiente.adicionarEntidade(new Robo(nomeRobo, xRobo, yRobo, zRobo, 'B', ambiente), true);
                         } else if (tipoRobo.equals("RoboLimpador")) {
-                            ambiente.adicionarEntidade(new Robo(nomeRobo, xRobo, yRobo, zRobo, 'x', ambiente), true);
+                            ambiente.adicionarEntidade(new Robo(nomeRobo, xRobo, yRobo, zRobo, 'L', ambiente), true);
                         }
                         break;
                     case "COMUNICADOR":
@@ -117,7 +117,7 @@ public class LeitorConfig {
                 }
                 scannerAuxiliar.close(); // Fechar o Scanner da linha
             }
-            ambiente.getLogger().finalizarAcao("Inicialização do ambiente concluída!");
+            ambiente.getLogger().finalizarAcao("Inicialização do ambiente concluída.\n");
         } catch (Exception e) {
             System.err.println("Erro durante a leitura do arquivo de configuração: " + e.getMessage());
             ambiente.getLogger().logErr(e);
