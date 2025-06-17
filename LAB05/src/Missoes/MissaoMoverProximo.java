@@ -28,6 +28,7 @@ public class MissaoMoverProximo implements Missao {
         }
         try { // devo melhorar isso, por exemplo eu devo 
             limpador.getAmbiente().moverRobo(limpador, maisProximo.getX_1() + 1, maisProximo.getY_1() + 1, 0);
+            limpador.getComunicador().registrarMensagem(limpador.getId(), "Movimento para o lixo mais próximo foi concluído com sucesso.");
         } catch (Exception e) {
             System.out.println("ERRO! Nunca deve cair aqui" + e.getMessage()); // 
         }

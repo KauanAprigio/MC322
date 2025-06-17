@@ -31,7 +31,8 @@ public class MissaoAprimorar implements Missao{
             int raio = robo.getRaioLimpeza() + 15; // adiciono 15m ao raio atual
             robo.setRaioLimpeza(raio); //atualizo o raio
             robo.setAprimorar(true); // marca que o robô foi aprimorado
-            System.out.println(robo.getId() + " teve seu raio de limpeza aumentado para " + raio + ".\n");    
+            System.out.println(robo.getId() + " teve seu raio de limpeza aumentado para " + raio + ".\n");
+            robo.getComunicador().registrarMensagem(robo.getId(), "Aprimoramento foi concluído com sucesso.");  
         } else {
             throw new MissaoInvalidaException("O robô já foi aprimorado anteriormente.");
         }

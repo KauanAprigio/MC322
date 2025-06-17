@@ -15,14 +15,13 @@ public class MissaoLimpezaAuto implements Missao {
         if (!(r instanceof RoboLimpador)){
             throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
         }
-
+        
         RoboLimpador limpador = (RoboLimpador) r;
         
         try {
             limpador.setMissao(aprimora);
             limpador.executarMissao(limpador.getAmbiente());
 
-            
             limpador.executarSensores();
 
             while (!(limpador.getLixos().isEmpty())){

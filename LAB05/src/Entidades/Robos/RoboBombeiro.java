@@ -75,7 +75,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
                         System.out.println("Erro Inesperado: " + e1.getMessage());
                     }    
                 }
-                    enviarMensagem(Central, "Incêndio apagado"); // aqui irá tirar o fogo do array fogos do ComunicadorCentral
+                enviarMensagem(Central, "Incêndio apagado"); // aqui irá tirar o fogo do array fogos do ComunicadorCentral
             }                         
     }
     
@@ -99,6 +99,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
             peso_max += 1500; // aumenta a capacidade máxima de peso em 1500 litros
             reservatorio = peso_max; // atualiza o reservatório para a nova capacidade máxima
             aprimorado = true; // marca que o robô foi aprimorado
+            central.registrarMensagem(getId(), "Aprimoramento foi concluído com sucesso.");
             getAmbiente().getLogger().finalizarAcao("Reservatório máximo do " + getId() + " agora é de " + peso_max + " litros.");
             getAmbiente().getLogger().logAcao(getId() + " está com o reservatório cheio.\n");
         } else { // caso não esteja em um oficina
@@ -122,6 +123,7 @@ public class RoboBombeiro extends Robo implements Comunicavel {
         //confirmo se está no lago e abasteço o robo
         if (getLocalAtualRep() == 'l'){
             reservatorio = peso_max; // Abastece o reservatório até o máximoAdd commentMore actions
+            central.registrarMensagem(getId(), "Abastecimento foi concluído com sucesso.");
             getAmbiente().getLogger().logAcao("Reservatorio possui " + reservatorio + " litros de um máximo de: " + peso_max + " litros.\n");
             getAmbiente().getLogger().finalizarAcao(getId() + " foi abastecido com sucesso.");
         }

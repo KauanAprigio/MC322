@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import LAB05.src.Entidades.Interfaces.Sensoreavel;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Exceptions.*;
+import LAB05.src.Entidades.CentralComunicacao;
 import LAB05.src.Entidades.SensorDeVarredura;
 import LAB05.src.Entidades.Obstaculos.*;
 
@@ -11,11 +12,13 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     private boolean aprimorado = false;
     private ArrayList<Obstaculo> lixos;
     private SensorDeVarredura sensor;
+    private CentralComunicacao comunicador;
 
     public RoboLimpador(String id, int x_1, int y_1, int z_1, char representacao, Ambiente ambiente, int raio_limpeza) {
         super("RoboLimpador_"+id, x_1, y_1, z_1, 'L', ambiente);
         this.raio_limpeza = raio_limpeza;
         sensor = new SensorDeVarredura();
+        comunicador = new CentralComunicacao();
     }
 
     @Override
@@ -45,6 +48,7 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     public ArrayList<Obstaculo> getLixos() { return lixos; }
     public int getRaioLimpeza() { return raio_limpeza; }
     public boolean estahAprimorado() { return aprimorado; }
+    public CentralComunicacao getComunicador() { return comunicador; }
 
     public void setRaioLimpeza(int raio) { this.raio_limpeza = raio; }
     public void setAprimorar(boolean aprimorar) { this.aprimorado = aprimorar; }
