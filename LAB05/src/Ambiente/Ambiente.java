@@ -39,7 +39,7 @@ public class Ambiente {
         this.planoXY = planoXY;
         entidades = new ArrayList<Entidade>();
         this.nome = "Ambiente_"+nome; // nome padrão do ambiente
-        this.logger = new Logger("Log.txt");
+        this.logger = new Logger("LAB05/src/Logger/Log.txt");
     }
 
 
@@ -105,7 +105,7 @@ public class Ambiente {
 
     // ve se esta dentro dos limites de x,y e altitude, caso contrário retorna false
     public boolean dentroDosLimites(int x, int y, int altitude) { 
-        if ((origemX <= x && x <= larguraX) && (origemY <= y && y <= larguraY) && (altitudeMinima <= altitude && altitude <= larguraZ)) return true;
+        if ((origemX <= x && x < larguraX) && (origemY <= y && y < larguraY) && (altitudeMinima <= altitude && altitude < larguraZ)) return true;
         return false;
     }
 
