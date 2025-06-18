@@ -3,6 +3,7 @@ package LAB05.src.Logger;
 import java.io.PrintWriter;
 import java.util.Stack; // Importa Stack para gerenciar IDs de ações
 
+import LAB05.src.Exceptions.ErrorLoggerException;
 import LAB05.src.Missoes.Missao;
 
 public class Logger {
@@ -64,7 +65,7 @@ public class Logger {
         impressor.println("-> " + texto);
     }
 
-    public void finalizarMissao(String resultado) {
+    public void finalizarMissao(String resultado) throws ErrorLoggerException{
         if (!idsMissoesAtivas.isEmpty()) {
             int idMissaoFinalizada = idsMissoesAtivas.pop(); // Pega o ID da missão que está sendo finalizada
             profundidadesAcaoAtivas.pop(); // Desempilha a profundidade inicial da missão
@@ -78,19 +79,24 @@ public class Logger {
             
             // Reseta contadores específicos da missão após uma missão ser concluída
             contadorIdAcaoMissao = 0;
+        } else{
+            // Se idsMissoesAtivas estiver vazia aqui, significa que isso foi chamado sem uma missão ativa
+            // Ou foi chamado múltiplas vezes para a mesma missão, o que indica um erro de uso.
+            throw new ErrorLoggerException("Tentativa de finalizar missão sem missão ativa!");
         }
-        // Se idsMissoesAtivas estiver vazia aqui, significa que isso foi chamado sem uma missão ativa
-        // Ou foi chamado múltiplas vezes para a mesma missão, o que indica um erro de uso.
     }
 
-    public void finalizarAcao(String resultado) {
+    public void finalizarAcao(String resultado) throws ErrorLoggerException{
         if (!profundidadesAcaoAtivas.isEmpty()) {
             int idAcaoFinalizada = profundidadesAcaoAtivas.pop(); // Pega o ID da ação que está sendo finalizada
             imprimirIndentacao();
             impressor.printf("-> Ação %d encerrada: %s\n", idAcaoFinalizada, resultado);
+        } else {
+            // Se profundidadesAcaoAtivas estiver vazia aqui, significa que isso foi chamado sem uma ação ativa
+            // ou muitas chamadas a inicializarAcao em comparação com finalizarAcao
+            throw new ErrorLoggerException("Tentativa de finalizar ação sem ação ativa!");
         }
-        // Se profundidadesAcaoAtivas estiver vazia aqui, significa que isso foi chamado sem uma ação ativa
-        // ou muitas chamadas a inicializarAcao em comparação com finalizarAcao
+
     }
 
     public void logErr(Exception e) {
@@ -101,10 +107,18 @@ public class Logger {
         // Tenta limpar quaisquer ações e missões ativas restantes
         // Isso imprimirá mensagens de "encerrada" para elas.
         while (!profundidadesAcaoAtivas.isEmpty()) {
-            finalizarAcao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as ações pendentes
+            try {
+                finalizarAcao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as ações pendentes
+            } catch (Exception error) {
+                System.out.printf("Erro no Logger: %s", e.getMessage());
+            }
         }
         while (!idsMissoesAtivas.isEmpty()) {
-            finalizarMissao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as missões pendentes
+           try {
+                finalizarMissao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as ações pendentes
+            } catch (Exception error) {
+                System.out.printf("Erro no Logger: %s", e.getMessage());
+            }
         }
     }
 
