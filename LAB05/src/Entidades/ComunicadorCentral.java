@@ -105,7 +105,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             }
         }
         // aqui não irei dar a coordenada do fogo, pois já farei isso quando o robo for mover para o fogo
-        getAmbiente().getLogger().logAcao("O fogo " + maisProximo.getId() + " foi localizado");
+        getAmbiente().getLogger().logAcao("O fogo " + maisProximo.getId() + " foi localizado.");
         getAmbiente().getLogger().finalizarAcao("A procura pela localização do fogo mais proximo ao " + robozin.getId() + " foi finalizada com sucesso.\n");
         return maisProximo;
     }

@@ -99,79 +99,72 @@ Ação 29 encerrada: Não foi possível aprimorar o robô: Bombeiro_Kauan pois e
 30 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central para localizar o próximo fogo...
 31 - Ação do tipo localizarFogoPróximo, inicializada por: Comunicador Central
-   -> O fogo Fogo foi localizado
+   -> O fogo Fogo foi localizado.
 Ação 31 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
-32 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-   -> Nova posição: (5, 5, 101)
-Ação 32 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
-Ação 31 encerrada: Bombeiro_Kauan precisa de 100 litros a mais para apagar o incêndio!
-33 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
-Ação 33 encerrada: Bombeiro_Kauan não está em um lago e não pode ser abastecido!
-34 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+Ação 30 encerrada: Bombeiro_Kauan precisa de 100 litros a mais para apagar o incêndio!
+32 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+Ação 32 encerrada: Bombeiro_Kauan não está em um lago e não pode ser abastecido!
+33 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central...
-35 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
-Ação 35 encerrada: Enviou com sucesso a mensagem.
-36 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+34 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
+Ação 34 encerrada: Enviou com sucesso a mensagem: ABASTECIMENTO
+35 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
    -> Nova posição: (5, 60, 0)
-Ação 36 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
-37 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
-Ação 37 encerrada: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
+Ação 35 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+36 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
 Ação 36 encerrada: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
-38 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+Ação 35 encerrada: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
+37 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
    -> Nova posição: (5, 60, 1)
-Ação 38 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
-39 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
-Ação 39 encerrada: Bombeiro_Kauan não está em um lago e não pode ser abastecido!
-40 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+Ação 37 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+38 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+Ação 38 encerrada: Bombeiro_Kauan não está em um lago e não pode ser abastecido!
+39 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
    -> Nova posição: (0, 0, 0)
-Ação 40 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
-41 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+Ação 39 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+40 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central para localizar o próximo fogo...
-42 - Ação do tipo localizarFogoPróximo, inicializada por: Comunicador Central
-   -> O fogo Fogo foi localizado
-Ação 42 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
-43 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
-Ação 43 encerrada: A região desejada pelo(a) ROBO está ocupada!
-Ação 42 encerrada: A região desejada pelo(a) ROBO está ocupada!
-Exceção detectada: Bombeiro_Kauan precisa de 100 litros a mais para apagar o incêndio!
-
-44 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
-Ação 44 encerrada: Bombeiro_Kauan não está dentro da oficina e não pode ser aprimorado!
-45 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+41 - Ação do tipo localizarFogoPróximo, inicializada por: Comunicador Central
+   -> O fogo Fogo foi localizado.
+Ação 41 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
+Ação 40 encerrada: Bombeiro_Kauan precisa de 100 litros a mais para apagar o incêndio!
+42 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+Ação 42 encerrada: Bombeiro_Kauan não está dentro da oficina e não pode ser aprimorado!
+43 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central...
-46 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
-Ação 46 encerrada: Enviou com sucesso a mensagem.
-47 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+44 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
+Ação 44 encerrada: Enviou com sucesso a mensagem: APRIMORAMENTO
+45 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
    -> Nova posição: (60, 5, 0)
-Ação 47 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
-48 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+Ação 45 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+46 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está dentro da oficina e pode ser aprimorado.
    -> Reservatório máximo do Bombeiro_Kauan agora é de 4500 litros.
    -> Bombeiro_Kauan está com o reservatório cheio.
-Ação 48 encerrada: O Aprimoramento de Bombeiro_Kauan foi finalizado com sucesso.
-49 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
-Ação 49 encerrada: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
-Ação 48 encerrada: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
-50 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+Ação 46 encerrada: O Aprimoramento de Bombeiro_Kauan foi finalizado com sucesso.
+47 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+Ação 47 encerrada: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
+Ação 46 encerrada: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
+48 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central para localizar o próximo fogo...
-51 - Ação do tipo localizarFogoPróximo, inicializada por: Comunicador Central
-   -> O fogo Fogo foi localizado
-Ação 51 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
-52 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+49 - Ação do tipo localizarFogoPróximo, inicializada por: Comunicador Central
+   -> O fogo Fogo foi localizado.
+Ação 49 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
+50 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
    -> Nova posição: (60, 27, 101)
-Ação 52 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+Ação 50 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
    -> Incêndio apagado com sucesso.
    -> Foram usados 100 litros para apagar o incêndio.
    -> O reservatório está atualmente com 4400 litros.
-53 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+51 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central...
-54 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
-Ação 54 encerrada: Aviso de incêndio apagado foi recebido pela central
-55 - Ação do tipo enviarMensagem, inicializada por: Comunicador Central
-56 - Ação do tipo receberMensagem, inicializada por: Bombeiro_Kauan
-Ação 56 encerrada: Bombeiro_Kauan recebebeu a mensagem de: Atualizando os incêndios que ainda estão no ambiente
-Ação 55 encerrada: A mensagem foi enviada com sucesso.
-Ação 54 encerrada: Enviou com sucesso a mensagem.
-Ação 53 encerrada: Apagar fogo finalizado por Bombeiro_Kauan
-57 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
-Ação 57 encerrada: Erro de comunicação: Destinatário não existe!
+52 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
+Ação 52 encerrada: Aviso de incêndio apagado foi recebido pela central
+53 - Ação do tipo enviarMensagem, inicializada por: Comunicador Central
+54 - Ação do tipo receberMensagem, inicializada por: Bombeiro_Kauan
+Ação 54 encerrada: Bombeiro_Kauan recebebeu a mensagem: Atualizando os incêndios que ainda estão no ambiente
+Ação 53 encerrada: A mensagem foi enviada com sucesso.
+Ação 52 encerrada: Enviou com sucesso a mensagem: Incêndio apagado
+Ação 51 encerrada: Apagar fogo finalizado por Bombeiro_Kauan
+55 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+Ação 55 encerrada: Erro de comunicação: Destinatário não existe!
