@@ -32,7 +32,7 @@ public class Ambiente {
     private Logger logger;
 
     //Construtor
-    public Ambiente(int larguraZ, int larguraX, int larguraY, TipoEntidade[][][] mapa, char[][] planoXY, String nome) {
+    public Ambiente(int larguraZ, int larguraX, int larguraY, TipoEntidade[][][] mapa, char[][] planoXY, String nome, String filepath) {
         this.larguraX = larguraX;
         this.larguraY = larguraY;
         this.larguraZ = larguraZ;
@@ -40,7 +40,7 @@ public class Ambiente {
         this.planoXY = planoXY;
         entidades = new ArrayList<Entidade>();
         this.nome = "Ambiente_"+nome; // nome padrão do ambiente
-        this.logger = new Logger("LAB05/src/Logger/Log.txt");
+        this.logger = new Logger(filepath);
     }
 
 

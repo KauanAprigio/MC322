@@ -25,9 +25,9 @@ import LAB05.src.Missoes.Missao;
  */
 public class Logger {
     // Esses contadores agora serão principalmente para atribuir IDs únicos
-    private static int contadorIdAcaoGlobal = 0;
-    private static int contadorIdAcaoMissao = 0;
-    private static int contadorIdMissao = 0;
+    private static int contadorIdAcaoGlobal;
+    private static int contadorIdAcaoMissao;
+    private static int contadorIdMissao;
 
     // Usa uma pilha para gerenciar os níveis de indentação para as ações.
     // Cada entrada representa uma ação ativa e ajuda a determinar sua indentação.
@@ -41,8 +41,11 @@ public class Logger {
             Logger.impressor = new PrintWriter(nomeArquivo);
             profundidadesAcaoAtivas = new Stack<>();
             idsMissoesAtivas = new Stack<>();
+            contadorIdAcaoGlobal = 0;
+            contadorIdAcaoMissao = 0;
+            contadorIdMissao = 0;
         } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("Erro na criação do logger: " + e.getMessage());
         }
     }
 
