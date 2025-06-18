@@ -12,7 +12,7 @@ import LAB05.src.Entidades.Obstaculos.*;
 public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     private int raio_limpeza;
     private boolean aprimorado = false;
-    private ArrayList<Obstaculo> lixos = new ArrayList<Obstaculo>();
+    private ArrayList<Obstaculo> lixos;
     private SensorDeVarredura sensor;
     private CentralComunicacao comunicador;
 
@@ -45,6 +45,7 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
             throw new RoboDesligadoException("O robô " + getId() + " não pode acionar os sensores, pois está desligado!\n");
         }
         getAmbiente().getLogger().inicializarAcao("executarSensor", getId());
+        lixos = new ArrayList<Obstaculo>();
         sensor.varreruda(this);
         getAmbiente().getLogger().finalizarAcao("A execução do sensor foi finalizada com sucesso.\n");
     }

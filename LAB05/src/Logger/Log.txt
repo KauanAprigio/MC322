@@ -198,25 +198,32 @@ Exceção detectada: O robô RoboLimpador_Diego não pode acionar os sensores, p
 
 ------- MISSÃO 1 -------
 Agente RoboLimpador_Diego inicializando missão:
-Limpeza dos lixos próximos
+Ir para o lixo mais próximo.
 ------- Fim Missão 1 -------
-Relatório da missão: Não foi possível limpar o ambiente pois o robô encontra-se desligado!
+Relatório da missão: Não foi possível mover para o lixo mais próximo, pois o robô encontra-se desligado!
 
 Total de ações executadas: 0
 ------- MISSÃO 2 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpeza dos lixos próximos
+------- Fim Missão 2 -------
+Relatório da missão: Não foi possível limpar o ambiente, pois o robô encontra-se desligado!
+
+Total de ações executadas: 0
+------- MISSÃO 3 -------
 Agente RoboLimpador_Diego inicializando missão:
 Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
    -> Está localizando a oficina...
    -> Está procurando a melhor rota até a oficina...
 1 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
     -> Ação 1 encerrada: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
-------- Fim Missão 2 -------
+------- Fim Missão 3 -------
 Relatório da missão: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
 
 Total de ações executadas: 0
 65 - Ação do tipo Ligar Robô, inicializada por: RoboLimpador_Diego
 Ação 65 encerrada: O robô foi ligado com sucesso.
-------- MISSÃO 3 -------
+------- MISSÃO 4 -------
 Agente RoboLimpador_Diego inicializando missão:
 Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
    -> Está localizando a oficina...
@@ -227,22 +234,29 @@ Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento d
    -> Está na oficina...
    -> RoboLimpador_Diego teve seu raio de limpeza aumentado para 30.
 
-------- Fim Missão 3 -------
-Relatório da missão: O agente RoboLimpador_Diego finalizou sua missão de aprimoramento com sucesso.
-
-Total de ações executadas: 1
-------- MISSÃO 4 -------
-Agente RoboLimpador_Diego inicializando missão:
-Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
 ------- Fim Missão 4 -------
-Relatório da missão: O robô já foi aprimorado anteriormente.
+Relatório da missão: O agente RoboLimpador_Diego finalizou sua missão de aprimoramento com sucesso.
 
 Total de ações executadas: 1
 ------- MISSÃO 5 -------
 Agente RoboLimpador_Diego inicializando missão:
-Limpeza dos lixos próximos
+Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
 ------- Fim Missão 5 -------
-Relatório da missão: Não há mais lixos no ambiente ou o robô RoboLimpador_Diego não executou o seu sensor de varredura!
+Relatório da missão: O robô já foi aprimorado anteriormente.
+
+Total de ações executadas: 1
+------- MISSÃO 6 -------
+Agente RoboLimpador_Diego inicializando missão:
+Ir para o lixo mais próximo.
+------- Fim Missão 6 -------
+Relatório da missão: Não foi possível mover para o lixo mais próximo, o robô RoboLimpador_Diego não executou o seu sensor de varredura!
+
+Total de ações executadas: 1
+------- MISSÃO 7 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpeza dos lixos próximos
+------- Fim Missão 7 -------
+Relatório da missão: Não foi possível limpar, pois o robô RoboLimpador_Diego não executou o seu sensor de varredura!
 
 Total de ações executadas: 1
 66 - Ação do tipo executarSensor, inicializada por: RoboLimpador_Diego
@@ -250,24 +264,26 @@ Total de ações executadas: 1
    -> Começará a varredura para encontrar todos os lixos.
 Ação 67 encerrada: Varredura finalizada com sucesso.
 Ação 66 encerrada: A execução do sensor foi finalizada com sucesso.
-------- MISSÃO 6 -------
+------- MISSÃO 8 -------
 Agente RoboLimpador_Diego inicializando missão:
 Limpeza dos lixos próximos
-   -> Verificando distância para efetuar a limpeza.
+   -> Verificando o ambiente ao redor para efetuar a limpeza.
    -> RoboLimpador_Diego limpou Sujeira encardida.
-------- Fim Missão 6 -------
-Relatório da missão: Missão de limpeza finalizada com sucesso.
-
-Total de ações executadas: 1
-   -> Verificando distância para efetuar a limpeza.
    -> RoboLimpador_Diego limpou Sacola plástica.
-------- Fim Missão 5 -------
-Relatório da missão: Missão de limpeza finalizada com sucesso.
-
-Total de ações executadas: 1
-   -> Verificando distância para efetuar a limpeza.
    -> RoboLimpador_Diego limpou Comida no chão.
-------- Fim Missão 4 -------
+------- Fim Missão 8 -------
 Relatório da missão: Missão de limpeza finalizada com sucesso.
 
 Total de ações executadas: 1
+------- MISSÃO 9 -------
+Agente RoboLimpador_Diego inicializando missão:
+Ir para o lixo mais próximo.
+   -> Procurando o lixo mais próximo...
+   -> Lixo selecionado e movendo-se até ele...
+3 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (7, 3, 0)
+    -> Ação 3 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+------- Fim Missão 9 -------
+Relatório da missão: Missão de movimentar para o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 2

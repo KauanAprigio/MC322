@@ -156,11 +156,14 @@ public class Main {
         MissaoLimpar limpar = new MissaoLimpar();
         MissaoMoverProximo moverProximo = new MissaoMoverProximo();
         
-        // Testes com o robo desligado
+        // Testes com o robo desligado, logo ele irá cair na exception em todos
         try { ambiente.moverRobo(roboLimpador, 50, 99, 10); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboLimpador.executarSensores(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         
+        roboLimpador.setMissao(moverProximo);
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+
         roboLimpador.setMissao(limpar);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
 
@@ -169,12 +172,23 @@ public class Main {
         
         // Testes com o robo ligado
         roboLimpador.ligar();
-        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboLimpador.executarMissao(ambiente); System.out.println("Teste [OK] Aprimorou com sucesso.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); } // exception já está aprimorado
+
+        // Vai cair na exception, porque o arrayList não foi instanciado
+        roboLimpador.setMissao(moverProximo);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
 
         roboLimpador.setMissao(limpar);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        
+        // Instancio o arraylist de lixos
         try { roboLimpador.executarSensores(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        
+        // Executará as missões corretamente
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+
+        roboLimpador.setMissao(moverProximo);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
