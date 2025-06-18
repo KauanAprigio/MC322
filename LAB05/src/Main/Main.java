@@ -43,7 +43,6 @@ public class Main {
 
         inicializarAmbiente();
         executarTestesAutomatizados();
-        menuInterativo();
         
 
         scanner.close();
