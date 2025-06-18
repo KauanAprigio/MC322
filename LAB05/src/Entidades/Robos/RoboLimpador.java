@@ -2,7 +2,6 @@ package LAB05.src.Entidades.Robos;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import LAB04.Code.Exceptions.ErrorLimpezaException;
 import LAB05.src.Entidades.Interfaces.Sensoreavel;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Exceptions.*;

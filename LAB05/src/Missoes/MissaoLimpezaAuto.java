@@ -10,7 +10,7 @@ public class MissaoLimpezaAuto implements Missao {
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException{
         r.getAmbiente().getLogger().inicializarMissao(this, r.getId());
         
-        MissaoLimpezaProxima mover = new MissaoLimpezaProxima();
+        MissaoLimpezaProxima limpeza_proxima = new MissaoLimpezaProxima();
 
         if (!(r instanceof RoboLimpador)){
             throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
@@ -20,7 +20,7 @@ public class MissaoLimpezaAuto implements Missao {
         
         try {
             while (!(limpador.getLixos().isEmpty())){
-                limpador.setMissao(mover);
+                limpador.setMissao(limpeza_proxima);
                 limpador.executarMissao(limpador.getAmbiente());
 
                 limpador.limpar();
