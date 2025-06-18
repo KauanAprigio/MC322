@@ -35,13 +35,12 @@ public class Robo implements Entidade {
         pos_x += deltaX;
         pos_y += deltaY;
         pos_z += deltaZ;
-        if (ambiente.getMapa()[pos_x][pos_y][pos_z] == TipoEntidade.VAZIO) {
-            setEstahEmLocal(false);
-            setLocalAtualRep('v');
-        }
-        else{
+        if (ambiente.getMapa()[pos_x][pos_y][0] == TipoEntidade.LOCAL) {
             setEstahEmLocal(true);
             setLocalAtualRep(ambiente.getplanoXY()[pos_x][pos_y]);
+        } else if (ambiente.getMapa()[pos_x][pos_y][0] == TipoEntidade.VAZIO){
+            setEstahEmLocal(false);
+            setLocalAtualRep('v');
         } 
     }
 
