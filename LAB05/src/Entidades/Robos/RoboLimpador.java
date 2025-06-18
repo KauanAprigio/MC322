@@ -44,6 +44,7 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
                 }
             }
         }
+        
         getAmbiente().getLogger().finalizarAcao("Limpeza do lixo finalizada com sucesso.\n");
 
     }

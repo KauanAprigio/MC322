@@ -43,6 +43,7 @@ public class Main {
 
         inicializarAmbiente();
         executarTestesAutomatizados();
+        menuInterativo();
         
 
         scanner.close();
@@ -59,13 +60,13 @@ public class Main {
      */
     private static void inicializarAmbiente() {
         System.out.println("\n--- 🛠️  Configurando o Mundo Virtual 🛠️  ---\n");
-        LeitorConfig inicializdor = new LeitorConfig();
+        LeitorConfig inicializador = new LeitorConfig();
         TipoEntidade[][][] mapa = new TipoEntidade[110][110][110];// depois tem q comentar o pq do z ir até 111, mas acho que é para o robo bombeiro subir acima dos predios para apagar o fogo
         char[][] planoXY = new char[110][110];
         ambiente = new Ambiente(110, 110, 110, mapa, planoXY, "Ambiente de Teste");
         ambiente.inicializarMapa();
 
-        inicializdor.inicializarAmbiente(ambiente, "LAB05/src/Main/config.txt");
+        inicializador.inicializarAmbiente(ambiente, "LAB05/src/Main/config.txt");
 
         System.out.println("--- ✅ Mundo configurado! ---");
         
@@ -196,6 +197,20 @@ public class Main {
     }
 
     private static void menuInterativo() {
+        inicializarAmbiente();
+        // instanciando os robos que já alocamos com o leitor config
+        for (Entidade e : ambiente.getEntidades()){
+            if (e.getRepresentacao() == 'L'){
+                roboLimpador = (RoboLimpador) e;
+            } else if (e.getRepresentacao() == 'B'){
+                roboBombeiro = (RoboBombeiro) e;
+            } else if (e.getRepresentacao() == 'c'){
+                comunicador = (ComunicadorCentral) e;
+            }
+        }
+        roboBombeiro.escolheCentral(comunicador);
+
+        //Agora tudo pronto, temos um novo ambiente igual o inicial dos testesAutomatizados
         System.out.println("\n--- 🤖 Bem-vindo ao Menu Interativo! 🤖 ---");
         System.out.println("Chegou a hora de pilotar! Escolha suas ações e divirta-se (ou salve o mundo!).");
 
