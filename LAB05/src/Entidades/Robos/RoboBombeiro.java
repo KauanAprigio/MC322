@@ -6,7 +6,24 @@ import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
 import LAB05.src.Exceptions.*;
-
+/**
+ * Classe RoboBombeiro:
+ * <p>
+ * Representa um robô bombeiro capaz de voar e apagar incêndios no ambiente.
+ * Ele possui um reservatório de água, um peso máximo que pode carregar e um raio de segurança para apagar incêndios.
+ * O robô pode ser aprimorado para aumentar sua capacidade de armazenamento de água e pode se comunicar com uma central de comando.
+ * </p>
+ * <ul>
+ * <li><b>apagar_fogo(Comunicavel Central)</b>: Método que permite ao robô apagar incêndios, comunicando-se com a central para localizar o fogo mais próximo.</li>
+ * * <li><b>aprimorar()</b>: Método que aprimora o robô, aumentando sua capacidade de armazenamento de água.</li>
+ * * <li><b>adicionar_agua()</b>: Método que permite ao robô reabastecer seu reservatório de água em um lago.</li>
+ * * <li><b>enviarMensagem(Comunicavel destinatario, String mensagem)</b>: Método que envia uma mensagem para a central de comando.</li>
+ * * <li><b>receberMensagem(String mensagem, Comunicavel remetente)</b>: Método que recebe uma mensagem da central de comando.</li>
+ * * <li><b>isComunicavel()</b>: Nesse caso retona verdadeiro a não ser que esteja desligado.</li>
+ * * <li><b>estahAprimorado()</b>: Método que verifica se o robô já foi aprimorado.</li>
+ * </ul>
+ * <p>
+ */
 public class RoboBombeiro extends Robo implements Comunicavel {
     private int peso_max; // peso maximo que o robo suporta;
     private int reservatorio; // litros de agua no reservatorio

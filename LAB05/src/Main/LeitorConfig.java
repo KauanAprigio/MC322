@@ -11,7 +11,17 @@ import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
 import LAB05.src.Entidades.Robos.RoboBombeiro;
 import LAB05.src.Entidades.Robos.RoboLimpador;
-
+/**
+ * Classe LeitorConfig:
+ * <p>
+ * Responsável por ler o arquivo de configuração do ambiente e inicializar as entidades no ambiente.
+ * Lê cada linha do arquivo, identifica o tipo de entidade e suas propriedades, e cria as instâncias correspondentes.
+ * As entidades podem ser obstáculos (como fogo, lixo, locais) ou robôs (como RoboBombeiro e RoboLimpador).
+ * O arquivo de configuração deve seguir um formato específico, onde cada linha define uma entidade com suas propriedades.
+ * </p>
+ * <ul>
+ * <li><b>inicializarAmbiente(Ambiente ambiente, String filepath)</b>: Método que lê o arquivo de configuração e inicializa o ambiente com as entidades definidas.</li>
+ */
 public class LeitorConfig {
     private Scanner scanner;
     private File arquivo;

@@ -8,7 +8,13 @@ import LAB05.src.Entidades.Robos.Robo;
 import LAB05.src.Entidades.Robos.RoboLimpador;
 import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
 import LAB05.src.Exceptions.MissaoInvalidaException;
-
+/**
+ * Classe MissaoAprimorar:
+ * <p>
+ * O robô deve localizar a oficina mais próxima, mover-se até lá e aprimorar seu raio de limpeza.
+ * </p>
+ * <ul>
+ */
 public class MissaoAprimorar implements Missao{
     @Override
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException{

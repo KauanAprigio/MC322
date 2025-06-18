@@ -6,7 +6,11 @@ import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
 import LAB05.src.Entidades.Robos.RoboLimpador;
 import LAB05.src.Exceptions.MissaoInvalidaException;
 
-
+/**
+ * Classe MissaoLimpezaProxima:
+ * <p>
+ * O robô limpador deve localizar o lixo mais próximo, mover-se até ele e realizar a limpeza.
+ */
 public class MissaoLimpezaProxima implements Missao {
     @Override
     public void executar(Robo robo, Ambiente ambiente) throws MissaoInvalidaException {

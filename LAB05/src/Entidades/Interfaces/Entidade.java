@@ -1,7 +1,24 @@
 package LAB05.src.Entidades.Interfaces;
 import LAB05.src.Ambiente.Ambiente;
 
-
+/**
+ * Interface Entidade
+ * <p>
+ * Define os métodos que todas as entidades no ambiente devem implementar.
+ * As entidades podem ser robôs, obstáculos, fogo, lixo, etc.
+ * </p>
+ *
+ * <ul>
+ *   <li><b>getX_1(), getY_1(), getZ_1()</b>: Obtém a posição inicial da entidade.</li>
+ *   <li><b>getX_2(), getY_2(), getZ_2()</b>: Obtém a posição final da entidade.</li>
+ *   <li><b>getTipo()</b>: Obtém o tipo da entidade (ex: ROBO, OBSTACULO, etc.).</li>
+ *   <li><b>getDescricao()</b>: Obtém uma breve descrição da entidade.</li>
+ *   <li><b>getRepresentacao()</b>: Obtém a representação da entidade no ambiente no plano XY.</li>
+ *   <li><b>getId()</b>: Obtém o ID da entidade.</li>
+ *   <li><b>getLarguraX(), getLarguraY(), getLarguraZ()</b>: Obtém as dimensões da entidade.</li>
+ *   <li><b>getAmbiente()</b>: Obtém o ambiente onde a entidade está localizada.</li>
+ * </ul>
+ */
 public interface Entidade {
     // Métodos para obter a posição da entidade no ambiente
     public int getX_1();

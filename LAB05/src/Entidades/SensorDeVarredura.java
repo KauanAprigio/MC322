@@ -5,7 +5,18 @@ import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Robos.AgenteInteligente;
 import LAB05.src.Entidades.Robos.RoboLimpador;
-
+/**
+ * Classe SensorDeVarredura:
+ * <p>
+ * Representa um sensor de varredura que permite a um robô limpador identificar e coletar lixos no ambiente.
+ * O sensor percorre o ambiente, detectando entidades do tipo LIXO e adicionando-as à lista de lixos do robô.
+ * </p>
+ * <ul>
+ *  <li><b>varreruda(AgenteInteligente agente)</b>: Método que executa a varredura no ambiente, identificando e coletando lixos.</li>
+ * * </ul>
+ * <p>
+ * A classe é utilizada por robôs limpadores para realizar a limpeza do ambiente, garantindo que todos os lixos sejam detectados e armazenados.
+ */
 public class SensorDeVarredura {
     public void varreruda(AgenteInteligente agente){
         agente.getAmbiente().getLogger().inicializarAcao("varredura", "Sensor de varredura");

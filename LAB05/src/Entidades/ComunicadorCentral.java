@@ -12,7 +12,25 @@ import LAB05.src.Entidades.Robos.RoboBombeiro;
 import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
 import LAB05.src.Exceptions.ErroComunicacaoException;
 
-
+/**
+ * Classe ComunicadorCentral:
+ * <p>
+ * Representa a central de comunicação que coordena as mensagens entre os robôs bombeiros e outros obstáculos no ambiente.
+ * Os robôs bombeiros podem enviar mensagens para a central, que as registra e as processa adequadamente.
+ * A central também pode localizar o fogo mais próximo de um robô bombeiro e fornecer informações sobre locais de abastecimento e aprimoramento.
+ * </p>
+ * <ul>
+ * <li><b>enviarMensagem(Comunicavel destinatario, String mensagem)</b>: Envia uma mensagem para um robô bombeiro.</li>
+ * * <li><b>receberMensagem(String mensagem, Comunicavel remetente)</b>: Recebe uma mensagem de um robô bombeiro.</li>
+ * * <li><b>LocalizarFogoMaisProx(Robo robozin)</b>: Localiza o fogo mais próximo de um robô bombeiro.</li>
+ * * <li><b>getFogos()</b>: Retorna a lista de fogos registrados na central.</li>
+ * * <li><b>getOficina()</b>: Retorna o obstáculo que representa a oficina.</li>
+ * * <li><b>getLago()</b>: Retorna o obstáculo que representa o lago.</li>
+ * </ul>
+ * <p>
+ * A classe ComunicadorCentral estende a CentralComunicacao e implementa as interfaces Entidade e Comunicavel,
+ * permitindo que a central se comporte como uma entidade no ambiente e se comunique com outras entidades.
+ */
 public class ComunicadorCentral extends CentralComunicacao implements Entidade, Comunicavel{
 
     private final int larguraX = 5;
@@ -47,7 +65,13 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             }
         }
     }
-
+    /**
+     * Envia uma mensagem para um destinatário (RoboBombeiro) e registra a mensagem na central.
+     * Verifica se o destinatário está ativo e se existe no ambiente antes de enviar a mensagem.
+     * @param destinatario O destinatário da mensagem, que deve ser um RoboBombeiro.
+     * @param mensagem A mensagem a ser enviada.
+     * @throws ErroComunicacaoException Se houver um erro de comunicação, como destinatário desligado ou inexistente.
+     */
     @Override
     public void enviarMensagem(Comunicavel destinatario, String mensagem) throws ErroComunicacaoException {
         getAmbiente().getLogger().inicializarAcao("enviarMensagem", getId());
@@ -65,7 +89,13 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
 
         getAmbiente().getLogger().finalizarAcao("A mensagem foi enviada com sucesso.\n");
     }
-
+    /**
+     * Recebe uma mensagem de um remetente (RoboBombeiro) e processa o conteúdo da mensagem.
+     * Dependendo do conteúdo da mensagem, a central pode atualizar o estado dos incêndios,
+     * fornecer coordenadas para abastecimento ou aprimoramento.
+     * @param mensagem A mensagem recebida do remetente.
+     * @param remetente O remetente da mensagem, que deve ser um RoboBombeiro.
+     */
     @Override
     public void receberMensagem(String mensagem, Comunicavel remetente) {
         getAmbiente().getLogger().inicializarAcao("receberMensagem", getId());
@@ -88,7 +118,12 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             System.out.println("Você poderá aprimorar-se caso for para a posição: " + coordenada);
         }
     }
-
+    /**
+     * Localiza o fogo mais próximo de um robô bombeiro e o envia as coordenadas.
+     * Calcula a distância entre o robô e cada fogo registrado, retornando o fogo mais próximo.
+     * @param robozin O robô bombeiro que está procurando o fogo mais próximo.
+     * @return O obstáculo que representa o fogo mais próximo do robô.
+     */
     public Obstaculo LocalizarFogoMaisProx (Robo robozin) {
         getAmbiente().getLogger().inicializarAcao("localizarFogoPróximo", getId());
         double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível
@@ -110,10 +145,12 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         return maisProximo;
     }
 
+    // Getters
     public ArrayList<Obstaculo> getFogos(){ return fogos; }
     public Obstaculo getOficina() { return oficina; }
     public Obstaculo getLago() { return lago; }
 
+    // Implementação dos métodos da interface Entidade
     @Override
     public int getX_1() { 
         return pos_x;

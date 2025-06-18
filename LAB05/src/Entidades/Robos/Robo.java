@@ -3,7 +3,18 @@ import LAB05.src.Exceptions.RoboDesligadoException;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.Interfaces.Entidade;
 
-
+/**
+ * Classe Robo:
+ * <p>
+ * Representa um robô básico no ambiente, capaz de se mover e ligar/desligar.
+ * Este robô é a base para outros tipos de robôs, como os robôs limpadores e bombeiros.
+ * </p>
+ * <ul>
+ *  <li><b>mover(int deltaX, int deltaY, int deltaZ)</b>: Move o robô nas direções especificadas.</li>
+ *  <li><b>ligar()</b>: Liga o robô.</li>
+ *  <li><b>desligar()</b>: Desliga o robô.</li>
+ * </ul>
+ */
 public class Robo implements Entidade {
     private int pos_x;
     private int pos_y;

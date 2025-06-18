@@ -8,7 +8,15 @@ import LAB05.src.Exceptions.*;
 import LAB05.src.Entidades.CentralComunicacao;
 import LAB05.src.Entidades.SensorDeVarredura;
 import LAB05.src.Entidades.Obstaculos.*;
-
+/**
+ * Classe RoboLimpador:
+ * <p>
+ * Representa um robô limpador capaz de limpar lixos no ambiente.
+ * É um agente inteligente, ou seja, é capaz de executar missões automaticamente.
+ * Possui um sensor de varredura para identificar lixos e uma central de comunicação para registrar que limpou o ambiente.
+ * * <ul>
+ * <li><b>limpar()</b>: Método que executa a limpeza de lixos no ambiente, removendo-os e registrando a ação.</li>
+ */
 public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     private int raio_limpeza;
     private boolean aprimorado = false;

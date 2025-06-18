@@ -4,7 +4,15 @@ import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.Robos.Robo;
 import LAB05.src.Entidades.Robos.RoboLimpador;
 import LAB05.src.Exceptions.MissaoInvalidaException;
-
+/**
+ * Classe MissaoLimpezaAuto:
+ * <p>
+ * Limpa o ambiente completamente, removendo todos os lixos encontrados.
+ * Chama várias outras Missões intermediárias, como MissaoLimpezaProxima,
+ * até que não haja mais lixos a serem removidos.
+ * </p>
+ * <ul>
+ */
 public class MissaoLimpezaAuto implements Missao {
     @Override
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException{

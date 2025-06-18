@@ -10,9 +10,10 @@ import LAB05.src.Exceptions.*;
 import LAB05.src.Logger.Logger;
 
 /**
- * Classe Ambiente representa um ambiente tridimensional onde entidades podem ser adicionadas, removidas e movidas.
- * Possui métodos para inicializar o mapa, adicionar e remover entidades, verificar colisões, mover entidades,
- * e visualizar o ambiente.
+ * Classe Ambiente:
+ *      Local em que as entidades (robôs, obstáculos, etc.) interagem.
+ *      Robôs podem se mover, adicionar ou remover Lixos e Fogos do ambiente.
+ *      O ambiente é tridimensional, com um plano XY no nível Z = 0.
  */
 public class Ambiente {
     //Atributos final

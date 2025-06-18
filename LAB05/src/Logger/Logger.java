@@ -1,11 +1,28 @@
 package LAB05.src.Logger;
 
 import java.io.PrintWriter;
-import java.util.Stack; // Importa Stack para gerenciar IDs de ações
-
+import java.util.Stack; 
 import LAB05.src.Exceptions.ErrorLoggerException;
 import LAB05.src.Missoes.Missao;
 
+/**
+ * Classe Logger:
+ * <p>
+ * Responsável por registrar ações e missões em um arquivo de log.txt.
+ * Formata Todas as ações e missões com indentação adequada, permitindo fácil leitura e compreensão do fluxo de execução.
+ * </p>
+ * <ul>
+ * <li><b>inicializarMissao(Missao missao, String agente)</b>: Inicia uma nova missão, registrando detalhes da missão e do agente.</li>
+ * <li><b>inicializarAcao(String acao, String origem)</b>: Registra o início de uma ação, atribuindo um ID único.</li>
+ * <li><b>logAcao(String texto)</b>: Registra uma mensagem de ação dentro de uma ação ativa.</li>
+ * <li><b>finalizarMissao(String resultado)</b>: Finaliza a missão atual, registrando o resultado e o total de ações executadas.</li>
+ * <li><b>finalizarAcao(String resultado)</b>: Finaliza a ação atual, registrando o resultado.</li>
+ * <li><b>logErr(Exception e)</b>: Registra uma exceção, limpando ações e missões ativas restantes.</li>
+ * <li><b>fecharLogger()</b>: Fecha o arquivo de log, garantindo que todos os dados sejam salvos corretamente.</li>
+ * </ul>
+ * <p>
+ * 
+ */
 public class Logger {
     // Esses contadores agora serão principalmente para atribuir IDs únicos
     private static int contadorIdAcaoGlobal = 0;
