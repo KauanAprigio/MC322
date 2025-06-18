@@ -25,20 +25,20 @@ import LAB05.src.Missoes.Missao;
  */
 public class Logger {
     // Esses contadores agora serão principalmente para atribuir IDs únicos
-    private static int contadorIdAcaoGlobal;
-    private static int contadorIdAcaoMissao;
-    private static int contadorIdMissao;
+    private int contadorIdAcaoGlobal;
+    private int contadorIdAcaoMissao;
+    private int contadorIdMissao;
 
     // Usa uma pilha para gerenciar os níveis de indentação para as ações.
     // Cada entrada representa uma ação ativa e ajuda a determinar sua indentação.
-    private static Stack<Integer> profundidadesAcaoAtivas;
-    private static Stack<Integer> idsMissoesAtivas;
+    private Stack<Integer> profundidadesAcaoAtivas;
+    private Stack<Integer> idsMissoesAtivas;
 
-    private static PrintWriter impressor;
+    private PrintWriter impressor;
 
     public Logger (String nomeArquivo) {
         try {
-            Logger.impressor = new PrintWriter(nomeArquivo);
+            this.impressor = new PrintWriter(nomeArquivo);
             profundidadesAcaoAtivas = new Stack<>();
             idsMissoesAtivas = new Stack<>();
             contadorIdAcaoGlobal = 0;
