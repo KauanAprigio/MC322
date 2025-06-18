@@ -107,18 +107,10 @@ public class Logger {
         // Tenta limpar quaisquer ações e missões ativas restantes
         // Isso imprimirá mensagens de "encerrada" para elas.
         while (!profundidadesAcaoAtivas.isEmpty()) {
-            try {
-                finalizarAcao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as ações pendentes
-            } catch (Exception error) {
-                System.out.printf("Erro no Logger: %s", e.getMessage());
-            }
+            finalizarAcao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as ações pendentes
         }
         while (!idsMissoesAtivas.isEmpty()) {
-           try {
-                finalizarMissao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as ações pendentes
-            } catch (Exception error) {
-                System.out.printf("Erro no Logger: %s", e.getMessage());
-            }
+            finalizarMissao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as ações pendentes
         }
     }
 
