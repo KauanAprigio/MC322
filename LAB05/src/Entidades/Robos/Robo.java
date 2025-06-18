@@ -45,6 +45,18 @@ public class Robo implements Entidade {
         } 
     }
 
+    public void ligar(){
+        ambiente.getLogger().inicializarAcao("Ligar Robô", id);
+        this.estado = EstadoRobo.ON; 
+        ambiente.getLogger().finalizarAcao("O robô foi ligado com sucesso.\n");
+    }
+
+    public void desligar(){
+        ambiente.getLogger().inicializarAcao("Desligar Robô", id);
+        this.estado = EstadoRobo.OFF; 
+        ambiente.getLogger().finalizarAcao("O robô foi desligado com sucesso.\n");
+    }
+
     // getters e setters para os atributos do implemento da interface Entidade
     @Override
     public int getX_1() { return pos_x; }
@@ -63,8 +75,6 @@ public class Robo implements Entidade {
     public Ambiente getAmbiente() { return ambiente; }
     public TipoEntidade getTipo() { return tipo; }
     public EstadoRobo getEstado() { return estado; }
-    public void ligar(){ this.estado = EstadoRobo.ON; }
-    public void desligar(){ this.estado = EstadoRobo.OFF; }
     public boolean estahEmLocal() { return estahEmLocal; }
     public void setEstahEmLocal(boolean e) { this.estahEmLocal = e; }
     public void setLocalAtualRep(char r) { LocalAtualRep = r; }
