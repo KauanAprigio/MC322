@@ -4,6 +4,7 @@ import java.util.Iterator;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.Robos.Robo;
 import LAB05.src.Entidades.Robos.RoboLimpador;
+import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
 import LAB05.src.Exceptions.MissaoInvalidaException;
 
 
@@ -16,6 +17,18 @@ public class MissaoLimpar implements Missao {
         }
 
         RoboLimpador limpador = (RoboLimpador) r; //aqui faço um casting e uso de um ponteiro para facilitar a busca
+
+        if (limpador.getEstado() == EstadoRobo.OFF){
+            String message = "Não foi possível limpar o ambiente pois o robô encontra-se desligado!\n";
+            throw new MissaoInvalidaException(message);
+        }
+        
+        if (limpador.getLixos().isEmpty()){
+            String message = "Não há mais lixos no ambiente ou o robô " + limpador.getId() + " não executou o seu sensor de varredura!\n";
+            throw new MissaoInvalidaException(message);
+        }
+
+
         Iterator<Obstaculo> iterator = limpador.getLixos().iterator();
 
         while (iterator.hasNext()) {

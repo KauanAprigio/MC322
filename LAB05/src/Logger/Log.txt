@@ -191,25 +191,32 @@ Ação 60 encerrada: Enviou com sucesso a mensagem: Incêndio apagado
 Ação 59 encerrada: Apagar fogo finalizado por Bombeiro_Kauan
 63 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
 Ação 63 encerrada: Erro de comunicação: Destinatário não existe!
-Exceção detectada: O robô RoboLimpador_Diego não pode acionar os sensores, pois está desligado!
-
-Exceção detectada: Nenhuma missão atribuída ao RoboLimpador.
 64 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
 Ação 64 encerrada: Robô RoboLimpador_Diego não pode voar (apenas Robôs Bombeiros podem)!
+Exceção detectada: Nenhuma missão atribuída ao RoboLimpador.
+Exceção detectada: O robô RoboLimpador_Diego não pode acionar os sensores, pois está desligado!
+
 ------- MISSÃO 1 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpeza dos lixos próximos
+------- Fim Missão 1 -------
+Relatório da missão: Não foi possível limpar o ambiente pois o robô encontra-se desligado!
+
+Total de ações executadas: 0
+------- MISSÃO 2 -------
 Agente RoboLimpador_Diego inicializando missão:
 Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
    -> Está localizando a oficina...
    -> Está procurando a melhor rota até a oficina...
 1 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
     -> Ação 1 encerrada: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
-------- Fim Missão 1 -------
+------- Fim Missão 2 -------
 Relatório da missão: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
 
 Total de ações executadas: 0
 65 - Ação do tipo Ligar Robô, inicializada por: RoboLimpador_Diego
 Ação 65 encerrada: O robô foi ligado com sucesso.
-------- MISSÃO 2 -------
+------- MISSÃO 3 -------
 Agente RoboLimpador_Diego inicializando missão:
 Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
    -> Está localizando a oficina...
@@ -220,14 +227,47 @@ Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento d
    -> Está na oficina...
    -> RoboLimpador_Diego teve seu raio de limpeza aumentado para 30.
 
-------- Fim Missão 2 -------
+------- Fim Missão 3 -------
 Relatório da missão: O agente RoboLimpador_Diego finalizou sua missão de aprimoramento com sucesso.
 
 Total de ações executadas: 1
-------- MISSÃO 3 -------
+------- MISSÃO 4 -------
 Agente RoboLimpador_Diego inicializando missão:
 Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
-------- Fim Missão 3 -------
+------- Fim Missão 4 -------
 Relatório da missão: O robô já foi aprimorado anteriormente.
+
+Total de ações executadas: 1
+------- MISSÃO 5 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpeza dos lixos próximos
+------- Fim Missão 5 -------
+Relatório da missão: Não há mais lixos no ambiente ou o robô RoboLimpador_Diego não executou o seu sensor de varredura!
+
+Total de ações executadas: 1
+66 - Ação do tipo executarSensor, inicializada por: RoboLimpador_Diego
+67 - Ação do tipo varredura, inicializada por: Sensor de varredura
+   -> Começará a varredura para encontrar todos os lixos.
+Ação 67 encerrada: Varredura finalizada com sucesso.
+Ação 66 encerrada: A execução do sensor foi finalizada com sucesso.
+------- MISSÃO 6 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpeza dos lixos próximos
+   -> Verificando distância para efetuar a limpeza.
+   -> RoboLimpador_Diego limpou Sujeira encardida.
+------- Fim Missão 6 -------
+Relatório da missão: Missão de limpeza finalizada com sucesso.
+
+Total de ações executadas: 1
+   -> Verificando distância para efetuar a limpeza.
+   -> RoboLimpador_Diego limpou Sacola plástica.
+------- Fim Missão 5 -------
+Relatório da missão: Missão de limpeza finalizada com sucesso.
+
+Total de ações executadas: 1
+   -> Verificando distância para efetuar a limpeza.
+   -> RoboLimpador_Diego limpou Comida no chão.
+------- Fim Missão 4 -------
+Relatório da missão: Missão de limpeza finalizada com sucesso.
 
 Total de ações executadas: 1

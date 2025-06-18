@@ -156,16 +156,26 @@ public class Main {
         MissaoLimpar limpar = new MissaoLimpar();
         MissaoMoverProximo moverProximo = new MissaoMoverProximo();
         
-        try { roboLimpador.executarSensores(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        // Testes com o robo desligado
         try { ambiente.moverRobo(roboLimpador, 50, 99, 10); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        roboLimpador.setMissao(aprimorar);
-        System.out.println(roboLimpador.getAmbiente().getplanoXY()[80][25]);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboLimpador.executarSensores(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        
+        roboLimpador.setMissao(limpar);
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+
+        roboLimpador.setMissao(aprimorar);
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        
+        // Testes com o robo ligado
         roboLimpador.ligar();
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        
+
+        roboLimpador.setMissao(limpar);
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboLimpador.executarSensores(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
 
