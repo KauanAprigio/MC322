@@ -20,15 +20,24 @@ import LAB05.src.Missoes.MissaoAprimorar;
 import LAB05.src.Missoes.MissaoLimpezaAuto;
 import LAB05.src.Missoes.MissaoLimpezaProxima;
 
-
 /**
  * Classe Main:
+ * <p>
  * Ponto de entrada do programa para o Laboratório 5.
  * Configura o ambiente, robôs e obstáculos.
  * Executa testes automatizados para validar funcionalidades e exceções.
  * Apresenta um menu interativo para o usuário.
- * Grupo: Diego Martins e Kauan Aprigio
- * RA's: 260205 e 288809
+ * </p>
+ * <ul>
+ * <li><b>inicializarAmbiente()</b>: Método que configura o ambiente, obstáculos, robôs e o comunicador central.</li>
+ * <li><b>executarTestesAutomatizados()</b>: Método que executa uma série de testes para validar as funcionalidades e exceções.</li>
+ * <li><b>menuInterativo()</b>: Método que apresenta um menu interativo para o usuário, permitindo a interação com os robôs e o ambiente.</li>
+ * <li><b>main(String[] args)</b>: Método principal que inicia a simulação, chama os métodos de configuração e testes, e gerencia o menu interativo.</li>
+ * </ul>
+ * <p>
+ * @author Diego Martins 288809
+ * @author Kauan Aprigio 260205
+ * </p>
  */
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
@@ -41,7 +50,7 @@ public class Main {
         System.out.println("🚀 Iniciando Simulação - MC322 - LAB05 🚀");
         System.out.println("=============================================");
 
-        inicializarAmbiente();
+        inicializarAmbiente("LAB05/src/Logger/LogTestes.txt");
         executarTestesAutomatizados();
         menuInterativo();
         
@@ -58,12 +67,12 @@ public class Main {
     /**
      * Configura o ambiente, obstáculos, robôs e o comunicador central.
      */
-    private static void inicializarAmbiente() {
+    private static void inicializarAmbiente(String logpath) {
         System.out.println("\n--- 🛠️  Configurando o Mundo Virtual 🛠️  ---\n");
         LeitorConfig inicializador = new LeitorConfig();
         TipoEntidade[][][] mapa = new TipoEntidade[110][110][110];// depois tem q comentar o pq do z ir até 111, mas acho que é para o robo bombeiro subir acima dos predios para apagar o fogo
         char[][] planoXY = new char[110][110];
-        ambiente = new Ambiente(110, 110, 110, mapa, planoXY, "Ambiente de Teste");
+        ambiente = new Ambiente(110, 110, 110, mapa, planoXY, "Ambiente de Teste", logpath);
         ambiente.inicializarMapa();
 
         inicializador.inicializarAmbiente(ambiente, "LAB05/src/Main/config.txt");
@@ -197,7 +206,7 @@ public class Main {
     }
 
     private static void menuInterativo() {
-        inicializarAmbiente();
+        inicializarAmbiente("LAB05/src/Logger/LogMenu.txt");
         // instanciando os robos que já alocamos com o leitor config
         for (Entidade e : ambiente.getEntidades()){
             if (e.getRepresentacao() == 'L'){
