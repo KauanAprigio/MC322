@@ -38,25 +38,24 @@ public class Logger {
 
     // Indica que uma ação começou (movimento, apagar fogo, adicionar entidade ao ambiente etc...)
     public void inicializarAcao(String acao, String Origem) {
-        for (int i = acoesIniciadas; i > 0; i--)
+        for (int i = 0; i < acoesIniciadas; i++)
             printer.print("   ");
         
         if (MissoesIniciadas != 0){ // Missao ativa {
             acaoAtualMissao = acaoProxMissao;
-            printer.printf("\n%d - Ação do tipo %s, inicializada por: %s\n", acaoAtualMissao, acao, Origem); // Marca o início de uma nova ação
+            printer.printf("%d - Ação do tipo %s, inicializada por: %s\n", acaoAtualMissao, acao, Origem); // Marca o início de uma nova ação
             acaoProxMissao = acaoAtualMissao + 1;
-            acoesIniciadas++;
         }
         else {
             acaoAtualGLobal = acaoProxGLobal;
-            printer.printf("\n%d - Ação do tipo %s, inicializada por: %s\n", acaoAtualGLobal, acao, Origem); // Marca o início de uma nova ação
+            printer.printf("%d - Ação do tipo %s, inicializada por: %s\n", acaoAtualGLobal, acao, Origem); // Marca o início de uma nova ação
             acaoProxGLobal = acaoAtualGLobal + 1;
-            acoesIniciadas++;
         }
+        acoesIniciadas++;
     }
 
     public void logAcao(String txt) {
-        for (int i = acoesIniciadas; i > 0; i--)
+        for (int i = 0; i < acoesIniciadas; i++)
             printer.print("   ");
         printer.println("-> " + txt);
     }
@@ -68,19 +67,19 @@ public class Logger {
         MissoesIniciadas--;
     }
 
-    // Indica que a ação ocorrendo finalizou seja por um erro ou porque chegou ao fim
+     // Indica que a ação ocorrendo finalizou seja por um erro ou porque chegou ao fim
     public void finalizarAcao(String Resultado) {
-        for (int i = acoesIniciadas; i > 0; i--)
+        acoesIniciadas--;
+        for (int i = 0; i < acoesIniciadas; i++)
             printer.print("   ");
-        if (MissoesIniciadas != 0) {  // Missao ativa
+        if (MissoesIniciadas != 0) {  // Mission active
             printer.printf("    -> Ação %d encerrada: %s", acaoAtualMissao, Resultado);
             acaoAtualMissao--;
-            acoesIniciadas--;
         } else {
             printer.printf("Ação %d encerrada: %s", acaoAtualGLobal, Resultado);
             acaoAtualGLobal--;
-            acoesIniciadas--;
         }
+        printer.println();  
     }
 
     // Finaliza a missão/ ação e loga o erro
@@ -90,10 +89,10 @@ public class Logger {
             printer.println("Exceção detectada: " + e.getMessage());
             return;
         }
-        while (acoesIniciadas != 0) {
+        while (acoesIniciadas > 0) {
             finalizarAcao(e.getMessage());
         }
-        while (MissoesIniciadas != 0) {
+        while (MissoesIniciadas > 0) {
             finalizarMissao(e.getMessage());
         } 
     }
