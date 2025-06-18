@@ -31,7 +31,7 @@ public class Logger {
     public void inicializarMissao(Missao m, String Agente) {
         MissaoAtual = MissaoProx;
         printer.printf("------- MISSÃO %d -------\n", MissaoAtual);
-        printer.printf("Agente %s inicializando missão....\n %s\n", Agente, m.getDetalhes());
+        printer.printf("Agente %s inicializando missão:\n%s\n", Agente, m.getDetalhes());
         MissaoProx = MissaoAtual+1;
         MissoesIniciadas++;
     }
@@ -58,7 +58,7 @@ public class Logger {
     public void finalizarMissao(String Resultado) {
         printer.printf("------- Fim Missão %d -------\n", MissaoAtual);
         printer.printf("Relatório da missão: %s\n", Resultado);
-        printer.printf("Total de ações executadas: %d", acaoAtualMissao);
+        printer.printf("Total de ações executadas: %d\n", acaoAtualMissao);
         MissaoAtual--;
         MissoesIniciadas--;
     }

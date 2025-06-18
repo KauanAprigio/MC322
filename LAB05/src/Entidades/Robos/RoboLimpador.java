@@ -1,5 +1,7 @@
 package LAB05.src.Entidades.Robos;
 import java.util.ArrayList;
+
+import LAB05.src.Exceptions.RoboDesligadoException;
 import LAB05.src.Entidades.Interfaces.Sensoreavel;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Exceptions.*;
@@ -10,7 +12,7 @@ import LAB05.src.Entidades.Obstaculos.*;
 public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     private int raio_limpeza;
     private boolean aprimorado = false;
-    private ArrayList<Obstaculo> lixos;
+    private ArrayList<Obstaculo> lixos = new ArrayList<Obstaculo>();
     private SensorDeVarredura sensor;
     private CentralComunicacao comunicador;
 
@@ -38,7 +40,10 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     }
 
     @Override
-    public void executarSensores(){
+    public void executarSensores() throws RoboDesligadoException{
+        if (this.getEstado() == EstadoRobo.OFF){
+            throw new RoboDesligadoException("O robô " + getId() + " não pode acionar os sensores, pois está desligado!\n");
+        }
         getAmbiente().getLogger().inicializarAcao("executarSensor", getId());
         sensor.varreruda(this);
         getAmbiente().getLogger().finalizarAcao("A execução do sensor foi finalizada com sucesso.\n");
@@ -52,5 +57,5 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
     public CentralComunicacao getComunicador() { return comunicador; }
 
     public void setRaioLimpeza(int raio) { this.raio_limpeza = raio; }
-    public void setAprimorar(boolean aprimorar) { this.aprimorado = aprimorar; }
+    public void aprimorar() { this.aprimorado = true; }
 }

@@ -15,6 +15,9 @@ import LAB05.src.Entidades.Robos.RoboBombeiro;
 import LAB05.src.Entidades.Robos.RoboLimpador;
 import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
 import LAB05.src.Exceptions.*;
+import LAB05.src.Missoes.MissaoAprimorar;
+import LAB05.src.Missoes.MissaoLimpar;
+import LAB05.src.Missoes.MissaoMoverProximo;
 
 
 /**
@@ -123,6 +126,8 @@ public class Main {
         try { roboBombeiro.aprimorar(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         
         roboBombeiro.ligar();
+        try { ambiente.moverRobo(roboBombeiro, 50, 99, 0); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { ambiente.moverRobo(roboBombeiro, 150, 99, 0); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboBombeiro.adicionar_agua(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboBombeiro.enviarMensagem(comunicador, "ABASTECIMENTO"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
@@ -143,7 +148,28 @@ public class Main {
         Comunicavel robozin = new RoboBombeiro("jao", 10, 15, 45, 'K', 1000, ambiente, 1000, 10);
         try { roboBombeiro.enviarMensagem(robozin, "NAO VAI ENVIAR NADA GAROTAO"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
 
+
+        // --- Testes RoboLimpador ---
+        System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("\n>> Testando RoboLimpador...\n");
+        MissaoAprimorar aprimorar = new MissaoAprimorar();
+        MissaoLimpar limpar = new MissaoLimpar();
+        MissaoMoverProximo moverProximo = new MissaoMoverProximo();
+        
+        try { roboLimpador.executarSensores(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { ambiente.moverRobo(roboLimpador, 50, 99, 10); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        roboLimpador.setMissao(aprimorar);
+        System.out.println(roboLimpador.getAmbiente().getplanoXY()[80][25]);
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        roboLimpador.ligar();
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        
+        
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
+
+        
 
     }
 }
