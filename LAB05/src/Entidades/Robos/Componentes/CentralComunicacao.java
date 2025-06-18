@@ -1,4 +1,4 @@
-package LAB05.src.Entidades;
+package LAB05.src.Entidades.Robos.Componentes;
 import java.util.ArrayList;
 
 /**

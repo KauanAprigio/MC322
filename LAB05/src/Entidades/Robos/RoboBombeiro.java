@@ -1,10 +1,10 @@
 package LAB05.src.Entidades.Robos;
 import LAB05.src.Ambiente.Ambiente;
-import LAB05.src.Entidades.ComunicadorCentral;
 import LAB05.src.Entidades.Interfaces.Comunicavel;
 import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
+import LAB05.src.Entidades.Robos.Componentes.ComunicadorCentral;
 import LAB05.src.Exceptions.*;
 /**
  * Classe RoboBombeiro:

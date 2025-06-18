@@ -5,12 +5,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import LAB05.src.Ambiente.Ambiente;
-import LAB05.src.Entidades.ComunicadorCentral;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
 import LAB05.src.Entidades.Robos.RoboBombeiro;
 import LAB05.src.Entidades.Robos.RoboLimpador;
+import LAB05.src.Entidades.Robos.Componentes.ComunicadorCentral;
 /**
  * Classe LeitorConfig:
  * <p>

@@ -10,10 +10,10 @@ import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;
 import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
 import LAB05.src.Ambiente.Ambiente;
-import LAB05.src.Entidades.*;
 import LAB05.src.Entidades.Robos.Robo;
 import LAB05.src.Entidades.Robos.RoboBombeiro;
 import LAB05.src.Entidades.Robos.RoboLimpador;
+import LAB05.src.Entidades.Robos.Componentes.ComunicadorCentral;
 import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
 import LAB05.src.Exceptions.*;
 import LAB05.src.Missoes.MissaoAprimorar;
@@ -239,7 +239,7 @@ public class Main {
             }
         } while (opcao != 5);
         System.out.println("\nSaindo do menu interativo. Foi um prazer, piloto!");
-
+        
     }
 
     private static void imprimirMenuPrincipal() {

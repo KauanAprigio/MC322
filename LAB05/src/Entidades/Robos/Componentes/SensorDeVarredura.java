@@ -1,4 +1,4 @@
-package LAB05.src.Entidades;
+package LAB05.src.Entidades.Robos.Componentes;
 
 import LAB05.src.Entidades.Interfaces.Entidade;
 import LAB05.src.Entidades.Interfaces.Entidade.TipoEntidade;

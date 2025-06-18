@@ -5,9 +5,9 @@ import java.util.Iterator;
 import LAB05.src.Entidades.Interfaces.Sensoreavel;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Exceptions.*;
-import LAB05.src.Entidades.CentralComunicacao;
-import LAB05.src.Entidades.SensorDeVarredura;
 import LAB05.src.Entidades.Obstaculos.*;
+import LAB05.src.Entidades.Robos.Componentes.CentralComunicacao;
+import LAB05.src.Entidades.Robos.Componentes.SensorDeVarredura;
 /**
  * Classe RoboLimpador:
  * <p>
