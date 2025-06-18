@@ -105,10 +105,5 @@
 -> Ação 2 encerrada: Inicialização do ambiente concluída.
 
 23 - Ação do tipo Inicialização do menu interativo, inicializada por: Ambiente_Ambiente de Teste
-   24 - Ação do tipo Listagem do estado dos Robôs, inicializada por: Ambiente_Ambiente de Teste
-      ->    - Bombeiro_Kauan: OFF
-      ->    - RoboLimpador_Diego: OFF
-   -> Ação 24 encerrada: A listagem de robôs por estados foi finalizada com sucesso.
-
 -> Ação 23 encerrada: Finalizou o menu interativo.
 
