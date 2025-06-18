@@ -1,125 +1,125 @@
-1 - Ação do tipo inicializarMapa, inicializada por: Ambiente_Ambiente de Teste
+1 - Ação do tipo inicializarMapa, inicializada por: Ambiente_CasosTeste
 -> Ação 1 encerrada: Mapa inicializado com sucesso.
 
 2 - Ação do tipo inicializarAmbiente, inicializada por: Main
-   3 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   3 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (5, 5, 0)
       -> Posição do canto superior direito: (10, 10, 5)
    -> Ação 3 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
 
-   4 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   4 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (15, 15, 0)
       -> Posição do canto superior direito: (45, 45, 100)
    -> Ação 4 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
 
-   5 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   5 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (4, 4, 0)
       -> Posição do canto superior direito: (4, 4, 0)
    -> Ação 5 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   6 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   6 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (3, 3, 0)
       -> Posição do canto superior direito: (3, 3, 0)
    -> Ação 6 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   7 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   7 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (6, 2, 0)
       -> Posição do canto superior direito: (6, 2, 0)
    -> Ação 7 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   8 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   8 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (1, 1, 0)
       -> Posição do canto superior direito: (1, 1, 0)
    -> Ação 8 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   9 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   9 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (104, 100, 0)
       -> Posição do canto superior direito: (104, 100, 0)
    -> Ação 9 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   10 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   10 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (100, 104, 0)
       -> Posição do canto superior direito: (100, 104, 0)
    -> Ação 10 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   11 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   11 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (50, 99, 0)
       -> Posição do canto superior direito: (55, 104, 5)
    -> Ação 11 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
 
-   12 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   12 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (60, 27, 0)
       -> Posição do canto superior direito: (65, 32, 5)
    -> Ação 12 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
 
-   13 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   13 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (60, 35, 0)
       -> Posição do canto superior direito: (60, 35, 0)
    -> Ação 13 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   14 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   14 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (64, 39, 0)
       -> Posição do canto superior direito: (64, 39, 0)
    -> Ação 14 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   15 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   15 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (68, 35, 0)
       -> Posição do canto superior direito: (68, 35, 0)
    -> Ação 15 encerrada: Entidade do tipo: LIXO adicionada ao ambiente.
 
-   16 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   16 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (74, 30, 0)
       -> Posição do canto superior direito: (104, 60, 100)
    -> Ação 16 encerrada: Entidade do tipo: FOGO adicionada ao ambiente.
 
-   17 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   17 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (60, 5, 0)
       -> Posição do canto superior direito: (80, 25, 20)
    -> Ação 17 encerrada: Entidade do tipo: LOCAL adicionada ao ambiente.
 
-   18 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   18 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (5, 60, 0)
       -> Posição do canto superior direito: (35, 90, 0)
    -> Ação 18 encerrada: Entidade do tipo: LOCAL adicionada ao ambiente.
 
-   19 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   19 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (69, 69, 0)
       -> Posição do canto superior direito: (99, 99, 100)
    -> Ação 19 encerrada: Entidade do tipo: LOCAL adicionada ao ambiente.
 
-   20 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   20 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (51, 51, 0)
       -> Posição do canto superior direito: (56, 56, 100)
    -> Ação 20 encerrada: Entidade do tipo: COMUNICADOR adicionada ao ambiente.
 
-   21 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   21 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (0, 0, 0)
       -> Posição do canto superior direito: (0, 0, 0)
    -> Ação 21 encerrada: Entidade do tipo: ROBO adicionada ao ambiente.
 
-   22 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+   22 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
       -> Posição do canto inferior esquerdo: (100, 100, 0)
       -> Posição do canto superior direito: (100, 100, 0)
    -> Ação 22 encerrada: Entidade do tipo: ROBO adicionada ao ambiente.
 
 -> Ação 2 encerrada: Inicialização do ambiente concluída.
 
-23 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+23 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
    Exceção detectada: A região desejada pelo(a) FOGO está fora dos limites do ambiente!
 
 -> Ação 23 encerrada: Erro: A região desejada pelo(a) FOGO está fora dos limites do ambiente!
 
-24 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_Ambiente de Teste
+24 - Ação do tipo adicionarEntidade, inicializada por: Ambiente_CasosTeste
    Exceção detectada: A região desejada pelo(a) FOGO está ocupada!
 
 -> Ação 24 encerrada: Erro: A região desejada pelo(a) FOGO está ocupada!
 
-25 - Ação do tipo removerEntidade, inicializada por: Ambiente_Ambiente de Teste
+25 - Ação do tipo removerEntidade, inicializada por: Ambiente_CasosTeste
    Exceção detectada: Entidade não está no ambiente ou não pôde ser encontrada!
 
 -> Ação 25 encerrada: Erro: Entidade não está no ambiente ou não pôde ser encontrada!
 
-26 - Ação do tipo removerEntidade, inicializada por: Ambiente_Ambiente de Teste
+26 - Ação do tipo removerEntidade, inicializada por: Ambiente_CasosTeste
 -> Ação 26 encerrada: A Entidade Fogo, do tipo FOGO, foi removida com sucesso.
 
 27 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
@@ -140,12 +140,12 @@
 30 - Ação do tipo Ligar Robô, inicializada por: Bombeiro_Kauan
 -> Ação 30 encerrada: O robô foi ligado com sucesso.
 
-31 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+31 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
    Exceção detectada: A região desejada pelo(a) ROBO está ocupada!
 
 -> Ação 31 encerrada: Erro: A região desejada pelo(a) ROBO está ocupada!
 
-32 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+32 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
    Exceção detectada: A região desejada pelo(a) ROBO está fora dos limites do ambiente!
 
 -> Ação 32 encerrada: Erro: A região desejada pelo(a) ROBO está fora dos limites do ambiente!
@@ -170,7 +170,7 @@
    37 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
    -> Ação 37 encerrada: Enviou com sucesso a mensagem: ABASTECIMENTO
 
-   38 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   38 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
       -> Nova posição: (5, 60, 0)
    -> Ação 38 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
 
@@ -181,7 +181,7 @@
 
 -> Ação 36 encerrada: Erro: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
 
-40 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+40 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
    -> Nova posição: (5, 60, 1)
 -> Ação 40 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
 
@@ -190,7 +190,7 @@
    -> Reservatório possui 3000 litros de um máximo de: 3000 litros.
 -> Ação 41 encerrada: O abastecimento de Bombeiro_Kauan foi finalizado com sucesso.
 
-42 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+42 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
    -> Nova posição: (0, 0, 0)
 -> Ação 42 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
 
@@ -200,7 +200,7 @@
       -> O fogo Fogo foi localizado.
    -> Ação 44 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
 
-   45 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   45 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
       -> Nova posição: (5, 5, 101)
    -> Ação 45 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
 
@@ -232,7 +232,7 @@
    52 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
    -> Ação 52 encerrada: Enviou com sucesso a mensagem: APRIMORAMENTO
 
-   53 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   53 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
       -> Nova posição: (60, 5, 0)
    -> Ação 53 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
 
@@ -255,7 +255,7 @@
       -> O fogo Fogo foi localizado.
    -> Ação 57 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
 
-   58 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   58 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
       -> Nova posição: (60, 27, 101)
    -> Ação 58 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
 
@@ -282,7 +282,7 @@
 
 -> Ação 63 encerrada: Erro: Erro de comunicação: Destinatário não existe!
 
-64 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+64 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
    Exceção detectada: Robô RoboLimpador_Diego não pode voar (apenas Robôs Bombeiros podem)!
 
 -> Ação 64 encerrada: Erro: Robô RoboLimpador_Diego não pode voar (apenas Robôs Bombeiros podem)!
@@ -301,4 +301,184 @@ Relatório da missão: Erro: Não foi possível mover para o lixo mais próximo,
 Total de ações executadas: 0
 ------- MISSÃO 2 -------
 Agente RoboLimpador_Diego inicializando missão:
-Procurar a Oficina no ambiente, 
+Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
+-> Está localizando a oficina...
+-> Está procurando a melhor rota até a oficina...
+1 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   Exceção detectada: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
+
+-> Ação 1 encerrada: Erro: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
+
+------- Fim Missão 2 -------
+Relatório da missão: Erro: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
+
+Total de ações executadas: 1
+65 - Ação do tipo Ligar Robô, inicializada por: RoboLimpador_Diego
+-> Ação 65 encerrada: O robô foi ligado com sucesso.
+
+------- MISSÃO 3 -------
+Agente RoboLimpador_Diego inicializando missão:
+Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
+-> Está localizando a oficina...
+-> Está procurando a melhor rota até a oficina...
+1 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   -> Nova posição: (80, 25, 0)
+-> Ação 1 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+-> Está na oficina...
+-> RoboLimpador_Diego teve seu raio de limpeza aumentado para 30.
+
+------- Fim Missão 3 -------
+Relatório da missão: O agente RoboLimpador_Diego finalizou sua missão de aprimoramento com sucesso.
+
+Total de ações executadas: 1
+------- MISSÃO 4 -------
+Agente RoboLimpador_Diego inicializando missão:
+Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
+Exceção detectada: O robô já foi aprimorado anteriormente.
+
+------- Fim Missão 4 -------
+Relatório da missão: Erro: O robô já foi aprimorado anteriormente.
+
+Total de ações executadas: 0
+------- MISSÃO 5 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+Exceção detectada: Não foi possível mover para o lixo mais próximo, o robô RoboLimpador_Diego não executou o seu sensor de varredura!
+
+------- Fim Missão 5 -------
+Relatório da missão: Erro: Não foi possível mover para o lixo mais próximo, o robô RoboLimpador_Diego não executou o seu sensor de varredura!
+
+Total de ações executadas: 0
+66 - Ação do tipo executarSensor, inicializada por: RoboLimpador_Diego
+   67 - Ação do tipo varredura, inicializada por: Sensor de varredura
+      -> Começará a varredura para encontrar todos os lixos.
+   -> Ação 67 encerrada: Varredura finalizada com sucesso.
+
+-> Ação 66 encerrada: A execução do sensor foi finalizada com sucesso.
+
+------- MISSÃO 6 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+1 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   -> Nova posição: (69, 36, 0)
+-> Ação 1 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+2 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sujeira encardida.
+-> Ação 2 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 6 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 2
+------- MISSÃO 7 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpeza completa do ambiente
+------- MISSÃO 8 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+1 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   -> Nova posição: (68, 36, 0)
+-> Ação 1 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+2 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sacola plástica.
+-> Ação 2 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 8 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 2
+1 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Comida no chão.
+-> Ação 1 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- MISSÃO 9 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+2 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   -> Nova posição: (7, 3, 0)
+-> Ação 2 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+3 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Comida no chão.
+-> Ação 3 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 9 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 3
+1 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sacola plástica.
+-> Ação 1 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- MISSÃO 10 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+2 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   -> Nova posição: (6, 3, 0)
+-> Ação 2 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+3 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sujeira encardida.
+-> Ação 3 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 10 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 3
+1 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sacola plástica.
+-> Ação 1 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- MISSÃO 11 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+2 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   -> Nova posição: (105, 101, 0)
+-> Ação 2 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+3 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sujeira encardida.
+-> Ação 3 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 11 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 3
+1 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Comida no chão.
+-> Ação 1 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 7 -------
+Relatório da missão: Missão de limpezaAuto finalizada com sucesso.
+Total de ações executadas: 1
+------- MISSÃO 12 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+Exceção detectada: Não foi possível mover para o lixo mais próximo, pois não há mais lixos no ambiente!
+
+------- Fim Missão 12 -------
+Relatório da missão: Erro: Não foi possível mover para o lixo mais próximo, pois não há mais lixos no ambiente!
+
+Total de ações executadas: 0
