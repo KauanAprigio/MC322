@@ -53,12 +53,12 @@ public class Main {
         System.out.println("=============================================");
 
         // --- MODO TESTES AUTOMATIZADOS ---
-        inicializarAmbiente("LAB05/src/Logger/LogTestes.txt", "CasosTeste"); // Cria um NOVO ambiente e logger para os testes automatizados
+        inicializarAmbiente("LAB05/src/Logger/txt/LogTestes.txt", "CasosTeste"); // Cria um NOVO ambiente e logger para os testes automatizados
         executarTestesAutomatizados();
         ambiente.getLogger().fecharLogger(); // Fecha o logger de testes AQUI.
 
         // --- MODO MENU INTERATIVO ---
-        inicializarAmbiente("LAB05/src/Logger/LogMenu.txt", "MenuInterativo"); // Cria um NOVO ambiente e logger para o menu
+        inicializarAmbiente("LAB05/src/Logger/txt/LogMenu.txt", "MenuInterativo"); // Cria um NOVO ambiente e logger para o menu
         ambiente.getLogger().logAcao("" + "\n======================Iniciando o menu interativo com o ambiente: " + ambiente.getNome() + "========================\n");
         menuInterativo();
         ambiente.getLogger().fecharLogger(); // Fecha o logger do menu AQUI.
@@ -78,7 +78,7 @@ public class Main {
         ambiente = new Ambiente(110, 110, 110, mapa, planoXY, nomeAmbiente, logpath);
         ambiente.inicializarMapa();
 
-        inicializador.inicializarAmbiente(ambiente, "LAB05/src/Main/config.txt");
+        inicializador.inicializarAmbiente(ambiente, "LAB05/src/Main/txt/config.txt");
 
         
     }
