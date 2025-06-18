@@ -1,106 +1,121 @@
 package LAB05.src.Logger;
 
 import java.io.PrintWriter;
+import java.util.Stack; // Importa Stack para gerenciar IDs de ações
 
 import LAB05.src.Missoes.Missao;
 
 public class Logger {
-    private static int acaoAtualGLobal = 0;
-    private static int acaoProxGLobal = 1;
+    // Esses contadores agora serão principalmente para atribuir IDs únicos
+    private static int contadorIdAcaoGlobal = 0;
+    private static int contadorIdAcaoMissao = 0;
+    private static int contadorIdMissao = 0;
 
-    private static int acaoAtualMissao = 0;
-    private static int acaoProxMissao = 1;
+    // Usa uma pilha para gerenciar os níveis de indentação para as ações.
+    // Cada entrada representa uma ação ativa e ajuda a determinar sua indentação.
+    private static Stack<Integer> profundidadesAcaoAtivas;
+    private static Stack<Integer> idsMissoesAtivas;
 
-    private static int MissaoAtual = 0;
-    private static int MissaoProx = 1;
+    private static PrintWriter impressor;
 
-    private static int MissoesIniciadas = 0;
-    private static int acoesIniciadas = 0;
-    
-    private static PrintWriter printer;
-
-    public Logger (String filename) {
+    public Logger (String nomeArquivo) {
         try {
-            Logger.printer = new PrintWriter(filename);
+            Logger.impressor = new PrintWriter(nomeArquivo);
+            profundidadesAcaoAtivas = new Stack<>();
+            idsMissoesAtivas = new Stack<>();
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
-        
-    } 
+    }
+
     // Ativa o modo missão
-    public void inicializarMissao(Missao m, String Agente) {
-        MissaoAtual = MissaoProx;
-        printer.printf("------- MISSÃO %d -------\n", MissaoAtual);
-        printer.printf("Agente %s inicializando missão:\n%s\n", Agente, m.getDetalhes());
-        MissaoProx = MissaoAtual+1;
-        MissoesIniciadas++;
+    public void inicializarMissao(Missao missao, String agente) {
+        contadorIdMissao++;
+        idsMissoesAtivas.push(contadorIdMissao); // Empilha o ID da missão atual
+        profundidadesAcaoAtivas.push(0); // Missões também contribuem para a profundidade, começando com 0 para suas ações internas
+
+        imprimirIndentacao(); // Indentação inicial para o bloco da missão
+        impressor.printf("------- MISSÃO %d -------\n", contadorIdMissao);
+        imprimirIndentacao();
+        impressor.printf("Agente %s inicializando missão:\n", agente);
+        imprimirIndentacao();
+        impressor.println(missao.getDetalhes());
     }
 
     // Indica que uma ação começou (movimento, apagar fogo, adicionar entidade ao ambiente etc...)
-    public void inicializarAcao(String acao, String Origem) {
-        for (int i = 0; i < acoesIniciadas; i++)
-            printer.print("   ");
-        
-        if (MissoesIniciadas != 0){ // Missao ativa {
-            acaoAtualMissao = acaoProxMissao;
-            printer.printf("%d - Ação do tipo %s, inicializada por: %s\n", acaoAtualMissao, acao, Origem); // Marca o início de uma nova ação
-            acaoProxMissao = acaoAtualMissao + 1;
-        }
-        else {
-            acaoAtualGLobal = acaoProxGLobal;
-            printer.printf("%d - Ação do tipo %s, inicializada por: %s\n", acaoAtualGLobal, acao, Origem); // Marca o início de uma nova ação
-            acaoProxGLobal = acaoAtualGLobal + 1;
-        }
-        acoesIniciadas++;
-    }
-
-    public void logAcao(String txt) {
-        for (int i = 0; i < acoesIniciadas; i++)
-            printer.print("   ");
-        printer.println("-> " + txt);
-    }
-    public void finalizarMissao(String Resultado) {
-        printer.printf("------- Fim Missão %d -------\n", MissaoAtual);
-        printer.printf("Relatório da missão: %s\n", Resultado);
-        printer.printf("Total de ações executadas: %d\n", acaoAtualMissao);
-        MissaoAtual--;
-        MissoesIniciadas--;
-    }
-
-     // Indica que a ação ocorrendo finalizou seja por um erro ou porque chegou ao fim
-    public void finalizarAcao(String Resultado) {
-        acoesIniciadas--;
-        for (int i = 0; i < acoesIniciadas; i++)
-            printer.print("   ");
-        if (MissoesIniciadas != 0) {  // Mission active
-            printer.printf("    -> Ação %d encerrada: %s", acaoAtualMissao, Resultado);
-            acaoAtualMissao--;
+    public void inicializarAcao(String acao, String origem) {
+        // Determina o ID baseado se uma missão está ativa ou não
+        int idAcaoAtual;
+        if (!idsMissoesAtivas.isEmpty()) {
+            contadorIdAcaoMissao++;
+            idAcaoAtual = contadorIdAcaoMissao;
         } else {
-            printer.printf("Ação %d encerrada: %s", acaoAtualGLobal, Resultado);
-            acaoAtualGLobal--;
+            contadorIdAcaoGlobal++;
+            idAcaoAtual = contadorIdAcaoGlobal;
         }
-        printer.println();  
+        imprimirIndentacao();
+        // Empilha um novo nível de profundidade para esta ação
+        profundidadesAcaoAtivas.push(idAcaoAtual);
+        impressor.printf("%d - Ação do tipo %s, inicializada por: %s\n", idAcaoAtual, acao, origem);
     }
 
-    // Finaliza a missão/ ação e loga o erro
-    // Chamar esse método em todo bloco (try-catch)
+    public void logAcao(String texto) {
+        imprimirIndentacao();
+        impressor.println("-> " + texto);
+    }
+
+    public void finalizarMissao(String resultado) {
+        if (!idsMissoesAtivas.isEmpty()) {
+            int idMissaoFinalizada = idsMissoesAtivas.pop(); // Pega o ID da missão que está sendo finalizada
+            profundidadesAcaoAtivas.pop(); // Desempilha a profundidade inicial da missão
+
+            imprimirIndentacao();
+            impressor.printf("------- Fim Missão %d -------\n", idMissaoFinalizada);
+            imprimirIndentacao();
+            impressor.printf("Relatório da missão: %s\n", resultado);
+            imprimirIndentacao();
+            impressor.printf("Total de ações executadas: %d\n", contadorIdAcaoMissao);
+            
+            // Reseta contadores específicos da missão após uma missão ser concluída
+            contadorIdAcaoMissao = 0;
+        }
+        // Se idsMissoesAtivas estiver vazia aqui, significa que isso foi chamado sem uma missão ativa
+        // Ou foi chamado múltiplas vezes para a mesma missão, o que indica um erro de uso.
+    }
+
+    public void finalizarAcao(String resultado) {
+        if (!profundidadesAcaoAtivas.isEmpty()) {
+            int idAcaoFinalizada = profundidadesAcaoAtivas.pop(); // Pega o ID da ação que está sendo finalizada
+            imprimirIndentacao();
+            impressor.printf("-> Ação %d encerrada: %s\n", idAcaoFinalizada, resultado);
+        }
+        // Se profundidadesAcaoAtivas estiver vazia aqui, significa que isso foi chamado sem uma ação ativa
+        // ou muitas chamadas a inicializarAcao em comparação com finalizarAcao
+    }
+
     public void logErr(Exception e) {
-        if (MissoesIniciadas == 0 && acoesIniciadas == 0) {
-            printer.println("Exceção detectada: " + e.getMessage());
-            return;
+        // Registra a mensagem de erro imediatamente
+        imprimirIndentacao();
+        impressor.println("Exceção detectada: " + e.getMessage());
+
+        // Tenta limpar quaisquer ações e missões ativas restantes
+        // Isso imprimirá mensagens de "encerrada" para elas.
+        while (!profundidadesAcaoAtivas.isEmpty()) {
+            finalizarAcao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as ações pendentes
         }
-        while (acoesIniciadas > 0) {
-            finalizarAcao(e.getMessage());
+        while (!idsMissoesAtivas.isEmpty()) {
+            finalizarMissao("Erro: " + e.getMessage()); // Passa a mensagem de erro para as missões pendentes
         }
-        while (MissoesIniciadas > 0) {
-            finalizarMissao(e.getMessage());
-        } 
     }
 
-    //Após o término do uso. Fechar o logger
+    // Método auxiliar para imprimir a indentação correta baseada no tamanho da pilha
+    private void imprimirIndentacao() {
+        for (int i = 0; i < profundidadesAcaoAtivas.size(); i++) {
+            impressor.print("   "); // 3 espaços por nível
+        }
+    }
+
     public void fecharLogger() {
-        printer.close();
+        impressor.close();
     }
-}   
-
-
+}
