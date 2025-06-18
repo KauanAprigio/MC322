@@ -65,7 +65,7 @@ public class Logger {
         impressor.println("-> " + texto);
     }
 
-    public void finalizarMissao(String resultado) throws ErrorLoggerException{
+    public void finalizarMissao(String resultado) {
         if (!idsMissoesAtivas.isEmpty()) {
             int idMissaoFinalizada = idsMissoesAtivas.pop(); // Pega o ID da missão que está sendo finalizada
             profundidadesAcaoAtivas.pop(); // Desempilha a profundidade inicial da missão
@@ -82,11 +82,11 @@ public class Logger {
         } else{
             // Se idsMissoesAtivas estiver vazia aqui, significa que isso foi chamado sem uma missão ativa
             // Ou foi chamado múltiplas vezes para a mesma missão, o que indica um erro de uso.
-            throw new ErrorLoggerException("Tentativa de finalizar missão sem missão ativa!");
+            logErr(new ErrorLoggerException("Tentativa de finalizar missão sem missão ativa!")); 
         }
     }
 
-    public void finalizarAcao(String resultado) throws ErrorLoggerException{
+    public void finalizarAcao(String resultado) {
         if (!profundidadesAcaoAtivas.isEmpty()) {
             int idAcaoFinalizada = profundidadesAcaoAtivas.pop(); // Pega o ID da ação que está sendo finalizada
             imprimirIndentacao();
@@ -94,7 +94,7 @@ public class Logger {
         } else {
             // Se profundidadesAcaoAtivas estiver vazia aqui, significa que isso foi chamado sem uma ação ativa
             // ou muitas chamadas a inicializarAcao em comparação com finalizarAcao
-            throw new ErrorLoggerException("Tentativa de finalizar ação sem ação ativa!");
+            logErr(new ErrorLoggerException("Tentativa de finalizar ação sem ação ativa!"));
         }
 
     }
