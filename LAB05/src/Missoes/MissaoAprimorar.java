@@ -23,11 +23,13 @@ public class MissaoAprimorar implements Missao{
         
         //faço o laço para encontrar as dimensões da oficina mais proxima e mover para lá
         if (robo.getLocalAtualRep() != 'o'){
+            System.out.println("Está localizando a oficina...");
             r.getAmbiente().getLogger().logAcao("Está localizando a oficina...");
             for (Entidade e : robo.getAmbiente().getEntidades()){
                 if (e.getTipo() == TipoEntidade.LOCAL){
                     Obstaculo oficina = (Obstaculo) e;
                     if (oficina.getTipoObstaculo() == TipoObstaculo.OFICINA){
+                        System.out.println("Está procurando a melhor rota até a oficina...");
                         robo.getAmbiente().getLogger().logAcao("Está procurando a melhor rota até a oficina...");
                         int Xmaisproximo = Math.max(oficina.getX_1(), Math.min(robo.getX_1(), oficina.getX_2()));
                         int Ymaisproximo = Math.max(oficina.getY_1(), Math.min(robo.getY_1(), oficina.getY_2()));
@@ -56,12 +58,14 @@ public class MissaoAprimorar implements Missao{
 
     public void aprimorar(RoboLimpador robolimpinho){
         robolimpinho.getAmbiente().getLogger().logAcao("Está na oficina...");
+        System.out.println(robolimpinho.getId() + " está na oficina.");
         int raio = robolimpinho.getRaioLimpeza() + 15; // adiciono 15m ao raio atual
         robolimpinho.setRaioLimpeza(raio); //atualizo o raio
         robolimpinho.aprimorar();; // marca que o robô foi aprimorado
                 
         robolimpinho.getComunicador().registrarMensagem(robolimpinho.getId(), "Aprimoramento foi concluído com sucesso.");  
-                
+        
+        System.out.println(robolimpinho.getId() + " teve seu raio de limpeza aumentado para " + raio + ".\n");
         robolimpinho.getAmbiente().getLogger().logAcao(robolimpinho.getId() + " teve seu raio de limpeza aumentado para " + raio + ".\n");
         robolimpinho.getAmbiente().getLogger().finalizarMissao("O agente " + robolimpinho.getId() + " finalizou sua missão de aprimoramento com sucesso.\n");
     }

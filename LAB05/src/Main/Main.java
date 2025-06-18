@@ -71,7 +71,6 @@ public class Main {
      * Configura o ambiente, obstáculos, robôs e o comunicador central.
      */
     private static void inicializarAmbiente(String logpath, String nomeAmbiente) {
-        System.out.println("\n--- 🛠️  Configurando o Mundo Virtual 🛠️  ---\n");
         LeitorConfig inicializador = new LeitorConfig();
         TipoEntidade[][][] mapa = new TipoEntidade[110][110][110];// depois tem q comentar o pq do z ir até 111, mas acho que é para o robo bombeiro subir acima dos predios para apagar o fogo
         char[][] planoXY = new char[110][110];
@@ -80,7 +79,6 @@ public class Main {
 
         inicializador.inicializarAmbiente(ambiente, "LAB05/src/Main/config.txt");
 
-        System.out.println("--- ✅ Mundo configurado! ---");
         
     }
 
@@ -102,7 +100,6 @@ public class Main {
         System.out.println("(Silencie-se, mundo! Os testes estão começando!)\n");
 
         // --- Testes Gerais e Exceções ---
-        System.out.println(">> Testando Exceções Gerais...\n");
 
         try {
             Obstaculo entidade_out = new Obstaculo(200, 200, TipoObstaculo.FOGO, ambiente, TipoEntidade.FOGO);
@@ -527,7 +524,8 @@ public class Main {
                     default: System.out.println("Ação inválida!"); break;
                 }
             } catch (Exception e) {
-                 System.err.println("🚨 Erro inesperado: " + e.getMessage());
+                ambiente.getLogger().logErr(e);
+                System.err.println("🚨 Erro inesperado: " + e.getMessage());
             }
          } while (opcao != 5);
     }
@@ -564,6 +562,7 @@ public class Main {
                 }
             } catch (ErrorAbastecimentoException | ErrorApagarFogoException | ErrorAprimoramentoException e) {
                 System.err.println("🚨 Falha na ação: " + e.getMessage());
+                ambiente.getLogger().logErr(e);
             } catch (Exception e) {
                  System.err.println("🚨 Erro inesperado: " + e.getMessage());
             }

@@ -22,6 +22,7 @@ public class SensorDeVarredura {
         agente.getAmbiente().getLogger().inicializarAcao("varredura", "Sensor de varredura");
         if (agente instanceof RoboLimpador){
             RoboLimpador robo = (RoboLimpador) agente;
+            System.out.println("Executando varredura...");
             agente.getAmbiente().getLogger().logAcao("Começará a varredura para encontrar todos os lixos.");
             for (Entidade e : agente.getAmbiente().getEntidades()){
                 if (e.getTipo() == TipoEntidade.LIXO){
@@ -29,6 +30,7 @@ public class SensorDeVarredura {
                     robo.getLixos().add(lixo);
                 }
             }
+            System.out.println("A varredura foi concluída e agora o " + agente.getId() + " pode limpar tudo.\n");
             agente.getAmbiente().getLogger().finalizarAcao("Varredura finalizada com sucesso.\n");
         }       
     }

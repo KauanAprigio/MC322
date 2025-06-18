@@ -36,6 +36,7 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
 
         Iterator<Obstaculo> iterator = getLixos().iterator();
 
+        System.out.println("Confirmando a limpeza...");
         getAmbiente().getLogger().logAcao("Confirmando a limpeza...");
         while (iterator.hasNext()) {
             Obstaculo lixo = iterator.next();              
@@ -45,6 +46,7 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
                     getAmbiente().removerEntidade(lixo,false); // remove do ambiente
                     iterator.remove(); // remove do arraylist<Obstaculo> lixos usando o iterator
                     getComunicador().registrarMensagem(getId(), "Limpeza de " + lixo.getId() + " foi concluída com sucesso.");
+                    System.out.println(getId() + " limpou " + lixo.getTipoObstaculo().getNome() + ".\n");
                     getAmbiente().getLogger().logAcao(getId() + " limpou " + lixo.getTipoObstaculo().getNome() + ".");
                     break; // aqui ele irá limpar somente um lixo
                 } catch (Exception e){
@@ -63,7 +65,7 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
         if (temMissao()) {
             missao.executar(this, a);
         } else {
-            throw new SemMissaoException("Nenhuma missão atribuída ao RoboLimpador.");
+            throw new SemMissaoException("Nenhuma missão atribuída ao RoboLimpador!\n");
         }
     }
 
@@ -79,6 +81,7 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
         if (this.getEstado() == EstadoRobo.OFF){
             throw new RoboDesligadoException("O robô " + getId() + " não pode acionar os sensores, pois está desligado!\n");
         }
+        System.out.println(getId() + " está executando seu sensor...");
         getAmbiente().getLogger().inicializarAcao("executarSensor", getId());
         lixos = new ArrayList<Obstaculo>();
         sensor.varreruda(this);

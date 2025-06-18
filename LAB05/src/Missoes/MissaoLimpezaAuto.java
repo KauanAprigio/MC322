@@ -21,11 +21,15 @@ public class MissaoLimpezaAuto implements Missao {
         MissaoLimpezaProxima limpeza_proxima = new MissaoLimpezaProxima();
 
         if (!(r instanceof RoboLimpador)){
-            throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
+            throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!\n");
         }
         
         RoboLimpador limpador = (RoboLimpador) r;
         
+        if (limpador.getLixos() == null){
+            throw new MissaoInvalidaException("O robô deve executar o seu sensor para fazer a missão!\n");
+        }
+
         try {
             while (!(limpador.getLixos().isEmpty())){
                 limpador.setMissao(limpeza_proxima);
@@ -33,6 +37,7 @@ public class MissaoLimpezaAuto implements Missao {
 
                 limpador.limpar();
             }
+            System.out.println(r.getId() + " limpou todo o ambiente.\n");
             limpador.getAmbiente().getLogger().finalizarMissao("Missão de limpezaAuto finalizada com sucesso.");
         } catch (Exception e){
             limpador.getAmbiente().getLogger().logErr(e);

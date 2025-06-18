@@ -49,6 +49,7 @@ public class MissaoLimpezaProxima implements Missao {
                 maisProximo = lixo; // Atualiza o lixo mais próximo
             }
         }
+        System.out.println("Lixo selecionado e movendo-se até ele...");
         limpador.getAmbiente().getLogger().logAcao("Lixo selecionado e movendo-se até ele...");
         testaOpcao(ambiente, maisProximo, limpador);
         limpador.getComunicador().registrarMensagem(limpador.getId(), "Movimento para o lixo mais próximo foi concluído com sucesso.");

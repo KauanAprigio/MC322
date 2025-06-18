@@ -111,11 +111,13 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             fogos.remove(bombeiro.getIncendioProximo());
             bombeiro.setIncendioProximo(null);
         } else if (mensagem.equalsIgnoreCase("ABASTECIMENTO")){
-            String coordenada = "(" + lago.getX_1() + "," + lago.getY_1() + "," + "1).";
+            String coordenada = "(" + lago.getX_1() + "," + lago.getY_1() + "," + "1).\n";
             System.out.println("Você poderá abastecer se for para a posição: " + coordenada);
+            getAmbiente().getLogger().finalizarAcao("Você poderá abastecer se for para a posição: " + coordenada);
         } else if (mensagem.equalsIgnoreCase("APRIMORAMENTO")){
-            String coordenada = "(" + oficina.getX_1() + "," + oficina.getY_1() + "," + "0).";
+            String coordenada = "(" + oficina.getX_1() + "," + oficina.getY_1() + "," + "0).\n";
             System.out.println("Você poderá aprimorar-se caso for para a posição: " + coordenada);
+            getAmbiente().getLogger().finalizarAcao("Você poderá aprimorar-se caso for para a posição: " + coordenada);
         }
     }
     /**

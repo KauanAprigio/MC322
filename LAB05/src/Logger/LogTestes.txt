@@ -168,18 +168,18 @@
 36 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central...
    37 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
-   -> Ação 37 encerrada: Enviou com sucesso a mensagem: ABASTECIMENTO
+   -> Ação 37 encerrada: Você poderá abastecer se for para a posição: (5,60,1).
 
-   38 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
-      -> Nova posição: (5, 60, 0)
-   -> Ação 38 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+-> Ação 36 encerrada: Enviou com sucesso a mensagem: ABASTECIMENTO
 
-   39 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
-      Exceção detectada: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
+38 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   -> Nova posição: (5, 60, 0)
+-> Ação 38 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
 
-   -> Ação 39 encerrada: Erro: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
+39 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+   Exceção detectada: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
 
--> Ação 36 encerrada: Erro: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
+-> Ação 39 encerrada: Erro: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
 
 40 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
    -> Nova posição: (5, 60, 1)
@@ -230,24 +230,24 @@
 51 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central...
    52 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
-   -> Ação 52 encerrada: Enviou com sucesso a mensagem: APRIMORAMENTO
+   -> Ação 52 encerrada: Você poderá aprimorar-se caso for para a posição: (60,5,0).
 
-   53 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
-      -> Nova posição: (60, 5, 0)
-   -> Ação 53 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+-> Ação 51 encerrada: Enviou com sucesso a mensagem: APRIMORAMENTO
 
-   54 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
-      -> Bombeiro_Kauan está dentro da oficina e pode ser aprimorado.
-      -> Reservatório máximo do Bombeiro_Kauan agora é de 4500 litros.
-      -> Bombeiro_Kauan está com o reservatório cheio.
-   -> Ação 54 encerrada: O Aprimoramento de Bombeiro_Kauan foi finalizado com sucesso.
+53 - Ação do tipo moverRobo, inicializada por: Ambiente_CasosTeste
+   -> Nova posição: (60, 5, 0)
+-> Ação 53 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
 
-   55 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
-      Exceção detectada: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
+54 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+   -> Bombeiro_Kauan está dentro da oficina e pode ser aprimorado.
+   -> Reservatório máximo do Bombeiro_Kauan agora é de 4500 litros.
+   -> Bombeiro_Kauan está com o reservatório cheio.
+-> Ação 54 encerrada: O Aprimoramento de Bombeiro_Kauan foi finalizado com sucesso.
 
-   -> Ação 55 encerrada: Erro: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
+55 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+   Exceção detectada: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
 
--> Ação 51 encerrada: Erro: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
+-> Ação 55 encerrada: Erro: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
 
 56 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
    -> Bombeiro_Kauan está contactando a central para localizar o próximo fogo...
@@ -287,7 +287,8 @@
 
 -> Ação 64 encerrada: Erro: Robô RoboLimpador_Diego não pode voar (apenas Robôs Bombeiros podem)!
 
-Exceção detectada: Nenhuma missão atribuída ao RoboLimpador.
+Exceção detectada: Nenhuma missão atribuída ao RoboLimpador!
+
 Exceção detectada: O robô RoboLimpador_Diego não pode acionar os sensores, pois está desligado!
 
 ------- MISSÃO 1 -------
