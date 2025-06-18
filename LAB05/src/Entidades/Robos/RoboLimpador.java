@@ -1,7 +1,8 @@
 package LAB05.src.Entidades.Robos;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-import LAB05.src.Exceptions.RoboDesligadoException;
+import LAB04.Code.Exceptions.ErrorLimpezaException;
 import LAB05.src.Entidades.Interfaces.Sensoreavel;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Exceptions.*;
@@ -22,6 +23,32 @@ public class RoboLimpador extends AgenteInteligente implements Sensoreavel {
         sensor = new SensorDeVarredura();
         comunicador = new CentralComunicacao();
     }
+
+    public void limpar() throws ErrorLimpezaException {
+        getAmbiente().getLogger().inicializarAcao("Limpar lixo", getId());
+
+        Iterator<Obstaculo> iterator = getLixos().iterator();
+
+        getAmbiente().getLogger().logAcao("Confirmando a limpeza...");
+        while (iterator.hasNext()) {
+            Obstaculo lixo = iterator.next();              
+            int distancia = (int) Math.sqrt(Math.pow(lixo.getX_1() - getX_1(), 2) + Math.pow(lixo.getY_1() - getY_1(), 2));
+            if (distancia < getRaioLimpeza()) { 
+                try {
+                    getAmbiente().removerEntidade(lixo,false); // remove do ambiente
+                    iterator.remove(); // remove do arraylist<Obstaculo> lixos usando o iterator
+                    getComunicador().registrarMensagem(getId(), "Limpeza de " + lixo.getId() + " foi concluída com sucesso.");
+                    getAmbiente().getLogger().logAcao(getId() + " limpou " + lixo.getTipoObstaculo().getNome() + ".");
+                    break; // aqui ele irá limpar somente um lixo
+                } catch (Exception e){
+                    getAmbiente().getLogger().logErr(e);
+                }
+            }
+        }
+        getAmbiente().getLogger().finalizarAcao("Limpeza do lixo finalizada com sucesso.\n");
+
+    }
+
 
     @Override
     public void executarMissao(Ambiente a) throws SemMissaoException, MissaoInvalidaException {

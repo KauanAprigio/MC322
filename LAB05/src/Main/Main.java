@@ -11,16 +11,14 @@ import LAB05.src.Entidades.Obstaculos.Obstaculo;
 import LAB05.src.Entidades.Obstaculos.Obstaculo.TipoObstaculo;
 import LAB05.src.Ambiente.Ambiente;
 import LAB05.src.Entidades.*;
-import LAB05.src.Entidades.Robos.AgenteInteligente;
 import LAB05.src.Entidades.Robos.Robo;
 import LAB05.src.Entidades.Robos.RoboBombeiro;
 import LAB05.src.Entidades.Robos.RoboLimpador;
 import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
 import LAB05.src.Exceptions.*;
 import LAB05.src.Missoes.MissaoAprimorar;
-import LAB05.src.Missoes.MissaoLimpar;
 import LAB05.src.Missoes.MissaoLimpezaAuto;
-import LAB05.src.Missoes.MissaoMoverProximo;
+import LAB05.src.Missoes.MissaoLimpezaProxima;
 
 
 /**
@@ -46,6 +44,7 @@ public class Main {
         inicializarAmbiente();
         executarTestesAutomatizados();
         menuInterativo();
+        
 
         scanner.close();
         System.out.println("\n=============================================");
@@ -157,8 +156,7 @@ public class Main {
         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println("\n>> Testando RoboLimpador...\n");
         MissaoAprimorar aprimorar = new MissaoAprimorar();
-        MissaoLimpar limpar = new MissaoLimpar();
-        MissaoMoverProximo moverProximo = new MissaoMoverProximo();
+        MissaoLimpezaProxima limpeza_proxima = new MissaoLimpezaProxima();
         MissaoLimpezaAuto auto = new MissaoLimpezaAuto();
         
         // Testes com o robo desligado, logo ele irá cair na exception em todos
@@ -166,10 +164,7 @@ public class Main {
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboLimpador.executarSensores(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         
-        roboLimpador.setMissao(moverProximo);
-        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-
-        roboLimpador.setMissao(limpar);
+        roboLimpador.setMissao(limpeza_proxima);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
 
         roboLimpador.setMissao(aprimorar);
@@ -181,29 +176,20 @@ public class Main {
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); } // exception já está aprimorado
 
         // Vai cair na exception, porque o arrayList não foi instanciado
-        roboLimpador.setMissao(moverProximo);
+        roboLimpador.setMissao(limpeza_proxima);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
 
-        roboLimpador.setMissao(limpar);
-        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        
         // Instancio o arraylist de lixos
         try { roboLimpador.executarSensores(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         
         // Executará as missões corretamente
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
 
-        roboLimpador.setMissao(moverProximo);
-        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-
         roboLimpador.setMissao(auto);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
 
         // Agora cairá nas exceptions que não tem mais lixos
-        roboLimpador.setMissao(limpar);
-        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-
-        roboLimpador.setMissao(moverProximo);
+        roboLimpador.setMissao(limpeza_proxima);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
 
         
@@ -446,8 +432,8 @@ public class Main {
          int opcao;
          do {
             System.out.println("\n--- Missões do Agente: " + rl.getId() + " ---");
-            System.out.println("1. Limpar");
-            System.out.println("2. MoverProximo");
+            System.out.println("1. Limpeza Autônoma");
+            System.out.println("2. Limpeza de lixo próximo");
             System.out.println("3. ExecutarSensores");
             System.out.println("4. Aprimorar");
             System.out.println("5. Voltar");
@@ -457,13 +443,13 @@ public class Main {
             try {
                 switch (opcao) {
                     case 1: 
-                        MissaoLimpar limpar = new MissaoLimpar();
-                        rl.setMissao(limpar);
+                        MissaoLimpezaAuto auto = new MissaoLimpezaAuto();
+                        rl.setMissao(auto);
                         rl.executarMissao(ambiente);
                         break;
                     case 2:
-                        MissaoMoverProximo moverProximo = new MissaoMoverProximo();
-                        rl.setMissao(moverProximo);
+                        MissaoLimpezaProxima proxima = new MissaoLimpezaProxima();
+                        rl.setMissao(proxima);
                         rl.executarMissao(ambiente);
                         break;
                     case 3:

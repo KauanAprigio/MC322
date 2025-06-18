@@ -7,14 +7,14 @@ import LAB05.src.Entidades.Robos.RoboLimpador;
 import LAB05.src.Exceptions.MissaoInvalidaException;
 
 
-public class MissaoMoverProximo implements Missao {
+public class MissaoLimpezaProxima implements Missao {
     @Override
-    public void executar(Robo r, Ambiente a) throws MissaoInvalidaException {
-        r.getAmbiente().getLogger().inicializarMissao(this, r.getId());
-        if (!(r instanceof RoboLimpador)){
+    public void executar(Robo robo, Ambiente ambiente) throws MissaoInvalidaException {
+        ambiente.getLogger().inicializarMissao(this, robo.getId());
+        if (!(robo instanceof RoboLimpador)){
             throw new MissaoInvalidaException("O robô deve ser um limpador para fazer esta missão!");
         }
-        RoboLimpador limpador = (RoboLimpador) r; //aqui faço um casting e uso de um ponteiro para facilitar a busca
+        RoboLimpador limpador = (RoboLimpador) robo; //aqui faço um casting e uso de um ponteiro para facilitar a busca
         double menorDistancia = Double.MAX_VALUE; // Inicializa com o maior valor possível
         Obstaculo maisProximo = null; // Inicializa como null para verificar se encontrou algum lixo
 
@@ -46,15 +46,21 @@ public class MissaoMoverProximo implements Missao {
             }
         }
         limpador.getAmbiente().getLogger().logAcao("Lixo selecionado e movendo-se até ele...");
-        testaOpcao(a, maisProximo, limpador);
+        testaOpcao(ambiente, maisProximo, limpador);
         limpador.getComunicador().registrarMensagem(limpador.getId(), "Movimento para o lixo mais próximo foi concluído com sucesso.");
-        limpador.getAmbiente().getLogger().finalizarMissao("Missão de movimentar para o lixo mais próximo foi finalizada com sucesso.\n");
         
+        try { // aqui ele irá limpar único lixo, no caso o mais próximo
+            limpador.limpar();
+        } catch (Exception e){
+            ambiente.getLogger().logErr(e);
+        }
+        limpador.getAmbiente().getLogger().finalizarMissao("Missão limpar o lixo mais próximo foi finalizada com sucesso.\n");
+        return; //confirmar que ele só vai limpar 1 lixo APENAS.
     }
 
     @Override
     public String getDetalhes() {
-        return "Ir para o lixo mais próximo.";
+        return "Limpar o lixo mais próximo.";
     }
 
     public void testaOpcao(Ambiente ambiente, Obstaculo lixo, Robo agente) {
