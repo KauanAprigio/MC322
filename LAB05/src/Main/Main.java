@@ -211,6 +211,8 @@ public class Main {
         roboBombeiro.escolheCentral(comunicador);
 
         //Agora tudo pronto, temos um novo ambiente igual o inicial dos testesAutomatizados
+
+        ambiente.getLogger().inicializarAcao("Inicialização do menu interativo", ambiente.getNome());
         System.out.println("\n--- 🤖 Bem-vindo ao Menu Interativo! 🤖 ---");
         System.out.println("Chegou a hora de pilotar! Escolha suas ações e divirta-se (ou salve o mundo!).");
 
@@ -229,6 +231,8 @@ public class Main {
             }
         } while (opcao != 5);
         System.out.println("\nSaindo do menu interativo. Foi um prazer, piloto!");
+        ambiente.getLogger().finalizarAcao("Finalizou o menu interativo.\n");
+
     }
 
     private static void imprimirMenuPrincipal() {
@@ -241,7 +245,7 @@ public class Main {
         System.out.print("Escolha sua ação, comandante: ");
     }
 
-     private static void listarRobos() {
+    private static void listarRobos() {
         System.out.println("\n--- 🛰️  Nossa Frota Atual 🛰️  ---");
         List<Robo> robos = ambiente.getEntidades().stream()
                 .filter(e -> e.getTipo() == TipoEntidade.ROBO)
@@ -262,7 +266,13 @@ public class Main {
             .forEach(r -> System.out.printf("  - %s (Bombeiro)\n", r.getId()));
 
         System.out.println("\n>> Robôs por Estado:");
+        ambiente.getLogger().inicializarAcao("Listagem do estado dos Robôs", ambiente.getNome());
         robos.forEach(r -> System.out.printf("  - %s: %s\n", r.getId(), r.getEstado()));
+        robos.forEach(r -> { // aqui irei passar os estados dos robôs para o logger
+            String mensagemFormatada = String.format("   - %s: %s", r.getId(), r.getEstado());
+            ambiente.getLogger().logAcao(mensagemFormatada);
+        } );
+        ambiente.getLogger().finalizarAcao("A listagem de robôs por estados foi finalizada com sucesso.\n");
     }
 
     private static void escolherRoboParaInteragir() {
@@ -285,13 +295,16 @@ public class Main {
 
         int escolha = lerOpcao();
         if (escolha > 0 && escolha <= robos.size()) {
+            ambiente.getLogger().inicializarAcao("Escolher robô/agente para interagir", ambiente.getNome());
             Robo roboSelecionado = robos.get(escolha - 1);
             System.out.printf("\nAssumindo controle de %s. Vamos lá!\n", roboSelecionado.getId());
             if (roboSelecionado instanceof RoboLimpador){
                 RoboLimpador limpador = (RoboLimpador) roboSelecionado;
+                ambiente.getLogger().finalizarAcao("Agente do tipo Limpador escolhido com sucesso.\n");
                 menuAgente(limpador);
             } else if (roboSelecionado instanceof RoboBombeiro){
                 RoboBombeiro bombeiro = (RoboBombeiro) roboSelecionado;
+                ambiente.getLogger().finalizarAcao("Robô do tipo Bombeiro escolhido com sucesso.\n");
                 menuRobo(bombeiro);
             }
         } else if (escolha != 0) {
@@ -345,29 +358,48 @@ public class Main {
 
     private static void visualizarStatus(Robo robo) {
         System.out.println("\n--- 📊 Status: " + robo.getId() + " 📊 ---");
-        System.out.printf("Posição: (%d, %d, %d)\n", robo.getX_1(), robo.getY_1(), robo.getZ_1());
-        System.out.println("Estado: " + robo.getEstado());
+        ambiente.getLogger().inicializarAcao("visualizando estado do Robô/Agente", ambiente.getNome());
+
+        String posicao = String.format("Posição: (%d, %d, %d)\n", robo.getX_1(), robo.getY_1(), robo.getZ_1());
+        System.out.printf(posicao);
+        ambiente.getLogger().logAcao(posicao);
+
+        String estado = "Estado: " + robo.getEstado();
+        System.out.println(estado);
+        ambiente.getLogger().logAcao(estado + "\n");
+
+
         System.out.println("Descrição: " + robo.getDescricao());
+
         if (robo instanceof RoboLimpador) {
             RoboLimpador rl = (RoboLimpador) robo;
             System.out.println("Raio de Limpeza: " + rl.getRaioLimpeza());
+            ambiente.getLogger().logAcao("Raio de Limpeza: " + rl.getRaioLimpeza() + "\n");
             if (rl.estahAprimorado()) {
                 System.out.println(rl.getId() + " já foi aprimorado ao máximo!");
+                ambiente.getLogger().logAcao(rl.getId() + " já foi aprimorado ao máximo!\n");
             } else {
                 System.out.println(rl.getId() + " Não foi aprimorado ainda!");
                 System.out.println("Vá até uma oficina para acrescentar 15m ao raio de detecção de lixos.");
+                ambiente.getLogger().logAcao(rl.getId() + " não foi aprimorado ainda, ainda pode fazer a missão de aprimoramento.\n");
             }
         } else if (robo instanceof RoboBombeiro) {
             RoboBombeiro rb = (RoboBombeiro) robo;
             System.out.println("Altitude Atual: " + rb.getZ_1()); // Usamos getZ() pois altitude não é mais um atributo direto
             System.out.println("Reservatório: " + rb.getReservatorio() + "/" + rb.getCapacidade() + "L");
+            ambiente.getLogger().logAcao("Altitude Atual: " + rb.getZ_1() + "\n");
+            ambiente.getLogger().logAcao("Reservatório: " + rb.getReservatorio() + "/" + rb.getCapacidade() + "L\n");
+
             if (rb.estahAprimorado()) {
                 System.out.println(rb.getId() + " já foi aprimorado ao máximo!");
+                ambiente.getLogger().logAcao(rb.getId() + " já foi aprimorado ao máximo!\n");
             } else {
                 System.out.println(rb.getId() + " Não foi aprimorado ainda!");
                 System.out.println("Vá até uma oficina para acrescentar 1500L de capacidade máxima no reservatório.");
+                ambiente.getLogger().logAcao(rb.getId() + " Não foi aprimorado ainda!\n");
             }
         }
+        ambiente.getLogger().finalizarAcao("Visualização finalizada com sucesso.\n");
         System.out.println("-------------------------");
     }
 
@@ -404,20 +436,25 @@ public class Main {
         }
 
         try {
-            System.out.printf("Posição_anterior: (%d, %d, %d)\n", robo.getX_1(), robo.getY_1(), robo.getZ_1());
+            String posicao = String.format("Posição_atual: (%d, %d, %d)\n", robo.getX_1(), robo.getY_1(), robo.getZ_1());
+            System.out.printf(posicao);
+            ambiente.getLogger().logAcao(posicao);
+
             int novoX = robo.getX_1() + deltaX;
             int novoY = robo.getY_1() + deltaY;
             int novoZ = robo.getZ_1() + deltaZ;
+            // no mover já tem o logger por isso nem vai precisar ter mais loggers aqui
             ambiente.moverRobo(robo, novoX, novoY, novoZ);
             System.out.printf(">>> %s movido para (%d, %d, %d)!\n", robo.getId(), novoX, novoY, novoZ);
         } catch (RoboDesligadoException | LocalOcupadoException | ForaDosLimitesException | NaoPodeVoarException e) {
             System.err.println("🚨 Ops! Não deu pra mover: " + e.getMessage());
+            ambiente.getLogger().logErr(e);
         } catch (Exception e) {
              System.err.println("🚨 Erro inesperado ao mover: " + e.getMessage());
         }
     }
 
-    private static void ativarDesligar(Robo robo) {
+    private static void ativarDesligar(Robo robo) { // ja tem logger no ativar e desligar
         if (robo.getEstado() == EstadoRobo.ON) {
             robo.desligar();
         } else {
