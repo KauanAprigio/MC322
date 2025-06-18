@@ -31,7 +31,7 @@ public class MissaoLimpezaAuto implements Missao {
         }
 
         try {
-            while (!(limpador.getLixos().isEmpty())){
+            while (limpador.getLixos().size() > 0){
                 limpador.setMissao(limpeza_proxima);
                 limpador.executarMissao(limpador.getAmbiente());
 

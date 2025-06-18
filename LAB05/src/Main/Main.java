@@ -59,6 +59,7 @@ public class Main {
 
         // --- MODO MENU INTERATIVO ---
         inicializarAmbiente("LAB05/src/Logger/LogMenu.txt", "MenuInterativo"); // Cria um NOVO ambiente e logger para o menu
+        ambiente.getLogger().logAcao("" + "\n======================Iniciando o menu interativo com o ambiente: " + ambiente.getNome() + "========================\n");
         menuInterativo();
         ambiente.getLogger().fecharLogger(); // Fecha o logger do menu AQUI.
 
@@ -220,7 +221,6 @@ public class Main {
 
         //Agora tudo pronto, temos um novo ambiente igual o inicial dos testesAutomatizados
 
-        ambiente.getLogger().inicializarAcao("Inicialização do menu interativo", ambiente.getNome());
         System.out.println("\n--- 🤖 Bem-vindo ao Menu Interativo! 🤖 ---");
         System.out.println("Chegou a hora de pilotar! Escolha suas ações e divirta-se (ou salve o mundo!).");
 
@@ -239,7 +239,6 @@ public class Main {
             }
         } while (opcao != 5);
         System.out.println("\nSaindo do menu interativo. Foi um prazer, piloto!");
-        ambiente.getLogger().finalizarAcao("Finalizou o menu interativo.\n");
 
     }
 
