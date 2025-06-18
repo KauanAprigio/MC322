@@ -76,6 +76,8 @@ public class Main {
                 roboLimpador = (RoboLimpador) e;
             } else if (e.getRepresentacao() == 'B'){
                 roboBombeiro = (RoboBombeiro) e;
+            } else if (e.getRepresentacao() == 'c'){
+                comunicador = (ComunicadorCentral) e;
             }
         }
         System.out.println("\n--- 🧪 Executando Bateria de Testes 🧪 ---");
@@ -105,42 +107,41 @@ public class Main {
             ambiente.adicionarEntidade(entidade_teste, false);
             ambiente.removerEntidade(entidade_teste, true);
         } catch (Exception e){
-            System.out.println("Teste [FALHA]" + e.getMessage());
+            ambiente.getLogger().logErr(e);;
         }
         
         // --- Testes RoboBombeiro ---
         System.out.print("---------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println("\n>> Testando RoboBombeiro...\n");
-        try { ambiente.moverRobo(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Mover Bombeiro (Perto fogo).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        // Vale ressaltar que os casos de testes do roboBombeiro não serão tão amplos tendo em vista que eles já foram testados no lab 04
+        // Também não ficarei colocando para printar as exception no terminal somente no log, pois já fizemos esses prints no lab 04!!
+        roboBombeiro.escolheCentral(comunicador); // aqui faço o Bombeiro instanciar a central correta
+        
+        // casos de teste quando o bombeiro está desligado
+        try { roboBombeiro.adicionar_agua(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboBombeiro.apagar_fogo(comunicador);; } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboBombeiro.aprimorar(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        
+        roboBombeiro.ligar();
         try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboBombeiro.adicionar_agua(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { ambiente.moverRobo(roboBombeiro, 5, 5, 5); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboBombeiro.enviarMensagem(comunicador, "ABASTECIMENTO"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { ambiente.moverRobo(roboBombeiro, 5, 60, 0); System.out.println("Teste [OK] Mover Bombeiro (Próximo do lago, mas z != 1).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboBombeiro.adicionar_agua(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { ambiente.moverRobo(roboBombeiro, 5, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Lago).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }        
-        try { roboBombeiro.adicionar_agua(); System.out.println("Teste [OK] Abasteceu Bombeiro.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { ambiente.moverRobo(roboBombeiro, 75, 5, 1); System.out.println("Teste [OK] Mover Bombeiro (Próximo do fogo).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }        
-        try { roboBombeiro.enviarMensagem(comunicador,"AJUDA"); System.out.println("Teste [OK] Bombeiro pediu ajuda.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { ambiente.moverRobo(roboBombeiro, 90, 3, 0); System.out.println("Teste [OK] Mover Bombeiro (Perto Fogo).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { roboBombeiro.apagar_fogo(comunicador); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { ambiente.moverRobo(roboBombeiro, 90, 3, 5); System.out.println("Teste [OK] Subir Bombeiro.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { roboBombeiro.apagar_fogo(comunicador); System.out.println("Teste [OK] Apagou Fogo.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); } // Deve apagar FOGO
-        try { roboBombeiro.enviarMensagem(comunicador,"AJUDA"); System.out.println("Teste [OK] Bombeiro pediu ajuda.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { ambiente.moverRobo(roboBombeiro, 0, 40, 101); System.out.println("Teste [OK] Mover Bombeiro (Perto Prédio Chamas).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { roboBombeiro.apagar_fogo(comunicador); System.out.println("Teste [OK] Apagou Prédio em chamas.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); } // Deve apagar FOGO
-        try { ambiente.moverRobo(roboBombeiro, 60, 46, 0); System.out.println("Teste [OK] Mover Oficina.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { roboBombeiro.aprimorar(); System.out.println("Teste [OK] Aprimorado com sucesso.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { ambiente.moverRobo(roboBombeiro, 5, 60, 1); System.out.println("Teste [OK] Mover Bombeiro (Próximo do lago).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboBombeiro.adicionar_agua(); System.out.println("Teste [OK] Abasteceu com sucesso.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { ambiente.moverRobo(roboBombeiro,0 , 0, 0); System.out.println("Teste [OK] Mover Bombeiro (Próximo do prédio em chamas).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }        
+        try { roboBombeiro.apagar_fogo(comunicador); System.out.println("Teste [OK] Prédio não está mais em chamas.\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
         try { roboBombeiro.aprimorar(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-
+        try { roboBombeiro.enviarMensagem(comunicador, "APRIMORAMENTO"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { ambiente.moverRobo(roboBombeiro, 60, 5, 0); System.out.println("Teste [OK] Mover Bombeiro (Próximo da oficina).\n"); } catch (Exception e) { ambiente.getLogger().logErr(e); }        
+        try { roboBombeiro.aprimorar(); System.out.println("Teste [OK] Aprimorou com sucesso.\n");} catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboBombeiro.aprimorar(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+        try { roboBombeiro.apagar_fogo(comunicador); System.out.println("Teste [OK] Apagou fogo com sucesso.\n");} catch (Exception e) { ambiente.getLogger().logErr(e); }
+        
         // teste de comunicação
         Comunicavel robozin = new RoboBombeiro("jao", 10, 15, 45, 'K', 1000, ambiente, 1000, 10);
         try { roboBombeiro.enviarMensagem(robozin, "NAO VAI ENVIAR NADA GAROTAO"); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        
-        // testes com o robo desligado
-        try { roboBombeiro.adicionar_agua(); } catch (Exception e) { ambiente.getLogger().logErr(e); }
-        try { roboBombeiro.apagar_fogo(comunicador);; } catch (Exception e) { ambiente.getLogger().logErr(e); }
-
 
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
 

@@ -101,7 +101,7 @@ public class LeitorConfig {
                         int yRobo = scannerAuxiliar.nextInt();
                         int zRobo = scannerAuxiliar.nextInt(); // Para o robo bombeiro
                         if (tipoRobo.equals("RoboBombeiro")) {
-                            ambiente.adicionarEntidade(new RoboBombeiro(nomeRobo, xRobo, yRobo, zRobo, 'B', 3000, ambiente, 3000, 15), true);
+                            ambiente.adicionarEntidade(new RoboBombeiro(nomeRobo, xRobo, yRobo, zRobo, 'B', 0, ambiente, 3000, 15), true);
                         } else if (tipoRobo.equals("RoboLimpador")) {
                             ambiente.adicionarEntidade(new RoboLimpador(nomeRobo, xRobo, yRobo, zRobo, 'L', ambiente, 15), true);
                         }

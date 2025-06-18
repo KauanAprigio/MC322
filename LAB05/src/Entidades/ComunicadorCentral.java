@@ -63,7 +63,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         bombeiro.receberMensagem(mensagem, this); // aqui basicamente ele irá enviar uma mensagem
         registrarMensagem(getId(), mensagem);
 
-        getAmbiente().getLogger().finalizarAcao("O mensagem enviada com sucesso.\n");
+        getAmbiente().getLogger().finalizarAcao("A mensagem foi enviada com sucesso.\n");
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
         registrarMensagem((bombeiro.getId()), mensagem);
         if (mensagem.equalsIgnoreCase("INCÊNDIO APAGADO")) {
             try{
-                getAmbiente().getLogger().finalizarAcao("Mesagem recebida pela central");
+                getAmbiente().getLogger().finalizarAcao("Aviso de incêndio apagado foi recebido pela central\n");
                 enviarMensagem(bombeiro, "Atualizando os incêndios que ainda estão no ambiente");
             } catch (ErroComunicacaoException message) {
                 getAmbiente().getLogger().logErr(message);
@@ -105,8 +105,8 @@ public class ComunicadorCentral extends CentralComunicacao implements Entidade, 
             }
         }
         // aqui não irei dar a coordenada do fogo, pois já farei isso quando o robo for mover para o fogo
-        getAmbiente().getLogger().logAcao("O fogo " + maisProximo.getId() + "foi localizado");
-        getAmbiente().getLogger().finalizarAcao("A localização do fogo mais proximo ao " + robozin.getId() + "foi finalizada com sucesso.\n");
+        getAmbiente().getLogger().logAcao("O fogo " + maisProximo.getId() + " foi localizado");
+        getAmbiente().getLogger().finalizarAcao("A procura pela localização do fogo mais proximo ao " + robozin.getId() + " foi finalizada com sucesso.\n");
         return maisProximo;
     }
 
