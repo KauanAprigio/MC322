@@ -148,4 +148,337 @@
 32 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
    Exceção detectada: A região desejada pelo(a) ROBO está fora dos limites do ambiente!
 
--> Ação 32 encerrada: Erro: A região desejada pelo(a) ROB
+-> Ação 32 encerrada: Erro: A região desejada pelo(a) ROBO está fora dos limites do ambiente!
+
+33 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+   -> Bombeiro_Kauan está contactando a central para localizar o próximo fogo...
+   34 - Ação do tipo localizarFogoPróximo, inicializada por: Comunicador Central
+      -> O fogo Fogo foi localizado.
+   -> Ação 34 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
+
+   Exceção detectada: Bombeiro_Kauan precisa de 100 litros a mais para apagar o incêndio!
+
+-> Ação 33 encerrada: Erro: Bombeiro_Kauan precisa de 100 litros a mais para apagar o incêndio!
+
+35 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+   Exceção detectada: Bombeiro_Kauan não está em um lago e não pode ser abastecido!
+
+-> Ação 35 encerrada: Erro: Bombeiro_Kauan não está em um lago e não pode ser abastecido!
+
+36 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+   -> Bombeiro_Kauan está contactando a central...
+   37 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
+   -> Ação 37 encerrada: Enviou com sucesso a mensagem: ABASTECIMENTO
+
+   38 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+      -> Nova posição: (5, 60, 0)
+   -> Ação 38 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+
+   39 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+      Exceção detectada: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
+
+   -> Ação 39 encerrada: Erro: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
+
+-> Ação 36 encerrada: Erro: Bombeiro_Kauan não está com a altura adequada, vá para 1m de altitude para abastecer água!
+
+40 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (5, 60, 1)
+-> Ação 40 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+
+41 - Ação do tipo Abastecimento, inicializada por: Bombeiro_Kauan
+   -> Bombeiro_Kauan está em um lago e pode ser abastecido.
+   -> Reservatório possui 3000 litros de um máximo de: 3000 litros.
+-> Ação 41 encerrada: O abastecimento de Bombeiro_Kauan foi finalizado com sucesso.
+
+42 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (0, 0, 0)
+-> Ação 42 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+
+43 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+   -> Bombeiro_Kauan está contactando a central para localizar o próximo fogo...
+   44 - Ação do tipo localizarFogoPróximo, inicializada por: Comunicador Central
+      -> O fogo Fogo foi localizado.
+   -> Ação 44 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
+
+   45 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+      -> Nova posição: (5, 5, 101)
+   -> Ação 45 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+
+   -> Incêndio apagado com sucesso.
+   -> Foram usados 100 litros para apagar o incêndio.
+   -> O reservatório está atualmente com 2900 litros.
+   46 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+      -> Bombeiro_Kauan está contactando a central...
+      47 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
+      -> Ação 47 encerrada: Aviso de incêndio apagado foi recebido pela central
+
+      48 - Ação do tipo enviarMensagem, inicializada por: Comunicador Central
+         49 - Ação do tipo receberMensagem, inicializada por: Bombeiro_Kauan
+         -> Ação 49 encerrada: Bombeiro_Kauan recebebeu a mensagem: Atualizando os incêndios que ainda estão no ambiente
+
+      -> Ação 48 encerrada: A mensagem foi enviada com sucesso.
+
+   -> Ação 46 encerrada: Enviou com sucesso a mensagem: Incêndio apagado
+
+-> Ação 43 encerrada: Apagar fogo finalizado por Bombeiro_Kauan
+
+50 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+   Exceção detectada: Bombeiro_Kauan não está dentro da oficina e não pode ser aprimorado!
+
+-> Ação 50 encerrada: Erro: Bombeiro_Kauan não está dentro da oficina e não pode ser aprimorado!
+
+51 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+   -> Bombeiro_Kauan está contactando a central...
+   52 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
+   -> Ação 52 encerrada: Enviou com sucesso a mensagem: APRIMORAMENTO
+
+   53 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+      -> Nova posição: (60, 5, 0)
+   -> Ação 53 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+
+   54 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+      -> Bombeiro_Kauan está dentro da oficina e pode ser aprimorado.
+      -> Reservatório máximo do Bombeiro_Kauan agora é de 4500 litros.
+      -> Bombeiro_Kauan está com o reservatório cheio.
+   -> Ação 54 encerrada: O Aprimoramento de Bombeiro_Kauan foi finalizado com sucesso.
+
+   55 - Ação do tipo Aprimoramento, inicializada por: Bombeiro_Kauan
+      Exceção detectada: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
+
+   -> Ação 55 encerrada: Erro: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
+
+-> Ação 51 encerrada: Erro: Bombeiro_Kauan já está aprimorado e não pode ser aprimorado novamente!
+
+56 - Ação do tipo Apagar fogo, inicializada por: Bombeiro_Kauan
+   -> Bombeiro_Kauan está contactando a central para localizar o próximo fogo...
+   57 - Ação do tipo localizarFogoPróximo, inicializada por: Comunicador Central
+      -> O fogo Fogo foi localizado.
+   -> Ação 57 encerrada: A procura pela localização do fogo mais proximo ao Bombeiro_Kauan foi finalizada com sucesso.
+
+   58 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+      -> Nova posição: (60, 27, 101)
+   -> Ação 58 encerrada: Bombeiro_Kauan movido com sucesso para a nova posição.
+
+   -> Incêndio apagado com sucesso.
+   -> Foram usados 100 litros para apagar o incêndio.
+   -> O reservatório está atualmente com 4400 litros.
+   59 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+      -> Bombeiro_Kauan está contactando a central...
+      60 - Ação do tipo receberMensagem, inicializada por: Comunicador Central
+      -> Ação 60 encerrada: Aviso de incêndio apagado foi recebido pela central
+
+      61 - Ação do tipo enviarMensagem, inicializada por: Comunicador Central
+         62 - Ação do tipo receberMensagem, inicializada por: Bombeiro_Kauan
+         -> Ação 62 encerrada: Bombeiro_Kauan recebebeu a mensagem: Atualizando os incêndios que ainda estão no ambiente
+
+      -> Ação 61 encerrada: A mensagem foi enviada com sucesso.
+
+   -> Ação 59 encerrada: Enviou com sucesso a mensagem: Incêndio apagado
+
+-> Ação 56 encerrada: Apagar fogo finalizado por Bombeiro_Kauan
+
+63 - Ação do tipo enviarMensagem, inicializada por: Bombeiro_Kauan
+   Exceção detectada: Erro de comunicação: Destinatário não existe!
+
+-> Ação 63 encerrada: Erro: Erro de comunicação: Destinatário não existe!
+
+64 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   Exceção detectada: Robô RoboLimpador_Diego não pode voar (apenas Robôs Bombeiros podem)!
+
+-> Ação 64 encerrada: Erro: Robô RoboLimpador_Diego não pode voar (apenas Robôs Bombeiros podem)!
+
+Exceção detectada: Nenhuma missão atribuída ao RoboLimpador.
+Exceção detectada: O robô RoboLimpador_Diego não pode acionar os sensores, pois está desligado!
+
+------- MISSÃO 1 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+Exceção detectada: Não foi possível mover para o lixo mais próximo, pois o robô encontra-se desligado!
+
+------- Fim Missão 1 -------
+Relatório da missão: Erro: Não foi possível mover para o lixo mais próximo, pois o robô encontra-se desligado!
+
+Total de ações executadas: 0
+------- MISSÃO 2 -------
+Agente RoboLimpador_Diego inicializando missão:
+Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
+-> Está localizando a oficina...
+-> Está procurando a melhor rota até a oficina...
+1 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   Exceção detectada: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
+
+-> Ação 1 encerrada: Erro: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
+
+------- Fim Missão 2 -------
+Relatório da missão: Erro: Não foi possível mover o robô: RoboLimpador_Diego pois ele está desligado!
+
+Total de ações executadas: 1
+65 - Ação do tipo Ligar Robô, inicializada por: RoboLimpador_Diego
+-> Ação 65 encerrada: O robô foi ligado com sucesso.
+
+------- MISSÃO 3 -------
+Agente RoboLimpador_Diego inicializando missão:
+Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
+-> Está localizando a oficina...
+-> Está procurando a melhor rota até a oficina...
+1 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (80, 25, 0)
+-> Ação 1 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+-> Está na oficina...
+-> RoboLimpador_Diego teve seu raio de limpeza aumentado para 30.
+
+------- Fim Missão 3 -------
+Relatório da missão: O agente RoboLimpador_Diego finalizou sua missão de aprimoramento com sucesso.
+
+Total de ações executadas: 1
+------- MISSÃO 4 -------
+Agente RoboLimpador_Diego inicializando missão:
+Procurar a Oficina no ambiente, mover o robô para lá e fazer o aprimoramento dele.
+Exceção detectada: O robô já foi aprimorado anteriormente.
+
+------- Fim Missão 4 -------
+Relatório da missão: Erro: O robô já foi aprimorado anteriormente.
+
+Total de ações executadas: 0
+------- MISSÃO 5 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+Exceção detectada: Não foi possível mover para o lixo mais próximo, o robô RoboLimpador_Diego não executou o seu sensor de varredura!
+
+------- Fim Missão 5 -------
+Relatório da missão: Erro: Não foi possível mover para o lixo mais próximo, o robô RoboLimpador_Diego não executou o seu sensor de varredura!
+
+Total de ações executadas: 0
+66 - Ação do tipo executarSensor, inicializada por: RoboLimpador_Diego
+   67 - Ação do tipo varredura, inicializada por: Sensor de varredura
+      -> Começará a varredura para encontrar todos os lixos.
+   -> Ação 67 encerrada: Varredura finalizada com sucesso.
+
+-> Ação 66 encerrada: A execução do sensor foi finalizada com sucesso.
+
+------- MISSÃO 6 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+1 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (69, 36, 0)
+-> Ação 1 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+2 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sujeira encardida.
+-> Ação 2 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 6 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 2
+------- MISSÃO 7 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpeza completa do ambiente
+------- MISSÃO 8 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+1 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (68, 36, 0)
+-> Ação 1 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+2 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sacola plástica.
+-> Ação 2 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 8 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 2
+1 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Comida no chão.
+-> Ação 1 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- MISSÃO 9 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+2 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (7, 3, 0)
+-> Ação 2 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+3 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Comida no chão.
+-> Ação 3 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 9 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 3
+1 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sacola plástica.
+-> Ação 1 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- MISSÃO 10 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+2 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (6, 3, 0)
+-> Ação 2 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+3 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sujeira encardida.
+-> Ação 3 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 10 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 3
+1 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sacola plástica.
+-> Ação 1 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- MISSÃO 11 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+-> Procurando o lixo mais próximo...
+-> Lixo selecionado e movendo-se até ele...
+2 - Ação do tipo moverRobo, inicializada por: Ambiente_Ambiente de Teste
+   -> Nova posição: (105, 101, 0)
+-> Ação 2 encerrada: RoboLimpador_Diego movido com sucesso para a nova posição.
+
+3 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Sujeira encardida.
+-> Ação 3 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 11 -------
+Relatório da missão: Missão limpar o lixo mais próximo foi finalizada com sucesso.
+
+Total de ações executadas: 3
+1 - Ação do tipo Limpar lixo, inicializada por: RoboLimpador_Diego
+   -> Confirmando a limpeza...
+   -> RoboLimpador_Diego limpou Comida no chão.
+-> Ação 1 encerrada: Limpeza do lixo finalizada com sucesso.
+
+------- Fim Missão 7 -------
+Relatório da missão: Missão de limpezaAuto finalizada com sucesso.
+Total de ações executadas: 1
+------- MISSÃO 12 -------
+Agente RoboLimpador_Diego inicializando missão:
+Limpar o lixo mais próximo.
+Exceção detectada: Não foi possível mover para o lixo mais próximo, pois não há mais lixos no ambiente!
+
+------- Fim Missão 12 -------
+Relatório da missão: Erro: Não foi possível mover para o lixo mais próximo, pois não há mais lixos no ambiente!
+
+Total de ações executadas: 0

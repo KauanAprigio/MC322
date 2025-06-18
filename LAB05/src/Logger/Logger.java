@@ -33,7 +33,6 @@ public class Logger {
     public void inicializarMissao(Missao missao, String agente) {
         contadorIdMissao++;
         idsMissoesAtivas.push(contadorIdMissao); // Empilha o ID da missão atual
-        profundidadesAcaoAtivas.push(0); // Missões também contribuem para a profundidade, começando com 0 para suas ações internas
 
         imprimirIndentacao(); // Indentação inicial para o bloco da missão
         impressor.printf("------- MISSÃO %d -------\n", contadorIdMissao);
@@ -68,7 +67,6 @@ public class Logger {
     public void finalizarMissao(String resultado) {
         if (!idsMissoesAtivas.isEmpty()) {
             int idMissaoFinalizada = idsMissoesAtivas.pop(); // Pega o ID da missão que está sendo finalizada
-            profundidadesAcaoAtivas.pop(); // Desempilha a profundidade inicial da missão
 
             imprimirIndentacao();
             impressor.printf("------- Fim Missão %d -------\n", idMissaoFinalizada);
