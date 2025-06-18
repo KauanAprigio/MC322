@@ -10,7 +10,6 @@ public class MissaoLimpezaAuto implements Missao {
     public void executar(Robo r, Ambiente a) throws MissaoInvalidaException{
         r.getAmbiente().getLogger().inicializarMissao(this, r.getId());
         
-        MissaoAprimorar aprimora = new MissaoAprimorar();
         MissaoLimpar limpar = new MissaoLimpar();
         MissaoMoverProximo mover = new MissaoMoverProximo();
 
@@ -21,11 +20,6 @@ public class MissaoLimpezaAuto implements Missao {
         RoboLimpador limpador = (RoboLimpador) r;
         
         try {
-            limpador.setMissao(aprimora);
-            limpador.executarMissao(limpador.getAmbiente());
-
-            limpador.executarSensores();
-
             while (!(limpador.getLixos().isEmpty())){
                 limpador.setMissao(mover);
                 limpador.executarMissao(limpador.getAmbiente());

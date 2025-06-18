@@ -17,6 +17,7 @@ import LAB05.src.Entidades.Robos.Robo.EstadoRobo;
 import LAB05.src.Exceptions.*;
 import LAB05.src.Missoes.MissaoAprimorar;
 import LAB05.src.Missoes.MissaoLimpar;
+import LAB05.src.Missoes.MissaoLimpezaAuto;
 import LAB05.src.Missoes.MissaoMoverProximo;
 
 
@@ -155,6 +156,7 @@ public class Main {
         MissaoAprimorar aprimorar = new MissaoAprimorar();
         MissaoLimpar limpar = new MissaoLimpar();
         MissaoMoverProximo moverProximo = new MissaoMoverProximo();
+        MissaoLimpezaAuto auto = new MissaoLimpezaAuto();
         
         // Testes com o robo desligado, logo ele irá cair na exception em todos
         try { ambiente.moverRobo(roboLimpador, 50, 99, 10); } catch (Exception e) { ambiente.getLogger().logErr(e); }
@@ -190,12 +192,22 @@ public class Main {
 
         roboLimpador.setMissao(moverProximo);
         try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+
+        roboLimpador.setMissao(auto);
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+
+        // Agora cairá nas exceptions que não tem mais lixos
+        roboLimpador.setMissao(limpar);
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+
+        roboLimpador.setMissao(moverProximo);
+        try { roboLimpador.executarMissao(ambiente); } catch (Exception e) { ambiente.getLogger().logErr(e); }
+
         
         System.out.println("\n--- ✅ Testes finalizados! Preparando para interação... ---");
-
-        
-
     }
+
+
 }
 
    
